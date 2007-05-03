@@ -27,7 +27,7 @@ public class Hasieratzailea {
 	    Erabiltzailea e14 = new Erabiltzailea(113,"Aiztiber","iza");
 	    Erabiltzailea e15 = new Erabiltzailea(114,"Beñat","lizarazu");
 	    Erabiltzailea e16 = new Erabiltzailea(115,"Inko","perurena");
-	    Erabiltzailea e17 = new Erabiltzailea(116,"Idoi//Xa","lertxundi");
+	    Erabiltzailea e17 = new Erabiltzailea(116,"Idoia","lertxundi");
 	    Erabiltzailea e18 = new Erabiltzailea(117,"Dani","Campos");
 	    Erabiltzailea e19 = new Erabiltzailea(118,"Amagoia","Agirre");
 	    Erabiltzailea e20 = new Erabiltzailea(119,"Janire","lasheras");
