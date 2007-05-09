@@ -57,8 +57,6 @@ public class EI_SegurtasunArduraduna extends JFrame {
 
 	private JMenu jMenu2 = null;
 
-	private JMenu jMenu3 = null;
-
 	private JScrollPane jScrollPane = null;
 
 	private JTable jTable = null;
@@ -70,8 +68,6 @@ public class EI_SegurtasunArduraduna extends JFrame {
 	public static final String zerbitzuIzena = "irakasleGatazkatsuena"; // @jve:decl-index=0:
 
 	private UrrunekoInterfazea urrunekoKud; // @jve:decl-index=0:
-
-	private JMenu jMenu4 = null;
 
 	private JMenuItem jMenuItem4 = null;
 
@@ -137,7 +133,6 @@ public class EI_SegurtasunArduraduna extends JFrame {
 			jJMenuBar.add(getJMenu());
 			jJMenuBar.add(getJMenu1());
 			jJMenuBar.add(getJMenu2());
-			jJMenuBar.add(getJMenu3());
 		}
 		return jJMenuBar;
 	}
@@ -241,23 +236,9 @@ public class EI_SegurtasunArduraduna extends JFrame {
 			jMenu2 = new JMenu();
 			jMenu2.setText("Kontsultak");
 			jMenu2.setMnemonic(KeyEvent.VK_K);
+			jMenu2.add(getJMenuItem4());
 		}
 		return jMenu2;
-	}
-
-	/**
-	 * This method initializes jMenu3
-	 * 
-	 * @return javax.swing.JMenu
-	 */
-	private JMenu getJMenu3() {
-		if (jMenu3 == null) {
-			jMenu3 = new JMenu();
-			jMenu3.setText("Erabiltzaileak");
-			jMenu3.setMnemonic(KeyEvent.VK_E);
-			jMenu3.add(getJMenu4());
-		}
-		return jMenu3;
 	}
 
 	/**
@@ -301,19 +282,6 @@ public class EI_SegurtasunArduraduna extends JFrame {
 			e.printStackTrace();
 			return null;
 		}
-	}
-
-	/**
-	 * This method initializes jMenu4
-	 * 
-	 * @return javax.swing.JMenu
-	 */
-	private JMenu getJMenu4() {
-		if (jMenu4 == null) {
-			jMenu4 = new JMenu("Irakasleak");
-			jMenu4.add(getJMenuItem4());
-		}
-		return jMenu4;
 	}
 
 	/**
