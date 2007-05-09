@@ -10,6 +10,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import java.awt.Insets;
 
 public class EI_PresentziaKontrolatu extends JDialog {
 
@@ -46,8 +47,6 @@ public class EI_PresentziaKontrolatu extends JDialog {
 	private JComboBox jComboBox6 = null;
 
 	private JComboBox jComboBox7 = null;
-
-	private JComboBox jComboBox8 = null;  //  @jve:decl-index=0:visual-constraint="550,244"
 
 	private JComboBox jComboBox9 = null;
 
@@ -114,11 +113,13 @@ public class EI_PresentziaKontrolatu extends JDialog {
 			gridBagConstraints13.gridx = 5;
 			GridBagConstraints gridBagConstraints12 = new GridBagConstraints();
 			gridBagConstraints12.gridx = 4;
+			gridBagConstraints12.anchor = GridBagConstraints.EAST;
 			gridBagConstraints12.gridy = 2;
 			jLabel4 = new JLabel();
 			jLabel4.setText("Bukaera Ordua:");
 			GridBagConstraints gridBagConstraints11 = new GridBagConstraints();
 			gridBagConstraints11.gridx = 4;
+			gridBagConstraints11.anchor = GridBagConstraints.EAST;
 			gridBagConstraints11.gridy = 1;
 			jLabel3 = new JLabel();
 			jLabel3.setText("Bukaera Eguna:");
@@ -142,6 +143,7 @@ public class EI_PresentziaKontrolatu extends JDialog {
 			gridBagConstraints7.gridx = 1;
 			GridBagConstraints gridBagConstraints6 = new GridBagConstraints();
 			gridBagConstraints6.gridx = 0;
+			gridBagConstraints6.anchor = GridBagConstraints.EAST;
 			gridBagConstraints6.gridy = 2;
 			jLabel2 = new JLabel();
 			jLabel2.setText("Hasierako Ordua:");
@@ -162,16 +164,20 @@ public class EI_PresentziaKontrolatu extends JDialog {
 			gridBagConstraints3.gridx = 1;
 			GridBagConstraints gridBagConstraints2 = new GridBagConstraints();
 			gridBagConstraints2.gridx = 0;
+			gridBagConstraints2.anchor = GridBagConstraints.EAST;
 			gridBagConstraints2.gridy = 1;
 			jLabel1 = new JLabel();
 			jLabel1.setText("Hasierako Eguna:");
 			GridBagConstraints gridBagConstraints1 = new GridBagConstraints();
-			gridBagConstraints1.fill = GridBagConstraints.VERTICAL;
+			gridBagConstraints1.fill = GridBagConstraints.BOTH;
 			gridBagConstraints1.gridy = 0;
 			gridBagConstraints1.weightx = 1.0;
+			gridBagConstraints1.gridwidth = 3;
+			gridBagConstraints1.insets = new Insets(5, 5, 5, 5);
 			gridBagConstraints1.gridx = 1;
 			GridBagConstraints gridBagConstraints = new GridBagConstraints();
 			gridBagConstraints.gridx = 0;
+			gridBagConstraints.anchor = GridBagConstraints.EAST;
 			gridBagConstraints.gridy = 0;
 			jLabel = new JLabel();
 			jLabel.setText("Txartel Kodea:");
@@ -319,18 +325,6 @@ public class EI_PresentziaKontrolatu extends JDialog {
 			jComboBox7 = new JComboBox();
 		}
 		return jComboBox7;
-	}
-
-	/**
-	 * This method initializes jComboBox8	
-	 * 	
-	 * @return javax.swing.JComboBox	
-	 */
-	private JComboBox getJComboBox8() {
-		if (jComboBox8 == null) {
-			jComboBox8 = new JComboBox();
-		}
-		return jComboBox8;
 	}
 
 	/**
