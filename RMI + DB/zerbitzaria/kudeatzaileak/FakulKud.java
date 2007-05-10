@@ -1,0 +1,50 @@
+package zerbitzaria.kudeatzaileak;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+/**
+ * @author Propietario
+ *
+ */
+public class FakulKud {
+
+	private Connection konexioa;
+
+	private Statement agindua;
+	
+	/**
+	 * Programaren exekuzioan zehar erabiliko den datu-basearen aurkako konexioa
+	 * esleituko du. Konexioa {@link Connection} klaseko objektu bat da.
+	 * 
+	 * @param kon
+	 *            Datu-basearen aurkako konexioaren parametroak gordetzen dituen
+	 *            klasea da. Negozio logika egikaritzean sortuko da eta honek
+	 *            egikarituriko klase guztiek erabiliko dute.
+	 */
+	public FakulKud(Connection kon) {
+		try {
+			this.konexioa = kon;
+			this.agindua = (Statement) konexioa.createStatement();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Eraikinean dauden pertsonen kopurua itziltzen du. 
+	 * @return int batean eraikinean dauden pertsonen kopurua.
+	 * @throws SQLException
+	 */
+	public int getEraikinekoPertsonKop() throws SQLException {
+		int kop = 0;
+			String query = "SELECT Count(erabId) AS kopuru FROM fakultatea";
+			ResultSet rs = this.agindua.executeQuery(query);
+			while (rs.next()) {
+				kop= rs.getInt("kopuru");
+			}
+			return kop;
+	}
+}
