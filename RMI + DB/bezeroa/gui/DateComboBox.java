@@ -17,6 +17,8 @@ import javax.swing.border.EmptyBorder;
 
 import com.sun.java.swing.plaf.motif.MotifComboBoxUI;
 import com.sun.java.swing.plaf.windows.WindowsComboBoxUI;
+import javax.swing.JLabel;
+import java.awt.Color;
 
 public class DateComboBox extends JComboBox {
 
@@ -97,8 +99,9 @@ public class DateComboBox extends JComboBox {
 
 		protected JPanel days = null;
 
-		protected SimpleDateFormat monthFormat = new SimpleDateFormat(
-				"MMM yyyy");
+		protected String[] hilabeteak = { "Urtarrila", "Otsaila", "Martxoa",
+				"Apirila", "Maiatza", "Ekaina", "Uztaia", "Abuztua", "Iraila",
+				"Urria", "Azaroa", "Abendua" };
 
 		protected Color selectedBackground;
 
@@ -115,7 +118,7 @@ public class DateComboBox extends JComboBox {
 			int yr = calendar.get(Calendar.YEAR);
 			int mn = calendar.get(Calendar.MONTH);
 			int dts = calendar.get(Calendar.DATE);
-			String dt = dts + "/" + (mn + 1) + "/" + yr;
+			String dt = yr + "/" + (mn + 1) + "/" + dts;
 			comboBox.addItem(dt);
 			// check Look and Feel
 			background = UIManager.getColor("ComboBox.background");
@@ -135,8 +138,7 @@ public class DateComboBox extends JComboBox {
 			try {
 				// if setSelectedItem() was called with a valid date, adjust the
 				// calendar
-				calendar.setTime(dateFormat.parse(comboBox.getSelectedItem()
-						.toString()));
+				calendar.setTime(dateFormat.parse(comboBox.getSelectedItem().toString()));
 			} catch (Exception e) {
 			}
 			updatePopup();
@@ -324,7 +326,7 @@ public class DateComboBox extends JComboBox {
 		// update the Popup when either the month or the year of the calendar
 		// has been changed
 		protected void updatePopup() {
-			monthLabel.setText(monthFormat.format(calendar.getTime()));
+			monthLabel.setText(hilabeteak[calendar.get(Calendar.MONTH)] + " " + calendar.get(Calendar.YEAR));
 			if (days != null) {
 				popup.remove(days);
 			}
@@ -339,11 +341,7 @@ public class DateComboBox extends JComboBox {
 				int dayInt = setupCalendar.get(Calendar.DAY_OF_WEEK);
 				JLabel label = new JLabel();
 				label.setHorizontalAlignment(JLabel.CENTER);
-				label.setForeground(foreground);
-				
-//labelari colorea aldatu
-				label.setBackground(foreground);
-				
+				label.setForeground(Color.blue);
 				if (dayInt == Calendar.SUNDAY) {
 					label.setText("Ig");
 				} else if (dayInt == Calendar.MONDAY) {
@@ -366,6 +364,10 @@ public class DateComboBox extends JComboBox {
 			setupCalendar = (Calendar) calendar.clone();
 			setupCalendar.set(Calendar.DAY_OF_MONTH, 1);
 			int first = setupCalendar.get(Calendar.DAY_OF_WEEK);
+			if (first == 1)
+				first += 6;
+			else
+				first -= 1;
 			for (int i = 0; i < (first - 1); i++) {
 				days.add(new JLabel(""));
 			}
@@ -387,8 +389,10 @@ public class DateComboBox extends JComboBox {
 						label.setBackground(background);
 						label.setForeground(foreground);
 						calendar.set(Calendar.DAY_OF_MONTH, day);
-						comboBox.setSelectedItem(dateFormat.format(calendar
-								.getTime()));
+						String data = calendar.get(Calendar.YEAR) + "/"
+								+ (calendar.get(Calendar.MONTH) + 1) + "/"
+								+ calendar.get(Calendar.DAY_OF_MONTH);
+						comboBox.setSelectedItem(data);
 						hide();
 						comboBox.requestFocus();
 					}
@@ -413,21 +417,4 @@ public class DateComboBox extends JComboBox {
 			popup.pack();
 		}
 	}
-
-	 public static void main(String args[]) {
-		JFrame f = new JFrame();
-		Container c = f.getContentPane();
-		c.setLayout(new FlowLayout());
-		c.add(new JLabel("Date:"));
-		DateComboBox dcb = new DateComboBox();
-		c.add(dcb);
-		f.addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent e) {
-				System.exit(0);
-			}
-		});
-		f.setSize(200, 100);
-		f.setVisible(true);
-	}
-
 }
