@@ -95,6 +95,39 @@ CREATE TABLE  `eraikikon`.`intzidentziak` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+DROP TABLE IF EXISTS `eraikikon`.`fakultatea`;
+CREATE TABLE  `eraikikon`.`fakultatea` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `erId` int(10) unsigned NOT NULL,
+  `guId` int(10) unsigned NOT NULL,
+  `inId` int(10) unsigned NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY(`erId`),
+  KEY(`guId`),
+  KEY(`inId`),
+  CONSTRAINT `erId` FOREIGN KEY (`erId`) REFERENCES `erabiltzaileak` (`id`),
+  CONSTRAINT `guId` FOREIGN KEY (`guId`) REFERENCES `guneak` (`id`),
+  CONSTRAINT `inId` FOREIGN KEY (`inId`) REFERENCES `intzidentziak` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `eraikikon`.`ordutegia`;
+CREATE TABLE `eraikikon`.`ordutegia` (
+  `jaiEguna` TINYINT(1) NOT NULL DEFAULT '0',
+  `haiseraOrdua` TIME NOT NULL,
+  `bukaeraOrdua` TIME NOT NULL,
+  `proId` INTEGER UNSIGNED NOT NULL,
+  `gunId` INTEGER UNSIGNED NOT NULL,
+  PRIMARY KEY USING BTREE (`haiseraOrdua`, `proId`, `gunId`),
+  KEY `proId` (`proId`),
+  KEY `gunId` (`gunId`),
+  CONSTRAINT `proId` FOREIGN KEY `proId` (`proId`)
+    REFERENCES `profilak` (`id`),
+  CONSTRAINT `gunId` FOREIGN KEY `gunId` (`gunId`)
+    REFERENCES `guneak` (`id`)
+)
+ENGINE = InnoDB DEFAULT CHARSET=latin1;
+
+
 
 INSERT INTO `eraikikon`.`profilak` (mota,deskribapena) VALUES ("Irakaslea","irakasleen buleagoak");
 INSERT INTO `eraikikon`.`profilak` (mota,deskribapena) VALUES ("Ikaslea","ikasleen gelak");
@@ -145,28 +178,37 @@ INSERT INTO `eraikikon`.`txartelak` (gaituData,erabId) VALUES ('2004-05-25 12:13
 INSERT INTO `eraikikon`.`txartelak` (gaituData,erabId) VALUES ('2006-01-24 12:13:59',20);
 INSERT INTO `eraikikon`.`txartelak` (gaituData,erabId) VALUES ('2007-01-20 12:13:59',21);
 
-INSERT INTO `eraikikon`.`ateak` (nagusia) VALUES (true);
-INSERT INTO `eraikikon`.`ateak` () VALUES ();
-INSERT INTO `eraikikon`.`ateak` () VALUES ();
-INSERT INTO `eraikikon`.`ateak` () VALUES ();
-INSERT INTO `eraikikon`.`ateak` () VALUES ();
+INSERT INTO `eraikikon`.`ateak` (nagusia) VALUES (true);  #Kalea eta Gune1 lotzen dituen atea
+INSERT INTO `eraikikon`.`ateak` () VALUES ();  #Gune1 eta Gune2 lotzen dituen atea
+INSERT INTO `eraikikon`.`ateak` () VALUES ();  #Gune2 eta Gune3 lotzen dituen atea
+INSERT INTO `eraikikon`.`ateak` () VALUES ();  #Gune1 eta Gune4 lotzen dituen atea
+INSERT INTO `eraikikon`.`ateak` () VALUES ();  #Gune3 eta Gune6 lotzen dituen atea
+INSERT INTO `eraikikon`.`ateak` () VALUES ();  #Gune4 eta Gune5 lotzen dituen atea
+INSERT INTO `eraikikon`.`ateak` () VALUES ();  #Gune5 eta Gune6 lotzen dituen atea
 
+INSERT INTO `eraikikon`.`guneak` (izena) VALUES ("KALEA");
+INSERT INTO `eraikikon`.`guneak` (izena) VALUES ("hall");
 INSERT INTO `eraikikon`.`guneak` (izena) VALUES ("lab1");
 INSERT INTO `eraikikon`.`guneak` (izena) VALUES ("lab2");
 INSERT INTO `eraikikon`.`guneak` (izena) VALUES ("lab3");
 INSERT INTO `eraikikon`.`guneak` (izena) VALUES ("lab4");
-INSERT INTO `eraikikon`.`guneak` (izena) VALUES ("kalea");
+INSERT INTO `eraikikon`.`guneak` (izena) VALUES ("lab5");
 
-INSERT INTO `eraikikon`.`txartelirakurgailuak` (guneId,ateId) VALUES (1,2);
-INSERT INTO `eraikikon`.`txartelirakurgailuak` (guneId,ateId) VALUES (2,2);
-INSERT INTO `eraikikon`.`txartelirakurgailuak` (guneId,ateId) VALUES (1,3);
-INSERT INTO `eraikikon`.`txartelirakurgailuak` (guneId,ateId) VALUES (3,3);
-INSERT INTO `eraikikon`.`txartelirakurgailuak` (guneId,ateId) VALUES (3,4);
+
 INSERT INTO `eraikikon`.`txartelirakurgailuak` (guneId,ateId) VALUES (1,1);
-INSERT INTO `eraikikon`.`txartelirakurgailuak` (guneId,ateId) VALUES (4,4);
+INSERT INTO `eraikikon`.`txartelirakurgailuak` (guneId,ateId) VALUES (2,1);
+INSERT INTO `eraikikon`.`txartelirakurgailuak` (guneId,ateId) VALUES (2,2);
+INSERT INTO `eraikikon`.`txartelirakurgailuak` (guneId,ateId) VALUES (2,4);
+INSERT INTO `eraikikon`.`txartelirakurgailuak` (guneId,ateId) VALUES (3,2);
+INSERT INTO `eraikikon`.`txartelirakurgailuak` (guneId,ateId) VALUES (3,3);
+INSERT INTO `eraikikon`.`txartelirakurgailuak` (guneId,ateId) VALUES (4,3);
 INSERT INTO `eraikikon`.`txartelirakurgailuak` (guneId,ateId) VALUES (4,5);
-INSERT INTO `eraikikon`.`txartelirakurgailuak` (guneId,ateId) VALUES (2,5);
-INSERT INTO `eraikikon`.`txartelirakurgailuak` (guneId,ateId) VALUES (5,1);
+INSERT INTO `eraikikon`.`txartelirakurgailuak` (guneId,ateId) VALUES (5,4);
+INSERT INTO `eraikikon`.`txartelirakurgailuak` (guneId,ateId) VALUES (5,6);
+INSERT INTO `eraikikon`.`txartelirakurgailuak` (guneId,ateId) VALUES (6,6);
+INSERT INTO `eraikikon`.`txartelirakurgailuak` (guneId,ateId) VALUES (6,7);
+INSERT INTO `eraikikon`.`txartelirakurgailuak` (guneId,ateId) VALUES (7,5);
+INSERT INTO `eraikikon`.`txartelirakurgailuak` (guneId,ateId) VALUES (7,7);
 
 INSERT INTO `eraikikon`.`sarbideeskaerak` (data,baimenduta,ukapenarenArrazoia,txId,txIrakurId) VALUES ('2006-08-30 13:00:07' ,true,null,1,3);
 INSERT INTO `eraikikon`.`sarbideeskaerak` (data,baimenduta,ukapenarenArrazoia,txId,txIrakurId) VALUES ('2007-02-25 13:22:07' ,false,"Baimenik ez",2,4);
