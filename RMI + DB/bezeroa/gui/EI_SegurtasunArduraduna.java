@@ -82,6 +82,9 @@ public class EI_SegurtasunArduraduna extends JFrame {
 	private EI_IrakasleGatazkatsuena irakGatazk = new EI_IrakasleGatazkatsuena(
 			this);
 
+	private EI_PresentziaKontrolatu presKontr = new EI_PresentziaKontrolatu(this);
+
+	private JMenuItem jMenuItem7 = null;
 	/**
 	 * Interfaze grafikoa hasieratzen du.
 	 * 
@@ -269,6 +272,7 @@ public class EI_SegurtasunArduraduna extends JFrame {
 			jMenu2.setText("Kontsultak");
 			jMenu2.setMnemonic(KeyEvent.VK_K);
 			jMenu2.add(getJMenuItem4());
+			jMenu2.add(getJMenuItem7());
 		}
 		return jMenu2;
 	}
@@ -394,6 +398,24 @@ public class EI_SegurtasunArduraduna extends JFrame {
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	/**
+	 * This method initializes jMenuItem7	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getJMenuItem7() {
+		if (jMenuItem7 == null) {
+			jMenuItem7 = new JMenuItem();
+			jMenuItem7.setText("Presentzia Kontrolatu");
+			jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					presKontr.setVisible(true);
+				}
+			});
+		}
+		return jMenuItem7;
 	}
 
 	/**
