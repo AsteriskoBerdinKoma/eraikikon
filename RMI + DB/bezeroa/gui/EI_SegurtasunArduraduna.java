@@ -70,6 +70,10 @@ public class EI_SegurtasunArduraduna extends JFrame {
 	private UrrunekoInterfazea urrunekoKud; // @jve:decl-index=0:
 
 	private JMenuItem jMenuItem4 = null;
+	
+	private JMenuItem jMenuItem5 = null;
+	
+	private JMenuItem jMenuItem6 = null;
 
 	private String host = "localhost";
 
@@ -147,10 +151,38 @@ public class EI_SegurtasunArduraduna extends JFrame {
 			jMenu = new JMenu();
 			jMenu.setText("Alarma");
 			jMenu.setMnemonic(KeyEvent.VK_A);
+			jMenu.add(getJMenuItem5());
+			jMenu.add(getJMenuItem6());
 		}
 		return jMenu;
 	}
+	
+	private JMenuItem getJMenuItem5() {
+		if (jMenuItem5 == null) {
+			jMenuItem5 = new JMenuItem();
+			jMenuItem5.setText("Gaitu");
+			jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					txart_eman.setVisible(true);
+				}
+			});
+		}
+		return jMenuItem5;
+	}
 
+	private JMenuItem getJMenuItem6() {
+		if (jMenuItem6 == null) {
+			jMenuItem6 = new JMenuItem();
+			jMenuItem6.setText("Desgaitu");
+			jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					txart_eman.setVisible(true);
+				}
+			});
+		}
+		return jMenuItem6;
+	}
+	
 	/**
 	 * This method initializes jMenu1
 	 * 
