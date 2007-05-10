@@ -80,4 +80,23 @@ public class SarbideEskKud {
 		}
 		return vTxIrakurId;
 	}
+	
+	public Vector getSarbideEskaerak(String data) 
+			throws IllegalStateException, SQLException {
+		Vector<Integer> vTxIrakurId = new Vector<Integer>();
+		String c4=
+			"SELECT A.id AS AteID,S.data AS SarbideData,S.txId AS TxartelID,G.id AS GuneID,S.baimenduta,S.ukapenarenArrazoia "+
+			"FROM ((sarbideeskaerak AS S INNER JOIN txartelirakurgailuak AS T ON S.txIrakurId=T.id) " +
+				 "INNER JOIN guneak AS G ON G.id=T.guneId) INNER JOIN ateak AS A ON A.id=T.ateId "+
+			"WHERE S.data BETWEEN '"+data+" 00:00:00' AND '"+data+" 23:59:59' " +
+			"GROUP BY A.id "+
+			"ORDER BY S.data ";
+		ResultSet q = agindua.executeQuery(c4);
+		//while (q.next()) {
+		//	for (int i = 0; i < q.getInt("Kop"); i++) {
+		//		vTxIrakurId.addElement(q.getInt("TxartelIrak"));
+		//	}
+		//}
+		return vTxIrakurId;
+	}
 }
