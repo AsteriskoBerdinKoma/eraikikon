@@ -30,6 +30,8 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 	private SarbideEskKud sek;
 
 	private IntziKud intz;
+	
+	private FakulKud fakul;
 
 	private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 
@@ -152,6 +154,17 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 	 */
 	public Vector<Vector<Object>> getIntzidentziak() {
 		return intz.getIntzidentziak();
+	}
+	
+	
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see irakasleGatazkatsuenaRMI.UrrunekoInterfazea#getEraikinekoPertsonKop()
+	 */
+	public int getEraikinekoPertsonKop() throws SQLException{
+		return fakul.getEraikinekoPertsonKop();
 	}
 
 	/**
