@@ -103,6 +103,8 @@ public class DateComboBox extends JComboBox {
 				"Apirila", "Maiatza", "Ekaina", "Uztaia", "Abuztua", "Iraila",
 				"Urria", "Azaroa", "Abendua" };
 
+		protected String[] egunak = { "Al", "Ar", "Az", "Oe", "Oi", "La", "Ig" };
+		
 		protected Color selectedBackground;
 
 		protected Color selectedForeground;
@@ -335,25 +337,10 @@ public class DateComboBox extends JComboBox {
 			setupCalendar.set(Calendar.DAY_OF_WEEK, setupCalendar
 					.getFirstDayOfWeek());
 			for (int i = 0; i < 7; i++) {
-				int dayInt = setupCalendar.get(Calendar.DAY_OF_WEEK);
 				JLabel label = new JLabel();
 				label.setHorizontalAlignment(JLabel.CENTER);
 				label.setForeground(Color.blue);
-				if (dayInt == Calendar.SUNDAY) {
-					label.setText("Ig");
-				} else if (dayInt == Calendar.MONDAY) {
-					label.setText("Al");
-				} else if (dayInt == Calendar.TUESDAY) {
-					label.setText("Ar");
-				} else if (dayInt == Calendar.WEDNESDAY) {
-					label.setText("Az");
-				} else if (dayInt == Calendar.THURSDAY) {
-					label.setText("Oe");
-				} else if (dayInt == Calendar.FRIDAY) {
-					label.setText("Oi");
-				} else if (dayInt == Calendar.SATURDAY) {
-					label.setText("La");
-				}
+				label.setText(egunak[i]);
 				days.add(label);
 				setupCalendar.roll(Calendar.DAY_OF_WEEK, true);
 			}
