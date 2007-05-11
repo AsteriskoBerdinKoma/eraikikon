@@ -44,17 +44,7 @@ public class EI_SegurtasunArduraduna extends JFrame {
 	private JMenuBar jJMenuBar = null;
 
 	private JMenu jMenu = null;
-
 	private JMenu jMenu1 = null;
-
-	private JMenuItem jMenuItem = null;
-
-	private JMenuItem jMenuItem1 = null;
-
-	private JMenuItem jMenuItem2 = null;
-
-	private JMenuItem jMenuItem3 = null;
-
 	private JMenu jMenu2 = null;
 
 	private JScrollPane jScrollPane = null;
@@ -69,22 +59,25 @@ public class EI_SegurtasunArduraduna extends JFrame {
 
 	private UrrunekoInterfazea urrunekoKud; // @jve:decl-index=0:
 
+	private JMenuItem jMenuItem = null;
+	private JMenuItem jMenuItem1 = null;
+	private JMenuItem jMenuItem2 = null;
+	private JMenuItem jMenuItem3 = null;
 	private JMenuItem jMenuItem4 = null;
-	
 	private JMenuItem jMenuItem5 = null;
-	
 	private JMenuItem jMenuItem6 = null;
+	private JMenuItem jMenuItem7 = null;
 
 	private String host = "localhost";
 
-	private JDialog txart_eman = new EI_TxartelaDialog(this); // @jve:decl-index=0:visual-constraint="458,10"
+	private JDialog txart_eman = new EI_TxartelaDialog(this);  //  @jve:decl-index=0:visual-constraint="10,165"
+	private EI_IrakasleGatazkatsuena irakGatazk = new EI_IrakasleGatazkatsuena(this);  //  @jve:decl-index=0:visual-constraint="13,55"
+	private EI_PresentziaKontrolatu presKontr = new EI_PresentziaKontrolatu(this);  //  @jve:decl-index=0:visual-constraint="13,91"
+	private EI_SarbideakKontsultatu sarbKonts = new EI_SarbideakKontsultatu(this);  //  @jve:decl-index=0:visual-constraint="12,126"
 
-	private EI_IrakasleGatazkatsuena irakGatazk = new EI_IrakasleGatazkatsuena(
-			this);
+	private JMenuItem jMenuItem8 = null;
 
-	private EI_PresentziaKontrolatu presKontr = new EI_PresentziaKontrolatu(this);
-
-	private JMenuItem jMenuItem7 = null;
+	
 	/**
 	 * Interfaze grafikoa hasieratzen du.
 	 * 
@@ -103,7 +96,7 @@ public class EI_SegurtasunArduraduna extends JFrame {
 		boolean negLog = setNegozioLogika();
 		if (negLog == false)
 			System.exit(1);
-		txart_eman.setSize(new Dimension(332, 192));
+		//txart_eman.setSize(new Dimension(332, 192));
 		this.setSize(491, 223);
 		this.setJMenuBar(getJJMenuBar());
 		this.setContentPane(getJContentPane());
@@ -273,6 +266,7 @@ public class EI_SegurtasunArduraduna extends JFrame {
 			jMenu2.setMnemonic(KeyEvent.VK_K);
 			jMenu2.add(getJMenuItem4());
 			jMenu2.add(getJMenuItem7());
+			jMenu2.add(getJMenuItem8());
 		}
 		return jMenu2;
 	}
@@ -328,6 +322,7 @@ public class EI_SegurtasunArduraduna extends JFrame {
 	private JMenuItem getJMenuItem4() {
 		if (jMenuItem4 == null) {
 			jMenuItem4 = new JMenuItem("Irakasle Gatazkatsuenak");
+			jMenuItem4.setText("Irakasle Gatazkatsuenak");
 			jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					irakGatazk.setVisible(true);
@@ -416,6 +411,24 @@ public class EI_SegurtasunArduraduna extends JFrame {
 			});
 		}
 		return jMenuItem7;
+	}
+
+	/**
+	 * This method initializes jMenuItem8	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getJMenuItem8() {
+		if (jMenuItem8 == null) {
+			jMenuItem8 = new JMenuItem();
+			jMenuItem8.setText("Sarbide-Eskaerak");
+			jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					sarbKonts.setVisible(true);
+				}
+			});
+		}
+		return jMenuItem8;
 	}
 
 	/**
