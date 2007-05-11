@@ -4,6 +4,9 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -53,6 +56,7 @@ public class EI_PresentziaKontrolatu extends JDialog {
 
 	private JTable jTable = null;
 	
+	private Calendar cal = new GregorianCalendar();  //  @jve:decl-index=0:
 	/**
 	 * @param arduraduna
 	 */
@@ -71,6 +75,11 @@ public class EI_PresentziaKontrolatu extends JDialog {
 		this.setSize(460, 302);
 		this.setTitle("Presentzia Kontrolatu");
 		this.setContentPane(getJContentPane());
+		cal.setTime(new Date());
+		hasOrd.setValue(cal.get(Calendar.HOUR_OF_DAY));
+		bukOrd.setValue(cal.get(Calendar.HOUR_OF_DAY));
+		hasMin.setValue(cal.get(Calendar.MINUTE));
+		bukMin.setValue(cal.get(Calendar.MINUTE));
 	}
 
 	/**
