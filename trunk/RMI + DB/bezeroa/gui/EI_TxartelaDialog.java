@@ -12,6 +12,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import java.awt.Dimension;
 
 /**
  * Erabiltzaile bati txartel bat esleitzea ahalbidetzen digun elkarrizketa leiho
@@ -61,7 +62,7 @@ public class EI_TxartelaDialog extends JDialog {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(249, 163);
+		this.setSize(267, 186);
 		this.setTitle("Txartela");
 		this.setContentPane(getJContentPane());
 	}
@@ -90,7 +91,7 @@ public class EI_TxartelaDialog extends JDialog {
 			gridBagConstraints7.gridwidth = 1;
 			GridBagConstraints gridBagConstraints6 = new GridBagConstraints();
 			gridBagConstraints6.gridheight = -1;
-			gridBagConstraints6.gridx = 1;
+			gridBagConstraints6.gridx = 2;
 			gridBagConstraints6.gridy = 1;
 			gridBagConstraints6.ipadx = -34;
 			gridBagConstraints6.ipady = -10;
@@ -109,7 +110,7 @@ public class EI_TxartelaDialog extends JDialog {
 			gridBagConstraints4.gridy = 2;
 			gridBagConstraints4.ipadx = 0;
 			gridBagConstraints4.ipady = 0;
-			gridBagConstraints4.fill = GridBagConstraints.BOTH;
+			gridBagConstraints4.fill = GridBagConstraints.HORIZONTAL;
 			gridBagConstraints4.gridx = 0;
 			GridBagConstraints gridBagConstraints3 = new GridBagConstraints();
 			gridBagConstraints3.fill = GridBagConstraints.BOTH;
@@ -125,7 +126,7 @@ public class EI_TxartelaDialog extends JDialog {
 			gridBagConstraints2.gridy = 1;
 			gridBagConstraints2.ipadx = 0;
 			gridBagConstraints2.ipady = 1;
-			gridBagConstraints2.fill = GridBagConstraints.BOTH;
+			gridBagConstraints2.fill = GridBagConstraints.HORIZONTAL;
 			gridBagConstraints2.gridx = 0;
 			GridBagConstraints gridBagConstraints1 = new GridBagConstraints();
 			gridBagConstraints1.fill = GridBagConstraints.BOTH;
@@ -141,7 +142,7 @@ public class EI_TxartelaDialog extends JDialog {
 			gridBagConstraints.gridy = 0;
 			gridBagConstraints.ipadx = 0;
 			gridBagConstraints.ipady = 0;
-			gridBagConstraints.fill = GridBagConstraints.BOTH;
+			gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
 			gridBagConstraints.gridx = 0;
 			jLabel2 = new JLabel();
 			jLabel2.setText("Profila:");
@@ -201,6 +202,7 @@ public class EI_TxartelaDialog extends JDialog {
 		itemNames.addElement("Arduraduna");
 		if (jComboBox == null) {
 			jComboBox = new JComboBox(itemNames);
+			jComboBox.setPreferredSize(new Dimension(31, 20));
 			jComboBox.addItemListener(new java.awt.event.ItemListener() {
 				public void itemStateChanged(java.awt.event.ItemEvent e) {
 					if (e.getStateChange() == ItemEvent.SELECTED
