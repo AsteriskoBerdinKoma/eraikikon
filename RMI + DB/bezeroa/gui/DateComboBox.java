@@ -123,11 +123,8 @@ public class DateComboBox extends JComboBox {
 			// check Look and Feel
 			background = UIManager.getColor("ComboBox.background");
 			foreground = UIManager.getColor("ComboBox.foreground");
-			selectedBackground = UIManager
-					.getColor("ComboBox.selectionBackground");
-			selectedForeground = UIManager
-					.getColor("ComboBox.selectionForeground");
-
+			selectedBackground = UIManager.getColor("ComboBox.selectionBackground");
+			selectedForeground = UIManager.getColor("ComboBox.selectionForeground");
 			initializePopup();
 		}
 
