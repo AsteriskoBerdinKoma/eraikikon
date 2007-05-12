@@ -106,10 +106,11 @@ public class SarbideEskKud {
 		Vector<Object> lerroa = new Vector<Object>();
 		String query = "SELECT G.id, G.izena, SE.data " +
 					"FROM (sarbideeskaerak AS SE INNER JOIN txartelirakurgailuak AS TI ON  SE.txIrakurId = TI.id) INNER JOIN guneak AS G ON TI.guneId = G.id " +
-					"WHERE baimenduta = true AND data BETWEEN '" + hasDataOrd + " ' AND '" + bukDataOrd + "' AND txId = " + String.valueOf(txartelId);
+					"WHERE baimenduta = true AND data BETWEEN '" + hasDataOrd + "' AND '" + bukDataOrd + "' AND txId = " + String.valueOf(txartelId);
 		ResultSet r = agindua.executeQuery(query);
 		while (r.next())
 		{
+			lerroa = new Vector<Object>();
 			lerroa.addElement(r.getInt("id"));
 			lerroa.addElement(r.getString("izena"));
 			lerroa.addElement(r.getString("data"));

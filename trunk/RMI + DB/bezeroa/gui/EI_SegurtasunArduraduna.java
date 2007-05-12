@@ -364,6 +364,7 @@ public class EI_SegurtasunArduraduna extends JFrame {
 			String zerbIzena = "rmi://" + host + "/" + zerbitzuIzena;
 			urrunekoObj = (UrrunekoInterfazea) Naming.lookup(zerbIzena);
 			irakGatazk.setUrrunekoNegozioLogika(urrunekoObj);
+			presKontr.setUrrunekoNegozioLogika(urrunekoObj);
 			urrunekoKud = urrunekoObj;
 			System.out.println("Negozioaren logika esleituta");
 			return true;

@@ -156,7 +156,7 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		return intz.getIntzidentziak();
 	}	
 	
-	public Vector<Vector<Object>> getGunea(int txartelid, String hasData, String bukData, String hasOrd, String bukOrd)
+	public Vector<Vector<Object>> getGuneak(int txartelid, String hasData, String bukData, String hasOrd, String bukOrd)
 	{
 		try {
 			return sek.getSarbideEskaerak(txartelid, hasData + " " + hasOrd, bukData + " " + bukOrd);
