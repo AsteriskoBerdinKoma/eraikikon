@@ -4,18 +4,24 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.rmi.RemoteException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JSpinner;
-import javax.swing.JTextField;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
+import partekatuak.UrrunekoInterfazea;
 
 public class EI_PresentziaKontrolatu extends JDialog {
 
@@ -38,10 +44,13 @@ public class EI_PresentziaKontrolatu extends JDialog {
 	private JLabel jLabel4 = null;
 
 	private JSpinner hasOrd = null;
+
 	private JSpinner bukOrd = null;
+
 	private JSpinner hasMin = null;
+
 	private JSpinner bukMin = null;
-	
+
 	private DateComboBox dataComboBox = null;
 
 	private DateComboBox dataComboBox1 = null;
@@ -50,20 +59,22 @@ public class EI_PresentziaKontrolatu extends JDialog {
 
 	private JLabel jLabel8 = null;
 
-	private EI_SegurtasunArduraduna jabea;
+	private UrrunekoInterfazea urrunekoKud; // @jve:decl-index=0:
 
 	private JScrollPane jScrollPane = null;
 
 	private JTable jTable = null;
-	
-	private Calendar cal = new GregorianCalendar();  //  @jve:decl-index=0:
+
+	private Calendar cal = new GregorianCalendar(); // @jve:decl-index=0:
+
+	private DefaultTableModel tableModel;
+
 	/**
 	 * @param arduraduna
 	 */
 	public EI_PresentziaKontrolatu(EI_SegurtasunArduraduna arduraduna) {
 		super(arduraduna, true);
 		initialize();
-		this.jabea = arduraduna;
 	}
 
 	/**
@@ -80,6 +91,12 @@ public class EI_PresentziaKontrolatu extends JDialog {
 		bukOrd.setValue(cal.get(Calendar.HOUR_OF_DAY));
 		hasMin.setValue(cal.get(Calendar.MINUTE));
 		bukMin.setValue(cal.get(Calendar.MINUTE));
+		Vector<Object> zutIzen = new Vector<Object>();
+		zutIzen.addElement("Gunearen IDa");
+		zutIzen.addElement("Gunearen Izena");
+		zutIzen.addElement("Data eta Ordua");
+		tableModel.setDataVector(null, zutIzen);
+		tableModel.fireTableStructureChanged();
 	}
 
 	/**
@@ -223,9 +240,9 @@ public class EI_PresentziaKontrolatu extends JDialog {
 	}
 
 	/**
-	 * This method initializes jTextField	
-	 * 	
-	 * @return javax.swing.JTextField	
+	 * This method initializes jTextField
+	 * 
+	 * @return javax.swing.JTextField
 	 */
 	private JTextField getJTextField() {
 		if (jTextField == null) {
@@ -242,7 +259,7 @@ public class EI_PresentziaKontrolatu extends JDialog {
 		}
 		return hasOrd;
 	}
-	
+
 	private JSpinner getbukOrd() {
 		if (bukOrd == null) {
 			bukOrd = new JSpinner();
@@ -250,7 +267,7 @@ public class EI_PresentziaKontrolatu extends JDialog {
 		}
 		return bukOrd;
 	}
-	
+
 	private JSpinner gethasMin() {
 		if (hasMin == null) {
 			hasMin = new JSpinner();
@@ -258,7 +275,7 @@ public class EI_PresentziaKontrolatu extends JDialog {
 		}
 		return hasMin;
 	}
-	
+
 	private JSpinner getbukMin() {
 		if (bukMin == null) {
 			bukMin = new JSpinner();
@@ -266,23 +283,61 @@ public class EI_PresentziaKontrolatu extends JDialog {
 		}
 		return bukMin;
 	}
+
 	/**
-	 * This method initializes jButton	
-	 * 	
-	 * @return javax.swing.JButton	
+	 * This method initializes jButton
+	 * 
+	 * @return javax.swing.JButton
 	 */
 	private JButton getJButton() {
 		if (jButton == null) {
 			jButton = new JButton();
-			jButton.setText("Bilatu");
+			jButton.setText("Erakutsi");
+			jButton.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					try {
+						String hasData = dataComboBox.getSelectedItem()
+								.toString().replace('/', '-');
+						String bukData = dataComboBox1.getSelectedItem()
+								.toString().replace('/', '-');
+						String hasOrdu = hasOrd.getValue().toString() + ":"
+								+ hasMin.getValue().toString();
+						String bukOrdu = bukOrd.getValue().toString() + ":"
+								+ bukMin.getValue().toString();
+						int txId = Integer.parseInt(jTextField.getText());
+						taulaEguneratu(txId, hasData, bukData, hasOrdu, bukOrdu);
+
+					} catch (RemoteException ex) {
+						// create an instance of a JOptionPane, with only an ok
+						// button and
+						// message.
+						JOptionPane optPane = new JOptionPane(
+								"Ezin izan da zerbitzariarekin konexioa ezarri",
+								JOptionPane.ERROR_MESSAGE);
+
+						JPanel buttonPanel = (JPanel) optPane.getComponent(1);
+						JButton buttonOk = (JButton) buttonPanel
+								.getComponent(0);
+						buttonOk.setText("Ados");
+
+						JDialog d = optPane.createDialog(null,
+								"Konexio errorea");
+						d.setVisible(true);
+
+						ex.printStackTrace();
+
+						System.exit(1); // terminate application
+					}
+				}
+			});
 		}
 		return jButton;
 	}
 
 	/**
-	 * This method initializes jComboBox	
-	 * 	
-	 * @return javax.swing.JComboBox	
+	 * This method initializes jComboBox
+	 * 
+	 * @return javax.swing.JComboBox
 	 */
 	private DateComboBox getdataComboBox() {
 		if (dataComboBox == null) {
@@ -293,9 +348,9 @@ public class EI_PresentziaKontrolatu extends JDialog {
 	}
 
 	/**
-	 * This method initializes dataComboBox1	
-	 * 	
-	 * @return bezeroa.gui.DateComboBox	
+	 * This method initializes dataComboBox1
+	 * 
+	 * @return bezeroa.gui.DateComboBox
 	 */
 	private DateComboBox getDataComboBox1() {
 		if (dataComboBox1 == null) {
@@ -306,9 +361,9 @@ public class EI_PresentziaKontrolatu extends JDialog {
 	}
 
 	/**
-	 * This method initializes jScrollPane	
-	 * 	
-	 * @return javax.swing.JScrollPane	
+	 * This method initializes jScrollPane
+	 * 
+	 * @return javax.swing.JScrollPane
 	 */
 	private JScrollPane getJScrollPane() {
 		if (jScrollPane == null) {
@@ -319,15 +374,38 @@ public class EI_PresentziaKontrolatu extends JDialog {
 	}
 
 	/**
-	 * This method initializes jTable	
-	 * 	
-	 * @return javax.swing.JTable	
+	 * This method initializes jTable
+	 * 
+	 * @return javax.swing.JTable
 	 */
 	private JTable getJTable() {
 		if (jTable == null) {
-			jTable = new JTable();
+			tableModel = new DefaultTableModel();
+			jTable = new JTable(tableModel);
 		}
 		return jTable;
 	}
 
-}  //  @jve:decl-index=0:visual-constraint="10,10"
+	/**
+	 * Interfaze grafikoari pasatako negozio logika esleitzen dio.
+	 * 
+	 * @param ui
+	 *            interfaze grafikoak erabiliko duen UrrunekoInterfazea motako
+	 *            objektu bat urruneko zerbitzariarekin konexioa ezarri ahal
+	 *            izateko.
+	 */
+	public void setUrrunekoNegozioLogika(UrrunekoInterfazea ui) {
+		this.urrunekoKud = ui;
+	}
+
+	public void taulaEguneratu(int txartelId, String hasData, String bukData,
+			String hasOrdu, String bukOrdu) throws RemoteException {
+		Vector<Object> zutIzen = new Vector<Object>();
+		zutIzen.addElement("Gunearen IDa");
+		zutIzen.addElement("Gunearen Izena");
+		zutIzen.addElement("Data eta Ordua");
+		Vector<Vector<Object>> taula = urrunekoKud.getGuneak(txartelId, hasData, bukData, hasOrdu, bukOrdu);
+		tableModel.setDataVector(taula, zutIzen);
+		tableModel.fireTableStructureChanged();
+	}
+} // @jve:decl-index=0:visual-constraint="10,10"

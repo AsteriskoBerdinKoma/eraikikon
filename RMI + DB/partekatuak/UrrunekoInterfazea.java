@@ -59,4 +59,6 @@ public interface UrrunekoInterfazea extends Remote {
 	 * @throws RemoteException
 	 */
 	public Vector getIntzidentziak() throws RemoteException;
+	
+	public Vector<Vector<Object>> getGuneak(int txartelid, String hasData, String bukData, String hasOrd, String bukOrd) throws RemoteException;
 }
