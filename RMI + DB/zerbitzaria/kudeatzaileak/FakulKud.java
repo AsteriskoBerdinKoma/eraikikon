@@ -38,13 +38,21 @@ public class FakulKud {
 	 * @return int batean eraikinean dauden pertsonen kopurua.
 	 * @throws SQLException
 	 */
-	public int getEraikinekoPertsonKop() throws SQLException {
+	public int getEraikinekoPertsonKop() {
 		int kop = 0;
-			String query = "SELECT Count(erabId) AS kopuru FROM fakultatea";
-			ResultSet rs = this.agindua.executeQuery(query);
-			while (rs.next()) {
-				kop= rs.getInt("kopuru");
+			String query = "SELECT Count(erId) AS kopuru FROM fakultatea";
+			ResultSet rs;
+			try {
+				rs = this.agindua.executeQuery(query);
+				while (rs.next()) {
+					kop = rs.getInt("kopuru");
+				}
+				return kop;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return 0;
 			}
-			return kop;
+			
 	}
 }
