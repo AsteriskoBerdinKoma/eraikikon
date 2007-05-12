@@ -70,6 +70,7 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		txk = new TxartelKud(kon);
 		sek = new SarbideEskKud(kon);
 		intz = new IntziKud(kon);
+		fakul = new FakulKud(kon);
 	}
 
 	/**

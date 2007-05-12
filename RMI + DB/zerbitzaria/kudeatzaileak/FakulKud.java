@@ -44,9 +44,8 @@ public class FakulKud {
 			ResultSet rs;
 			try {
 				rs = this.agindua.executeQuery(query);
-				while (rs.next()) {
+				if (rs.next())
 					kop = rs.getInt("kopuru");
-				}
 				return kop;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

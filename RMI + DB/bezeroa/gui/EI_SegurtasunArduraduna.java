@@ -72,7 +72,7 @@ public class EI_SegurtasunArduraduna extends JFrame {
 	private EI_IrakasleGatazkatsuena irakGatazk = new EI_IrakasleGatazkatsuena(this);  //  @jve:decl-index=0:visual-constraint="13,55"
 	private EI_PresentziaKontrolatu presKontr = new EI_PresentziaKontrolatu(this);  //  @jve:decl-index=0:visual-constraint="13,91"
 	private EI_SarbideakKontsultatu sarbKonts = new EI_SarbideakKontsultatu(this);  //  @jve:decl-index=0:visual-constraint="12,126"
-	private EI_AlarmaGaitu alarma_gaitu = new EI_AlarmaGaitu (this);
+	private EI_AlarmaGaitu alarma_gaitu = new EI_AlarmaGaitu(this);
 
 	private JMenuItem jMenuItem8 = null;
 
@@ -158,6 +158,7 @@ public class EI_SegurtasunArduraduna extends JFrame {
 			jMenuItem5.setText("Gaitu");
 			jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
+					alarma_gaitu.setEraikinekoPertsonKop();
 					alarma_gaitu.setVisible(true);
 				}
 			});
@@ -171,7 +172,7 @@ public class EI_SegurtasunArduraduna extends JFrame {
 			jMenuItem6.setText("Desgaitu");
 			jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					txart_eman.setVisible(true);
+					//txart_eman.setVisible(true);
 				}
 			});
 		}

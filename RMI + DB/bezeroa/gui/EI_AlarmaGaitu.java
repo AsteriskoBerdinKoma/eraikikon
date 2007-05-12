@@ -25,7 +25,7 @@ public class EI_AlarmaGaitu extends JDialog {
 
 	private JButton jButton = null;
 	
-	private UrrunekoInterfazea urrunekoKud;
+	private UrrunekoInterfazea urrunekoKud;  //  @jve:decl-index=0:
 
 	/**
 	 * @param owner
@@ -61,15 +61,7 @@ public class EI_AlarmaGaitu extends JDialog {
 			gridBagConstraints.gridx = 0;
 			gridBagConstraints.insets = new Insets(0, 0, 5, 0);
 			gridBagConstraints.gridy = 0;
-			int kop = 0;
-				/*try {
-					kop = urrunekoKud.getEraikinekoPertsonKop();
-				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}*/
 			jLabel = new JLabel();
-			jLabel.setText("Eraikinean dauden pertsonen kopurua: "+ kop);
 			jContentPane = new JPanel();
 			jContentPane.setLayout(new GridBagLayout());
 			jContentPane.add(jLabel, gridBagConstraints);
@@ -95,4 +87,14 @@ public class EI_AlarmaGaitu extends JDialog {
 		this.urrunekoKud = ui;
 	}
 
+	public void setEraikinekoPertsonKop(){
+		int kop = 0;
+			try {
+				kop = urrunekoKud.getEraikinekoPertsonKop();
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		jLabel.setText("Eraikinean dauden pertsonen kopurua: "+ kop);
+	}
 }
