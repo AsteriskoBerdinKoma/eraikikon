@@ -1,25 +1,19 @@
 package bezeroa.gui;
 
-import javax.swing.JPanel;
-import java.awt.Frame;
-import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
+import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import partekatuak.UrrunekoInterfazea;
-import java.awt.GridBagLayout;
-import java.awt.Dimension;
-import javax.swing.JComboBox;
-import java.awt.GridBagConstraints;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JList;
-import javax.swing.JTable;
-import java.awt.Insets;
-import javax.swing.ListSelectionModel;
 
 public class EI_SarbideakKontsultatu extends JDialog {
 

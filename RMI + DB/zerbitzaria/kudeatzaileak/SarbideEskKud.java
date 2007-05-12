@@ -104,13 +104,14 @@ public class SarbideEskKud {
 	{
 		Vector<Vector<Object>> taula = new Vector<Vector<Object>>();
 		Vector<Object> lerroa = new Vector<Object>();
-		String query = "SELECT guneId, data " +
-					"FROM sarbideeskaerak INNER JOIN txartelirakurgailuak ON  txIrakurId = id " +
+		String query = "SELECT G.id, G.izena, SE.data " +
+					"FROM (sarbideeskaerak AS SE INNER JOIN txartelirakurgailuak AS TI ON  SE.txIrakurId = TI.id) INNER JOIN guneak AS G ON TI.guneId = G.id " +
 					"WHERE baimenduta = true AND data BETWEEN '" + hasDataOrd + " ' AND '" + bukDataOrd + "' AND txId = " + String.valueOf(txartelId);
 		ResultSet r = agindua.executeQuery(query);
 		while (r.next())
 		{
-			lerroa.addElement(r.getInt("guneId"));
+			lerroa.addElement(r.getInt("id"));
+			lerroa.addElement(r.getString("izena"));
 			lerroa.addElement(r.getString("data"));
 			taula.addElement(lerroa);
 		}
