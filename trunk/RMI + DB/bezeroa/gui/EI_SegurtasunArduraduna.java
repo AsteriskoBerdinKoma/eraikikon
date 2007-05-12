@@ -2,8 +2,8 @@ package bezeroa.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.KeyEvent;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -25,8 +25,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import partekatuak.UrrunekoInterfazea;
-
-import java.awt.event.KeyEvent;
 
 /**
  * Segurtasun arduradunaren erabilpen kasu guztiak bateratzeko interfaze
