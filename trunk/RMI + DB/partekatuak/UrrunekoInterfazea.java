@@ -2,6 +2,7 @@ package partekatuak;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.Vector;
 
 /**
@@ -61,4 +62,11 @@ public interface UrrunekoInterfazea extends Remote {
 	public Vector getIntzidentziak() throws RemoteException;
 	
 	public Vector<Vector<Object>> getGuneak(int txartelid, String hasData, String bukData, String hasOrd, String bukOrd) throws RemoteException;
+	
+	/**
+	 * Eraikinean dauden pertsonen kopurua itziltzen du. 
+	 * @return int batean eraikinean dauden pertsonen kopurua.
+	 * @throws SQLException
+	 */
+	public int getEraikinekoPertsonKop() throws RemoteException;
 }

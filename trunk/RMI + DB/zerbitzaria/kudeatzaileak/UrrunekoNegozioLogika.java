@@ -171,7 +171,7 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 	 * 
 	 * @see irakasleGatazkatsuenaRMI.UrrunekoInterfazea#getEraikinekoPertsonKop()
 	 */
-	public int getEraikinekoPertsonKop() throws SQLException{
+	public int getEraikinekoPertsonKop(){
 		return fakul.getEraikinekoPertsonKop();
 	}
 

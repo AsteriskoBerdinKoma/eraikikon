@@ -12,6 +12,8 @@ import javax.swing.JButton;
 import partekatuak.UrrunekoInterfazea;
 
 import java.awt.Insets;
+import java.rmi.RemoteException;
+import java.sql.SQLException;
 
 public class EI_AlarmaGaitu extends JDialog {
 
@@ -28,8 +30,8 @@ public class EI_AlarmaGaitu extends JDialog {
 	/**
 	 * @param owner
 	 */
-	public EI_AlarmaGaitu(Frame owner) {
-		super(owner);
+	public EI_AlarmaGaitu(EI_SegurtasunArduraduna owner) {
+		super(owner, true);
 		initialize();
 	}
 
@@ -59,8 +61,15 @@ public class EI_AlarmaGaitu extends JDialog {
 			gridBagConstraints.gridx = 0;
 			gridBagConstraints.insets = new Insets(0, 0, 5, 0);
 			gridBagConstraints.gridy = 0;
+			int kop = 0;
+				/*try {
+					kop = urrunekoKud.getEraikinekoPertsonKop();
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}*/
 			jLabel = new JLabel();
-			jLabel.setText("");
+			jLabel.setText("Eraikinean dauden pertsonen kopurua: "+ kop);
 			jContentPane = new JPanel();
 			jContentPane.setLayout(new GridBagLayout());
 			jContentPane.add(jLabel, gridBagConstraints);
@@ -80,6 +89,10 @@ public class EI_AlarmaGaitu extends JDialog {
 			jButton.setText("Alarma Gaitu");
 		}
 		return jButton;
+	}
+	
+	public void setUrrunekoNegozioLogika(UrrunekoInterfazea ui) {
+		this.urrunekoKud = ui;
 	}
 
 }
