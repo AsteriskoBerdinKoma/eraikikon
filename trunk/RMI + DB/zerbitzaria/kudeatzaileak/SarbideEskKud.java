@@ -99,4 +99,21 @@ public class SarbideEskKud {
 		//}
 		return vTxIrakurId;
 	}
+	
+	public Vector<Vector<Object>> getSarbideEskaerak(int txartelId, String hasDataOrd, String bukDataOrd) throws SQLException
+	{
+		Vector<Vector<Object>> taula = new Vector<Vector<Object>>();
+		Vector<Object> lerroa = new Vector<Object>();
+		String query = "SELECT guneId, data " +
+					"FROM sarbideeskaerak INNER JOIN txartelirakurgailuak ON  txIrakurId = id " +
+					"WHERE baimenduta = true AND data BETWEEN '" + hasDataOrd + " ' AND '" + bukDataOrd + "' AND txId = " + String.valueOf(txartelId);
+		ResultSet r = agindua.executeQuery(query);
+		while (r.next())
+		{
+			lerroa.addElement(r.getInt("guneId"));
+			lerroa.addElement(r.getString("data"));
+			taula.addElement(lerroa);
+		}
+		return taula;
+	}
 }
