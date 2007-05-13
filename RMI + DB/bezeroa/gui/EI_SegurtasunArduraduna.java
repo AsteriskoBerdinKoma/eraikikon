@@ -78,6 +78,7 @@ public class EI_SegurtasunArduraduna extends JFrame {
 	public EI_SegurtasunArduraduna(UrrunekoInterfazea ui) {
 		super();
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
 		this.setUrrunekoNegozioLogika(ui);
 		initialize();
 	}
@@ -155,6 +156,7 @@ public class EI_SegurtasunArduraduna extends JFrame {
 			jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					alarma_gaitu.setEraikinekoPertsonKop();
+					alarma_gaitu.setLocationRelativeTo(null);
 					alarma_gaitu.setVisible(true);
 				}
 			});
@@ -204,6 +206,7 @@ public class EI_SegurtasunArduraduna extends JFrame {
 			jMenuItem.setText("Txartela Eman");
 			jMenuItem.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
+					txart_eman.setLocationRelativeTo(null);
 					txart_eman.setVisible(true);
 				}
 			});
@@ -320,6 +323,7 @@ public class EI_SegurtasunArduraduna extends JFrame {
 			jMenuItem4.setText("Irakasle Gatazkatsuenak");
 			jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
+					irakGatazk.setLocationRelativeTo(null);
 					irakGatazk.setVisible(true);
 				}
 			});
@@ -415,6 +419,7 @@ public class EI_SegurtasunArduraduna extends JFrame {
 			jMenuItem7.setText("Presentzia Kontrolatu");
 			jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
+					presKontr.setLocationRelativeTo(null);
 					presKontr.setVisible(true);
 				}
 			});
@@ -433,6 +438,7 @@ public class EI_SegurtasunArduraduna extends JFrame {
 			jMenuItem8.setText("Sarbide-Eskaerak");
 			jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
+					sarbKonts.setLocationRelativeTo(null);
 					sarbKonts.setVisible(true);
 				}
 			});
