@@ -22,6 +22,8 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import partekatuak.UrrunekoInterfazea;
+import java.awt.SystemColor;
+import java.awt.Color;
 
 public class EI_PresentziaKontrolatu extends JDialog {
 
@@ -69,6 +71,8 @@ public class EI_PresentziaKontrolatu extends JDialog {
 
 	private DefaultTableModel tableModel;
 
+	private JLabel jLabel5 = null;
+
 	/**
 	 * @param arduraduna
 	 */
@@ -106,13 +110,22 @@ public class EI_PresentziaKontrolatu extends JDialog {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
+			GridBagConstraints gridBagConstraints15 = new GridBagConstraints();
+			gridBagConstraints15.gridx = 0;
+			gridBagConstraints15.gridwidth = 6;
+			gridBagConstraints15.anchor = GridBagConstraints.WEST;
+			gridBagConstraints15.insets = new Insets(10, 10, 5, 10);
+			gridBagConstraints15.gridy = 3;
+			jLabel5 = new JLabel();
+			jLabel5.setText("");
+			jLabel5.setForeground(Color.blue);
 			GridBagConstraints gridBagConstraints14 = new GridBagConstraints();
 			gridBagConstraints14.fill = GridBagConstraints.BOTH;
-			gridBagConstraints14.gridy = 3;
+			gridBagConstraints14.gridy = 4;
 			gridBagConstraints14.weightx = 1.0;
 			gridBagConstraints14.weighty = 1.0;
 			gridBagConstraints14.gridwidth = 3;
-			gridBagConstraints14.insets = new Insets(5, 5, 5, 0);
+			gridBagConstraints14.insets = new Insets(5, 10, 5, 0);
 			gridBagConstraints14.gridheight = 5;
 			gridBagConstraints14.gridx = 0;
 			GridBagConstraints gridBagConstraints8 = new GridBagConstraints();
@@ -188,7 +201,7 @@ public class EI_PresentziaKontrolatu extends JDialog {
 			gridBagConstraints10.fill = GridBagConstraints.HORIZONTAL;
 			gridBagConstraints10.ipadx = 0;
 			gridBagConstraints10.ipady = -5;
-			gridBagConstraints10.gridy = 3;
+			gridBagConstraints10.gridy = 4;
 			GridBagConstraints gridBagConstraints6 = new GridBagConstraints();
 			gridBagConstraints6.gridx = 2;
 			gridBagConstraints6.anchor = GridBagConstraints.EAST;
@@ -235,6 +248,7 @@ public class EI_PresentziaKontrolatu extends JDialog {
 			jContentPane.add(gethasMin(), gridBagConstraints7);
 			jContentPane.add(getbukMin(), gridBagConstraints8);
 			jContentPane.add(getJScrollPane(), gridBagConstraints14);
+			jContentPane.add(jLabel5, gridBagConstraints15);
 		}
 		return jContentPane;
 	}
@@ -305,6 +319,11 @@ public class EI_PresentziaKontrolatu extends JDialog {
 						String bukOrdu = bukOrd.getValue().toString() + ":"
 								+ bukMin.getValue().toString();
 						int txId = Integer.parseInt(jTextField.getText());
+						String erabIzen = urrunekoKud.getErabIzena(txId);
+						if (erabIzen != null)
+							jLabel5.setText(erabIzen + " erabiltzaileak zeharkatu dituen guneak.");
+						else
+							jLabel5.setText("Ez dago txartel hori dagokion erabiltzailerik.");
 						taulaEguneratu(txId, hasData, bukData, hasOrdu, bukOrdu);
 
 					} catch (RemoteException ex) {
