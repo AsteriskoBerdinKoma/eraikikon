@@ -214,6 +214,17 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		}
 	}
 
+	
+	public String getErabIzena(int txId)
+	{
+		try {
+			return txk.getErabIzena(txId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	public boolean loginEgin(String erab, String pasahitza) throws RemoteException {
 			return true;
 	}

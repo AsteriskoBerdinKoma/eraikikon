@@ -61,4 +61,16 @@ public class TxartelKud {
 			biUrte = -1;
 		return biUrte.intValue();
 	}
+	
+	public String getErabIzena(int txId) throws SQLException
+	{
+		String query = "SELECT E.izena " +
+					"FROM erabiltzaileak AS E INNER JOIN txartelak AS T ON E.id = T.erabId " +
+					"WHERE T.id = " + txId;
+		ResultSet r = agindua.executeQuery(query);
+		if (r.next())
+			return r.getString("izena");
+		else
+			return null;
+	}
 }
