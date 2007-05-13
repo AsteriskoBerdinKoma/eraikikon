@@ -1,9 +1,13 @@
 package bezeroa.gui;
 
+
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.rmi.RemoteException;
+import java.util.Vector;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -14,6 +18,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import partekatuak.UrrunekoInterfazea;
+import partekatuak.DbDatuLerroa;
 
 public class EI_SarbideakKontsultatu extends JDialog {
 
@@ -23,15 +28,12 @@ public class EI_SarbideakKontsultatu extends JDialog {
 	
 	private UrrunekoInterfazea urrunekoKud; // @jve:decl-index=0:
 	private DefaultTableModel tableModel;
-	private EI_SegurtasunArduraduna jabea;
 
 	private DateComboBox jDateComboBox = null;
 
 	private JLabel jLabel = null;
 
 	private JButton jButton = null;
-
-	private JTable jTable = null;
 
 	private JScrollPane jScrollPane1 = null;
 
@@ -44,6 +46,9 @@ public class EI_SarbideakKontsultatu extends JDialog {
 	private JLabel jLabel1 = null;
 
 	private JLabel jLabel2 = null;
+	
+	private Vector<DbDatuLerroa> datuak=new Vector<DbDatuLerroa>();  //  @jve:decl-index=0:
+	private DefaultListModel ateak=new DefaultListModel();
 
 	/**
 	 * @param owner
@@ -51,7 +56,6 @@ public class EI_SarbideakKontsultatu extends JDialog {
 	public EI_SarbideakKontsultatu(EI_SegurtasunArduraduna owner) {
 		super(owner, true);
 		initialize();
-		this.jabea = owner;
 	}
 
 	/**
@@ -140,6 +144,17 @@ public class EI_SarbideakKontsultatu extends JDialog {
 	private DateComboBox getJDateComboBox() {
 		if (jDateComboBox == null) {
 			jDateComboBox = new DateComboBox();
+//			jDateComboBox.addActionListener(new java.awt.event.ActionListener() {
+//				public void actionPerformed(java.awt.event.ActionEvent e) {
+//					Calendar cal = new GregorianCalendar();
+//					cal.setTime(new Date());
+//					cal.getTime();
+//					Date data= (Date)jDateComboBox.getSelectedItem();
+//					if (data.after(cal.getTime())){
+//						System.out.println("data ez da oraindik existitzen");
+//					}
+//				}
+//			});
 		}
 		return jDateComboBox;
 	}
@@ -153,21 +168,25 @@ public class EI_SarbideakKontsultatu extends JDialog {
 		if (jButton == null) {
 			jButton = new JButton();
 			jButton.setText("Kontsultatu");
+			jButton.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					try {
+						String data = jDateComboBox.getSelectedItem().toString().replace('/', '-');
+						System.out.println(data);
+						listaKargatu(data);
+					//data egokia den konprobatu.
+					//egokia bada, emandako data String batean bilakatu eta horrekin datuakEguneraturi deitu
+					//honek data horretako sarbide eskaera guztiak lortuko ditu eta atelista beteko du.
+					//egkoia ez bada, joptionpane, data egokia sartzeko adieraziz.
+					} catch (RemoteException e1) {
+						System.out.println("Remote exception");
+					}
+				}
+			});
 		}
 		return jButton;
 	}
 
-	/**
-	 * This method initializes jTable	
-	 * 	
-	 * @return javax.swing.JTable	
-	 */
-	private JTable getJTable() {
-		if (jTable == null) {
-			jTable = new JTable();
-		}
-		return jTable;
-	}
 
 	/**
 	 * This method initializes jScrollPane1	
@@ -189,7 +208,7 @@ public class EI_SarbideakKontsultatu extends JDialog {
 	 */
 	private JList getJList() {
 		if (jList == null) {
-			jList = new JList();
+			jList = new JList(ateak);
 		}
 		return jList;
 	}
@@ -214,9 +233,87 @@ public class EI_SarbideakKontsultatu extends JDialog {
 	 */
 	private JTable getJTable1() {
 		if (jTable1 == null) {
-			jTable1 = new JTable();
+			tableModel = new DefaultTableModel();
+			jTable1 = new JTable(tableModel);
 		}
 		return jTable1;
 	}
+	
+	public void setUrrunekoNegozioLogika(UrrunekoInterfazea ui) {
+//		try {
+			this.urrunekoKud = ui;
+
+//			Calendar cal = new GregorianCalendar();
+//			cal.setTime(new Date());
+//			// Daten formatua: UUUU-HH-E
+//			String sarData = String.valueOf(cal.get(Calendar.YEAR)) + "-"
+//					+ String.valueOf(cal.get(Calendar.MONTH) + 1) + "-1";
+//			this.noiztikNora = String.valueOf(cal.get(Calendar.YEAR)) + "-"
+//					+ String.valueOf(cal.get(Calendar.MONTH) + 1) + "/"
+//					+ String.valueOf(cal.get(Calendar.YEAR)) + "-"
+//					+ String.valueOf(cal.get(Calendar.MONTH) + 1);
+//			this.datuakEguneratu(sarData);
+
+//		} catch (RemoteException e) {
+			// create an instance of a JOptionPane, with only an ok button and
+			// message.
+//			JOptionPane optPane = new JOptionPane(
+//					"Ezin izan da zerbitzariarekin konexioa ezarri",
+//					JOptionPane.ERROR_MESSAGE);
+//
+//			JPanel buttonPanel = (JPanel) optPane.getComponent(1);
+//			JButton buttonOk = (JButton) buttonPanel.getComponent(0);
+//			buttonOk.setText("Ados");
+//
+//			JDialog d = optPane.createDialog(null, "Konexio errorea");
+//			d.setVisible(true);
+//
+//			e.printStackTrace();
+//
+//			System.exit(1); // terminate application
+//		}
+	}
+	
+	public void listaKargatu(String data) throws RemoteException {
+		datuak=urrunekoKud.getSarbideEskaerak(data);
+		if (datuak.size() != 0) {
+			for (DbDatuLerroa lerroa: datuak) {
+				if((Integer) ateak.lastElement()!=lerroa.getAteId())
+					ateak.addElement(lerroa.getAteId());
+			}
+			jList.setModel(ateak);
+		} 
+		else {
+			//JOptionPane ez dago sarbide eskaerarik data horretan
+		}
+
+	}
+	
+	public void taulaEguneratu (int ateid){
+		Vector<Object> zutIzen = new Vector<Object>();
+		Vector<Object> lerroa = new Vector<Object>();
+		Vector<Vector<Object>> vEskaerak = new Vector<Vector<Object>>();
+		zutIzen.addElement("Ordua");
+		zutIzen.addElement("Txartel Zenbakia");
+		zutIzen.addElement("Hasiera Gunea");
+		zutIzen.addElement("Helburu Gunea");
+		zutIzen.addElement("Baimenduta?");
+		zutIzen.addElement("Ukapenaren Arrazoia");
+		for(DbDatuLerroa ddl: datuak){
+			if(ddl.getAteId()==ateid){
+				lerroa = new Vector<Object>();
+				lerroa.addElement(ddl.getSarbideData());
+				lerroa.addElement(ddl.getTxartelId());
+				lerroa.addElement(ddl.getHasieraGune());
+				lerroa.addElement(ddl.getHelburuGune());
+				lerroa.addElement(ddl.getBaimenduta());
+				lerroa.addElement(ddl.getUkapenarenArrazoia());
+				vEskaerak.addElement(lerroa);
+			}
+		}
+		tableModel.setDataVector(vEskaerak, zutIzen);
+		tableModel.fireTableStructureChanged();
+	}
+
 
 }  //  @jve:decl-index=0:visual-constraint="182,31"

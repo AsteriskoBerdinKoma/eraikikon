@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.Collections;
 import java.util.Vector;
 
+
 import partekatuak.*;
 
 /**
@@ -32,6 +33,8 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 	private IntziKud intz;
 	
 	private FakulKud fakul;
+	
+	private TxartelIrakKud tik;
 
 	private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 
@@ -70,6 +73,7 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		txk = new TxartelKud(kon);
 		sek = new SarbideEskKud(kon);
 		intz = new IntziKud(kon);
+		tik = new TxartelIrakKud(kon);
 		fakul = new FakulKud(kon);
 	}
 
@@ -91,8 +95,7 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 	 * @see irakasleGatazkatsuenaRMI.UrrunekoInterfazea#createIntzidentzia(java.lang.String,
 	 *      java.lang.String, java.lang.String)
 	 */
-	public void createIntzidentzia(String txartId, String tIrakId,
-			String noiztikNora) {
+	public void createIntzidentzia(String txartId, String tIrakId, String noiztikNora) {
 		intz.insertIntzGatazkatsuena(txartId, tIrakId, noiztikNora);
 	}
 
@@ -103,8 +106,7 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 	 */
 	public Vector<IrakasleGatazkatsuaDatuak> getGatazkatsuenak(String sarData) {
 		if (!connectedToDatabase)
-			throw new IllegalStateException(
-					"Datu-basearekin ez dago konexiorik.");
+			throw new IllegalStateException("Datu-basearekin ez dago konexiorik.");
 		try {
 			Vector<Integer> vErabiltzaileak;
 			Vector<Integer> vErabTxartelIrakUkatu;
@@ -167,6 +169,36 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		}
 	}
 	
+
+	public Vector<DbDatuLerroa> getSarbideEskaerak(String data){
+		
+		try {
+			Vector<DbDatuLerroa> vTratatzekoDatuak;
+			vTratatzekoDatuak=sek.getSarbideEskaerak(data);
+			System.out.println(vTratatzekoDatuak.size());
+			if (vTratatzekoDatuak!=null){
+				for (DbDatuLerroa lerro: vTratatzekoDatuak){
+					int a=lerro.getAteId();
+					int b=lerro.getHasieraGune();
+					int helburugune=tik.getHelburuGunea(a,b);
+					lerro.setHelburuGune(helburugune);
+				}
+				return vTratatzekoDatuak;
+			}
+			return null;
+		} catch (IllegalStateException e) {
+			System.out.println("error");
+			e.printStackTrace();
+			return null;
+		} catch (SQLException e) {
+			System.out.println("error");
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+	
+
 	/*
 	 * (non-Javadoc)
 	 * 

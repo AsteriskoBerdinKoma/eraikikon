@@ -361,6 +361,7 @@ public class EI_SegurtasunArduraduna extends JFrame {
 	 * @return Boolean bat itzultzen du. True urruneko zerbitzua atzigarri
 	 *         baldin badago eta konexioa gauzatu bada, False bestela.
 	 */
+
 //	public boolean setNegozioLogika() {
 //		try {
 //			System.setProperty("java.security.policy", "client.policy");
