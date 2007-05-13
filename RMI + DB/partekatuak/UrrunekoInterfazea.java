@@ -59,7 +59,7 @@ public interface UrrunekoInterfazea extends Remote {
 	 *         bektorean gordetzen da azken honek taula osoa osatuz.
 	 * @throws RemoteException
 	 */
-	public Vector getIntzidentziak() throws RemoteException;
+	public Vector<Vector<Object>> getIntzidentziak() throws RemoteException;
 	
 	public Vector<Vector<Object>> getGuneak(int txartelid, String hasData, String bukData, String hasOrd, String bukOrd) throws RemoteException;
 	
@@ -70,5 +70,7 @@ public interface UrrunekoInterfazea extends Remote {
 	 */
 	public int getEraikinekoPertsonKop() throws RemoteException;
 
+	public String getErabIzena(int txId) throws RemoteException;
+	
 	public boolean loginEgin(String erab, String pasahitza) throws RemoteException;
 }
