@@ -21,6 +21,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import partekatuak.*;
+import java.awt.Dimension;
+import java.awt.event.KeyEvent;
 
 /**
  * Irakasle gatazkatsuenak ikusteko eta horiekin intzidentziak sortzeko
@@ -96,14 +98,15 @@ public class EI_IrakasleGatazkatsuena extends JDialog {
 			gridBagConstraints5.insets = new Insets(5, 5, 10, 10);
 			gridBagConstraints5.gridx = 3;
 			gridBagConstraints5.gridy = 2;
-			gridBagConstraints5.ipadx = 6;
-			gridBagConstraints5.ipady = -7;
-			gridBagConstraints5.fill = GridBagConstraints.BOTH;
+			gridBagConstraints5.ipadx = 0;
+			gridBagConstraints5.ipady = 0;
+			gridBagConstraints5.fill = GridBagConstraints.NONE;
 			gridBagConstraints5.weightx = 0.0D;
-			gridBagConstraints5.gridwidth = 2;
+			gridBagConstraints5.anchor = GridBagConstraints.EAST;
+			gridBagConstraints5.gridwidth = 1;
 			GridBagConstraints gridBagConstraints4 = new GridBagConstraints();
 			gridBagConstraints4.fill = GridBagConstraints.BOTH;
-			gridBagConstraints4.gridwidth = 5;
+			gridBagConstraints4.gridwidth = 4;
 			gridBagConstraints4.gridx = 0;
 			gridBagConstraints4.gridy = 1;
 			gridBagConstraints4.ipadx = 157;
@@ -114,33 +117,35 @@ public class EI_IrakasleGatazkatsuena extends JDialog {
 			GridBagConstraints gridBagConstraints3 = new GridBagConstraints();
 			gridBagConstraints3.insets = new Insets(10, 5, 5, 10);
 			gridBagConstraints3.gridy = 0;
-			gridBagConstraints3.ipadx = 4;
-			gridBagConstraints3.ipady = -7;
-			gridBagConstraints3.fill = GridBagConstraints.BOTH;
+			gridBagConstraints3.ipadx = 0;
+			gridBagConstraints3.ipady = 0;
+			gridBagConstraints3.fill = GridBagConstraints.NONE;
 			gridBagConstraints3.gridwidth = 1;
-			gridBagConstraints3.gridx = 4;
+			gridBagConstraints3.anchor = GridBagConstraints.EAST;
+			gridBagConstraints3.gridx = 3;
 			GridBagConstraints gridBagConstraints2 = new GridBagConstraints();
 			gridBagConstraints2.insets = new Insets(10, 5, 5, 5);
 			gridBagConstraints2.gridy = 0;
-			gridBagConstraints2.ipadx = 35;
-			gridBagConstraints2.fill = GridBagConstraints.BOTH;
+			gridBagConstraints2.ipadx = 0;
+			gridBagConstraints2.fill = GridBagConstraints.HORIZONTAL;
 			gridBagConstraints2.gridwidth = 1;
+			gridBagConstraints2.weightx = 0.0D;
 			gridBagConstraints2.gridx = 2;
 			GridBagConstraints gridBagConstraints1 = new GridBagConstraints();
-			gridBagConstraints1.fill = GridBagConstraints.BOTH;
+			gridBagConstraints1.fill = GridBagConstraints.HORIZONTAL;
 			gridBagConstraints1.gridx = 1;
 			gridBagConstraints1.gridy = 0;
-			gridBagConstraints1.ipadx = 23;
-			gridBagConstraints1.ipady = -6;
-			gridBagConstraints1.weightx = 1.0;
+			gridBagConstraints1.ipadx = 0;
+			gridBagConstraints1.ipady = 0;
+			gridBagConstraints1.weightx = 0.0D;
 			gridBagConstraints1.insets = new Insets(10, 5, 5, 5);
 			GridBagConstraints gridBagConstraints = new GridBagConstraints();
-			gridBagConstraints.fill = GridBagConstraints.BOTH;
+			gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
 			gridBagConstraints.gridx = 0;
 			gridBagConstraints.gridy = 0;
-			gridBagConstraints.ipadx = 53;
-			gridBagConstraints.ipady = -6;
-			gridBagConstraints.weightx = 1.0;
+			gridBagConstraints.ipadx = 0;
+			gridBagConstraints.ipady = 0;
+			gridBagConstraints.weightx = 0.0D;
 			gridBagConstraints.insets = new Insets(10, 10, 5, 5);
 			jLabel = new JLabel();
 			jLabel.setText("datatik aurrera egondako irakasle gatazkatsuenak ");
@@ -171,6 +176,7 @@ public class EI_IrakasleGatazkatsuena extends JDialog {
 				urteak.addElement(String.valueOf(i));
 			jComboBox = new JComboBox(urteak);
 			jComboBox.setSelectedIndex(0);
+			jComboBox.setPreferredSize(new Dimension(75, 20));
 			jComboBox.addItemListener(new java.awt.event.ItemListener() {
 				public void itemStateChanged(java.awt.event.ItemEvent e) {
 					Calendar gaurkoUrte = new GregorianCalendar();
@@ -212,6 +218,7 @@ public class EI_IrakasleGatazkatsuena extends JDialog {
 				jComboBox1.addItem(new Integer(i));
 			jComboBox1.setSelectedItem(new Integer(gaurkoUrte
 					.get(Calendar.MONTH) + 1));
+			jComboBox1.setPreferredSize(new Dimension(55, 20));
 		}
 		return jComboBox1;
 	}
@@ -225,6 +232,7 @@ public class EI_IrakasleGatazkatsuena extends JDialog {
 		if (jButton == null) {
 			jButton = new JButton();
 			jButton.setText("Erakutsi");
+			jButton.setPreferredSize(new Dimension(145, 20));
 			jButton.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					try {
@@ -283,6 +291,8 @@ public class EI_IrakasleGatazkatsuena extends JDialog {
 		if (jButton1 == null) {
 			jButton1 = new JButton();
 			jButton1.setText("Intzidentzia Sortu");
+			jButton1.setMnemonic(KeyEvent.VK_UNDEFINED);
+			jButton1.setPreferredSize(new Dimension(145, 20));
 			jButton1.addActionListener(new java.awt.event.ActionListener() {
 
 				public void actionPerformed(java.awt.event.ActionEvent e) {
