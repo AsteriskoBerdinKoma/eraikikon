@@ -1,19 +1,16 @@
 package bezeroa.gui;
 
-import javax.swing.JPanel;
-import java.awt.Frame;
-import java.awt.BorderLayout;
-import javax.swing.JDialog;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
-import javax.swing.JButton;
-
-import partekatuak.UrrunekoInterfazea;
-
+import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.rmi.RemoteException;
-import java.sql.SQLException;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import partekatuak.UrrunekoInterfazea;
 
 public class EI_AlarmaGaitu extends JDialog {
 
