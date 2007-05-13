@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import partekatuak.UrrunekoInterfazea;
+import java.awt.Dimension;
 
 public class EI_AlarmaGaitu extends JDialog {
 
@@ -76,6 +77,7 @@ public class EI_AlarmaGaitu extends JDialog {
 		if (jButton == null) {
 			jButton = new JButton();
 			jButton.setText("Alarma Gaitu");
+			jButton.setPreferredSize(new Dimension(115, 20));
 		}
 		return jButton;
 	}
