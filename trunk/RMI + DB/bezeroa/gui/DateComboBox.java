@@ -283,16 +283,18 @@ public class DateComboBox extends JComboBox {
 
 			JLabel label;
 			label = createUpdateButton(Calendar.YEAR, -1);
-			label.setText("<<");
-			label.setToolTipText("Previous Year");
+			label.setIcon(new ImageIcon(getClass().getResource("urte_ezk.png")));
+			//label.setText("<<");
+			label.setToolTipText("Aurreko Urtea");
 
 			header.add(Box.createHorizontalStrut(12));
 			header.add(label);
 			header.add(Box.createHorizontalStrut(12));
 
 			label = createUpdateButton(Calendar.MONTH, -1);
-			label.setText("<");
-			label.setToolTipText("Previous Month");
+			label.setIcon(new ImageIcon(getClass().getResource("hil_ezk.png")));
+			//label.setText("<");
+			label.setToolTipText("Aurreko Hilabetea");
 			header.add(label);
 
 			monthLabel = new JLabel("", JLabel.CENTER);
@@ -302,13 +304,15 @@ public class DateComboBox extends JComboBox {
 			header.add(Box.createHorizontalGlue());
 
 			label = createUpdateButton(Calendar.MONTH, 1);
-			label.setText(">");
-			label.setToolTipText("Next Month");
+			label.setIcon(new ImageIcon(getClass().getResource("hil_esk.png")));
+			//label.setText(">");
+			label.setToolTipText("Urrengo Hilabetea");
 			header.add(label);
 
 			label = createUpdateButton(Calendar.YEAR, 1);
-			label.setText(">>");
-			label.setToolTipText("Next Year");
+			label.setIcon(new ImageIcon(getClass().getResource("urte_esk.png")));
+			//label.setText(">>");
+			label.setToolTipText("Hurrengo Urtea");
 
 			header.add(Box.createHorizontalStrut(12));
 			header.add(label);
