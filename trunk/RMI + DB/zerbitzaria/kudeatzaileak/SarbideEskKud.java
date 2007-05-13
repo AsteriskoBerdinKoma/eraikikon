@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
+import partekatuak.DbDatuLerroa;
+
 import com.mysql.jdbc.Statement;
 
 /**
@@ -29,7 +31,6 @@ public class SarbideEskKud {
 	 *            klasea da. Negozio logika egikaritzean sortuko da eta honek
 	 *            egikarituriko klase guztiek erabiliko dute.
 	 */
-
 	public SarbideEskKud(Connection kon) {
 		try {
 			konexioa = kon;
@@ -81,23 +82,28 @@ public class SarbideEskKud {
 		return vTxIrakurId;
 	}
 	
-	public Vector getSarbideEskaerak(String data) 
+	public Vector<DbDatuLerroa> getSarbideEskaerak(String data) 
 			throws IllegalStateException, SQLException {
-		Vector<Integer> vTxIrakurId = new Vector<Integer>();
+		Vector<DbDatuLerroa> vDatuak= new Vector<DbDatuLerroa>();
 		String c4=
-			"SELECT A.id AS AteID,S.data AS SarbideData,S.txId AS TxartelID,G.id AS GuneID,S.baimenduta,S.ukapenarenArrazoia "+
+			"SELECT A.id, S.data, S.txId, G.id, S.baimenduta, S.ukapenarenArrazoia, T.id " +
 			"FROM ((sarbideeskaerak AS S INNER JOIN txartelirakurgailuak AS T ON S.txIrakurId=T.id) " +
-				 "INNER JOIN guneak AS G ON G.id=T.guneId) INNER JOIN ateak AS A ON A.id=T.ateId "+
+			     "INNER JOIN guneak AS G ON G.id=T.guneId) INNER JOIN ateak AS A ON A.id=T.ateId " +
 			"WHERE S.data BETWEEN '"+data+" 00:00:00' AND '"+data+" 23:59:59' " +
-			"GROUP BY A.id "+
-			"ORDER BY S.data ";
+			"ORDER BY A.id, S.data";
 		ResultSet q = agindua.executeQuery(c4);
-		//while (q.next()) {
-		//	for (int i = 0; i < q.getInt("Kop"); i++) {
-		//		vTxIrakurId.addElement(q.getInt("TxartelIrak"));
-		//	}
-		//}
-		return vTxIrakurId;
+		while (q.next()) {
+			DbDatuLerroa lerroa = new DbDatuLerroa();
+			lerroa.setAteId(q.getInt("A.id"));
+			lerroa.setSarbideData(q.getString("S.data"));
+			lerroa.setTxartelId(q.getInt("S.txId"));
+			lerroa.setHasieraGune(q.getInt("G.id"));
+			lerroa.setBaimenduta(q.getInt("S.baimenduta"));
+			lerroa.setUkapenarenArrazoia(q.getString("S.ukapenarenArrazoia"));
+			lerroa.setTxartelIrakId(q.getInt("T.id"));
+			vDatuak.addElement(lerroa);
+		}
+		return vDatuak;
 	}
 	
 	public Vector<Vector<Object>> getSarbideEskaerak(int txartelId, String hasDataOrd, String bukDataOrd) throws SQLException
