@@ -204,6 +204,21 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 	public int getEraikinekoPertsonKop(){
 		return fakul.getEraikinekoPertsonKop();
 	}
+	
+	public String getErabIzena(int txId)
+	{
+		try {
+			return txk.getErabIzena(txId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public boolean loginEgin(String erab, String pasahitza) throws RemoteException {
+			return true;
+	}
+
 
 	/**
 	 * UrrunekoNegozioLogika-ren zerbitzaria hasieratzen du zerbitzuIzena
@@ -241,20 +256,5 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 			System.out
 					.println("Errorea zerbitzaria jaurtitzean" + e.toString());
 		}
-	}
-
-	
-	public String getErabIzena(int txId)
-	{
-		try {
-			return txk.getErabIzena(txId);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
-	public boolean loginEgin(String erab, String pasahitza) throws RemoteException {
-			return true;
 	}
 }
