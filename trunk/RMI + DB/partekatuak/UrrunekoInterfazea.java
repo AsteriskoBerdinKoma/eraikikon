@@ -69,4 +69,6 @@ public interface UrrunekoInterfazea extends Remote {
 	 * @throws SQLException
 	 */
 	public int getEraikinekoPertsonKop() throws RemoteException;
+
+	public boolean loginEgin(String erab, String pasahitza) throws RemoteException;
 }

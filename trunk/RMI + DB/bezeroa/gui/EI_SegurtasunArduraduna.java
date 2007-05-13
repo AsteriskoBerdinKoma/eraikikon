@@ -4,25 +4,20 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
-import java.net.MalformedURLException;
-import java.rmi.Naming;
-import java.rmi.NotBoundException;
-import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
 import java.util.Vector;
 
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.Segment;
 
 import partekatuak.UrrunekoInterfazea;
 
@@ -66,7 +61,7 @@ public class EI_SegurtasunArduraduna extends JFrame {
 	private JMenuItem jMenuItem6 = null;
 	private JMenuItem jMenuItem7 = null;
 
-	private String host = "localhost";
+	//private String host = "localhost";  //  @jve:decl-index=0:
 
 	private JDialog txart_eman = new EI_TxartelaDialog(this);  //  @jve:decl-index=0:visual-constraint="10,165"
 	private EI_IrakasleGatazkatsuena irakGatazk = new EI_IrakasleGatazkatsuena(this);  //  @jve:decl-index=0:visual-constraint="13,55"
@@ -81,8 +76,10 @@ public class EI_SegurtasunArduraduna extends JFrame {
 	 * Interfaze grafikoa hasieratzen du.
 	 * 
 	 */
-	public EI_SegurtasunArduraduna() {
+	public EI_SegurtasunArduraduna(UrrunekoInterfazea ui) {
 		super();
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setUrrunekoNegozioLogika(ui);
 		initialize();
 	}
 
@@ -92,9 +89,9 @@ public class EI_SegurtasunArduraduna extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
-		boolean negLog = setNegozioLogika();
-		if (negLog == false)
-			System.exit(1);
+//		boolean negLog = setNegozioLogika();
+//		if (negLog == false)
+//			System.exit(1);
 		//txart_eman.setSize(new Dimension(332, 192));
 		this.setSize(491, 223);
 		this.setJMenuBar(getJJMenuBar());
@@ -303,8 +300,7 @@ public class EI_SegurtasunArduraduna extends JFrame {
 				v.addElement("Txartel Irakurgailua");
 				v.addElement("Gaitua");
 				v.addElement("Noiztik Nora");
-				tableModel = new DefaultTableModel(urrunekoKud
-						.getIntzidentziak(), v);
+				tableModel = new DefaultTableModel(urrunekoKud.getIntzidentziak(), v);
 				jTable = new JTable(tableModel);
 			}
 			return jTable;
@@ -350,52 +346,62 @@ public class EI_SegurtasunArduraduna extends JFrame {
 		this.tableModel.fireTableStructureChanged();
 	}
 
+	public void setUrrunekoNegozioLogika(UrrunekoInterfazea ui)
+	{
+		this.urrunekoKud = ui;
+		
+		irakGatazk.setUrrunekoNegozioLogika(urrunekoKud);
+		presKontr.setUrrunekoNegozioLogika(urrunekoKud);
+		alarma_gaitu.setUrrunekoNegozioLogika(urrunekoKud);
+	}
+	
+	
 	/**
 	 * Urruneko zerbitzua esleitzeko erabiltzen da.
 	 * 
 	 * @return Boolean bat itzultzen du. True urruneko zerbitzua atzigarri
 	 *         baldin badago eta konexioa gauzatu bada, False bestela.
 	 */
-	public boolean setNegozioLogika() {
-		try {
-			System.setProperty("java.security.policy", "client.policy");
-			// Assingn security manager
-			if (System.getSecurityManager() == null)
-				System.setSecurityManager(new RMISecurityManager());
-			UrrunekoInterfazea urrunekoObj;
-			String zerbIzena = "rmi://" + host + "/" + zerbitzuIzena;
-			urrunekoObj = (UrrunekoInterfazea) Naming.lookup(zerbIzena);
-			irakGatazk.setUrrunekoNegozioLogika(urrunekoObj);
-			presKontr.setUrrunekoNegozioLogika(urrunekoObj);
-			alarma_gaitu.setUrrunekoNegozioLogika(urrunekoObj);
-			urrunekoKud = urrunekoObj;
-			System.out.println("Negozioaren logika esleituta");
-			return true;
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-			return false;
-		} catch (RemoteException e) {
-			// create an instance of a JOptionPane, with only an ok button and
-			// message.
-			JOptionPane optPane = new JOptionPane(
-					"Ezin izan da zerbitzariarekin konexioa ezarri",
-					JOptionPane.ERROR_MESSAGE);
-
-			JPanel buttonPanel = (JPanel) optPane.getComponent(1);
-			JButton buttonOk = (JButton) buttonPanel.getComponent(0);
-			buttonOk.setText("Ados");
-
-			JDialog d = optPane.createDialog(null, "Konexio errorea");
-			d.setVisible(true);
-
-			e.printStackTrace();
-
-			return false;
-		} catch (NotBoundException e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
+//	public boolean setNegozioLogika() {
+//		try {
+//			System.setProperty("java.security.policy", "client.policy");
+//			// Assingn security manager
+//			if (System.getSecurityManager() == null)
+//				System.setSecurityManager(new RMISecurityManager());
+//			UrrunekoInterfazea urrunekoObj;
+//			String zerbIzena = "rmi://" + host + "/" + zerbitzuIzena;
+//			urrunekoObj = (UrrunekoInterfazea) Naming.lookup(zerbIzena);
+//			irakGatazk.setUrrunekoNegozioLogika(urrunekoObj);
+//			presKontr.setUrrunekoNegozioLogika(urrunekoObj);
+//			alarma_gaitu.setUrrunekoNegozioLogika(urrunekoObj);
+//			urrunekoKud = urrunekoObj;
+//			System.out.println("Negozioaren logika esleituta");
+//			return true;
+//		} catch (MalformedURLException e) {
+//			e.printStackTrace();
+//			return false;
+//		} catch (RemoteException e) {
+//			// create an instance of a JOptionPane, with only an ok button and
+//			// message.
+//			JOptionPane optPane = new JOptionPane(
+//					"Ezin izan da zerbitzariarekin konexioa ezarri",
+//					JOptionPane.ERROR_MESSAGE);
+//
+//			JPanel buttonPanel = (JPanel) optPane.getComponent(1);
+//			JButton buttonOk = (JButton) buttonPanel.getComponent(0);
+//			buttonOk.setText("Ados");
+//
+//			JDialog d = optPane.createDialog(null, "Konexio errorea");
+//			d.setVisible(true);
+//
+//			e.printStackTrace();
+//
+//			return false;
+//		} catch (NotBoundException e) {
+//			e.printStackTrace();
+//			return false;
+//		}
+//	}
 
 	/**
 	 * This method initializes jMenuItem7	
@@ -441,9 +447,9 @@ public class EI_SegurtasunArduraduna extends JFrame {
 	 *            Aplikazioa komando lerrotik jaurtitzean, beharrezkoak diren
 	 *            parametroak (behar balitu) jasotzeko Array bat da.
 	 */
-	public static void main(String[] args) {
-		EI_SegurtasunArduraduna segArd = new EI_SegurtasunArduraduna();
-		segArd.setVisible(true);
-		segArd.setDefaultCloseOperation(EXIT_ON_CLOSE);
-	}
+//	public static void main(String[] args) {
+//		EI_SegurtasunArduraduna segArd = new EI_SegurtasunArduraduna();
+//		segArd.setVisible(true);
+//		segArd.setDefaultCloseOperation(EXIT_ON_CLOSE);
+//	}
 } // @jve:decl-index=0:visual-constraint="201,10"

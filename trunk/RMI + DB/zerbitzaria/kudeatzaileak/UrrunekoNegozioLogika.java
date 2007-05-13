@@ -48,7 +48,7 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 	/**
 	 * Zerbitzuak izango duen izena.
 	 */
-	public static final String zerbitzuIzena = "irakasleGatazkatsuena";
+	public static final String zerbitzuIzena = "EraikiKon";
 
 	/**
 	 * Zerbitzaria martxan dagoen bitartean datu basea atzitzeko erabiliko den
@@ -212,5 +212,9 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 			System.out
 					.println("Errorea zerbitzaria jaurtitzean" + e.toString());
 		}
+	}
+
+	public boolean loginEgin(String erab, String pasahitza) throws RemoteException {
+			return true;
 	}
 }
