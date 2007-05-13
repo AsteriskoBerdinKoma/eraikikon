@@ -352,6 +352,7 @@ public class EI_SegurtasunArduraduna extends JFrame {
 		irakGatazk.setUrrunekoNegozioLogika(urrunekoKud);
 		presKontr.setUrrunekoNegozioLogika(urrunekoKud);
 		alarma_gaitu.setUrrunekoNegozioLogika(urrunekoKud);
+		sarbKonts.setUrrunekoNegozioLogika(urrunekoKud);
 	}
 	
 	
