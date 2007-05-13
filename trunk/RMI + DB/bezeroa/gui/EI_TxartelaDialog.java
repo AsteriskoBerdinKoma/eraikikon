@@ -62,7 +62,7 @@ public class EI_TxartelaDialog extends JDialog {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(267, 186);
+		this.setSize(284, 176);
 		this.setTitle("Txartela");
 		this.setContentPane(getJContentPane());
 	}
@@ -80,6 +80,7 @@ public class EI_TxartelaDialog extends JDialog {
 			gridBagConstraints8.ipadx = 0;
 			gridBagConstraints8.ipady = 0;
 			gridBagConstraints8.fill = GridBagConstraints.BOTH;
+			gridBagConstraints8.weightx = 1.0D;
 			gridBagConstraints8.gridx = 2;
 			GridBagConstraints gridBagConstraints7 = new GridBagConstraints();
 			gridBagConstraints7.insets = new Insets(5, 5, 5, 5);
@@ -88,6 +89,7 @@ public class EI_TxartelaDialog extends JDialog {
 			gridBagConstraints7.ipadx = 0;
 			gridBagConstraints7.ipady = 0;
 			gridBagConstraints7.fill = GridBagConstraints.BOTH;
+			gridBagConstraints7.weightx = 1.0D;
 			gridBagConstraints7.gridwidth = 1;
 			GridBagConstraints gridBagConstraints6 = new GridBagConstraints();
 			gridBagConstraints6.gridheight = -1;
@@ -158,9 +160,9 @@ public class EI_TxartelaDialog extends JDialog {
 			jContentPane.add(getJTextField1(), gridBagConstraints3);
 			jContentPane.add(jLabel2, gridBagConstraints4);
 			jContentPane.add(getJComboBox(), gridBagConstraints5);
-			jContentPane.add(new JButton(), gridBagConstraints6);
 			jContentPane.add(getJButton(), gridBagConstraints7);
 			jContentPane.add(getJButton1(), gridBagConstraints8);
+			jContentPane.add(new JButton(), gridBagConstraints6);
 		}
 		return jContentPane;
 	}
@@ -225,6 +227,7 @@ public class EI_TxartelaDialog extends JDialog {
 		if (jButton == null) {
 			jButton = new JButton();
 			jButton.setText("Ezeztatu");
+			jButton.setPreferredSize(new Dimension(67, 25));
 		}
 		return jButton;
 	}
