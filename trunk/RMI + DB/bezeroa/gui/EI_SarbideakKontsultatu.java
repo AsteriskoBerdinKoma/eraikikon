@@ -17,8 +17,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import partekatuak.UrrunekoInterfazea;
 import partekatuak.DbDatuLerroa;
+import partekatuak.UrrunekoInterfazea;
+import java.awt.Dimension;
 
 public class EI_SarbideakKontsultatu extends JDialog {
 
@@ -64,7 +65,7 @@ public class EI_SarbideakKontsultatu extends JDialog {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(557, 300);
+		this.setSize(459, 253);
 		this.setTitle("Sarbide-Eskaerak Kontsultatu");
 		this.setContentPane(getJContentPane());
 	}
@@ -77,8 +78,9 @@ public class EI_SarbideakKontsultatu extends JDialog {
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
 			GridBagConstraints gridBagConstraints18 = new GridBagConstraints();
-			gridBagConstraints18.gridx = 2;
-			gridBagConstraints18.insets = new Insets(0, 10, 0, 0);
+			gridBagConstraints18.gridx = 1;
+			gridBagConstraints18.insets = new Insets(0, 5, 0, 0);
+			gridBagConstraints18.anchor = GridBagConstraints.WEST;
 			gridBagConstraints18.gridy = 1;
 			jLabel2 = new JLabel();
 			jLabel2.setText("Ateko sarbide-eskaerak: ");
@@ -95,33 +97,39 @@ public class EI_SarbideakKontsultatu extends JDialog {
 			gridBagConstraints16.weightx = 1.0;
 			gridBagConstraints16.weighty = 1.0;
 			gridBagConstraints16.gridwidth = 3;
-			gridBagConstraints16.insets = new Insets(5, 10, 10, 10);
+			gridBagConstraints16.insets = new Insets(5, 5, 10, 10);
 			gridBagConstraints16.gridx = 1;
 			GridBagConstraints gridBagConstraints13 = new GridBagConstraints();
 			gridBagConstraints13.fill = GridBagConstraints.BOTH;
 			gridBagConstraints13.gridy = 2;
-			gridBagConstraints13.weightx = 1.0;
-			gridBagConstraints13.weighty = 1.0;
+			gridBagConstraints13.weightx = 0.0D;
+			gridBagConstraints13.weighty = 0.0D;
 			gridBagConstraints13.insets = new Insets(5, 10, 10, 10);
+			gridBagConstraints13.ipadx = 15;
 			gridBagConstraints13.gridx = 0;
 			GridBagConstraints gridBagConstraints = new GridBagConstraints();
-			gridBagConstraints.gridx = 3;
+			gridBagConstraints.gridx = 2;
 			gridBagConstraints.anchor = GridBagConstraints.CENTER;
 			gridBagConstraints.insets = new Insets(10, 10, 10, 10);
 			gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+			gridBagConstraints.ipady = -5;
 			gridBagConstraints.gridy = 0;
 			GridBagConstraints gridBagConstraints4 = new GridBagConstraints();
-			gridBagConstraints4.gridx = 2;
-			gridBagConstraints4.insets = new Insets(10, 10, 10, 10);
+			gridBagConstraints4.gridx = 1;
+			gridBagConstraints4.insets = new Insets(5, 5, 5, 10);
+			gridBagConstraints4.weightx = 1.0D;
+			gridBagConstraints4.anchor = GridBagConstraints.WEST;
 			gridBagConstraints4.gridy = 0;
 			jLabel = new JLabel();
 			jLabel.setText("datako Sarbide-eskerak");
 			GridBagConstraints gridBagConstraints1 = new GridBagConstraints();
 			gridBagConstraints1.fill = GridBagConstraints.HORIZONTAL;
 			gridBagConstraints1.gridy = 0;
-			gridBagConstraints1.weightx = 1.0;
-			gridBagConstraints1.insets = new Insets(10, 10, 5, 5);
+			gridBagConstraints1.weightx = 0.0D;
+			gridBagConstraints1.insets = new Insets(10, 10, 10, 10);
 			gridBagConstraints1.gridwidth = 1;
+			gridBagConstraints1.ipadx = 15;
+			gridBagConstraints1.ipady = -5;
 			gridBagConstraints1.gridx = 0;
 			jContentPane = new JPanel();
 			jContentPane.setLayout(new GridBagLayout());
@@ -145,6 +153,7 @@ public class EI_SarbideakKontsultatu extends JDialog {
 		if (jDateComboBox == null) {
 			jDateComboBox = new DateComboBox();
 //			jDateComboBox.addActionListener(new java.awt.event.ActionListener() {
+			jDateComboBox.setPreferredSize(new Dimension(100, 20));
 //				public void actionPerformed(java.awt.event.ActionEvent e) {
 //					Calendar cal = new GregorianCalendar();
 //					cal.setTime(new Date());
@@ -168,6 +177,7 @@ public class EI_SarbideakKontsultatu extends JDialog {
 		if (jButton == null) {
 			jButton = new JButton();
 			jButton.setText("Kontsultatu");
+			jButton.setPreferredSize(new Dimension(108, 20));
 			jButton.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					try {
@@ -200,6 +210,7 @@ public class EI_SarbideakKontsultatu extends JDialog {
 	private JScrollPane getJScrollPane1() {
 		if (jScrollPane1 == null) {
 			jScrollPane1 = new JScrollPane();
+			jScrollPane1.setPreferredSize(new Dimension(100, 131));
 			jScrollPane1.setViewportView(getJList());
 		}
 		return jScrollPane1;
