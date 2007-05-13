@@ -49,7 +49,7 @@ public class EI_SarbideakKontsultatu extends JDialog {
 	
 	private Vector<DbDatuLerroa> datuak=new Vector<DbDatuLerroa>();  //  @jve:decl-index=0:
 	private DefaultListModel ateak=new DefaultListModel();
-
+	
 	/**
 	 * @param owner
 	 */
@@ -173,6 +173,10 @@ public class EI_SarbideakKontsultatu extends JDialog {
 					try {
 						String data = jDateComboBox.getSelectedItem().toString().replace('/', '-');
 						System.out.println(data);
+						ateak.removeAllElements();
+						jList.setModel(new DefaultListModel());
+						tableModel.setDataVector(new Vector<Object>(), null);
+						tableModel.fireTableStructureChanged();
 						listaKargatu(data);
 					//data egokia den konprobatu.
 					//egokia bada, emandako data String batean bilakatu eta horrekin datuakEguneraturi deitu
@@ -208,7 +212,15 @@ public class EI_SarbideakKontsultatu extends JDialog {
 	 */
 	private JList getJList() {
 		if (jList == null) {
-			jList = new JList(ateak);
+			jList = new JList();
+			jList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+				public void valueChanged(javax.swing.event.ListSelectionEvent e) {
+					if(ateak.size()!=0){
+						Integer ateBalio=(Integer)jList.getSelectedValue();
+						taulaEguneratu(ateBalio.intValue());
+					}
+				}
+			});
 		}
 		return jList;
 	}
@@ -240,45 +252,16 @@ public class EI_SarbideakKontsultatu extends JDialog {
 	}
 	
 	public void setUrrunekoNegozioLogika(UrrunekoInterfazea ui) {
-//		try {
 			this.urrunekoKud = ui;
-
-//			Calendar cal = new GregorianCalendar();
-//			cal.setTime(new Date());
-//			// Daten formatua: UUUU-HH-E
-//			String sarData = String.valueOf(cal.get(Calendar.YEAR)) + "-"
-//					+ String.valueOf(cal.get(Calendar.MONTH) + 1) + "-1";
-//			this.noiztikNora = String.valueOf(cal.get(Calendar.YEAR)) + "-"
-//					+ String.valueOf(cal.get(Calendar.MONTH) + 1) + "/"
-//					+ String.valueOf(cal.get(Calendar.YEAR)) + "-"
-//					+ String.valueOf(cal.get(Calendar.MONTH) + 1);
-//			this.datuakEguneratu(sarData);
-
-//		} catch (RemoteException e) {
-			// create an instance of a JOptionPane, with only an ok button and
-			// message.
-//			JOptionPane optPane = new JOptionPane(
-//					"Ezin izan da zerbitzariarekin konexioa ezarri",
-//					JOptionPane.ERROR_MESSAGE);
-//
-//			JPanel buttonPanel = (JPanel) optPane.getComponent(1);
-//			JButton buttonOk = (JButton) buttonPanel.getComponent(0);
-//			buttonOk.setText("Ados");
-//
-//			JDialog d = optPane.createDialog(null, "Konexio errorea");
-//			d.setVisible(true);
-//
-//			e.printStackTrace();
-//
-//			System.exit(1); // terminate application
-//		}
 	}
 	
 	public void listaKargatu(String data) throws RemoteException {
 		datuak=urrunekoKud.getSarbideEskaerak(data);
-		if (datuak.size() != 0) {
+		if (datuak!=null) {
+			ateak.addElement(datuak.elementAt(0).getAteId());
 			for (DbDatuLerroa lerroa: datuak) {
-				if((Integer) ateak.lastElement()!=lerroa.getAteId())
+				Integer azkenekoAtea= (Integer)ateak.lastElement();
+				if(azkenekoAtea.intValue()!=lerroa.getAteId())
 					ateak.addElement(lerroa.getAteId());
 			}
 			jList.setModel(ateak);
