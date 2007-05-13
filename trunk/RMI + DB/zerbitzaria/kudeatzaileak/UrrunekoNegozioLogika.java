@@ -175,8 +175,7 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		try {
 			Vector<DbDatuLerroa> vTratatzekoDatuak;
 			vTratatzekoDatuak=sek.getSarbideEskaerak(data);
-			System.out.println(vTratatzekoDatuak.size());
-			if (vTratatzekoDatuak!=null){
+			if (vTratatzekoDatuak.size()!=0){
 				for (DbDatuLerroa lerro: vTratatzekoDatuak){
 					int a=lerro.getAteId();
 					int b=lerro.getHasieraGune();
@@ -187,11 +186,9 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 			}
 			return null;
 		} catch (IllegalStateException e) {
-			System.out.println("error");
 			e.printStackTrace();
 			return null;
 		} catch (SQLException e) {
-			System.out.println("error");
 			e.printStackTrace();
 			return null;
 		}
