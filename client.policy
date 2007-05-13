@@ -1,4 +1,7 @@
 grant {
 permission java.net.SocketPermission "*:1024-", "connect, resolve, listen, accept";
 permission java.awt.AWTPermission "showWindowWithoutWarningBanner";
+permission javax.sound.sampled.AudioPermission "play";
+permission java.lang.RuntimePermission "accessClassInPackage.sun.audio";
+permission java.io.FilePermission "alarm.wav", "read";
 };
