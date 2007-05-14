@@ -59,8 +59,46 @@ public class FakulKud {
 		try {
 			this.agindua.executeUpdate(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	
+	
+	public boolean erabiltzaileaFakultatean(String erabId)throws 
+	IllegalStateException, SQLException{
+		
+		String query1 = "SELECT * FROM fakultatea WHERE erId= "+ erabId;
+		ResultSet rs;
+		rs = this.agindua.executeQuery(query1);
+		if (rs.next()){
+			return true;
+		}
+		return false;
+	}
+	
+	
+	
+	
+	
+	
+	public void kokapenaEguneratu(String erabId,String guneId) throws 
+	IllegalStateException, SQLException{
+		
+			
+			String query2= "UPDATE fakultatea SET guId= " + guneId + " WHERE erId= " + erabId;
+			this.agindua.executeUpdate(query2);
+			
+		
+	}
+	
+	public void kokapenaSartu(String erabId, String guneId) throws
+	IllegalStateException, SQLException{
+		String query3= "INSERT INTO fakultatea (erId, guId, inId) VALUES( "
+		+ erabId + " , " + guneId + " ,1 )";
+		this.agindua.executeUpdate(query3);
+		
+	}
+
+	
 }
