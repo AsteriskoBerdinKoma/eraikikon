@@ -100,6 +100,7 @@ public class EI_TxartelaJaso extends JDialog {
 	 * 	
 	 * @return javax.swing.JButton	
 	 */
+
 	private JButton getJButton() {
 		if (jButton == null) {
 			jButton = new JButton();
