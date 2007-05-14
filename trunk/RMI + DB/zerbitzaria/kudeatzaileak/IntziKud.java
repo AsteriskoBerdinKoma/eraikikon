@@ -27,14 +27,11 @@ public class IntziKud {
 	 *            Datu-basearen aurkako konexioaren parametroak gordetzen dituen
 	 *            klasea da. Negozio logika egikaritzean sortuko da eta honek
 	 *            egikarituriko klase guztiek erabiliko dute.
+	 * @throws SQLException
 	 */
-	public IntziKud(Connection kon) {
-		try {
-			this.konexioa = kon;
-			this.agindua = (Statement) konexioa.createStatement();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public IntziKud(Connection kon) throws SQLException {
+		this.konexioa = kon;
+		this.agindua = (Statement) konexioa.createStatement();
 	}
 
 	/**
@@ -46,23 +43,19 @@ public class IntziKud {
 	 * @return lehenengo bektorean lerroak gordeko dira datu bakoitzeko Object
 	 *         bat sortuz. Sortutako lerro bakoitzeko bektorea bigarren
 	 *         bektorean gordetzen da azken honek taula osoa osatuz.
+	 * @throws SQLException
 	 */
-	public Vector<Vector<Object>> getIntzidentziak() {
-		try {
-			String query = "SELECT * FROM intzidentziak";
-			ResultSet rs = this.agindua.executeQuery(query);
-			Vector<Vector<Object>> lerroak = new Vector<Vector<Object>>();
-			while (rs.next()) {
-				Vector<Object> row = new Vector<Object>();
-				for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++)
-					row.addElement(rs.getObject(i));
-				lerroak.addElement(row);
-			}
-			return lerroak;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
+	public Vector<Vector<Object>> getIntzidentziak() throws SQLException {
+		String query = "SELECT * FROM intzidentziak";
+		ResultSet rs = this.agindua.executeQuery(query);
+		Vector<Vector<Object>> lerroak = new Vector<Vector<Object>>();
+		while (rs.next()) {
+			Vector<Object> row = new Vector<Object>();
+			for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++)
+				row.addElement(rs.getObject(i));
+			lerroak.addElement(row);
 		}
+		return lerroak;
 	}
 
 	/**
@@ -80,29 +73,21 @@ public class IntziKud {
 	 *            String-ak honako formatua eduki behar du:
 	 *            <p>
 	 *            UUUU-HH/UUUU-HH
+	 * @throws SQLException
 	 */
 	public void insertIntzGatazkatsuena(String TxartelId, String TxartelIrakId,
-			String noiztikNora) {
+			String noiztikNora) throws SQLException {
 		String intz = "INSERT INTO intzidentziak (data, mota, idTxartela, idTxartelIrakurgailua, gaituta, noiztikNora) "
 				+ "VALUES (NOW(), 'irakasleGatazkatsua',"
 				+ TxartelId
 				+ ", "
 				+ TxartelIrakId + ",true, '" + noiztikNora + "')";
-		try {
-			this.agindua.executeUpdate(intz);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		this.agindua.executeUpdate(intz);
 	}
-	
-	public void insertAlarma(){
-		String intz= "INSERT INTO intzidentziak (data, mota, gaituta) "
-			+ "VALUES (NOW(), 'alarma', true)";
-		try {
-			this.agindua.executeUpdate(intz);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+	public void insertAlarma() throws SQLException {
+		String intz = "INSERT INTO intzidentziak (data, mota, gaituta) "
+				+ "VALUES (NOW(), 'alarma', true)";
+		this.agindua.executeUpdate(intz);
 	}
 }

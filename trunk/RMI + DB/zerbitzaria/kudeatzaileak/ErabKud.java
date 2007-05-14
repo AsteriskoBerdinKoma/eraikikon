@@ -27,14 +27,11 @@ public class ErabKud {
 	 *            Datu-basearen aurkako konexioaren parametroak gordetzen dituen
 	 *            klasea da. Negozio logika egikaritzean sortuko da eta honek
 	 *            egikarituriko klase guztiek erabiliko dute.
+	 * @throws SQLException
 	 */
-	public ErabKud(Connection kon) {
-		try {
-			konexioa = kon;
-			agindua = (Statement) konexioa.createStatement();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public ErabKud(Connection kon) throws SQLException {
+		konexioa = kon;
+		agindua = (Statement) konexioa.createStatement();
 	}
 
 	/**
@@ -83,23 +80,28 @@ public class ErabKud {
 			izena = q.getString("E.izena");
 		return izena;
 	}
-	
-	public void insertErabiltzailea(int nan, String izena,String pasahitza, int profId) throws SQLException{
+
+	public void insertErabiltzailea(int nan, String izena, String pasahitza,
+			int profId) throws SQLException {
 		String erab = "INSERT INTO erabiltzaileak (id,izena,pasahitza,profId) "
-			+ "VALUES ("+nan+",'"+izena+"','"+pasahitza+"',"+profId+")";
-		this.agindua.executeUpdate(erab);		
+				+ "VALUES (" + nan + ",'" + izena + "','" + pasahitza + "',"
+				+ profId + ")";
+		this.agindua.executeUpdate(erab);
 	}
 
-	public boolean isLoginZuzena(String erab, String pasahitza) throws SQLException {
-		String query = "SELECT * FROM erabiltzaileak WHERE id = " + erab + " AND pasahitza = '" + pasahitza + "'";
+	public boolean isLoginZuzena(String erab, String pasahitza)
+			throws SQLException {
+		String query = "SELECT * FROM erabiltzaileak WHERE id = " + erab
+				+ " AND pasahitza = '" + pasahitza + "'";
 		ResultSet r = agindua.executeQuery(query);
 		return r.next();
 	}
 
 	public int getProfila(String erab) throws SQLException {
-		String query = "SELECT P.id FROM erabiltzaileak AS E INNER JOIN profilak AS P ON E.profId = P.id WHERE E.id = " + erab;
+		String query = "SELECT P.id FROM erabiltzaileak AS E INNER JOIN profilak AS P ON E.profId = P.id WHERE E.id = "
+				+ erab;
 		ResultSet r = agindua.executeQuery(query);
-		if(r.next())
+		if (r.next())
 			return r.getInt("id");
 		else
 			return -1;

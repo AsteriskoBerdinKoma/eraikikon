@@ -7,7 +7,7 @@ import java.util.Vector;
 import com.mysql.jdbc.Statement;
 
 public class GuneKud {
-	
+
 	private Connection konexioa;
 
 	private Statement agindua;
@@ -20,14 +20,11 @@ public class GuneKud {
 	 *            Datu-basearen aurkako konexioaren parametroak gordetzen dituen
 	 *            klasea da. Negozio logika egikaritzean sortuko da eta honek
 	 *            egikarituriko klase guztiek erabiliko dute.
+	 * @throws SQLException
 	 */
-	public GuneKud(Connection kon) {
-		try {
-			this.konexioa = kon;
-			this.agindua = (Statement) konexioa.createStatement();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public GuneKud(Connection kon) throws SQLException {
+		this.konexioa = kon;
+		this.agindua = (Statement) konexioa.createStatement();
 	}
 
 	/**
@@ -40,21 +37,20 @@ public class GuneKud {
 	 *         bat sortuz. Sortutako lerro bakoitzeko bektorea bigarren
 	 *         bektorean gordetzen da azken honek taula osoa osatuz.
 	 */
-	public Vector<Vector<Object>> getGuneGuztiak()throws 
-	IllegalStateException, SQLException{
-		
-			String query = "SELECT * FROM guneak ";
-			ResultSet rs = this.agindua.executeQuery(query);
-			Vector<Vector<Object>> lerroak = new Vector<Vector<Object>>();
-			while (rs.next()) {
-				Vector<Object> row = new Vector<Object>();
-				for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++)
-					row.addElement(rs.getObject(i));
-				lerroak.addElement(row);
-			}
-			return lerroak;
-	
-	}
+	public Vector<Vector<Object>> getGuneGuztiak()
+			throws IllegalStateException, SQLException {
 
+		String query = "SELECT * FROM guneak ";
+		ResultSet rs = this.agindua.executeQuery(query);
+		Vector<Vector<Object>> lerroak = new Vector<Vector<Object>>();
+		while (rs.next()) {
+			Vector<Object> row = new Vector<Object>();
+			for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++)
+				row.addElement(rs.getObject(i));
+			lerroak.addElement(row);
+		}
+		return lerroak;
+
+	}
 
 }
