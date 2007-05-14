@@ -35,6 +35,8 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 	private FakulKud fakul;
 	
 	private TxartelIrakKud tik;
+	
+	private AteKud ate;
 
 	private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 
@@ -75,6 +77,7 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		intz = new IntziKud(kon);
 		tik = new TxartelIrakKud(kon);
 		fakul = new FakulKud(kon);
+		ate = new AteKud(kon);
 	}
 
 	/**
@@ -99,6 +102,9 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		intz.insertIntzGatazkatsuena(txartId, tIrakId, noiztikNora);
 	}
 
+	public void alarmaIntzidentziaSortu(){
+		intz.insertAlarma();
+	}
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -219,6 +225,13 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 			return true;
 	}
 
+	public void irekiAteak(){
+		ate.IrekiAteak();
+	}
+	
+	public void ItxiAteak(){
+		ate.ItxiAteak();
+	}
 
 	/**
 	 * UrrunekoNegozioLogika-ren zerbitzaria hasieratzen du zerbitzuIzena

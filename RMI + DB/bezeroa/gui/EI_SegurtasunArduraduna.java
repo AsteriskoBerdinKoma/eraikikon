@@ -144,7 +144,6 @@ public class EI_SegurtasunArduraduna extends JFrame {
 			jMenu.setText("Alarma");
 			jMenu.setMnemonic(KeyEvent.VK_A);
 			jMenu.add(getJMenuItem5());
-			jMenu.add(getJMenuItem6());
 		}
 		return jMenu;
 	}
@@ -152,7 +151,7 @@ public class EI_SegurtasunArduraduna extends JFrame {
 	private JMenuItem getJMenuItem5() {
 		if (jMenuItem5 == null) {
 			jMenuItem5 = new JMenuItem();
-			jMenuItem5.setText("Gaitu");
+			jMenuItem5.setText("Gaitu/Desgaitu");
 			jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					alarma_gaitu.setEraikinekoPertsonKop();
@@ -162,19 +161,6 @@ public class EI_SegurtasunArduraduna extends JFrame {
 			});
 		}
 		return jMenuItem5;
-	}
-
-	private JMenuItem getJMenuItem6() {
-		if (jMenuItem6 == null) {
-			jMenuItem6 = new JMenuItem();
-			jMenuItem6.setText("Desgaitu");
-			jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					//txart_eman.setVisible(true);
-				}
-			});
-		}
-		return jMenuItem6;
 	}
 	
 	/**
