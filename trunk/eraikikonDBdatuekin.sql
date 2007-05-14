@@ -100,7 +100,7 @@ CREATE TABLE  `eraikikon`.`fakultatea` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `erId` int(10) unsigned NOT NULL,
   `guId` int(10) unsigned NOT NULL,
-  `inId` int(10) unsigned NOT NULL,
+  `inId` int(10) unsigned default NULL,
   PRIMARY KEY  (`id`),
   KEY(`erId`),
   KEY(`guId`),
@@ -276,11 +276,11 @@ INSERT INTO `eraikikon`.`intzidentziak` (data,larritasuna,mota,deskribapena,idTx
 INSERT INTO `eraikikon`.`intzidentziak` (data,larritasuna,mota,deskribapena,idTxartela,idAtea,idTxartelIrakurgailua,gaituta) VALUES ('2004-11-30 16:47:07',"larria","sarbide eskaera ukatua","errore ezezaguna",11,4,7,true);
 
 INSERT INTO `eraikikon`.`fakultatea` (erId,guId,inId) VALUES (1,1,1);
-INSERT INTO `eraikikon`.`fakultatea` (erId,guId,inId) VALUES (2,4,-1);
-INSERT INTO `eraikikon`.`fakultatea` (erId,guId,inId) VALUES (3,2,-1);
-INSERT INTO `eraikikon`.`fakultatea` (erId,guId,inId) VALUES (4,7,-1);
-INSERT INTO `eraikikon`.`fakultatea` (erId,guId,inId) VALUES (5,6,-1);
-INSERT INTO `eraikikon`.`fakultatea` (erId,guId,inId) VALUES (6,4,-1);
+INSERT INTO `eraikikon`.`fakultatea` (erId,guId) VALUES (2,4);
+INSERT INTO `eraikikon`.`fakultatea` (erId,guId) VALUES (3,2);
+INSERT INTO `eraikikon`.`fakultatea` (erId,guId) VALUES (4,7);
+INSERT INTO `eraikikon`.`fakultatea` (erId,guId) VALUES (5,6);
+INSERT INTO `eraikikon`.`fakultatea` (erId,guId) VALUES (6,4);
 INSERT INTO `eraikikon`.`fakultatea` (erId,guId,inId) VALUES (7,2,3);
 INSERT INTO `eraikikon`.`fakultatea` (erId,guId,inId) VALUES (8,3,4);
-INSERT INTO `eraikikon`.`fakultatea` (erId,guId,inId) VALUES (9,2,-1);
+INSERT INTO `eraikikon`.`fakultatea` (erId,guId) VALUES (9,2);
