@@ -3,7 +3,10 @@ package bezeroa.gui;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Rectangle;
 import java.awt.event.ItemEvent;
+import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.Vector;
 
 import javax.swing.JButton;
@@ -14,6 +17,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.Dimension;
 import javax.swing.SwingConstants;
+import javax.swing.JPasswordField;
+
+import partekatuak.UrrunekoInterfazea;
 
 /**
  * Erabiltzaile bati txartel bat esleitzea ahalbidetzen digun elkarrizketa leiho
@@ -48,7 +54,9 @@ public class EI_TxartelaEman extends JDialog {
 
 	private JLabel jLabel3 = null;
 
-	private JTextField jTextField2 = null;
+	private UrrunekoInterfazea urrunekoKud; // @jve:decl-index=0:
+
+	private JPasswordField jPasswordField = null;
 
 	/**
 	 * Elkarrizketa leihoa hasieratzen du.
@@ -79,13 +87,13 @@ public class EI_TxartelaEman extends JDialog {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
-			GridBagConstraints gridBagConstraints21 = new GridBagConstraints();
-			gridBagConstraints21.fill = GridBagConstraints.HORIZONTAL;
-			gridBagConstraints21.gridy = 2;
-			gridBagConstraints21.weightx = 1.0;
-			gridBagConstraints21.gridwidth = 2;
-			gridBagConstraints21.insets = new Insets(5, 5, 0, 10);
-			gridBagConstraints21.gridx = 1;
+			GridBagConstraints gridBagConstraints12 = new GridBagConstraints();
+			gridBagConstraints12.fill = GridBagConstraints.HORIZONTAL;
+			gridBagConstraints12.gridy = 2;
+			gridBagConstraints12.weightx = 1.0;
+			gridBagConstraints12.insets = new Insets(5, 5, 0, 10);
+			gridBagConstraints12.gridwidth = 2;
+			gridBagConstraints12.gridx = 1;
 			GridBagConstraints gridBagConstraints11 = new GridBagConstraints();
 			gridBagConstraints11.gridx = 0;
 			gridBagConstraints11.anchor = GridBagConstraints.EAST;
@@ -193,7 +201,7 @@ public class EI_TxartelaEman extends JDialog {
 			jContentPane.add(getJButton1(), gridBagConstraints8);
 			jContentPane.add(new JButton(), gridBagConstraints6);
 			jContentPane.add(jLabel3, gridBagConstraints11);
-			jContentPane.add(getJTextField2(), gridBagConstraints21);
+			jContentPane.add(getJPasswordField(), gridBagConstraints12);
 		}
 		return jContentPane;
 	}
@@ -228,23 +236,20 @@ public class EI_TxartelaEman extends JDialog {
 	 * @return javax.swing.JComboBox
 	 */
 	private JComboBox getJComboBox() {
-		Vector<String> itemNames = new Vector<String>();
-		itemNames.addElement("Irakasleak");
-		itemNames.addElement("Bisitak");
-		itemNames.addElement("Ikasleak");
-		itemNames.addElement("Arduraduna");
 		if (jComboBox == null) {
-			jComboBox = new JComboBox(itemNames);
-			jComboBox.setPreferredSize(new Dimension(31, 20));
+			jComboBox = new JComboBox();
+			jComboBox.setBounds(new Rectangle(90, 85, 177, 25));
+			jComboBox.addItem("Profil bat aukeratu");
+			jComboBox.addItem("Bisitari");
 			jComboBox.addItemListener(new java.awt.event.ItemListener() {
-				public void itemStateChanged(java.awt.event.ItemEvent e) {
-					if (e.getStateChange() == ItemEvent.SELECTED
-							&& e.getItem().equals("Bisitak")) {
-						bisitari.setVisible(true);
-						bisitari.pack();
-					}
+				public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.SELECTED &&
+				e.getItem().equals("Bisita") ){
+				bisitari.setVisible(true);
+				bisitari.pack();
 				}
-			});
+				}
+				});
 		}
 		return jComboBox;
 	}
@@ -259,6 +264,11 @@ public class EI_TxartelaEman extends JDialog {
 			jButton = new JButton();
 			jButton.setText("Ezeztatu");
 			jButton.setPreferredSize(new Dimension(67, 25));
+			jButton.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					setVisible(false);
+				}
+			});
 		}
 		return jButton;
 	}
@@ -272,20 +282,66 @@ public class EI_TxartelaEman extends JDialog {
 		if (jButton1 == null) {
 			jButton1 = new JButton();
 			jButton1.setText("Sortu");
+			jButton1.setBounds(new Rectangle(145, 127, 126, 26));
+			jButton1.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					try {
+						String nan = jTextField.getText();
+						String izena = jTextField1.getText();
+						String pasahitza = String.valueOf(jPasswordField
+								.getPassword());
+						// bisita bada zelan ein???
+						int aukProf = urrunekoKud.profilZenbakia(jComboBox
+								.getSelectedItem().toString());
+						int bal = Integer.parseInt(nan);
+						urrunekoKud.createErabiltzailea(bal, izena, pasahitza,
+								aukProf);
+						urrunekoKud.gaituTxartela(bal);
+						
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			});
+
 		}
 		return jButton1;
 	}
 
 	/**
-	 * This method initializes jTextField2	
-	 * 	
-	 * @return javax.swing.JTextField	
+	 * This method initializes jPasswordField
+	 * 
+	 * @return javax.swing.JPasswordField
 	 */
-	private JTextField getJTextField2() {
-		if (jTextField2 == null) {
-			jTextField2 = new JTextField();
+	private JPasswordField getJPasswordField() {
+		if (jPasswordField == null) {
+			jPasswordField = new JPasswordField();
 		}
-		return jTextField2;
+		return jPasswordField;
 	}
 
+	public void setUrrunekoNegozioLogika(UrrunekoInterfazea ui) {
+		this.urrunekoKud = ui;
+	}
+
+	public void profilakKargatu() {
+		try {
+			Vector<String> vProfilak = null;
+			vProfilak = urrunekoKud.getProfilak();
+			if (vProfilak.size() != 0) {
+				for (String prof : vProfilak)
+					jComboBox.addItem(prof);
+			}
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 } // @jve:decl-index=0:visual-constraint="10,10"

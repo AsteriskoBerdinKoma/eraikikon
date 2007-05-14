@@ -62,8 +62,9 @@ public class EI_SegurtasunArduraduna extends JFrame {
 
 	//private String host = "localhost";  //  @jve:decl-index=0:
 
-	private JDialog txart_eman = new EI_TxartelaEman(this);  //  @jve:decl-index=0:visual-constraint="10,165"
-	private JDialog txart_jaso =  new EI_TxartelaJaso(this);//  @jve:decl-index=0:visual-constraint="10,165"
+	private EI_TxartelaEman txart_eman = new EI_TxartelaEman(this);  //  @jve:decl-index=0:visual-constraint="10,165"
+	private EI_TxartelaJaso txart_jaso =  new EI_TxartelaJaso(this);
+	private EI_TxartelaGaitu txart_gaitu =  new EI_TxartelaGaitu(this);//  @jve:decl-index=0:visual-constraint="10,165"
 	
 	private EI_IrakasleGatazkatsuena irakGatazk = new EI_IrakasleGatazkatsuena(this);  //  @jve:decl-index=0:visual-constraint="13,55"
 	private EI_PresentziaKontrolatu presKontr = new EI_PresentziaKontrolatu(this);  //  @jve:decl-index=0:visual-constraint="13,91"
@@ -202,6 +203,7 @@ public class EI_SegurtasunArduraduna extends JFrame {
 			jMenuItem.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					txart_eman.setLocationRelativeTo(null);
+					txart_eman.profilakKargatu();
 					txart_eman.setVisible(true);
 				}
 			});
@@ -218,7 +220,7 @@ public class EI_SegurtasunArduraduna extends JFrame {
 		if (jMenuItem1 == null) {
 			jMenuItem1 = new JMenuItem();
 			jMenuItem1.setText("Txartela Jaso");
-			jMenuItem.addActionListener(new java.awt.event.ActionListener() {
+			jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					txart_jaso.setVisible(true);
 				}
@@ -236,6 +238,11 @@ public class EI_SegurtasunArduraduna extends JFrame {
 		if (jMenuItem2 == null) {
 			jMenuItem2 = new JMenuItem();
 			jMenuItem2.setText("Txartela Gaitu");
+			jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					txart_gaitu.setVisible(true);
+				}
+			});
 		}
 		return jMenuItem2;
 	}
@@ -249,6 +256,11 @@ public class EI_SegurtasunArduraduna extends JFrame {
 		if (jMenuItem3 == null) {
 			jMenuItem3 = new JMenuItem();
 			jMenuItem3.setText("Txartela Desgaitu");
+			jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					txart_jaso.setVisible(true);
+				}
+			});
 		}
 		return jMenuItem3;
 	}
@@ -358,6 +370,10 @@ public class EI_SegurtasunArduraduna extends JFrame {
 		alarma_gaitu.setUrrunekoNegozioLogika(urrunekoKud);
 		sarbKonts.setUrrunekoNegozioLogika(urrunekoKud);
 		kokEgun.setUrrunekoNegozioLogika(urrunekoKud);
+		txart_eman.setUrrunekoNegozioLogika(urrunekoKud);
+		txart_jaso.setUrrunekoNegozioLogika(urrunekoKud);
+		txart_gaitu.setUrrunekoNegozioLogika(urrunekoKud);
+		
 	}
 	
 	

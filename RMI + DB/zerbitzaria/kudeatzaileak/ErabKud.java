@@ -83,6 +83,12 @@ public class ErabKud {
 			izena = q.getString("E.izena");
 		return izena;
 	}
+	
+	public void insertErabiltzailea(int nan, String izena,String pasahitza, int profId) throws SQLException{
+		String erab = "INSERT INTO erabiltzaileak (id,izena,pasahitza,profId) "
+			+ "VALUES ("+nan+",'"+izena+"','"+pasahitza+"',"+profId+")";
+		this.agindua.executeUpdate(erab);		
+	}
 
 	public boolean isLoginZuzena(String erab, String pasahitza) throws SQLException {
 		String query = "SELECT * FROM erabiltzaileak WHERE id = " + erab + " AND pasahitza = '" + pasahitza + "'";
