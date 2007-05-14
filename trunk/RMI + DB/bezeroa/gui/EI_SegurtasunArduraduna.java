@@ -62,7 +62,7 @@ public class EI_SegurtasunArduraduna extends JFrame {
 
 	//private String host = "localhost";  //  @jve:decl-index=0:
 
-	private JDialog txart_eman = new EI_TxartelaDialog(this);  //  @jve:decl-index=0:visual-constraint="10,165"
+	private JDialog txart_eman = new EI_TxartelaEman(this);  //  @jve:decl-index=0:visual-constraint="10,165"
 	private EI_IrakasleGatazkatsuena irakGatazk = new EI_IrakasleGatazkatsuena(this);  //  @jve:decl-index=0:visual-constraint="13,55"
 	private EI_PresentziaKontrolatu presKontr = new EI_PresentziaKontrolatu(this);  //  @jve:decl-index=0:visual-constraint="13,91"
 	private EI_SarbideakKontsultatu sarbKonts = new EI_SarbideakKontsultatu(this);  //  @jve:decl-index=0:visual-constraint="12,126"

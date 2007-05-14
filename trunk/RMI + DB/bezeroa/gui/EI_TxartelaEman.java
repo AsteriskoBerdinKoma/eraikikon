@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.Dimension;
+import javax.swing.SwingConstants;
 
 /**
  * Erabiltzaile bati txartel bat esleitzea ahalbidetzen digun elkarrizketa leiho
@@ -21,7 +22,7 @@ import java.awt.Dimension;
  * @author 5. TALDEA
  * 
  */
-public class EI_TxartelaDialog extends JDialog {
+public class EI_TxartelaEman extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 
@@ -45,12 +46,16 @@ public class EI_TxartelaDialog extends JDialog {
 
 	private JDialog bisitari;
 
+	private JLabel jLabel3 = null;
+
+	private JTextField jTextField2 = null;
+
 	/**
 	 * Elkarrizketa leihoa hasieratzen du.
 	 * 
 	 * @param arduraduna
 	 */
-	public EI_TxartelaDialog(EI_SegurtasunArduraduna arduraduna) {
+	public EI_TxartelaEman(EI_SegurtasunArduraduna arduraduna) {
 		super(arduraduna, true);
 		bisitari = new EI_BisitariaTxartela(arduraduna);
 		initialize();
@@ -62,8 +67,8 @@ public class EI_TxartelaDialog extends JDialog {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(284, 176);
-		this.setTitle("Txartela");
+		this.setSize(297, 192);
+		this.setTitle("Txartela Eman");
 		this.setContentPane(getJContentPane());
 	}
 
@@ -74,9 +79,25 @@ public class EI_TxartelaDialog extends JDialog {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
+			GridBagConstraints gridBagConstraints21 = new GridBagConstraints();
+			gridBagConstraints21.fill = GridBagConstraints.HORIZONTAL;
+			gridBagConstraints21.gridy = 2;
+			gridBagConstraints21.weightx = 1.0;
+			gridBagConstraints21.gridwidth = 2;
+			gridBagConstraints21.insets = new Insets(5, 5, 0, 10);
+			gridBagConstraints21.gridx = 1;
+			GridBagConstraints gridBagConstraints11 = new GridBagConstraints();
+			gridBagConstraints11.gridx = 0;
+			gridBagConstraints11.anchor = GridBagConstraints.EAST;
+			gridBagConstraints11.insets = new Insets(5, 10, 0, 5);
+			gridBagConstraints11.gridy = 2;
+			jLabel3 = new JLabel();
+			jLabel3.setText("Pasahitza:");
+			jLabel3.setHorizontalAlignment(SwingConstants.RIGHT);
+			jLabel3.setHorizontalTextPosition(SwingConstants.RIGHT);
 			GridBagConstraints gridBagConstraints8 = new GridBagConstraints();
 			gridBagConstraints8.insets = new Insets(5, 5, 5, 10);
-			gridBagConstraints8.gridy = 3;
+			gridBagConstraints8.gridy = 4;
 			gridBagConstraints8.ipadx = 0;
 			gridBagConstraints8.ipady = 0;
 			gridBagConstraints8.fill = GridBagConstraints.BOTH;
@@ -85,7 +106,7 @@ public class EI_TxartelaDialog extends JDialog {
 			GridBagConstraints gridBagConstraints7 = new GridBagConstraints();
 			gridBagConstraints7.insets = new Insets(5, 5, 5, 5);
 			gridBagConstraints7.gridx = 1;
-			gridBagConstraints7.gridy = 3;
+			gridBagConstraints7.gridy = 4;
 			gridBagConstraints7.ipadx = 0;
 			gridBagConstraints7.ipady = 0;
 			gridBagConstraints7.fill = GridBagConstraints.BOTH;
@@ -102,17 +123,18 @@ public class EI_TxartelaDialog extends JDialog {
 			gridBagConstraints5.fill = GridBagConstraints.BOTH;
 			gridBagConstraints5.gridwidth = 2;
 			gridBagConstraints5.gridx = 1;
-			gridBagConstraints5.gridy = 2;
+			gridBagConstraints5.gridy = 3;
 			gridBagConstraints5.ipadx = 0;
 			gridBagConstraints5.ipady = 0;
 			gridBagConstraints5.weightx = 1.0;
 			gridBagConstraints5.insets = new Insets(5, 5, 5, 10);
 			GridBagConstraints gridBagConstraints4 = new GridBagConstraints();
 			gridBagConstraints4.insets = new Insets(5, 10, 5, 5);
-			gridBagConstraints4.gridy = 2;
+			gridBagConstraints4.gridy = 3;
 			gridBagConstraints4.ipadx = 0;
 			gridBagConstraints4.ipady = 0;
 			gridBagConstraints4.fill = GridBagConstraints.HORIZONTAL;
+			gridBagConstraints4.anchor = GridBagConstraints.EAST;
 			gridBagConstraints4.gridx = 0;
 			GridBagConstraints gridBagConstraints3 = new GridBagConstraints();
 			gridBagConstraints3.fill = GridBagConstraints.BOTH;
@@ -122,13 +144,14 @@ public class EI_TxartelaDialog extends JDialog {
 			gridBagConstraints3.ipadx = 0;
 			gridBagConstraints3.ipady = 0;
 			gridBagConstraints3.weightx = 1.0;
-			gridBagConstraints3.insets = new Insets(5, 5, 5, 10);
+			gridBagConstraints3.insets = new Insets(5, 5, 0, 10);
 			GridBagConstraints gridBagConstraints2 = new GridBagConstraints();
-			gridBagConstraints2.insets = new Insets(5, 10, 5, 5);
+			gridBagConstraints2.insets = new Insets(5, 10, 0, 5);
 			gridBagConstraints2.gridy = 1;
 			gridBagConstraints2.ipadx = 0;
 			gridBagConstraints2.ipady = 1;
 			gridBagConstraints2.fill = GridBagConstraints.HORIZONTAL;
+			gridBagConstraints2.anchor = GridBagConstraints.EAST;
 			gridBagConstraints2.gridx = 0;
 			GridBagConstraints gridBagConstraints1 = new GridBagConstraints();
 			gridBagConstraints1.fill = GridBagConstraints.BOTH;
@@ -138,20 +161,26 @@ public class EI_TxartelaDialog extends JDialog {
 			gridBagConstraints1.ipadx = 0;
 			gridBagConstraints1.ipady = 0;
 			gridBagConstraints1.weightx = 1.0;
-			gridBagConstraints1.insets = new Insets(5, 5, 5, 10);
+			gridBagConstraints1.insets = new Insets(5, 5, 0, 10);
 			GridBagConstraints gridBagConstraints = new GridBagConstraints();
-			gridBagConstraints.insets = new Insets(5, 10, 5, 5);
+			gridBagConstraints.insets = new Insets(5, 10, 0, 5);
 			gridBagConstraints.gridy = 0;
 			gridBagConstraints.ipadx = 0;
 			gridBagConstraints.ipady = 0;
 			gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+			gridBagConstraints.anchor = GridBagConstraints.EAST;
 			gridBagConstraints.gridx = 0;
 			jLabel2 = new JLabel();
 			jLabel2.setText("Profila:");
+			jLabel2.setHorizontalAlignment(SwingConstants.RIGHT);
 			jLabel1 = new JLabel();
 			jLabel1.setText("Izena:");
+			jLabel1.setHorizontalAlignment(SwingConstants.RIGHT);
+			jLabel1.setHorizontalTextPosition(SwingConstants.RIGHT);
 			jLabel = new JLabel();
 			jLabel.setText("NAN:");
+			jLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+			jLabel.setHorizontalTextPosition(SwingConstants.RIGHT);
 			jContentPane = new JPanel();
 			jContentPane.setLayout(new GridBagLayout());
 			jContentPane.add(jLabel, gridBagConstraints);
@@ -163,6 +192,8 @@ public class EI_TxartelaDialog extends JDialog {
 			jContentPane.add(getJButton(), gridBagConstraints7);
 			jContentPane.add(getJButton1(), gridBagConstraints8);
 			jContentPane.add(new JButton(), gridBagConstraints6);
+			jContentPane.add(jLabel3, gridBagConstraints11);
+			jContentPane.add(getJTextField2(), gridBagConstraints21);
 		}
 		return jContentPane;
 	}
@@ -243,6 +274,18 @@ public class EI_TxartelaDialog extends JDialog {
 			jButton1.setText("Sortu");
 		}
 		return jButton1;
+	}
+
+	/**
+	 * This method initializes jTextField2	
+	 * 	
+	 * @return javax.swing.JTextField	
+	 */
+	private JTextField getJTextField2() {
+		if (jTextField2 == null) {
+			jTextField2 = new JTextField();
+		}
+		return jTextField2;
 	}
 
 } // @jve:decl-index=0:visual-constraint="10,10"
