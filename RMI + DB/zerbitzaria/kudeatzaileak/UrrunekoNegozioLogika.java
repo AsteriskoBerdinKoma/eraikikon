@@ -37,6 +37,8 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 	private TxartelIrakKud tik;
 	
 	private AteKud ate;
+	
+	private GuneKud gunek;
 
 	private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 
@@ -78,6 +80,7 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		tik = new TxartelIrakKud(kon);
 		fakul = new FakulKud(kon);
 		ate = new AteKud(kon);
+		gunek = new GuneKud(kon);
 	}
 
 	/**
@@ -232,6 +235,35 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 	public void ItxiAteak(){
 		ate.ItxiAteak();
 	}
+	
+	public Vector<Vector<Object>> getGuneGuztiak(){
+		try {
+			return gunek.getGuneGuztiak();
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+			return null;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+	
+	public Vector<Vector<Object>> getErabiltzaileKokapena(String txId){
+		
+		try {
+			return txk.getErabiltzaileKokapena(txId);
+		} catch (IllegalStateException e) {
+			
+			e.printStackTrace();
+			return null;
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
 
 	/**
 	 * UrrunekoNegozioLogika-ren zerbitzaria hasieratzen du zerbitzuIzena
@@ -270,4 +302,6 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 					.println("Errorea zerbitzaria jaurtitzean" + e.toString());
 		}
 	}
+	
+	
 }
