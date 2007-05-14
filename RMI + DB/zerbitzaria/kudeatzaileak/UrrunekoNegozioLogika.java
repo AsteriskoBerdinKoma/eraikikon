@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.util.Collections;
 import java.util.Vector;
 
-
 import partekatuak.*;
 
 /**
@@ -31,13 +30,13 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 	private SarbideEskKud sek;
 
 	private IntziKud intz;
-	
+
 	private FakulKud fakul;
-	
+
 	private TxartelIrakKud tik;
-	
+
 	private AteKud ate;
-	
+
 	private GuneKud gunek;
 
 	private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
@@ -101,13 +100,15 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 	 * @see irakasleGatazkatsuenaRMI.UrrunekoInterfazea#createIntzidentzia(java.lang.String,
 	 *      java.lang.String, java.lang.String)
 	 */
-	public void createIntzidentzia(String txartId, String tIrakId, String noiztikNora) {
+	public void createIntzidentzia(String txartId, String tIrakId,
+			String noiztikNora) {
 		intz.insertIntzGatazkatsuena(txartId, tIrakId, noiztikNora);
 	}
 
-	public void alarmaIntzidentziaSortu(){
+	public void alarmaIntzidentziaSortu() {
 		intz.insertAlarma();
 	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -115,7 +116,8 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 	 */
 	public Vector<IrakasleGatazkatsuaDatuak> getGatazkatsuenak(String sarData) {
 		if (!connectedToDatabase)
-			throw new IllegalStateException("Datu-basearekin ez dago konexiorik.");
+			throw new IllegalStateException(
+					"Datu-basearekin ez dago konexiorik.");
 		try {
 			Vector<Integer> vErabiltzaileak;
 			Vector<Integer> vErabTxartelIrakUkatu;
@@ -166,29 +168,29 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 	 */
 	public Vector<Vector<Object>> getIntzidentziak() {
 		return intz.getIntzidentziak();
-	}	
-	
-	public Vector<Vector<Object>> getGuneak(int txartelid, String hasData, String bukData, String hasOrd, String bukOrd)
-	{
+	}
+
+	public Vector<Vector<Object>> getGuneak(int txartelid, String hasData,
+			String bukData, String hasOrd, String bukOrd) {
 		try {
-			return sek.getSarbideEskaerak(txartelid, hasData + " " + hasOrd, bukData + " " + bukOrd);
+			return sek.getSarbideEskaerak(txartelid, hasData + " " + hasOrd,
+					bukData + " " + bukOrd);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
-	
 
-	public Vector<DbDatuLerroa> getSarbideEskaerak(String data){
-		
+	public Vector<DbDatuLerroa> getSarbideEskaerak(String data) {
+
 		try {
 			Vector<DbDatuLerroa> vTratatzekoDatuak;
-			vTratatzekoDatuak=sek.getSarbideEskaerak(data);
-			if (vTratatzekoDatuak.size()!=0){
-				for (DbDatuLerroa lerro: vTratatzekoDatuak){
-					int a=lerro.getAteId();
-					int b=lerro.getHasieraGune();
-					int helburugune=tik.getHelburuGunea(a,b);
+			vTratatzekoDatuak = sek.getSarbideEskaerak(data);
+			if (vTratatzekoDatuak.size() != 0) {
+				for (DbDatuLerroa lerro : vTratatzekoDatuak) {
+					int a = lerro.getAteId();
+					int b = lerro.getHasieraGune();
+					int helburugune = tik.getHelburuGunea(a, b);
 					lerro.setHelburuGune(helburugune);
 				}
 				return vTratatzekoDatuak;
@@ -201,21 +203,19 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 			e.printStackTrace();
 			return null;
 		}
-		
+
 	}
-	
 
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see irakasleGatazkatsuenaRMI.UrrunekoInterfazea#getEraikinekoPertsonKop()
 	 */
-	public int getEraikinekoPertsonKop(){
+	public int getEraikinekoPertsonKop() {
 		return fakul.getEraikinekoPertsonKop();
 	}
-	
-	public String getErabIzena(int txId)
-	{
+
+	public String getErabIzena(int txId) {
 		try {
 			return txk.getErabIzena(txId);
 		} catch (SQLException e) {
@@ -223,24 +223,32 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 			return null;
 		}
 	}
-	
-	public boolean loginEgin(String erab, String pasahitza) throws RemoteException {
-			return true;
+
+	public int loginEgin(String erab, String pasahitza) throws RemoteException {
+		try {
+			if (erak.isLoginZuzena(erab, pasahitza))
+				return erak.getProfila(erab);
+			else
+				return -1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
 	}
 
-	public void irekiAteak(){
+	public void irekiAteak() {
 		ate.IrekiAteak();
 	}
-	
-	public void ItxiAteak(){
+
+	public void ItxiAteak() {
 		ate.ItxiAteak();
 	}
-	
-	public void pertsonakAteraEraikinetik(){
+
+	public void pertsonakAteraEraikinetik() {
 		fakul.pertsonakAteraEraikinetik();
 	}
-	
-	public Vector<Vector<Object>> getGuneGuztiak(){
+
+	public Vector<Vector<Object>> getGuneGuztiak() {
 		try {
 			return gunek.getGuneGuztiak();
 		} catch (IllegalStateException e) {
@@ -250,23 +258,23 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 			e.printStackTrace();
 			return null;
 		}
-		
+
 	}
-	
-	public Vector<Vector<Object>> getErabiltzaileKokapena(String txId){
-		
+
+	public Vector<Vector<Object>> getErabiltzaileKokapena(String txId) {
+
 		try {
 			return txk.getErabiltzaileKokapena(txId);
 		} catch (IllegalStateException e) {
-			
+
 			e.printStackTrace();
 			return null;
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 			return null;
 		}
-		
+
 	}
 	
 	public boolean erabiltzaileaFakultatean( String erabId){
@@ -344,6 +352,5 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 					.println("Errorea zerbitzaria jaurtitzean" + e.toString());
 		}
 	}
-	
-	
+
 }

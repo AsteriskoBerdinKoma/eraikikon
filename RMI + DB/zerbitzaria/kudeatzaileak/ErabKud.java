@@ -83,4 +83,19 @@ public class ErabKud {
 			izena = q.getString("E.izena");
 		return izena;
 	}
+
+	public boolean isLoginZuzena(String erab, String pasahitza) throws SQLException {
+		String query = "SELECT * FROM erabiltzaileak WHERE id = " + erab + " AND pasahitza = '" + pasahitza + "'";
+		ResultSet r = agindua.executeQuery(query);
+		return r.next();
+	}
+
+	public int getProfila(String erab) throws SQLException {
+		String query = "SELECT P.id FROM erabiltzaileak AS E INNER JOIN profilak AS P ON E.profId = P.id WHERE E.id = " + erab;
+		ResultSet r = agindua.executeQuery(query);
+		if(r.next())
+			return r.getInt("id");
+		else
+			return -1;
+	}
 }
