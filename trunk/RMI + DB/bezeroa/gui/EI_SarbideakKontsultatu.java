@@ -5,11 +5,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.rmi.RemoteException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Vector;
 
 import javax.swing.DefaultListModel;
@@ -25,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
 import partekatuak.DbDatuLerroa;
 import partekatuak.UrrunekoInterfazea;
 import java.awt.Dimension;
-import java.awt.event.ItemEvent;
+import java.awt.Rectangle;
 
 public class EI_SarbideakKontsultatu extends JDialog {
 
@@ -71,8 +66,8 @@ public class EI_SarbideakKontsultatu extends JDialog {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(459, 253);
 		this.setTitle("Sarbide-Eskaerak Kontsultatu");
+		this.setBounds(new Rectangle(0, 0, 580, 253));
 		this.setContentPane(getJContentPane());
 	}
 
@@ -200,7 +195,14 @@ public class EI_SarbideakKontsultatu extends JDialog {
 						System.out.println(data);
 						ateak.removeAllElements();
 						jList.setModel(new DefaultListModel());
-						tableModel.setDataVector(new Vector<Object>(), null);
+						Vector<String> zutIzen=new Vector<String>();
+						zutIzen.addElement("Ordua");
+						zutIzen.addElement("Txartel Zenbakia");
+						zutIzen.addElement("Hasiera Gunea");
+						zutIzen.addElement("Helburu Gunea");
+						zutIzen.addElement("Baimenduta?");
+						zutIzen.addElement("Ukapenaren Arrazoia");
+						tableModel.setDataVector(new Vector<Object>(), zutIzen);
 						tableModel.fireTableStructureChanged();
 						listaKargatu(data);
 					//data egokia den konprobatu.
@@ -272,6 +274,14 @@ public class EI_SarbideakKontsultatu extends JDialog {
 	private JTable getJTable1() {
 		if (jTable1 == null) {
 			tableModel = new DefaultTableModel();
+			Vector<String> zutIzen=new Vector<String>();
+			zutIzen.addElement("Ordua");
+			zutIzen.addElement("Txartel Zenbakia");
+			zutIzen.addElement("Hasiera Gunea");
+			zutIzen.addElement("Helburu Gunea");
+			zutIzen.addElement("Baimenduta?");
+			zutIzen.addElement("Ukapenaren Arrazoia");
+			tableModel.setDataVector(new Vector<Object>(), zutIzen);
 			jTable1 = new JTable(tableModel);
 		}
 		return jTable1;
