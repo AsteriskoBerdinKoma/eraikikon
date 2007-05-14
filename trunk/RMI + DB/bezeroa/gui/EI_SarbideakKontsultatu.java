@@ -5,6 +5,11 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.rmi.RemoteException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Vector;
 
 import javax.swing.DefaultListModel;
@@ -20,6 +25,7 @@ import javax.swing.table.DefaultTableModel;
 import partekatuak.DbDatuLerroa;
 import partekatuak.UrrunekoInterfazea;
 import java.awt.Dimension;
+import java.awt.event.ItemEvent;
 
 public class EI_SarbideakKontsultatu extends JDialog {
 
@@ -152,18 +158,27 @@ public class EI_SarbideakKontsultatu extends JDialog {
 	private DateComboBox getJDateComboBox() {
 		if (jDateComboBox == null) {
 			jDateComboBox = new DateComboBox();
-//			jDateComboBox.addActionListener(new java.awt.event.ActionListener() {
 			jDateComboBox.setPreferredSize(new Dimension(100, 20));
-//				public void actionPerformed(java.awt.event.ActionEvent e) {
-//					Calendar cal = new GregorianCalendar();
-//					cal.setTime(new Date());
-//					cal.getTime();
-//					Date data= (Date)jDateComboBox.getSelectedItem();
-//					if (data.after(cal.getTime())){
-//						System.out.println("data ez da oraindik existitzen");
+//			jDateComboBox.addItemListener(new java.awt.event.ItemListener() {
+//				public void itemStateChanged(java.awt.event.ItemEvent e) {
+//					Calendar gaur = new GregorianCalendar();
+//					Calendar auk = new GregorianCalendar();
+//					DateFormat combo = null;
+//					gaur.setTime(new Date());
+//					auk.setTime(new Date());
+//					try {
+//						if(e.getStateChange() == ItemEvent.SELECTED){ 
+//							Date dat= combo.parse(jDateComboBox.getSelectedItem().toString());
+//							auk.setTime(dat);
+//							if(gaur.getTime().after(auk.getTime())){
+//								System.out.println("data ez da oraindik existitzen");
+//								jButton.setEnabled(false);
+//							}
+//						}
+//					} catch (ParseException e1) {
+//						e1.printStackTrace();
 //					}
-//				}
-//			});
+//			}});
 		}
 		return jDateComboBox;
 	}
