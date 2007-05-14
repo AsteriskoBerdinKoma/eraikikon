@@ -268,6 +268,44 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		}
 		
 	}
+	
+	public boolean erabiltzaileaFakultatean( String erabId){
+		try {
+			return fakul.erabiltzaileaFakultatean(erabId);
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public void kokapenaEguneratu( String erabId, String guneId){
+		try {
+			fakul.kokapenaEguneratu(erabId, guneId);
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void kokapenaSartu(String erabId, String guneId){
+		try {
+			fakul.kokapenaSartu(erabId, guneId);
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * UrrunekoNegozioLogika-ren zerbitzaria hasieratzen du zerbitzuIzena
