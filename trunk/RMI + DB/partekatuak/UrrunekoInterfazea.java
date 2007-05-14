@@ -87,6 +87,12 @@ public interface UrrunekoInterfazea extends Remote {
 	public Vector<Vector<Object>> getErabiltzaileKokapena (String txId) throws RemoteException;
 	
 	public Vector<Vector<Object>> getGuneGuztiak() throws RemoteException;
+	
+	public boolean erabiltzaileaFakultatean(String erabId) throws RemoteException;
+	
+	public void kokapenaEguneratu( String erabId, String guneId) throws RemoteException;
+	
+	public void kokapenaSartu( String erabId, String guneId)throws RemoteException;
 
 
 }
