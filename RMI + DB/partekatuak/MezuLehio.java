@@ -34,10 +34,20 @@ public class MezuLehio {
 			this.botoia = "Ados";
 			this.titulua = "Konexio errorea";
 			this.mota = JOptionPane.ERROR_MESSAGE;
-			
-			this.sortuMezua();
 		}
-		
+		if(exceptioMota.equals("IO")){
+			this.mezua = " baliabide baten atzipena egiterakoan arazoa egon da";
+			this.botoia = "Ados";
+			this.titulua = "Sarrera/Irteera arazoa";
+			this.mota = JOptionPane.ERROR_MESSAGE;
+		}
+		if(exceptioMota.equals("NegozioLogika")){
+			this.mezua = " Errorea negozio logika esleitzean";
+			this.botoia = "Ados";
+			this.titulua = "Negozio logika errorea";
+			this.mota = JOptionPane.ERROR_MESSAGE;
+		}
+		this.sortuMezua();
 	}
 	
 	private void sortuMezua(){

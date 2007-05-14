@@ -16,6 +16,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import partekatuak.MezuLehio;
 import partekatuak.UrrunekoInterfazea;
 import sun.audio.AudioData;
 import sun.audio.AudioDataStream;
@@ -78,6 +79,7 @@ public class EI_AlarmaGaitu extends JDialog {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
+				new MezuLehio("IO");
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}  
