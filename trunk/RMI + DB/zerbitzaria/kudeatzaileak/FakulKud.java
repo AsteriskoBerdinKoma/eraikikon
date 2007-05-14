@@ -51,7 +51,16 @@ public class FakulKud {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return 0;
-			}
-			
+			}	
+	}
+	
+	public void pertsonakAteraEraikinetik(){
+		String query = "DELETE FROM fakultatea";
+		try {
+			this.agindua.executeUpdate(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
