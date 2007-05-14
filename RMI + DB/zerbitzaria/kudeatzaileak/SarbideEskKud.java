@@ -30,14 +30,11 @@ public class SarbideEskKud {
 	 *            Datu-basearen aurkako konexioaren parametroak gordetzen dituen
 	 *            klasea da. Negozio logika egikaritzean sortuko da eta honek
 	 *            egikarituriko klase guztiek erabiliko dute.
+	 * @throws SQLException
 	 */
-	public SarbideEskKud(Connection kon) {
-		try {
-			konexioa = kon;
-			agindua = (Statement) konexioa.createStatement();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public SarbideEskKud(Connection kon) throws SQLException {
+		konexioa = kon;
+		agindua = (Statement) konexioa.createStatement();
 	}
 
 	/**
@@ -81,16 +78,18 @@ public class SarbideEskKud {
 		}
 		return vTxIrakurId;
 	}
-	
-	public Vector<DbDatuLerroa> getSarbideEskaerak(String data) 
+
+	public Vector<DbDatuLerroa> getSarbideEskaerak(String data)
 			throws IllegalStateException, SQLException {
-		Vector<DbDatuLerroa> vDatuak= new Vector<DbDatuLerroa>();
-		String c4=
-			"SELECT A.id, S.data, S.txId, G.id, S.baimenduta, S.ukapenarenArrazoia, T.id " +
-			"FROM ((sarbideeskaerak AS S INNER JOIN txartelirakurgailuak AS T ON S.txIrakurId=T.id) " +
-			     "INNER JOIN guneak AS G ON G.id=T.guneId) INNER JOIN ateak AS A ON A.id=T.ateId " +
-			"WHERE S.data BETWEEN '"+data+" 00:00:00' AND '"+data+" 23:59:59' " +
-			"ORDER BY A.id, S.data";
+		Vector<DbDatuLerroa> vDatuak = new Vector<DbDatuLerroa>();
+		String c4 = "SELECT A.id, S.data, S.txId, G.id, S.baimenduta, S.ukapenarenArrazoia, T.id "
+				+ "FROM ((sarbideeskaerak AS S INNER JOIN txartelirakurgailuak AS T ON S.txIrakurId=T.id) "
+				+ "INNER JOIN guneak AS G ON G.id=T.guneId) INNER JOIN ateak AS A ON A.id=T.ateId "
+				+ "WHERE S.data BETWEEN '"
+				+ data
+				+ " 00:00:00' AND '"
+				+ data
+				+ " 23:59:59' " + "ORDER BY A.id, S.data";
 		ResultSet q = agindua.executeQuery(c4);
 		while (q.next()) {
 			DbDatuLerroa lerroa = new DbDatuLerroa();
@@ -105,17 +104,18 @@ public class SarbideEskKud {
 		}
 		return vDatuak;
 	}
-	
-	public Vector<Vector<Object>> getSarbideEskaerak(int txartelId, String hasDataOrd, String bukDataOrd) throws SQLException
-	{
+
+	public Vector<Vector<Object>> getSarbideEskaerak(int txartelId,
+			String hasDataOrd, String bukDataOrd) throws SQLException {
 		Vector<Vector<Object>> taula = new Vector<Vector<Object>>();
 		Vector<Object> lerroa = new Vector<Object>();
-		String query = "SELECT G.id, G.izena, SE.data " +
-					"FROM (sarbideeskaerak AS SE INNER JOIN txartelirakurgailuak AS TI ON  SE.txIrakurId = TI.id) INNER JOIN guneak AS G ON TI.guneId = G.id " +
-					"WHERE baimenduta = true AND data BETWEEN '" + hasDataOrd + "' AND '" + bukDataOrd + "' AND txId = " + String.valueOf(txartelId);
+		String query = "SELECT G.id, G.izena, SE.data "
+				+ "FROM (sarbideeskaerak AS SE INNER JOIN txartelirakurgailuak AS TI ON  SE.txIrakurId = TI.id) INNER JOIN guneak AS G ON TI.guneId = G.id "
+				+ "WHERE baimenduta = true AND data BETWEEN '" + hasDataOrd
+				+ "' AND '" + bukDataOrd + "' AND txId = "
+				+ String.valueOf(txartelId);
 		ResultSet r = agindua.executeQuery(query);
-		while (r.next())
-		{
+		while (r.next()) {
 			lerroa = new Vector<Object>();
 			lerroa.addElement(r.getInt("id"));
 			lerroa.addElement(r.getString("izena"));

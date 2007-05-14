@@ -23,45 +23,32 @@ public class FakulKud {
 	 *            Datu-basearen aurkako konexioaren parametroak gordetzen dituen
 	 *            klasea da. Negozio logika egikaritzean sortuko da eta honek
 	 *            egikarituriko klase guztiek erabiliko dute.
+	 * @throws SQLException 
 	 */
-	public FakulKud(Connection kon) {
-		try {
+	public FakulKud(Connection kon) throws SQLException {
 			this.konexioa = kon;
 			this.agindua = (Statement) konexioa.createStatement();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	/**
 	 * Eraikinean dauden pertsonen kopurua itziltzen du. 
 	 * @return int batean eraikinean dauden pertsonen kopurua.
+	 * @throws SQLException 
 	 * @throws SQLException
 	 */
-	public int getEraikinekoPertsonKop() {
+	public int getEraikinekoPertsonKop() throws SQLException {
 		int kop = 0;
 			String query = "SELECT Count(erId) AS kopuru FROM fakultatea";
 			ResultSet rs;
-			try {
 				rs = this.agindua.executeQuery(query);
 				if (rs.next())
 					kop = rs.getInt("kopuru");
-				return kop;
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return 0;
-			}	
+				return kop;	
 	}
 	
-	public void pertsonakAteraEraikinetik(){
+	public void pertsonakAteraEraikinetik() throws SQLException{
 		String query = "DELETE FROM fakultatea";
-		try {
 			this.agindua.executeUpdate(query);
-		} catch (SQLException e) {
-		// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	

@@ -11,26 +11,20 @@ public class TxartelIrakKud {
 
 	private Statement agindua;
 
-	public TxartelIrakKud(Connection kon){
-		try {
-			this.konexioa = kon;
-			this.agindua = (Statement) konexioa.createStatement();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public TxartelIrakKud(Connection kon) throws SQLException {
+		this.konexioa = kon;
+		this.agindua = (Statement) konexioa.createStatement();
 	}
 
-	public int getHelburuGunea(int ateid,int guneid) 
+	public int getHelburuGunea(int ateid, int guneid)
 			throws IllegalStateException, SQLException {
-		String c6="SELECT guneId " +
-				  "FROM txartelirakurgailuak " +
-				  "WHERE ateId="+ateid+" AND guneId!="+guneid;
+		String c6 = "SELECT guneId " + "FROM txartelirakurgailuak "
+				+ "WHERE ateId=" + ateid + " AND guneId!=" + guneid;
 		ResultSet q = agindua.executeQuery(c6);
 		if (q.next())
 			return q.getInt("guneId");
 		else
 			return -1;
-					
-		
+
 	}
 }
