@@ -13,7 +13,7 @@ CREATE TABLE  `eraikikon`.`profilak` (
 
 DROP TABLE IF EXISTS `eraikikon`.`erabiltzaileak`;
 CREATE TABLE  `eraikikon`.`erabiltzaileak` (
-  `id` int(10) unsigned NOT NULL auto_increment,
+  `id` int(10) unsigned NOT NULL,
   `izena` varchar(45) NOT NULL,
   `pasahitza` varchar(45) NOT NULL,
   `profId` int(10) unsigned NOT NULL,
@@ -133,27 +133,27 @@ INSERT INTO `eraikikon`.`profilak` (mota,deskribapena) VALUES ("Irakaslea","irak
 INSERT INTO `eraikikon`.`profilak` (mota,deskribapena) VALUES ("Ikaslea","ikasleen gelak");
 INSERT INTO `eraikikon`.`profilak` (mota,deskribapena) VALUES ("Arduraduna","laborategiak");
 
-INSERT INTO `eraikikon`.`erabiltzaileak` (izena,pasahitza,profId) VALUES ("pepe","sareak2", 1);
-INSERT INTO `eraikikon`.`erabiltzaileak` (izena,pasahitza,profId) VALUES ("Jon","sistemaEragileak", 1);
-INSERT INTO `eraikikon`.`erabiltzaileak` (izena,pasahitza,profId) VALUES ("Arantxa","programazioa", 1);
-INSERT INTO `eraikikon`.`erabiltzaileak` (izena,pasahitza,profId) VALUES ("Jon", "DEA", 1);
-INSERT INTO `eraikikon`.`erabiltzaileak` (izena,pasahitza,profId) VALUES ("Itziar","estadistika", 1);
-INSERT INTO `eraikikon`.`erabiltzaileak` (izena,pasahitza,profId) VALUES ("Xabier","programazio2", 1);
-INSERT INTO `eraikikon`.`erabiltzaileak` (izena,pasahitza,profId) VALUES ("Juanan","software", 1);
-INSERT INTO `eraikikon`.`erabiltzaileak` (izena,pasahitza,profId) VALUES ("Txelo","elektronika", 1);
-INSERT INTO `eraikikon`.`erabiltzaileak` (izena,pasahitza,profId) VALUES ("Patxi","analisis", 1);
-INSERT INTO `eraikikon`.`erabiltzaileak` (izena,pasahitza,profId) VALUES ("Luis","fisika", 1);
-INSERT INTO `eraikikon`.`erabiltzaileak` (izena,pasahitza,profId) VALUES ("Inaki","sistemenkud", 1);
-INSERT INTO `eraikikon`.`erabiltzaileak` (izena,pasahitza,profId) VALUES ("Alex","sareak", 1);
-INSERT INTO `eraikikon`.`erabiltzaileak` (izena,pasahitza,profId) VALUES ("Josune","analisi", 1);
-INSERT INTO `eraikikon`.`erabiltzaileak` (izena,pasahitza,profId) VALUES ("Aitziber","iza", 2);
-INSERT INTO `eraikikon`.`erabiltzaileak` (izena,pasahitza,profId) VALUES ("Benat","lizarazu", 2);
-INSERT INTO `eraikikon`.`erabiltzaileak` (izena,pasahitza,profId) VALUES ("Inko","perurena", 2);
-INSERT INTO `eraikikon`.`erabiltzaileak` (izena,pasahitza,profId) VALUES ("Idoia","lertxundi", 2);
-INSERT INTO `eraikikon`.`erabiltzaileak` (izena,pasahitza,profId) VALUES ("Dani","Campos", 2);
-INSERT INTO `eraikikon`.`erabiltzaileak` (izena,pasahitza,profId) VALUES ("Amagoia","Agirre", 2);
-INSERT INTO `eraikikon`.`erabiltzaileak` (izena,pasahitza,profId) VALUES ("Janire","lasheras", 2);
-INSERT INTO `eraikikon`.`erabiltzaileak` (izena,pasahitza,profId) VALUES ("Garazi","nirea", 3);
+INSERT INTO `eraikikon`.`erabiltzaileak` (id, izena,pasahitza,profId) VALUES (1, "pepe","sareak2", 1);
+INSERT INTO `eraikikon`.`erabiltzaileak` (id, izena,pasahitza,profId) VALUES (2, "Jon","sistemaEragileak", 1);
+INSERT INTO `eraikikon`.`erabiltzaileak` (id, izena,pasahitza,profId) VALUES (3, "Arantxa","programazioa", 1);
+INSERT INTO `eraikikon`.`erabiltzaileak` (id, izena,pasahitza,profId) VALUES (4, "Jon", "DEA", 1);
+INSERT INTO `eraikikon`.`erabiltzaileak` (id, izena,pasahitza,profId) VALUES (5, "Itziar","estadistika", 1);
+INSERT INTO `eraikikon`.`erabiltzaileak` (id, izena,pasahitza,profId) VALUES (6, "Xabier","programazio2", 1);
+INSERT INTO `eraikikon`.`erabiltzaileak` (id, izena,pasahitza,profId) VALUES (7, "Juanan","software", 1);
+INSERT INTO `eraikikon`.`erabiltzaileak` (id, izena,pasahitza,profId) VALUES (8, "Txelo","elektronika", 1);
+INSERT INTO `eraikikon`.`erabiltzaileak` (id, izena,pasahitza,profId) VALUES (9, "Patxi","analisis", 1);
+INSERT INTO `eraikikon`.`erabiltzaileak` (id, izena,pasahitza,profId) VALUES (10, "Luis","fisika", 1);
+INSERT INTO `eraikikon`.`erabiltzaileak` (id, izena,pasahitza,profId) VALUES (11, "Inaki","sistemenkud", 1);
+INSERT INTO `eraikikon`.`erabiltzaileak` (id, izena,pasahitza,profId) VALUES (12, "Alex","sareak", 1);
+INSERT INTO `eraikikon`.`erabiltzaileak` (id, izena,pasahitza,profId) VALUES (13, "Josune","analisi", 1);
+INSERT INTO `eraikikon`.`erabiltzaileak` (id, izena,pasahitza,profId) VALUES (14, "Aitziber","iza", 2);
+INSERT INTO `eraikikon`.`erabiltzaileak` (id, izena,pasahitza,profId) VALUES (15, "Benat","lizarazu", 2);
+INSERT INTO `eraikikon`.`erabiltzaileak` (id, izena,pasahitza,profId) VALUES (16, "Inko","perurena", 2);
+INSERT INTO `eraikikon`.`erabiltzaileak` (id, izena,pasahitza,profId) VALUES (17, "Idoia","lertxundi", 2);
+INSERT INTO `eraikikon`.`erabiltzaileak` (id, izena,pasahitza,profId) VALUES (18, "Dani","Campos", 2);
+INSERT INTO `eraikikon`.`erabiltzaileak` (id, izena,pasahitza,profId) VALUES (19, "Amagoia","Agirre", 2);
+INSERT INTO `eraikikon`.`erabiltzaileak` (id, izena,pasahitza,profId) VALUES (20, "Janire","lasheras", 2);
+INSERT INTO `eraikikon`.`erabiltzaileak` (id, izena,pasahitza,profId) VALUES (21, "Garazi","nirea", 3);
 
 
 INSERT INTO `eraikikon`.`txartelak` (gaituData,erabId) VALUES ('2006-07-30 13:00:45',1);
