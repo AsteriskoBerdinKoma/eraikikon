@@ -274,3 +274,13 @@ INSERT INTO `eraikikon`.`sarbideeskaerak` (data,baimenduta,ukapenarenArrazoia,tx
 INSERT INTO `eraikikon`.`intzidentziak` (data,larritasuna,mota,deskribapena,idTxartela,idAtea,idTxartelIrakurgailua,gaituta) VALUES ('2005-07-30 15:22:07',"larria","sarbide eskaera ukatua","Atea puxkatuta",6,4,5,true);
 INSERT INTO `eraikikon`.`intzidentziak` (data,larritasuna,mota,deskribapena,idTxartela,idAtea,idTxartelIrakurgailua,gaituta) VALUES ('2007-03-04 14:11:07',"oso larria","sarbide eskaera ukatua","baimenik ez",8,4,5,true);
 INSERT INTO `eraikikon`.`intzidentziak` (data,larritasuna,mota,deskribapena,idTxartela,idAtea,idTxartelIrakurgailua,gaituta) VALUES ('2004-11-30 16:47:07',"larria","sarbide eskaera ukatua","errore ezezaguna",11,4,7,true);
+
+INSERT INTO `eraikikon`.`fakultatea` (erId,guId,inId) VALUES (1,1,1);
+INSERT INTO `eraikikon`.`fakultatea` (erId,guId,inId) VALUES (2,4,-1);
+INSERT INTO `eraikikon`.`fakultatea` (erId,guId,inId) VALUES (3,2,-1);
+INSERT INTO `eraikikon`.`fakultatea` (erId,guId,inId) VALUES (4,7,-1);
+INSERT INTO `eraikikon`.`fakultatea` (erId,guId,inId) VALUES (5,6,-1);
+INSERT INTO `eraikikon`.`fakultatea` (erId,guId,inId) VALUES (6,4,-1);
+INSERT INTO `eraikikon`.`fakultatea` (erId,guId,inId) VALUES (7,2,3);
+INSERT INTO `eraikikon`.`fakultatea` (erId,guId,inId) VALUES (8,3,4);
+INSERT INTO `eraikikon`.`fakultatea` (erId,guId,inId) VALUES (9,2,-1);
