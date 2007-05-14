@@ -144,7 +144,7 @@ public class EI_Jaurtitzailea extends JFrame {
 		} catch (Exception ex) {
 			jTextArea1.setText("Errorea negozio logika esleitzean\n");
 			jTextArea1.append(ex.toString());
-			new MezuLehio("Errorea negozio logika esleitzean","Ados","Negozio logika errorea",JOptionPane.ERROR_MESSAGE);
+			new MezuLehio("NegozioLogika");
 		}
 	}
 

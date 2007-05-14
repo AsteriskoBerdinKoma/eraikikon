@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import partekatuak.MezuLehio;
@@ -76,6 +77,7 @@ public class EI_AlarmaGaitu extends JDialog {
 				ad= as.getData();
 				cas= new ContinuousAudioDataStream(ad);
 			} catch (FileNotFoundException e) {
+				new MezuLehio("Alarmaren soinua duen Fitxategia ez da aurkitu","Ados","Alarma soinua ez dago",JOptionPane.ERROR_MESSAGE);
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -126,6 +128,7 @@ public class EI_AlarmaGaitu extends JDialog {
 						try {
 								urrunekoKud.irekiAteak();
 							} catch (RemoteException e1) {
+								new MezuLehio("REMOTE");
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
@@ -145,6 +148,7 @@ public class EI_AlarmaGaitu extends JDialog {
 							jabea.setTableModel(urrunekoKud.getIntzidentziak(),
 									zutIzenak);
 						} catch (RemoteException e1) {
+							new MezuLehio("REMOTE");
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
@@ -161,6 +165,7 @@ public class EI_AlarmaGaitu extends JDialog {
 							urrunekoKud.ItxiAteak();
 							urrunekoKud.pertsonakAteraEraikinetik();
 						} catch (RemoteException e1) {
+							new MezuLehio("REMOTE");
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
@@ -187,6 +192,7 @@ public class EI_AlarmaGaitu extends JDialog {
 			try {
 				kop = urrunekoKud.getEraikinekoPertsonKop();
 			} catch (RemoteException e) {
+				new MezuLehio("REMOTE");
 				e.printStackTrace();
 			}
 		jLabel.setText("Eraikinean dauden pertsonen kopurua: "+ kop);
