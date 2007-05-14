@@ -183,12 +183,7 @@ public class EI_IrakasleGatazkatsuena extends JDialog {
 					gaurkoUrte.setTime(new Date());
 					int egun = 12;
 					if (e.getStateChange() == ItemEvent.SELECTED
-							&& jComboBox
-									.getSelectedItem()
-									.toString()
-									.equals(
-											String
-													.valueOf(/* gaurkoUrte.get(Calendar.YEAR) */2007)))
+							&& jComboBox.getSelectedItem().toString().equals(String.valueOf(gaurkoUrte.get(Calendar.YEAR))))
 						egun = gaurkoUrte.get(Calendar.MONTH) + 1;
 					jComboBox1.removeAllItems();
 					for (int i = 1; i <= egun; i++)

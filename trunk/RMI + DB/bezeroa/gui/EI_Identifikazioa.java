@@ -1,6 +1,7 @@
 package bezeroa.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -28,7 +29,7 @@ public class EI_Identifikazioa extends JFrame {
 	 */
 	private static final long serialVersionUID = 3372486190912554562L;
 
-	BorderLayout borderLayout1 = new BorderLayout();  //  @jve:decl-index=0:
+	BorderLayout borderLayout1 = new BorderLayout(); // @jve:decl-index=0:
 
 	JPanel jPanel1 = new JPanel();
 
@@ -47,7 +48,7 @@ public class EI_Identifikazioa extends JFrame {
 	JLabel jLabel3 = new JLabel();
 
 	EI_SegurtasunArduraduna segArd;
-	
+
 	public EI_Identifikazioa() {
 		super();
 		try {
@@ -112,7 +113,7 @@ public class EI_Identifikazioa extends JFrame {
 		gridBagConstraints.gridx = 0;
 		this.setSize(new Dimension(339, 206));
 		this.setContentPane(jPanel1);
-		jLabel1.setText("Idatzi erabiltzaile izena:");
+		jLabel1.setText("Idatzi erabiltzailearen NAN zenbakia:");
 		jLabel1.setHorizontalAlignment(SwingConstants.RIGHT);
 		jLabel1.setHorizontalTextPosition(SwingConstants.RIGHT);
 		jButton1.setText("Sisteman sartu");
@@ -135,7 +136,7 @@ public class EI_Identifikazioa extends JFrame {
 		jPanel1.add(jPasswordField1, gridBagConstraints3);
 		jPanel1.add(jButton1, gridBagConstraints4);
 		jPanel1.add(jLabel3, gridBagConstraints5);
-		//this.getContentPane().add(jPanel1, BorderLayout.CENTER);
+		// this.getContentPane().add(jPanel1, BorderLayout.CENTER);
 	}
 
 	public void setNegozioLogika(UrrunekoInterfazea i) {
@@ -145,21 +146,28 @@ public class EI_Identifikazioa extends JFrame {
 
 	void jButton1_actionPerformed(ActionEvent e) {
 		try {
-			String pass= String.valueOf(jPasswordField1.getPassword());
-			String kodetuta= kodetu(pass);
-			boolean b = urrunekoKud.loginEgin(jTextField1.getText(), kodetuta);
-			if (b)
-			{
-				jLabel3.setText("AURRERA");
-				segArd = new EI_SegurtasunArduraduna(urrunekoKud);
-				this.setVisible(false);
-				segArd.setLocationRelativeTo(null);
-				segArd.setVisible(true);
+			String erab = jTextField1.getText();
+			String pasahitza = String.valueOf(jPasswordField1.getPassword());
+			if (!erab.equals("") && !pasahitza.equals("")) {
+				if (urrunekoKud.loginEgin(erab, pasahitza) == 3) {
+					jLabel3.setForeground(Color.GREEN);
+					jLabel3.setText("AURRERA");
+					segArd = new EI_SegurtasunArduraduna(urrunekoKud);
+					this.setVisible(false);
+					segArd.setLocationRelativeTo(null);
+					segArd.setVisible(true);
+				} else {
+					jLabel3.setForeground(Color.RED);
+					jLabel3.setText("EZ DUZU SARTZEKO BAIMENIK");
+				}
 			}
-			else
+			else {
+				jLabel3.setForeground(Color.RED);
 				jLabel3.setText("EZ DUZU SARTZEKO BAIMENIK");
+			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
+			jLabel3.setForeground(Color.RED);
 			jLabel3.setText("NEGOZIO LOGIKAREKIN ARAZOAK DAUDE");
 		}
 	}
