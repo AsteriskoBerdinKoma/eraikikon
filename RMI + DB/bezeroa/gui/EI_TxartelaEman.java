@@ -5,7 +5,10 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.event.ItemEvent;
+import java.io.UnsupportedEncodingException;
 import java.rmi.RemoteException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Vector;
 
@@ -20,6 +23,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JPasswordField;
 
 import partekatuak.UrrunekoInterfazea;
+import sun.misc.BASE64Encoder;
 
 /**
  * Erabiltzaile bati txartel bat esleitzea ahalbidetzen digun elkarrizketa leiho
@@ -288,8 +292,7 @@ public class EI_TxartelaEman extends JDialog {
 					try {
 						String nan = jTextField.getText();
 						String izena = jTextField1.getText();
-						String pasahitza = String.valueOf(jPasswordField
-								.getPassword());
+						String pasahitza = kodetu(String.valueOf(jPasswordField.getPassword()));
 						// bisita bada zelan ein???
 						int aukProf = urrunekoKud.profilZenbakia(jComboBox
 								.getSelectedItem().toString());
@@ -299,7 +302,6 @@ public class EI_TxartelaEman extends JDialog {
 						urrunekoKud.gaituTxartela(bal);
 						
 					} catch (RemoteException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
@@ -334,14 +336,35 @@ public class EI_TxartelaEman extends JDialog {
 					jComboBox.addItem(prof);
 			}
 		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	
+	public String kodetu (String testusoila){
+	    MessageDigest md = null;
+	    try
+	    {
+	      md = MessageDigest.getInstance("SHA"); //2. pausua
+	    }
+	    catch(NoSuchAlgorithmException e)
+	    {
+	      e.printStackTrace();
+	    }
+	    
+	    try
+	    {
+	      md.update(testusoila.getBytes("UTF-8")); //3. pausua
+	    }
+	    catch(UnsupportedEncodingException e)
+	    {
+	      e.printStackTrace();
+	    }
+	    byte raw[] = md.digest(); //4. pausua
+	    String hash = (new BASE64Encoder()).encode(raw); //5. pausua
+	    return hash; //6. pausua
+	  }
 } // @jve:decl-index=0:visual-constraint="10,10"

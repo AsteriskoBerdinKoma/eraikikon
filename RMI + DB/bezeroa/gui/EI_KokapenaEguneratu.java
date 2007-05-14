@@ -6,7 +6,6 @@ import javax.swing.JPanel;
 import javax.swing.JDialog;
 
 import javax.swing.JLabel;
-import java.awt.Rectangle;
 import java.rmi.RemoteException;
 import java.util.Vector;
 
@@ -20,6 +19,11 @@ import javax.swing.table.DefaultTableModel;
 
 
 import partekatuak.UrrunekoInterfazea;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.Dimension;
+import javax.swing.SwingConstants;
 
 public class EI_KokapenaEguneratu extends JDialog {
 	
@@ -33,8 +37,6 @@ public class EI_KokapenaEguneratu extends JDialog {
 	private DefaultTableModel tableModel;
 	private DefaultTableModel tableModel1;
 	private UrrunekoInterfazea urruIn;  //  @jve:decl-index=0:
-	private JLabel jLabel = null;
-
 	private JTextField jTextField = null;
 
 	private JButton jButton = null;
@@ -53,11 +55,15 @@ public class EI_KokapenaEguneratu extends JDialog {
 
 
 
-	private JLabel jLabel1 = null;
-
-
-
 	private JButton jButton1 = null;
+
+
+
+	private JLabel jLabel = null;
+
+
+
+	private JLabel jLabel1 = null;
 
 	/**
 	 * @param owner
@@ -74,7 +80,7 @@ public class EI_KokapenaEguneratu extends JDialog {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(605, 303);
+		this.setSize(614, 380);
 		this.setTitle("Erabiltzailearen Kokapena Eguneratu");
 		this.setContentPane(getJContentPane());
 	}
@@ -86,21 +92,73 @@ public class EI_KokapenaEguneratu extends JDialog {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
+			GridBagConstraints gridBagConstraints31 = new GridBagConstraints();
+			gridBagConstraints31.gridx = 0;
+			gridBagConstraints31.anchor = GridBagConstraints.WEST;
+			gridBagConstraints31.insets = new Insets(5, 10, 5, 10);
+			gridBagConstraints31.gridy = 2;
 			jLabel1 = new JLabel();
-			jLabel1.setBounds(new Rectangle(15, 102, 107, 28));
 			jLabel1.setText("Guneak:");
+			GridBagConstraints gridBagConstraints21 = new GridBagConstraints();
+			gridBagConstraints21.gridx = 0;
+			gridBagConstraints21.anchor = GridBagConstraints.WEST;
+			gridBagConstraints21.insets = new Insets(10, 10, 5, 5);
+			gridBagConstraints21.gridy = 0;
 			jLabel = new JLabel();
-			jLabel.setBounds(new Rectangle(12, 7, 103, 27));
-			jLabel.setText("Txartel kodea:");
+			jLabel.setText("Txartel Kodea:");
+			jLabel.setHorizontalTextPosition(SwingConstants.RIGHT);
+			jLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+			GridBagConstraints gridBagConstraints6 = new GridBagConstraints();
+			gridBagConstraints6.insets = new Insets(5, 10, 10, 10);
+			gridBagConstraints6.gridy = 4;
+			gridBagConstraints6.ipadx = 0;
+			gridBagConstraints6.ipady = 0;
+			gridBagConstraints6.anchor = GridBagConstraints.EAST;
+			gridBagConstraints6.gridx = 2;
+			GridBagConstraints gridBagConstraints4 = new GridBagConstraints();
+			gridBagConstraints4.fill = GridBagConstraints.BOTH;
+			gridBagConstraints4.gridwidth = 4;
+			gridBagConstraints4.gridx = 0;
+			gridBagConstraints4.gridy = 3;
+			gridBagConstraints4.ipadx = 0;
+			gridBagConstraints4.ipady = 0;
+			gridBagConstraints4.weightx = 1.0;
+			gridBagConstraints4.weighty = 1.0;
+			gridBagConstraints4.insets = new Insets(5, 10, 10, 10);
+			GridBagConstraints gridBagConstraints3 = new GridBagConstraints();
+			gridBagConstraints3.fill = GridBagConstraints.BOTH;
+			gridBagConstraints3.gridwidth = 4;
+			gridBagConstraints3.gridx = 0;
+			gridBagConstraints3.gridy = 1;
+			gridBagConstraints3.ipadx = 0;
+			gridBagConstraints3.ipady = 0;
+			gridBagConstraints3.weightx = 1.0;
+			gridBagConstraints3.weighty = 1.0;
+			gridBagConstraints3.insets = new Insets(5, 10, 10, 10);
+			GridBagConstraints gridBagConstraints2 = new GridBagConstraints();
+			gridBagConstraints2.insets = new Insets(10, 5, 5, 10);
+			gridBagConstraints2.gridy = 0;
+			gridBagConstraints2.ipadx = 0;
+			gridBagConstraints2.ipady = 0;
+			gridBagConstraints2.anchor = GridBagConstraints.EAST;
+			gridBagConstraints2.gridx = 2;
+			GridBagConstraints gridBagConstraints1 = new GridBagConstraints();
+			gridBagConstraints1.fill = GridBagConstraints.HORIZONTAL;
+			gridBagConstraints1.gridx = 1;
+			gridBagConstraints1.gridy = 0;
+			gridBagConstraints1.ipadx = 0;
+			gridBagConstraints1.ipady = 0;
+			gridBagConstraints1.weightx = 1.0;
+			gridBagConstraints1.insets = new Insets(10, 5, 5, 5);
 			jContentPane = new JPanel();
-			jContentPane.setLayout(null);
-			jContentPane.add(jLabel, null);
-			jContentPane.add(getJTextField(), null);
-			jContentPane.add(getJButton(), null);
-			jContentPane.add(getJScrollPane(), null);
-			jContentPane.add(getJScrollPane1(), null);
-			jContentPane.add(jLabel1, null);
-			jContentPane.add(getJButton1(), null);
+			jContentPane.setLayout(new GridBagLayout());
+			jContentPane.add(getJTextField(), gridBagConstraints1);
+			jContentPane.add(getJButton(), gridBagConstraints2);
+			jContentPane.add(getJScrollPane(), gridBagConstraints3);
+			jContentPane.add(getJScrollPane1(), gridBagConstraints4);
+			jContentPane.add(getJButton1(), gridBagConstraints6);
+			jContentPane.add(jLabel, gridBagConstraints21);
+			jContentPane.add(jLabel1, gridBagConstraints31);
 		}
 		return jContentPane;
 	}
@@ -113,7 +171,6 @@ public class EI_KokapenaEguneratu extends JDialog {
 	private JTextField getJTextField() {
 		if (jTextField == null) {
 			jTextField = new JTextField();
-			jTextField.setBounds(new Rectangle(125, 8, 109, 26));
 		}
 		return jTextField;
 	}
@@ -126,8 +183,8 @@ public class EI_KokapenaEguneratu extends JDialog {
 	private JButton getJButton() {
 		if (jButton == null) {
 			jButton = new JButton();
-			jButton.setBounds(new Rectangle(243, 10, 174, 23));
 			jButton.setText("Kokapena Erakutsi");
+			jButton.setPreferredSize(new Dimension(140, 20));
 			jButton.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					
@@ -137,7 +194,6 @@ public class EI_KokapenaEguneratu extends JDialog {
 						taulaKokapenaEguneratu(kode);
 						taulaGuneakEguneratu();
 					} catch (RemoteException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 					
@@ -155,7 +211,6 @@ public class EI_KokapenaEguneratu extends JDialog {
 	private JScrollPane getJScrollPane() {
 		if (jScrollPane == null) {
 			jScrollPane = new JScrollPane();
-			jScrollPane.setBounds(new Rectangle(14, 49, 571, 36));
 			jScrollPane.setViewportView(getJTable1());
 		}
 		return jScrollPane;
@@ -233,7 +288,6 @@ public class EI_KokapenaEguneratu extends JDialog {
 	private JScrollPane getJScrollPane1() {
 		if (jScrollPane1 == null) {
 			jScrollPane1 = new JScrollPane();
-			jScrollPane1.setBounds(new Rectangle(14, 135, 571, 84));
 			jScrollPane1.setViewportView(getJTable());
 		}
 		return jScrollPane1;
@@ -262,8 +316,8 @@ public class EI_KokapenaEguneratu extends JDialog {
 	private JButton getJButton1() {
 		if (jButton1 == null) {
 			jButton1 = new JButton();
-			jButton1.setBounds(new Rectangle(467, 227, 104, 31));
 			jButton1.setText("Eguneratu");
+			jButton1.setPreferredSize(new Dimension(92, 20));
 			jButton1.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					String erabId = jTable1.getValueAt(0, 1).toString();
