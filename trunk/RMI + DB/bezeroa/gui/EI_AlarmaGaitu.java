@@ -17,8 +17,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import partekatuak.UrrunekoInterfazea;
+import sun.audio.AudioData;
+import sun.audio.AudioDataStream;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
+import sun.audio.ContinuousAudioDataStream;
 
 import java.awt.Dimension;
 
@@ -39,6 +42,11 @@ public class EI_AlarmaGaitu extends JDialog {
 	private InputStream in;
 	
 	private AudioStream as;
+	
+	private AudioData ad;
+	
+	
+	private ContinuousAudioDataStream cas;
 	
 	private EI_SegurtasunArduraduna jabea;
 
@@ -64,6 +72,8 @@ public class EI_AlarmaGaitu extends JDialog {
 				in = new FileInputStream("alarm.wav");
 			// Create an AudioStream object from the input stream.
 				as = new AudioStream(in);
+				ad= as.getData();
+				cas= new ContinuousAudioDataStream(ad);
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -138,7 +148,7 @@ public class EI_AlarmaGaitu extends JDialog {
 						}
 						//Use the static class member "player" from class AudioPlayer to play
 						// clip.
-						AudioPlayer.player.start(as);
+						AudioPlayer.player.start(cas);
 						jButton.setText("Alarma Desgaitu");
 						jLabel.setText("");
 						jLabel.setIcon(new ImageIcon(getClass().getResource("sirena.GIF")));
@@ -155,7 +165,7 @@ public class EI_AlarmaGaitu extends JDialog {
 						jButton.setText("Alarma Gaitu");
 						jLabel.setIcon(null);
 						setEraikinekoPertsonKop();
-						AudioPlayer.player.stop(as);
+						AudioPlayer.player.stop(cas);
 						setDefaultCloseOperation(HIDE_ON_CLOSE);
 						setVisible(false);
 					}
