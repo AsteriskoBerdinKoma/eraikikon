@@ -1,22 +1,19 @@
 package bezeroa.gui;
 
+import java.awt.Frame;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.rmi.RemoteException;
+
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import java.awt.Frame;
-import java.awt.BorderLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-
-import javax.swing.JDialog;
-
 import partekatuak.UrrunekoInterfazea;
-
-import java.awt.GridBagLayout;
-import java.rmi.RemoteException;
 
 public class EI_TxartelaGaitu extends JDialog {
 
@@ -110,7 +107,6 @@ public class EI_TxartelaGaitu extends JDialog {
 					int bal= Integer.parseInt(nan);
 						urrunekoKud.gaitTxartela(bal);
 					} catch (RemoteException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}

@@ -20,7 +20,6 @@ import javax.swing.JPanel;
 import partekatuak.MezuLeiho;
 import partekatuak.UrrunekoInterfazea;
 import sun.audio.AudioData;
-import sun.audio.AudioDataStream;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 import sun.audio.ContinuousAudioDataStream;
@@ -78,11 +77,9 @@ public class EI_AlarmaGaitu extends JDialog {
 				cas= new ContinuousAudioDataStream(ad);
 			} catch (FileNotFoundException e) {
 				new MezuLeiho("Alarmaren soinua duen Fitxategia ez da aurkitu","Ados","Alarma soinua ez dago",JOptionPane.ERROR_MESSAGE);
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
 				new MezuLeiho("IO");
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}  
 	}
@@ -129,7 +126,6 @@ public class EI_AlarmaGaitu extends JDialog {
 								urrunekoKud.irekiAteak();
 							} catch (RemoteException e1) {
 								new MezuLeiho("REMOTE");
-								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
 						try {
@@ -149,7 +145,6 @@ public class EI_AlarmaGaitu extends JDialog {
 									zutIzenak);
 						} catch (RemoteException e1) {
 							new MezuLeiho("REMOTE");
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 						//Use the static class member "player" from class AudioPlayer to play
@@ -166,7 +161,6 @@ public class EI_AlarmaGaitu extends JDialog {
 							urrunekoKud.pertsonakAteraEraikinetik();
 						} catch (RemoteException e1) {
 							new MezuLeiho("REMOTE");
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 						jButton.setText("Alarma Gaitu");
