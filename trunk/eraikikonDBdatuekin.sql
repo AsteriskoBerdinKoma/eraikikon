@@ -87,7 +87,7 @@ CREATE TABLE  `eraikikon`.`intzidentziak` (
   `larritasuna` varchar(45) default NULL,
   `mota` varchar(200) NOT NULL,
   `deskribapena` varchar(200) default NULL,
-  `idTxartela` int(10) unsigned NOT NULL,
+  `idTxartela` int(10) unsigned default NULL,
   `idAtea` int(10) unsigned default NULL,
   `idTxartelIrakurgailua` int(10) unsigned default NULL,
   `gaituta` tinyint(1) NOT NULL,
@@ -281,6 +281,6 @@ INSERT INTO `eraikikon`.`fakultatea` (erId,guId) VALUES (3,2);
 INSERT INTO `eraikikon`.`fakultatea` (erId,guId) VALUES (4,7);
 INSERT INTO `eraikikon`.`fakultatea` (erId,guId) VALUES (5,6);
 INSERT INTO `eraikikon`.`fakultatea` (erId,guId) VALUES (6,4);
-INSERT INTO `eraikikon`.`fakultatea` (erId,guId,inId) VALUES (7,2,3);
-INSERT INTO `eraikikon`.`fakultatea` (erId,guId,inId) VALUES (8,3,4);
+INSERT INTO `eraikikon`.`fakultatea` (erId,guId,inId) VALUES (7,2,2);
+INSERT INTO `eraikikon`.`fakultatea` (erId,guId,inId) VALUES (8,3,1);
 INSERT INTO `eraikikon`.`fakultatea` (erId,guId) VALUES (9,2);
