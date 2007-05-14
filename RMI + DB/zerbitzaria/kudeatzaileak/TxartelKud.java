@@ -3,6 +3,7 @@ package zerbitzaria.kudeatzaileak;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Vector;
 
 import com.mysql.jdbc.Statement;
 
@@ -61,6 +62,32 @@ public class TxartelKud {
 			biUrte = -1;
 		return biUrte.intValue();
 	}
+	
+	public Vector<Vector<Object>> getErabiltzaileKokapena(String txId)throws 
+	IllegalStateException,SQLException {
+
+
+		String c3 = "SELECT e.izena, " + "e.id, t.id, g.id, g.izena, s.data " + 
+		"FROM (((guneak g " + 
+		"INNER JOIN txartelirakurgailuak ti ON g.id=ti.guneId) " +
+		"INNER JOIN sarbideeskaerak s ON ti.id=s.txIrakurId) " +
+		"INNER JOIN txartelak t ON s.txId=t.id) " +
+		"INNER JOIN erabiltzaileak e ON t.erabId=e.id " +
+		"WHERE s.txId= " + txId + " AND s.data <= ALL "+
+		"(SELECT data FROM sarbideeskaerak "+
+        "WHERE txId= " + txId + ")";
+
+
+		ResultSet q = this.agindua.executeQuery(c3);
+		Vector<Vector<Object>> erabKokapena = new Vector<Vector<Object>>();
+		while (q.next()) {
+			Vector<Object> row = new Vector<Object>();
+			for (int i = 1; i <=q.getMetaData().getColumnCount(); i++)
+				row.addElement(q.getObject(i));
+			erabKokapena.addElement(row);
+		}
+		return erabKokapena;
+		}
 	
 	public String getErabIzena(int txId) throws SQLException
 	{
