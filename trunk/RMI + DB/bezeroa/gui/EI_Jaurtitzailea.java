@@ -11,12 +11,13 @@ import java.rmi.RMISecurityManager;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import partekatuak.UrrunekoInterfazea;
+import partekatuak.*;
 
 public class EI_Jaurtitzailea extends JFrame {
 	/**
@@ -143,6 +144,7 @@ public class EI_Jaurtitzailea extends JFrame {
 		} catch (Exception ex) {
 			jTextArea1.setText("Errorea negozio logika esleitzean\n");
 			jTextArea1.append(ex.toString());
+			new MezuLehio("Errorea negozio logika esleitzean","Ados","Negozio logika errorea",JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
