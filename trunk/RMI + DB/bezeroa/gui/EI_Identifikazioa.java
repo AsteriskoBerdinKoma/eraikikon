@@ -148,6 +148,7 @@ public class EI_Identifikazioa extends JFrame {
 				jLabel3.setText("AURRERA");
 				segArd = new EI_SegurtasunArduraduna(urrunekoKud);
 				this.setVisible(false);
+				segArd.setLocationRelativeTo(null);
 				segArd.setVisible(true);
 			}
 			else
