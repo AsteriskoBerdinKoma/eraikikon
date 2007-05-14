@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.rmi.RemoteException;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -34,6 +35,12 @@ public class EI_AlarmaGaitu extends JDialog {
 	private boolean gaituta=false;
 
 	private UrrunekoInterfazea urrunekoKud; // @jve:decl-index=0:
+	
+	private InputStream in;
+	
+	private AudioStream as;
+	
+	private EI_SegurtasunArduraduna jabea;
 
 	/**
 	 * @param owner
@@ -41,6 +48,7 @@ public class EI_AlarmaGaitu extends JDialog {
 	public EI_AlarmaGaitu(EI_SegurtasunArduraduna owner) {
 		super(owner, true);
 		initialize();
+		this.jabea= owner;
 	}
 
 	/**
@@ -52,6 +60,17 @@ public class EI_AlarmaGaitu extends JDialog {
 		this.setSize(300, 230);
 		this.setTitle("Alarma Gaitu");
 		this.setContentPane(getJContentPane());
+			try {
+				in = new FileInputStream("alarm.wav");
+			// Create an AudioStream object from the input stream.
+				as = new AudioStream(in);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}  
 	}
 
 	/**
@@ -87,45 +106,48 @@ public class EI_AlarmaGaitu extends JDialog {
 		if (jButton == null) {
 			jButton = new JButton();
 			jButton.setText("Alarma Gaitu");
-			jButton.setPreferredSize(new Dimension(115, 20));
+			jButton.setPreferredSize(new Dimension(115, 20)); 
 			jButton.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
+				public void actionPerformed(java.awt.event.ActionEvent e) {					
 					if (!gaituta){
+						setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);	
 						try {
-							urrunekoKud.irekiAteak();
+								urrunekoKud.irekiAteak();
+							} catch (RemoteException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+						try {
+							urrunekoKud.alarmaIntzidentziaSortu();
+							Vector<String> zutIzenak = new Vector<String>();
+							zutIzenak.addElement("Erabiltzaile ID");
+							zutIzenak.addElement("Data");
+							zutIzenak.addElement("Larritasuna");
+							zutIzenak.addElement("Mota");
+							zutIzenak.addElement("Deskribapena");
+							zutIzenak.addElement("Txartel Zenbakia");
+							zutIzenak.addElement("Atea");
+							zutIzenak.addElement("Txartel Irakurgailua");
+							zutIzenak.addElement("Gaitua");
+							zutIzenak.addElement("Noiztik Nora");
+							jabea.setTableModel(urrunekoKud.getIntzidentziak(),
+									zutIzenak);
 						} catch (RemoteException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-						/*try {
-							urrunekoKud.alarmaIntzidentziaSortu();
-						} catch (RemoteException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}*/
+						//Use the static class member "player" from class AudioPlayer to play
+						// clip.
+						AudioPlayer.player.start(as);
 						jButton.setText("Alarma Desgaitu");
 						jLabel.setText("");
 						jLabel.setIcon(new ImageIcon(getClass().getResource("sirena.GIF")));
-						InputStream in;
-						try {
-							in = new FileInputStream("alarm.wav");
-							// Create an AudioStream object from the input stream.
-						AudioStream as = new AudioStream(in);         
-						// Use the static class member "player" from class AudioPlayer to play
-						// clip.
-						AudioPlayer.player.start(as);
-						// Similarly, to stop the audio.
-						} catch (FileNotFoundException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						} catch (IOException e2) {
-							// TODO Auto-generated catch block
-							e2.printStackTrace();
-						}	
 					}
+						
 					else {
 						try {
 							urrunekoKud.ItxiAteak();
+							urrunekoKud.pertsonakAteraEraikinetik();
 						} catch (RemoteException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -133,6 +155,9 @@ public class EI_AlarmaGaitu extends JDialog {
 						jButton.setText("Alarma Gaitu");
 						jLabel.setIcon(null);
 						setEraikinekoPertsonKop();
+						AudioPlayer.player.stop(as);
+						setDefaultCloseOperation(HIDE_ON_CLOSE);
+						setVisible(false);
 					}
 					gaituta = !gaituta;
 				}

@@ -236,6 +236,10 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		ate.ItxiAteak();
 	}
 	
+	public void pertsonakAteraEraikinetik(){
+		fakul.pertsonakAteraEraikinetik();
+	}
+	
 	public Vector<Vector<Object>> getGuneGuztiak(){
 		try {
 			return gunek.getGuneGuztiak();
