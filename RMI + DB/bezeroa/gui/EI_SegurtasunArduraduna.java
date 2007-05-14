@@ -67,8 +67,13 @@ public class EI_SegurtasunArduraduna extends JFrame {
 	private EI_PresentziaKontrolatu presKontr = new EI_PresentziaKontrolatu(this);  //  @jve:decl-index=0:visual-constraint="13,91"
 	private EI_SarbideakKontsultatu sarbKonts = new EI_SarbideakKontsultatu(this);  //  @jve:decl-index=0:visual-constraint="12,126"
 	private EI_AlarmaGaitu alarma_gaitu = new EI_AlarmaGaitu(this);
+	private EI_KokapenaEguneratu kokEgun = new EI_KokapenaEguneratu(this);
 
 	private JMenuItem jMenuItem8 = null;
+
+	private JMenu jMenu3 = null;
+
+	private JMenuItem jMenuItem61 = null;
 
 	
 	/**
@@ -129,6 +134,7 @@ public class EI_SegurtasunArduraduna extends JFrame {
 			jJMenuBar.add(getJMenu());
 			jJMenuBar.add(getJMenu1());
 			jJMenuBar.add(getJMenu2());
+			jJMenuBar.add(getJMenu3());
 		}
 		return jJMenuBar;
 	}
@@ -343,6 +349,7 @@ public class EI_SegurtasunArduraduna extends JFrame {
 		presKontr.setUrrunekoNegozioLogika(urrunekoKud);
 		alarma_gaitu.setUrrunekoNegozioLogika(urrunekoKud);
 		sarbKonts.setUrrunekoNegozioLogika(urrunekoKud);
+		kokEgun.setUrrunekoNegozioLogika(urrunekoKud);
 	}
 	
 	
@@ -430,6 +437,40 @@ public class EI_SegurtasunArduraduna extends JFrame {
 			});
 		}
 		return jMenuItem8;
+	}
+
+	/**
+	 * This method initializes jMenu3	
+	 * 	
+	 * @return javax.swing.JMenu	
+	 */
+	private JMenu getJMenu3() {
+		if (jMenu3 == null) {
+			jMenu3 = new JMenu();
+			jMenu3.setMnemonic(KeyEvent.VK_E);
+			jMenu3.setText("Erabiltzaileak");
+			jMenu3.add(getJMenuItem61());
+		}
+		return jMenu3;
+	}
+
+	/**
+	 * This method initializes jMenuItem61	
+	 * 	
+	 * @return javax.swing.JMenuItem	
+	 */
+	private JMenuItem getJMenuItem61() {
+		if (jMenuItem61 == null) {
+			jMenuItem61 = new JMenuItem();
+			jMenuItem61.setText("Kokapena Eguneratu");
+			jMenuItem61.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					kokEgun.setLocationRelativeTo(null);
+					kokEgun.setVisible(true);
+				}
+			});
+		}
+		return jMenuItem61;
 	}
 
 	/**
