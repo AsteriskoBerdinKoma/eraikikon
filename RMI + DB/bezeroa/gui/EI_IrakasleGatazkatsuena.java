@@ -348,7 +348,7 @@ public class EI_IrakasleGatazkatsuena extends JDialog {
 		} catch (RemoteException e) {
 			// create an instance of a JOptionPane, with only an ok button and
 			// message.
-			new MezuLehio("Ezin izan da zerbitzariarekin konexioa ezarri","Ados","Konexio errorea",JOptionPane.ERROR_MESSAGE);
+			new MezuLeiho("Ezin izan da zerbitzariarekin konexioa ezarri","Ados","Konexio errorea",JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 			System.exit(1); // terminate application
 		}
