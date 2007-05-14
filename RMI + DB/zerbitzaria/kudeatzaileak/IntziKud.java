@@ -96,8 +96,8 @@ public class IntziKud {
 	}
 	
 	public void insertAlarma(){
-		String intz= "INSERT INTO intzidentziak (data, mota, idTxartela, gaituta) "
-			+ "VALUES (NOW(), 'alarma',1, true)";
+		String intz= "INSERT INTO intzidentziak (data, mota, gaituta) "
+			+ "VALUES (NOW(), 'alarma', true)";
 		try {
 			this.agindua.executeUpdate(intz);
 		} catch (SQLException e) {
