@@ -94,4 +94,15 @@ public class IntziKud {
 			e.printStackTrace();
 		}
 	}
+	
+	public void insertAlarma(){
+		String intz= "INSERT INTO intzidentziak (data, mota, idTxartela, gaituta) "
+			+ "VALUES (NOW(), 'alarma',1, true)";
+		try {
+			this.agindua.executeUpdate(intz);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

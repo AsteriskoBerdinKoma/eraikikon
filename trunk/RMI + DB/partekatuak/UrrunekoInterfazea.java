@@ -75,4 +75,10 @@ public interface UrrunekoInterfazea extends Remote {
 	public boolean loginEgin(String erab, String pasahitza) throws RemoteException;
 	
 	public Vector<DbDatuLerroa> getSarbideEskaerak(String data) throws RemoteException;
+	
+	public void irekiAteak() throws RemoteException;
+	
+	public void ItxiAteak() throws RemoteException;
+	
+	public void alarmaIntzidentziaSortu() throws RemoteException;
 }

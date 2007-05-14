@@ -5,6 +5,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.rmi.RemoteException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -24,6 +25,8 @@ public class EI_AlarmaGaitu extends JDialog {
 	private JButton jButton = null;
 	
 	private UrrunekoInterfazea urrunekoKud;  //  @jve:decl-index=0:
+	
+	private boolean gaituta=false;
 
 	/**
 	 * @param owner
@@ -39,7 +42,7 @@ public class EI_AlarmaGaitu extends JDialog {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(300, 200);
+		this.setSize(300, 230);
 		this.setTitle("Alarma Gaitu");
 		this.setContentPane(getJContentPane());
 	}
@@ -78,6 +81,40 @@ public class EI_AlarmaGaitu extends JDialog {
 			jButton = new JButton();
 			jButton.setText("Alarma Gaitu");
 			jButton.setPreferredSize(new Dimension(115, 20));
+			jButton.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					if (!gaituta){
+						try {
+							urrunekoKud.irekiAteak();
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						/*try {
+							urrunekoKud.alarmaIntzidentziaSortu();
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}*/
+						jButton.setText("Alarma Desgaitu");
+						jLabel.setText("");
+						jLabel.setIcon(new ImageIcon(getClass().getResource("sirena.GIF")));
+						
+					}
+					else {
+						try {
+							urrunekoKud.ItxiAteak();
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						jButton.setText("Alarma Gaitu");
+						jLabel.setIcon(null);
+						setEraikinekoPertsonKop();
+					}
+					gaituta = !gaituta;
+				}
+			});
 		}
 		return jButton;
 	}
@@ -91,7 +128,6 @@ public class EI_AlarmaGaitu extends JDialog {
 			try {
 				kop = urrunekoKud.getEraikinekoPertsonKop();
 			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		jLabel.setText("Eraikinean dauden pertsonen kopurua: "+ kop);
