@@ -100,6 +100,7 @@ public class EI_SegurtasunArduraduna extends JFrame {
 //		if (negLog == false)
 //			System.exit(1);
 		//txart_eman.setSize(new Dimension(332, 192));
+		this.setExtendedState(getExtendedState()| MAXIMIZED_BOTH);
 		this.setSize(491, 223);
 		this.setJMenuBar(getJJMenuBar());
 		this.setContentPane(getJContentPane());
