@@ -7,6 +7,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,6 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import partekatuak.UrrunekoInterfazea;
+import sun.misc.BASE64Encoder;
 
 public class EI_Identifikazioa extends JFrame {
 	/**
@@ -141,8 +145,9 @@ public class EI_Identifikazioa extends JFrame {
 
 	void jButton1_actionPerformed(ActionEvent e) {
 		try {
-			boolean b = urrunekoKud.loginEgin(jTextField1.getText(), String
-					.valueOf(jPasswordField1.getPassword()));
+			String pass= String.valueOf(jPasswordField1.getPassword());
+			String kodetuta= kodetu(pass);
+			boolean b = urrunekoKud.loginEgin(jTextField1.getText(), kodetuta);
 			if (b)
 			{
 				jLabel3.setText("AURRERA");
@@ -158,4 +163,28 @@ public class EI_Identifikazioa extends JFrame {
 			jLabel3.setText("NEGOZIO LOGIKAREKIN ARAZOAK DAUDE");
 		}
 	}
+	
+	public String kodetu (String testusoila){
+	    MessageDigest md = null;
+	    try
+	    {
+	      md = MessageDigest.getInstance("SHA"); //2. pausua
+	    }
+	    catch(NoSuchAlgorithmException e)
+	    {
+	      e.printStackTrace();
+	    }
+	    
+	    try
+	    {
+	      md.update(testusoila.getBytes("UTF-8")); //3. pausua
+	    }
+	    catch(UnsupportedEncodingException e)
+	    {
+	      e.printStackTrace();
+	    }
+	    byte raw[] = md.digest(); //4. pausua
+	    String hash = (new BASE64Encoder()).encode(raw); //5. pausua
+	    return hash; //6. pausua
+	  }
 }  //  @jve:decl-index=0:visual-constraint="10,10"
