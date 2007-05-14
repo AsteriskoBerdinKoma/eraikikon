@@ -3,6 +3,10 @@ package bezeroa.gui;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.rmi.RemoteException;
 
 import javax.swing.ImageIcon;
@@ -12,6 +16,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import partekatuak.UrrunekoInterfazea;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+
 import java.awt.Dimension;
 
 public class EI_AlarmaGaitu extends JDialog {
@@ -24,9 +31,9 @@ public class EI_AlarmaGaitu extends JDialog {
 
 	private JButton jButton = null;
 	
-	private UrrunekoInterfazea urrunekoKud;  //  @jve:decl-index=0:
-	
 	private boolean gaituta=false;
+
+	private UrrunekoInterfazea urrunekoKud; // @jve:decl-index=0:
 
 	/**
 	 * @param owner
@@ -72,9 +79,9 @@ public class EI_AlarmaGaitu extends JDialog {
 	}
 
 	/**
-	 * This method initializes jButton	
-	 * 	
-	 * @return javax.swing.JButton	
+	 * This method initializes jButton
+	 * 
+	 * @return javax.swing.JButton
 	 */
 	private JButton getJButton() {
 		if (jButton == null) {
@@ -99,7 +106,22 @@ public class EI_AlarmaGaitu extends JDialog {
 						jButton.setText("Alarma Desgaitu");
 						jLabel.setText("");
 						jLabel.setIcon(new ImageIcon(getClass().getResource("sirena.GIF")));
-						
+						InputStream in;
+						try {
+							in = new FileInputStream("alarm.wav");
+							// Create an AudioStream object from the input stream.
+						AudioStream as = new AudioStream(in);         
+						// Use the static class member "player" from class AudioPlayer to play
+						// clip.
+						AudioPlayer.player.start(as);
+						// Similarly, to stop the audio.
+						} catch (FileNotFoundException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (IOException e2) {
+							// TODO Auto-generated catch block
+							e2.printStackTrace();
+						}	
 					}
 					else {
 						try {
@@ -118,12 +140,12 @@ public class EI_AlarmaGaitu extends JDialog {
 		}
 		return jButton;
 	}
-	
+
 	public void setUrrunekoNegozioLogika(UrrunekoInterfazea ui) {
 		this.urrunekoKud = ui;
 	}
 
-	public void setEraikinekoPertsonKop(){
+	public void setEraikinekoPertsonKop() {
 		int kop = 0;
 			try {
 				kop = urrunekoKud.getEraikinekoPertsonKop();
