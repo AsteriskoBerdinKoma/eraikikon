@@ -100,4 +100,35 @@ public class TxartelKud {
 		else
 			return null;
 	}
+	
+	public void gaituTxartela(int nan){
+		String txart = "INSERT INTO txartelak (gaituData,desgaituData,erabId) "
+			+ "VALUES (NOW(),'null,'"+nan+"')";
+		try {
+			this.agindua.executeUpdate(txart);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void desgaituTxartela(int nan){
+		String txart = "UPDATE txartelak SET desgaituData=NOW()WHERE erabId='"+nan+"'";
+		try {
+			this.agindua.executeUpdate(txart);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void gaitTxartela(int nan){
+		String txart = "UPDATE txartelak SET gaituData=NOW(), desgaituData=null WHERE erabId='"+nan+"'";
+		try {
+			this.agindua.executeUpdate(txart);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

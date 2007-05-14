@@ -4,6 +4,7 @@ import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.rmi.RemoteException;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -20,7 +21,7 @@ public class EI_TxartelaJaso extends JDialog {
 
 	private JPanel jContentPane = null;
 
-	private UrrunekoInterfazea ui;
+	private UrrunekoInterfazea urrunekoKud;  //  @jve:decl-index=0:
 
 	private JLabel jLabel = null;
 
@@ -104,9 +105,27 @@ public class EI_TxartelaJaso extends JDialog {
 	private JButton getJButton() {
 		if (jButton == null) {
 			jButton = new JButton();
-			jButton.setText("Txart Desgaitu");
+			jButton.setText("Txartela Desgaitu");
+			jButton.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					try {
+					String nan = jTextField.getText();
+					int bal= Integer.parseInt(nan);
+					
+						urrunekoKud.desgaituTxartela(bal);
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			});		
+			
 		}
 		return jButton;
 	}
-
+	
+	public void setUrrunekoNegozioLogika(UrrunekoInterfazea ui)
+	{
+		this.urrunekoKud = ui;
+	}
 }  //  @jve:decl-index=0:visual-constraint="9,8"

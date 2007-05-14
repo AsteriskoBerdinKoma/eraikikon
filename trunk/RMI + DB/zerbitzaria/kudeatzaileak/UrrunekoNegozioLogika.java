@@ -1,5 +1,6 @@
 package zerbitzaria.kudeatzaileak;
 
+
 import java.rmi.Naming;
 import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
@@ -9,6 +10,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.Vector;
+
+import javax.swing.JOptionPane;
 
 import partekatuak.*;
 
@@ -37,6 +40,8 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 
 	private AteKud ate;
 
+	private ProfKud prof;
+	
 	private GuneKud gunek;
 
 	private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
@@ -79,7 +84,11 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		tik = new TxartelIrakKud(kon);
 		fakul = new FakulKud(kon);
 		ate = new AteKud(kon);
+
+		prof = new ProfKud(kon);
+
 		gunek = new GuneKud(kon);
+
 	}
 
 	/**
@@ -105,7 +114,40 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		intz.insertIntzGatazkatsuena(txartId, tIrakId, noiztikNora);
 	}
 
-	public void alarmaIntzidentziaSortu() {
+	public void createErabiltzailea(int nan, String izena, String pasahitza,int profId){
+		try {
+			erak.insertErabiltzailea(nan, izena, pasahitza, profId);
+		} catch (SQLException e) {
+			new MezuLeiho("Erabiltzaile hori jadanik existitzen da","Ados","Arazoa erabiltzailea sortzerakoan",JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+	}
+	public void gaituTxartela(int nan){
+		txk.gaituTxartela(nan);
+	}
+	
+	public void gaitTxartela(int nan){
+		txk.gaitTxartela(nan);
+	}
+	
+	public void desgaituTxartela(int nan){
+		txk.desgaituTxartela(nan);
+	}
+	
+	
+	public int profilZenbakia(String mota){
+		try {
+		int profZenb;
+			profZenb = prof.profilZenbakia(mota);
+		return  profZenb;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return -1;
+		}
+	}
+	
+	public void alarmaIntzidentziaSortu(){
 		intz.insertAlarma();
 	}
 
@@ -179,6 +221,9 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 			e.printStackTrace();
 			return null;
 		}
+	}
+	public Vector<String> getProfilak() throws IllegalStateException, SQLException{
+		return prof.getProfilak();
 	}
 
 	public Vector<DbDatuLerroa> getSarbideEskaerak(String data) {
