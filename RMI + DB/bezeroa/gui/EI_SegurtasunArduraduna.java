@@ -1,5 +1,6 @@
 package bezeroa.gui;
 
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -57,12 +58,13 @@ public class EI_SegurtasunArduraduna extends JFrame {
 	private JMenuItem jMenuItem3 = null;
 	private JMenuItem jMenuItem4 = null;
 	private JMenuItem jMenuItem5 = null;
-	private JMenuItem jMenuItem6 = null;
 	private JMenuItem jMenuItem7 = null;
 
 	//private String host = "localhost";  //  @jve:decl-index=0:
 
 	private JDialog txart_eman = new EI_TxartelaEman(this);  //  @jve:decl-index=0:visual-constraint="10,165"
+	private JDialog txart_jaso =  new EI_TxartelaJaso(this);//  @jve:decl-index=0:visual-constraint="10,165"
+	
 	private EI_IrakasleGatazkatsuena irakGatazk = new EI_IrakasleGatazkatsuena(this);  //  @jve:decl-index=0:visual-constraint="13,55"
 	private EI_PresentziaKontrolatu presKontr = new EI_PresentziaKontrolatu(this);  //  @jve:decl-index=0:visual-constraint="13,91"
 	private EI_SarbideakKontsultatu sarbKonts = new EI_SarbideakKontsultatu(this);  //  @jve:decl-index=0:visual-constraint="12,126"
@@ -215,6 +217,11 @@ public class EI_SegurtasunArduraduna extends JFrame {
 		if (jMenuItem1 == null) {
 			jMenuItem1 = new JMenuItem();
 			jMenuItem1.setText("Txartela Jaso");
+			jMenuItem.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					txart_jaso.setVisible(true);
+				}
+			});
 		}
 		return jMenuItem1;
 	}
