@@ -17,7 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import partekatuak.MezuLehio;
+import partekatuak.MezuLeiho;
 import partekatuak.UrrunekoInterfazea;
 import sun.audio.AudioData;
 import sun.audio.AudioDataStream;
@@ -77,11 +77,11 @@ public class EI_AlarmaGaitu extends JDialog {
 				ad= as.getData();
 				cas= new ContinuousAudioDataStream(ad);
 			} catch (FileNotFoundException e) {
-				new MezuLehio("Alarmaren soinua duen Fitxategia ez da aurkitu","Ados","Alarma soinua ez dago",JOptionPane.ERROR_MESSAGE);
+				new MezuLeiho("Alarmaren soinua duen Fitxategia ez da aurkitu","Ados","Alarma soinua ez dago",JOptionPane.ERROR_MESSAGE);
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				new MezuLehio("IO");
+				new MezuLeiho("IO");
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}  
@@ -128,7 +128,7 @@ public class EI_AlarmaGaitu extends JDialog {
 						try {
 								urrunekoKud.irekiAteak();
 							} catch (RemoteException e1) {
-								new MezuLehio("REMOTE");
+								new MezuLeiho("REMOTE");
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
@@ -148,7 +148,7 @@ public class EI_AlarmaGaitu extends JDialog {
 							jabea.setTableModel(urrunekoKud.getIntzidentziak(),
 									zutIzenak);
 						} catch (RemoteException e1) {
-							new MezuLehio("REMOTE");
+							new MezuLeiho("REMOTE");
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
@@ -165,7 +165,7 @@ public class EI_AlarmaGaitu extends JDialog {
 							urrunekoKud.ItxiAteak();
 							urrunekoKud.pertsonakAteraEraikinetik();
 						} catch (RemoteException e1) {
-							new MezuLehio("REMOTE");
+							new MezuLeiho("REMOTE");
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
@@ -192,7 +192,7 @@ public class EI_AlarmaGaitu extends JDialog {
 			try {
 				kop = urrunekoKud.getEraikinekoPertsonKop();
 			} catch (RemoteException e) {
-				new MezuLehio("REMOTE");
+				new MezuLeiho("REMOTE");
 				e.printStackTrace();
 			}
 		jLabel.setText("Eraikinean dauden pertsonen kopurua: "+ kop);
