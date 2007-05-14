@@ -11,6 +11,7 @@ import java.rmi.RemoteException;
 import java.util.Vector;
 
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -199,9 +200,17 @@ public class EI_KokapenaEguneratu extends JDialog {
 		
 			taula = urruIn.getErabiltzaileKokapena(kode);
 			
-			tableModel.setDataVector(taula, zutIzen);
 			
-			tableModel.fireTableStructureChanged();
+			if (taula.size()!=0){
+				jButton1.setEnabled(true);
+				tableModel.setDataVector(taula, zutIzen);
+				
+				tableModel.fireTableStructureChanged();
+			}
+			else
+			
+		
+			jButton1.setEnabled(false);
 		
 	}
 	
@@ -255,6 +264,43 @@ public class EI_KokapenaEguneratu extends JDialog {
 			jButton1 = new JButton();
 			jButton1.setBounds(new Rectangle(467, 227, 104, 31));
 			jButton1.setText("Eguneratu");
+			jButton1.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					String erabId = jTable1.getValueAt(0, 1).toString();
+					//String txId= jTable1.getValueAt(0, 2).toString(); 
+					
+					
+					int x =jTable.getSelectedRow();
+					
+					if (x== -1){
+					JOptionPane optPane = new JOptionPane("Ez duzu gunerik aukeratu",JOptionPane.ERROR_MESSAGE);
+			
+					JPanel buttonPanel = (JPanel) optPane.getComponent(1);
+					JButton buttonOk = (JButton) buttonPanel.getComponent(0);
+					buttonOk.setText("Ados");
+					JDialog d = optPane.createDialog(null, "Errorea");
+					d.setVisible(true);
+					}
+					else{
+						String guneId = jTable.getValueAt(x, 0).toString();
+						
+						try {
+							boolean b = urruIn.erabiltzaileaFakultatean(erabId);
+							if (b==true){
+								urruIn.kokapenaEguneratu(erabId, guneId);
+							}else {
+								urruIn.kokapenaSartu(erabId, guneId);
+							}
+							
+						} catch (RemoteException e1) {
+						
+							e1.printStackTrace();
+						}
+					}
+					
+				
+				}
+			});
 		}
 		return jButton1;
 	}
