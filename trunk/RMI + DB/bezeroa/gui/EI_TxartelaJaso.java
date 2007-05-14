@@ -1,15 +1,18 @@
 package bezeroa.gui;
 
-import javax.swing.JPanel;
 import java.awt.Frame;
-import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import java.awt.Rectangle;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
-import java.awt.Dimension;
-import javax.swing.JButton;
-import javax.swing.JPasswordField;
+import javax.swing.SwingConstants;
+
+import partekatuak.UrrunekoInterfazea;
 
 public class EI_TxartelaJaso extends JDialog {
 
@@ -17,17 +20,13 @@ public class EI_TxartelaJaso extends JDialog {
 
 	private JPanel jContentPane = null;
 
+	private UrrunekoInterfazea ui;
+
 	private JLabel jLabel = null;
 
 	private JTextField jTextField = null;
 
 	private JButton jButton = null;
-
-	private JLabel jLabel1 = null;
-
-	private JPasswordField jPasswordField = null;
-	
-	private UrrunekoInterfazea ui;
 
 	/**
 	 * @param owner
@@ -43,7 +42,7 @@ public class EI_TxartelaJaso extends JDialog {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(318, 179);
+		this.setSize(225, 130);
 		this.setTitle("Txartela Jaso");
 		this.setContentPane(getJContentPane());
 	}
@@ -55,19 +54,31 @@ public class EI_TxartelaJaso extends JDialog {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
-			jLabel1 = new JLabel();
-			jLabel1.setBounds(new Rectangle(10, 48, 115, 26));
-			jLabel1.setText("  Pasahitza: ");
+			GridBagConstraints gridBagConstraints2 = new GridBagConstraints();
+			gridBagConstraints2.gridx = 0;
+			gridBagConstraints2.gridwidth = 2;
+			gridBagConstraints2.insets = new Insets(5, 10, 10, 10);
+			gridBagConstraints2.gridy = 1;
+			GridBagConstraints gridBagConstraints1 = new GridBagConstraints();
+			gridBagConstraints1.fill = GridBagConstraints.HORIZONTAL;
+			gridBagConstraints1.gridy = 0;
+			gridBagConstraints1.weightx = 1.0;
+			gridBagConstraints1.insets = new Insets(10, 5, 5, 10);
+			gridBagConstraints1.gridx = 1;
+			GridBagConstraints gridBagConstraints = new GridBagConstraints();
+			gridBagConstraints.gridx = 0;
+			gridBagConstraints.anchor = GridBagConstraints.EAST;
+			gridBagConstraints.insets = new Insets(10, 10, 5, 5);
+			gridBagConstraints.gridy = 0;
 			jLabel = new JLabel();
-			jLabel.setBounds(new Rectangle(10, 13, 115, 26));
-			jLabel.setText("  Erabiltzaile izena:   ");
+			jLabel.setText("NAN:");
+			jLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+			jLabel.setHorizontalTextPosition(SwingConstants.RIGHT);
 			jContentPane = new JPanel();
-			jContentPane.setLayout(null);
-			jContentPane.add(jLabel, null);
-			jContentPane.add(getJTextField(), null);
-			jContentPane.add(getJButton(), null);
-			jContentPane.add(jLabel1, null);
-			jContentPane.add(getJPasswordField(), null);
+			jContentPane.setLayout(new GridBagLayout());
+			jContentPane.add(jLabel, gridBagConstraints);
+			jContentPane.add(getJTextField(), gridBagConstraints1);
+			jContentPane.add(getJButton(), gridBagConstraints2);
 		}
 		return jContentPane;
 	}
@@ -80,7 +91,6 @@ public class EI_TxartelaJaso extends JDialog {
 	private JTextField getJTextField() {
 		if (jTextField == null) {
 			jTextField = new JTextField();
-			jTextField.setBounds(new Rectangle(144, 13, 150, 22));
 		}
 		return jTextField;
 	}
@@ -93,42 +103,9 @@ public class EI_TxartelaJaso extends JDialog {
 	private JButton getJButton() {
 		if (jButton == null) {
 			jButton = new JButton();
-			jButton.setBounds(new Rectangle(78, 92, 145, 37));
-			jButton.setText("Desgaitu txartela");
-			jButton.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					String erabIzen=jTextField.getText();
-		    		String erabPas=String.valueOf(jPasswordField.getPassword());
-		    		boolean b;
-//					boolean b = NegLog.loginEgin(erabIzen,erabPas);
-//		    		if (b==false)
-//		    			jLabel.setText("ERROEA:Izena edo pasahitza ez da ondo sartu.Saiatu berriz.");
-				//HOLAKO BAT NON SARTU?????
-//		    		public interface NegozioLogikaInterfazea {
-//		    			
-//		    			public boolean loginEgin(String erabIzen,String erabPas);
-//
-//		    		}
-		    		
-		    		ui.desgaituTxartela(erabId);
-		    		
-				}
-			});
+			jButton.setText("Txart Desgaitu");
 		}
 		return jButton;
-	}
-
-	/**
-	 * This method initializes jPasswordField	
-	 * 	
-	 * @return javax.swing.JPasswordField	
-	 */
-	private JPasswordField getJPasswordField() {
-		if (jPasswordField == null) {
-			jPasswordField = new JPasswordField();
-			jPasswordField.setBounds(new Rectangle(144, 49, 150, 22));
-		}
-		return jPasswordField;
 	}
 
 }  //  @jve:decl-index=0:visual-constraint="9,8"
