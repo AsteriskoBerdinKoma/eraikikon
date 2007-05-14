@@ -147,7 +147,7 @@ public class EI_Identifikazioa extends JFrame {
 	void jButton1_actionPerformed(ActionEvent e) {
 		try {
 			String erab = jTextField1.getText();
-			String pasahitza = String.valueOf(jPasswordField1.getPassword());
+			String pasahitza = kodetu(String.valueOf(jPasswordField1.getPassword()));
 			if (!erab.equals("") && !pasahitza.equals("")) {
 				if (urrunekoKud.loginEgin(erab, pasahitza) == 3) {
 					jLabel3.setForeground(Color.GREEN);
