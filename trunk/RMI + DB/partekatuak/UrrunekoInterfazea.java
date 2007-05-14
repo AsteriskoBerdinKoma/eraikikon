@@ -81,4 +81,9 @@ public interface UrrunekoInterfazea extends Remote {
 	public void ItxiAteak() throws RemoteException;
 	
 	public void alarmaIntzidentziaSortu() throws RemoteException;
+	
+	public Vector<Vector<Object>> getErabiltzaileKokapena (String txId) throws RemoteException;
+	
+	public Vector<Vector<Object>> getGuneGuztiak() throws RemoteException;
+
 }
