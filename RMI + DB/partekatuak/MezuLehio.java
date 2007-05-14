@@ -1,0 +1,53 @@
+package partekatuak;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+public class MezuLehio {
+
+	private String mezua;
+	private String botoia;
+	private String titulua;
+	private int mota;
+	
+	
+	/**
+	 * @param mezu
+	 * @param botoi
+	 * @param titulu
+	 * @param mezu_mota JOptionPane-en motak
+	 */
+	public MezuLehio(String mezu, String botoi, String titulu, int mezu_mota){
+		this.mezua = mezu;
+		this.botoia = botoi;
+		this.titulua = titulu;
+		this.mota = mezu_mota;
+		
+		this.sortuMezua();
+	}
+	
+	public MezuLehio(String exceptioMota){
+		if (exceptioMota.equals("REMOTE")){
+			this.mezua = "Ezin izan da zerbitzariarekin konexioa ezarri";
+			this.botoia = "Ados";
+			this.titulua = "Konexio errorea";
+			this.mota = JOptionPane.ERROR_MESSAGE;
+			
+			this.sortuMezua();
+		}
+		
+	}
+	
+	private void sortuMezua(){
+//		create an instance of a JOptionPane, with only an ok button and
+		// message.
+		JOptionPane optPane = new JOptionPane(mezua,mota);
+		JPanel buttonPanel = (JPanel) optPane.getComponent(1);
+		JButton buttonOk = (JButton) buttonPanel.getComponent(0);
+		buttonOk.setText(botoia);
+		JDialog d = optPane.createDialog(null, titulua);
+		d.setVisible(true);
+	}
+}
