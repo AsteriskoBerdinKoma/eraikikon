@@ -18,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import partekatuak.MezuLeiho;
 import partekatuak.UrrunekoInterfazea;
 
 /**
@@ -318,6 +319,7 @@ public class EI_SegurtasunArduraduna extends JFrame {
 			}
 			return jTable;
 		} catch (RemoteException e) {
+			new MezuLeiho("REMOTE");
 			e.printStackTrace();
 			return null;
 		}
@@ -374,55 +376,7 @@ public class EI_SegurtasunArduraduna extends JFrame {
 		txart_gaitu.setUrrunekoNegozioLogika(urrunekoKud);
 		
 	}
-	
-	
-	/**
-	 * Urruneko zerbitzua esleitzeko erabiltzen da.
-	 * 
-	 * @return Boolean bat itzultzen du. True urruneko zerbitzua atzigarri
-	 *         baldin badago eta konexioa gauzatu bada, False bestela.
-	 */
 
-//	public boolean setNegozioLogika() {
-//		try {
-//			System.setProperty("java.security.policy", "client.policy");
-//			// Assingn security manager
-//			if (System.getSecurityManager() == null)
-//				System.setSecurityManager(new RMISecurityManager());
-//			UrrunekoInterfazea urrunekoObj;
-//			String zerbIzena = "rmi://" + host + "/" + zerbitzuIzena;
-//			urrunekoObj = (UrrunekoInterfazea) Naming.lookup(zerbIzena);
-//			irakGatazk.setUrrunekoNegozioLogika(urrunekoObj);
-//			presKontr.setUrrunekoNegozioLogika(urrunekoObj);
-//			alarma_gaitu.setUrrunekoNegozioLogika(urrunekoObj);
-//			urrunekoKud = urrunekoObj;
-//			System.out.println("Negozioaren logika esleituta");
-//			return true;
-//		} catch (MalformedURLException e) {
-//			e.printStackTrace();
-//			return false;
-//		} catch (RemoteException e) {
-//			// create an instance of a JOptionPane, with only an ok button and
-//			// message.
-//			JOptionPane optPane = new JOptionPane(
-//					"Ezin izan da zerbitzariarekin konexioa ezarri",
-//					JOptionPane.ERROR_MESSAGE);
-//
-//			JPanel buttonPanel = (JPanel) optPane.getComponent(1);
-//			JButton buttonOk = (JButton) buttonPanel.getComponent(0);
-//			buttonOk.setText("Ados");
-//
-//			JDialog d = optPane.createDialog(null, "Konexio errorea");
-//			d.setVisible(true);
-//
-//			e.printStackTrace();
-//
-//			return false;
-//		} catch (NotBoundException e) {
-//			e.printStackTrace();
-//			return false;
-//		}
-//	}
 
 	/**
 	 * This method initializes jMenuItem7	
@@ -495,18 +449,4 @@ public class EI_SegurtasunArduraduna extends JFrame {
 		}
 		return jMenuItem61;
 	}
-
-	/**
-	 * Main metodoa. Interfaze grafikoa egikaritzeko erabiltzen da. Interfazea
-	 * ixterakoan egin beharreko ekintzak definitzen ditu.
-	 * 
-	 * @param args
-	 *            Aplikazioa komando lerrotik jaurtitzean, beharrezkoak diren
-	 *            parametroak (behar balitu) jasotzeko Array bat da.
-	 */
-//	public static void main(String[] args) {
-//		EI_SegurtasunArduraduna segArd = new EI_SegurtasunArduraduna();
-//		segArd.setVisible(true);
-//		segArd.setDefaultCloseOperation(EXIT_ON_CLOSE);
-//	}
 } // @jve:decl-index=0:visual-constraint="201,10"
