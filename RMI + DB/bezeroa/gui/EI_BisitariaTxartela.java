@@ -92,7 +92,6 @@ public class EI_BisitariaTxartela extends JDialog {
 		if (jButton == null) {
 			jButton = new JButton();
 			vBotoi.addElement(new Botoia(jButton, 1));
-			new Botoia(jButton, 1);
 			jButton.setIcon(new ImageIcon(getClass().getResource("g1.png")));
 			jButton.setBackground(Color.blue);
 			jButton.addActionListener(new JButton_actionPerformed());
@@ -109,7 +108,6 @@ public class EI_BisitariaTxartela extends JDialog {
 		if (jButton1 == null) {
 			jButton1 = new JButton();
 			vBotoi.addElement(new Botoia(jButton1, 2));
-			new Botoia(jButton1, 2);
 			jButton1.setIcon(new ImageIcon(getClass().getResource("g2.png")));
 			jButton1.setBackground(Color.blue);
 			jButton1.addActionListener(new JButton_actionPerformed());
@@ -125,8 +123,7 @@ public class EI_BisitariaTxartela extends JDialog {
 	private JButton getJButton2() {
 		if (jButton2 == null) {
 			jButton2 = new JButton();
-			vBotoi.addElement(new Botoia(jButton2, 3));
-			new Botoia(jButton2, 3);
+			vBotoi.addElement(new Botoia(jButton2, 4));
 			jButton2.setIcon(new ImageIcon(getClass().getResource("g4.png")));
 			jButton2.setBackground(Color.blue);
 			jButton2.addActionListener(new JButton_actionPerformed());
@@ -142,8 +139,7 @@ public class EI_BisitariaTxartela extends JDialog {
 	private JButton getJButton3() {
 		if (jButton3 == null) {
 			jButton3 = new JButton();
-			vBotoi.addElement(new Botoia(jButton3, 4));
-			new Botoia(jButton3, 4);
+			vBotoi.addElement(new Botoia(jButton3, 5));
 			jButton3.setIcon(new ImageIcon(getClass().getResource("g5.png")));
 			jButton3.setBackground(Color.blue);
 			jButton3.addActionListener(new JButton_actionPerformed());
@@ -159,8 +155,7 @@ public class EI_BisitariaTxartela extends JDialog {
 	private JButton getJButton4() {
 		if (jButton4 == null) {
 			jButton4 = new JButton();
-			vBotoi.addElement(new Botoia(jButton4, 5));
-			new Botoia(jButton4, 5);
+			vBotoi.addElement(new Botoia(jButton4, 6));
 			jButton4.setIcon(new ImageIcon(getClass().getResource("g6.png")));
 			jButton4.setBackground(Color.blue);
 			jButton4.addActionListener(new JButton_actionPerformed());
@@ -176,8 +171,7 @@ public class EI_BisitariaTxartela extends JDialog {
 	private JButton getJButton5() {
 		if (jButton5 == null) {
 			jButton5 = new JButton();
-			vBotoi.addElement(new Botoia(jButton5, 6));
-			new Botoia(jButton5, 6);
+			vBotoi.addElement(new Botoia(jButton5, 3));
 			jButton5.setMnemonic(KeyEvent.VK_UNDEFINED);
 			jButton5.setBackground(Color.blue);
 			jButton5.setIcon(new ImageIcon(getClass().getResource("g3.png")));

@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -115,6 +116,8 @@ public class EI_TxartelaJaso extends JDialog {
 					int bal= Integer.parseInt(nan);
 					
 						urrunekoKud.desgaituTxartela(bal);
+						new MezuLeiho("Txartela desgaitua izan da","Ados","Txartela jasoa",JOptionPane.INFORMATION_MESSAGE);
+						setVisible(false);
 					} catch (RemoteException e1) {
 						new MezuLeiho("REMOTE");
 						// TODO Auto-generated catch block
