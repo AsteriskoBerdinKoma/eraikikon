@@ -218,7 +218,7 @@ public class EI_AlarmaGaitu extends JDialog {
 						AudioPlayer.player.stop(cas);
 						setDefaultCloseOperation(HIDE_ON_CLOSE);
 						setVisible(false);
-						new MezuLeiho("Alarma desgaitua izan da\n Ate gutziak itxi egin dira", "Ados",
+						new MezuLeiho("Alarma desgaitua izan da\n Ate guztiak itxi egin dira", "Ados",
 								"Alarma Desgaitua",
 								JOptionPane.INFORMATION_MESSAGE);
 					}
