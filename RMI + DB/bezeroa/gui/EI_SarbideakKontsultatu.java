@@ -282,7 +282,7 @@ public class EI_SarbideakKontsultatu extends JDialog {
 			jList.setModel(ateak);
 		} 
 		else {
-			new MezuLeiho("Ez dago sarbide eskaerarik data horretan","Ados","Sarbide eskaerarik ez",JOptionPane.ERROR_MESSAGE);
+			new MezuLeiho("Ez dago sarbide eskaerarik data horretan","Ados","Sarbide eskaerarik ez",JOptionPane.INFORMATION_MESSAGE);
 		}
 		} catch (IllegalStateException e) {
 			new MezuLeiho("DB");
