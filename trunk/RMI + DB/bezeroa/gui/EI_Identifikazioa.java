@@ -15,11 +15,13 @@ import java.security.NoSuchAlgorithmException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import partekatuak.MezuLeiho;
 import partekatuak.UrrunekoInterfazea;
 import sun.misc.BASE64Encoder;
 
@@ -54,6 +56,7 @@ public class EI_Identifikazioa extends JFrame {
 		try {
 			jbInit();
 		} catch (Exception e) {
+			new MezuLeiho("Errorea identifikazio egiterakoan","Ados","Identifikazio Errorea", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}
 	}
@@ -177,18 +180,12 @@ public class EI_Identifikazioa extends JFrame {
 	    try
 	    {
 	      md = MessageDigest.getInstance("SHA"); //2. pausua
-	    }
-	    catch(NoSuchAlgorithmException e)
-	    {
-	      e.printStackTrace();
-	    }
-	    
-	    try
-	    {
 	      md.update(testusoila.getBytes("UTF-8")); //3. pausua
-	    }
-	    catch(UnsupportedEncodingException e)
-	    {
+	    }catch(NoSuchAlgorithmException e){
+	    	new MezuLeiho("Ez da zifraketa algoritmoa aurkitu","Ados","Zifraketa Arazoa",JOptionPane.ERROR_MESSAGE);
+	    	e.printStackTrace();
+	    }catch(UnsupportedEncodingException e){
+	    	new MezuLeiho("Errorea kodetzerakoan","Ados","Kodeketa Errorea",JOptionPane.ERROR_MESSAGE);
 	      e.printStackTrace();
 	    }
 	    byte raw[] = md.digest(); //4. pausua
