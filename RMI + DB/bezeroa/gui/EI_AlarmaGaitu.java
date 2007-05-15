@@ -26,6 +26,7 @@ import sun.audio.AudioStream;
 import sun.audio.ContinuousAudioDataStream;
 
 import java.awt.Dimension;
+import java.awt.Color;
 
 public class EI_AlarmaGaitu extends JDialog {
 
@@ -51,6 +52,8 @@ public class EI_AlarmaGaitu extends JDialog {
 	private ContinuousAudioDataStream cas;
 	
 	private EI_SegurtasunArduraduna jabea;
+
+	private JLabel jLabel1 = null;
 
 	/**
 	 * @param owner
@@ -92,19 +95,26 @@ public class EI_AlarmaGaitu extends JDialog {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
+			GridBagConstraints gridBagConstraints11 = new GridBagConstraints();
+			gridBagConstraints11.gridx = 0;
+			gridBagConstraints11.gridy = 0;
+			jLabel1 = new JLabel();
+			jLabel1.setText("");
+			jLabel1.setForeground(Color.red);
 			GridBagConstraints gridBagConstraints1 = new GridBagConstraints();
 			gridBagConstraints1.gridx = 0;
 			gridBagConstraints1.insets = new Insets(5, 0, 0, 0);
-			gridBagConstraints1.gridy = 1;
+			gridBagConstraints1.gridy = 2;
 			GridBagConstraints gridBagConstraints = new GridBagConstraints();
 			gridBagConstraints.gridx = 0;
 			gridBagConstraints.insets = new Insets(0, 0, 5, 0);
-			gridBagConstraints.gridy = 0;
+			gridBagConstraints.gridy = 1;
 			jLabel = new JLabel();
 			jContentPane = new JPanel();
 			jContentPane.setLayout(new GridBagLayout());
 			jContentPane.add(jLabel, gridBagConstraints);
 			jContentPane.add(getJButton(), gridBagConstraints1);
+			jContentPane.add(jLabel1, gridBagConstraints11);
 		}
 		return jContentPane;
 	}
@@ -178,6 +188,7 @@ public class EI_AlarmaGaitu extends JDialog {
 						jButton.setText("Alarma Desgaitu");
 						jLabel.setText("");
 						jLabel.setIcon(new ImageIcon(getClass().getResource("sirena.GIF")));
+						jLabel1.setText("Alarma Gaitu Da!");
 					}
 						
 					else {
@@ -201,10 +212,12 @@ public class EI_AlarmaGaitu extends JDialog {
 						}
 						jButton.setText("Alarma Gaitu");
 						jLabel.setIcon(null);
+						jLabel1.setText("");
 						setEraikinekoPertsonKop();
 						AudioPlayer.player.stop(cas);
 						setDefaultCloseOperation(HIDE_ON_CLOSE);
 						setVisible(false);
+						new MezuLeiho("Alarma desgaitua izan da", "Ados", "Alarma Desgaitua", JOptionPane.INFORMATION_MESSAGE);
 					}
 					gaituta = !gaituta;
 				}
