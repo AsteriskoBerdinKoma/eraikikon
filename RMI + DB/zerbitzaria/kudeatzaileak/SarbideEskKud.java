@@ -61,8 +61,7 @@ public class SarbideEskKud {
 	 * @throws IllegalStateException
 	 * @throws SQLException
 	 */
-	public Vector<Integer> getSarbideEskaeraUkatuak(int txartelId, String data)
-			throws IllegalStateException, SQLException {
+	public Vector<Integer> getSarbideEskaeraUkatuak(int txartelId, String data)throws SQLException {
 		Vector<Integer> vTxIrakurId = new Vector<Integer>();
 		String c3 = "SELECT S.txIrakurId AS TxartelIrak, COUNT(*) AS Kop "
 				+ "FROM sarbideeskaerak AS S INNER JOIN txartelirakurgailuak AS T ON S.txIrakurId=T.id "
@@ -79,8 +78,7 @@ public class SarbideEskKud {
 		return vTxIrakurId;
 	}
 
-	public Vector<DbDatuLerroa> getSarbideEskaerak(String data)
-			throws IllegalStateException, SQLException {
+	public Vector<DbDatuLerroa> getSarbideEskaerak(String data)throws SQLException {
 		Vector<DbDatuLerroa> vDatuak = new Vector<DbDatuLerroa>();
 		String c4 = "SELECT A.id, S.data, S.txId, G.id, S.baimenduta, S.ukapenarenArrazoia, T.id "
 				+ "FROM ((sarbideeskaerak AS S INNER JOIN txartelirakurgailuak AS T ON S.txIrakurId=T.id) "

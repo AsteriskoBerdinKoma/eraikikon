@@ -16,8 +16,7 @@ public class TxartelIrakKud {
 		this.agindua = (Statement) konexioa.createStatement();
 	}
 
-	public int getHelburuGunea(int ateid, int guneid)
-			throws IllegalStateException, SQLException {
+	public int getHelburuGunea(int ateid, int guneid)throws SQLException {
 		String c6 = "SELECT guneId " + "FROM txartelirakurgailuak "
 				+ "WHERE ateId=" + ateid + " AND guneId!=" + guneid;
 		ResultSet q = agindua.executeQuery(c6);

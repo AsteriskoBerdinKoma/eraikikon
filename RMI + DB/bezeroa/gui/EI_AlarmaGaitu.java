@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
@@ -127,9 +128,29 @@ public class EI_AlarmaGaitu extends JDialog {
 							} catch (RemoteException e1) {
 								new MezuLeiho("REMOTE");
 								e1.printStackTrace();
+							} catch (IllegalStateException e1) {
+								new MezuLeiho("DB");
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (SQLException e1) {
+								new MezuLeiho("Ezin izan dira ateak ireki","Ados","SQL Errorea",JOptionPane.ERROR_MESSAGE);
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
 							}
 						try {
 							urrunekoKud.alarmaIntzidentziaSortu();
+						} catch (RemoteException e1) {
+							new MezuLeiho("REMOTE");
+							e1.printStackTrace();
+						} catch (IllegalStateException e1) {
+							new MezuLeiho("DB");
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (SQLException e1) {
+							new MezuLeiho("Ezin izan da alrmaren intzidentzia sortu","Ados","SQL Errorea",JOptionPane.ERROR_MESSAGE);
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 							Vector<String> zutIzenak = new Vector<String>();
 							zutIzenak.addElement("Erabiltzaile ID");
 							zutIzenak.addElement("Data");
@@ -141,12 +162,23 @@ public class EI_AlarmaGaitu extends JDialog {
 							zutIzenak.addElement("Txartel Irakurgailua");
 							zutIzenak.addElement("Gaitua");
 							zutIzenak.addElement("Noiztik Nora");
-							jabea.setTableModel(urrunekoKud.getIntzidentziak(),
-									zutIzenak);
-						} catch (RemoteException e1) {
-							new MezuLeiho("REMOTE");
-							e1.printStackTrace();
-						}
+							try {
+								jabea.setTableModel(urrunekoKud.getIntzidentziak(),
+										zutIzenak);
+							} catch (IllegalStateException e1) {
+								new MezuLeiho("DB");
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (RemoteException e1) {
+								new MezuLeiho("REMOTE");
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (SQLException e1) {
+								new MezuLeiho("Ezin izan dira intzidentziak hartu, eta ondoren ezin da gertakari taula eguneratu","Ados","SQL Errorea",JOptionPane.ERROR_MESSAGE);
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+						
 						//Use the static class member "player" from class AudioPlayer to play
 						// clip.
 						AudioPlayer.player.start(cas);
@@ -157,10 +189,24 @@ public class EI_AlarmaGaitu extends JDialog {
 						
 					else {
 						try {
-							urrunekoKud.ItxiAteak();
+							try {
+								urrunekoKud.ItxiAteak();
+							} catch (SQLException e1) {
+								new MezuLeiho("SQL","Ezin izan dira ateak itxi");
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 							urrunekoKud.pertsonakAteraEraikinetik();
 						} catch (RemoteException e1) {
 							new MezuLeiho("REMOTE");
+							e1.printStackTrace();
+						} catch (IllegalStateException e1) {
+							new MezuLeiho("DB");
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (SQLException e1) {
+							new MezuLeiho("SQL","Ezin da jakin zenbat pertsona dauden eraikinean");
+							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 						jButton.setText("Alarma Gaitu");
@@ -187,6 +233,14 @@ public class EI_AlarmaGaitu extends JDialog {
 				kop = urrunekoKud.getEraikinekoPertsonKop();
 			} catch (RemoteException e) {
 				new MezuLeiho("REMOTE");
+				e.printStackTrace();
+			} catch (IllegalStateException e) {
+				new MezuLeiho("DB");
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				new MezuLeiho("SQL","Ezin da jakin zenbat pertsona dauden eraikinean");
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		jLabel.setText("Eraikinean dauden pertsonen kopurua: "+ kop);

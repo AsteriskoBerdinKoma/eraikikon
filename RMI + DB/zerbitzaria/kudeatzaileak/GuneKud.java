@@ -37,8 +37,7 @@ public class GuneKud {
 	 *         bat sortuz. Sortutako lerro bakoitzeko bektorea bigarren
 	 *         bektorean gordetzen da azken honek taula osoa osatuz.
 	 */
-	public Vector<Vector<Object>> getGuneGuztiak()
-			throws IllegalStateException, SQLException {
+	public Vector<Vector<Object>> getGuneGuztiak()throws SQLException {
 
 		String query = "SELECT * FROM guneak ";
 		ResultSet rs = this.agindua.executeQuery(query);

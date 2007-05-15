@@ -46,8 +46,7 @@ public class TxartelKud {
 	 * @throws IllegalStateException
 	 * @throws SQLException
 	 */
-	public int getTxartel2Urte(int erabId) throws IllegalStateException,
-			SQLException {
+	public int getTxartel2Urte(int erabId) throws SQLException {
 		Integer biUrte = null;
 		String c2 = "SELECT id " + "FROM txartelak " + "WHERE erabId= "
 				+ erabId + " AND gaituData<=DATE_SUB(NOW(), "
@@ -60,8 +59,7 @@ public class TxartelKud {
 		return biUrte.intValue();
 	}
 
-	public Vector<Vector<Object>> getErabiltzaileKokapena(String txId)
-			throws IllegalStateException, SQLException {
+	public Vector<Vector<Object>> getErabiltzaileKokapena(String txId)throws SQLException {
 
 		String c3 = "SELECT e.izena, " + "e.id, t.id, g.id, g.izena, s.data "
 				+ "FROM (((guneak g "

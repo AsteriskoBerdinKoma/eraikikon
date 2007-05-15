@@ -52,8 +52,7 @@ public class FakulKud {
 	}
 	
 	
-	public boolean erabiltzaileaFakultatean(String erabId)throws 
-	IllegalStateException, SQLException{
+	public boolean erabiltzaileaFakultatean(String erabId)throws SQLException{
 		
 		String query1 = "SELECT * FROM fakultatea WHERE erId= "+ erabId;
 		ResultSet rs;
