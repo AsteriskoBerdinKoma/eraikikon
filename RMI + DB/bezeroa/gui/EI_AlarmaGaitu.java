@@ -130,11 +130,9 @@ public class EI_AlarmaGaitu extends JDialog {
 								e1.printStackTrace();
 							} catch (IllegalStateException e1) {
 								new MezuLeiho("DB");
-								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							} catch (SQLException e1) {
 								new MezuLeiho("SQL","Ezin izan dira ateak ireki");
-								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
 						try {
@@ -144,11 +142,9 @@ public class EI_AlarmaGaitu extends JDialog {
 							e1.printStackTrace();
 						} catch (IllegalStateException e1) {
 							new MezuLeiho("DB");
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						} catch (SQLException e1) {
 							new MezuLeiho("SQL","Ezin izan da alrmaren intzidentzia sortu");
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 							Vector<String> zutIzenak = new Vector<String>();
@@ -167,15 +163,12 @@ public class EI_AlarmaGaitu extends JDialog {
 										zutIzenak);
 							} catch (IllegalStateException e1) {
 								new MezuLeiho("DB");
-								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							} catch (RemoteException e1) {
 								new MezuLeiho("REMOTE");
-								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							} catch (SQLException e1) {
 								new MezuLeiho("SQL","Ezin izan dira intzidentziak hartu, eta ondoren ezin da gertakari taula eguneratu");
-								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
 						
@@ -193,7 +186,6 @@ public class EI_AlarmaGaitu extends JDialog {
 								urrunekoKud.ItxiAteak();
 							} catch (SQLException e1) {
 								new MezuLeiho("SQL","Ezin izan dira ateak itxi");
-								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
 							urrunekoKud.pertsonakAteraEraikinetik();
@@ -202,11 +194,9 @@ public class EI_AlarmaGaitu extends JDialog {
 							e1.printStackTrace();
 						} catch (IllegalStateException e1) {
 							new MezuLeiho("DB");
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						} catch (SQLException e1) {
 							new MezuLeiho("SQL","Ezin da jakin zenbat pertsona dauden eraikinean");
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 						jButton.setText("Alarma Gaitu");
@@ -236,11 +226,9 @@ public class EI_AlarmaGaitu extends JDialog {
 				e.printStackTrace();
 			} catch (IllegalStateException e) {
 				new MezuLeiho("DB");
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (SQLException e) {
 				new MezuLeiho("SQL","Ezin da jakin zenbat pertsona dauden eraikinean");
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		jLabel.setText("Eraikinean dauden pertsonen kopurua: "+ kop);
