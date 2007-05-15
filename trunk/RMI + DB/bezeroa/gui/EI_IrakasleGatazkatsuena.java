@@ -243,6 +243,7 @@ public class EI_IrakasleGatazkatsuena extends JDialog {
 								+ String.valueOf(cal.get(Calendar.MONTH) + 1);
 						taulaEguneratu(sarData);
 					} catch (RemoteException e1) {
+						new MezuLeiho("REMOTE");
 						e1.printStackTrace();
 					}
 				}
@@ -344,11 +345,9 @@ public class EI_IrakasleGatazkatsuena extends JDialog {
 					+ String.valueOf(cal.get(Calendar.YEAR)) + "-"
 					+ String.valueOf(cal.get(Calendar.MONTH) + 1);
 			this.taulaEguneratu(sarData);
-
 		} catch (RemoteException e) {
-			// create an instance of a JOptionPane, with only an ok button and
-			// message.
-			new MezuLeiho("Ezin izan da zerbitzariarekin konexioa ezarri","Ados","Konexio errorea",JOptionPane.ERROR_MESSAGE);
+
+			new MezuLeiho("REMOTE");
 			e.printStackTrace();
 			System.exit(1); // terminate application
 		}
