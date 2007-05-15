@@ -122,4 +122,13 @@ public class SarbideEskKud {
 		}
 		return taula;
 	}
+	
+	public void sarbideEskaeraEguneratu(int txartelid,int txartelirakid) 
+				throws SQLException{
+		String c18=
+			"INSERT INTO sarbideeskaerak " +
+			"(data,baimenduta,ukapenarenArrazoia,txId,txIrakurId) " +
+			"VALUES (now(),1,null,"+txartelid+","+txartelirakid+")";
+		agindua.executeUpdate(c18);
+	}
 }
