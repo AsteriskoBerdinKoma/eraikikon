@@ -6,6 +6,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -334,6 +335,14 @@ public class EI_PresentziaKontrolatu extends JDialog {
 						new MezuLeiho("REMOTE");
 						ex.printStackTrace();
 						System.exit(1); // terminate application
+					} catch (IllegalStateException e1) {
+						new MezuLeiho("DB");
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (SQLException e1) {
+						new MezuLeiho("SQL","Ezin da Txartelaren Erabiltzaileran Izena lortu Datu Basetik");
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
 				}
 			});
@@ -407,13 +416,26 @@ public class EI_PresentziaKontrolatu extends JDialog {
 
 	public void taulaEguneratu(int txartelId, String hasData, String bukData,
 			String hasOrdu, String bukOrdu) throws RemoteException {
+		try {
 		Vector<Object> zutIzen = new Vector<Object>();
 		zutIzen.addElement("Gunearen IDa");
 		zutIzen.addElement("Gunearen Izena");
 		zutIzen.addElement("Data eta Ordua");
-		Vector<Vector<Object>> taula = urrunekoKud.getGuneak(txartelId,
-				hasData, bukData, hasOrdu, bukOrdu);
+		Vector<Vector<Object>> taula;
+		
+			taula = urrunekoKud.getGuneak(txartelId,
+					hasData, bukData, hasOrdu, bukOrdu);
+		
 		tableModel.setDataVector(taula, zutIzen);
 		tableModel.fireTableStructureChanged();
+		} catch (IllegalStateException e) {
+			new MezuLeiho("DB");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			new MezuLeiho("SQL","Ezin da Erabiltzaile horrek zein gunetan egon den jakin");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 } // @jve:decl-index=0:visual-constraint="10,10"

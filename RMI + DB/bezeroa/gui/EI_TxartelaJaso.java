@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -116,6 +117,14 @@ public class EI_TxartelaJaso extends JDialog {
 						urrunekoKud.desgaituTxartela(bal);
 					} catch (RemoteException e1) {
 						new MezuLeiho("REMOTE");
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IllegalStateException e1) {
+						new MezuLeiho("DB");
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (SQLException e1) {
+						new MezuLeiho("SQL","Ezin da txartela desgaitu datu Basean");
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}

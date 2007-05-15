@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.Vector;
 
 import javax.swing.JFrame;
@@ -317,12 +318,20 @@ public class EI_SegurtasunArduraduna extends JFrame {
 				tableModel = new DefaultTableModel(urrunekoKud.getIntzidentziak(), v);
 				jTable = new JTable(tableModel);
 			}
-			return jTable;
 		} catch (RemoteException e) {
 			new MezuLeiho("REMOTE");
 			e.printStackTrace();
 			return null;
+		} catch (IllegalStateException e) {
+			new MezuLeiho("DB");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			new MezuLeiho("SQL","Ezin izan dira intzidentziak Lorrtu, eta ondoren ezin da gertakari taula eguneratu");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return jTable;
 	}
 
 	/**
