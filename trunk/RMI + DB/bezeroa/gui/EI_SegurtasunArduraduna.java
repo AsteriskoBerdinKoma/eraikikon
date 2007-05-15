@@ -54,7 +54,6 @@ public class EI_SegurtasunArduraduna extends JFrame {
 	private UrrunekoInterfazea urrunekoKud; // @jve:decl-index=0:
 
 	private JMenuItem jMenuItem = null;
-	private JMenuItem jMenuItem1 = null;
 	private JMenuItem jMenuItem2 = null;
 	private JMenuItem jMenuItem3 = null;
 	private JMenuItem jMenuItem4 = null;
@@ -185,7 +184,6 @@ public class EI_SegurtasunArduraduna extends JFrame {
 			jMenu1.setText("Txartelak");
 			jMenu1.setMnemonic(KeyEvent.VK_T);
 			jMenu1.add(getJMenuItem());
-			jMenu1.add(getJMenuItem1());
 			jMenu1.add(getJMenuItem2());
 			jMenu1.add(getJMenuItem3());
 		}
@@ -217,19 +215,6 @@ public class EI_SegurtasunArduraduna extends JFrame {
 	 * 
 	 * @return javax.swing.JMenuItem
 	 */
-	private JMenuItem getJMenuItem1() {
-		if (jMenuItem1 == null) {
-			jMenuItem1 = new JMenuItem();
-			jMenuItem1.setText("Txartela Jaso");
-			jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					txart_desgaitu.setLocationRelativeTo(null);
-					txart_desgaitu.setVisible(true);
-				}
-			});
-		}
-		return jMenuItem1;
-	}
 
 	/**
 	 * This method initializes jMenuItem2
