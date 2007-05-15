@@ -319,7 +319,7 @@ public class EI_IrakasleGatazkatsuena extends JDialog {
 							zutIzenak.addElement("Gaitua");
 							zutIzenak.addElement("Noiztik Nora");
 							jabea.setTableModel(urrunekoKud.getIntzidentziak(), zutIzenak);
-							new MezuLeiho (txartId + " txartela duen irakaslea " + noiztikNora.substring(0, noiztikNora.indexOf('/')) + "-(e)tik " + noiztikNora.substring(noiztikNora.indexOf('/')) + "-era irakasle gatazkatsuena izan da.", "Ados", "Intzidentzia sortua", JOptionPane.INFORMATION_MESSAGE);
+							new MezuLeiho (txartId + " txartela duen irakaslea " + noiztikNora.substring(0, noiztikNora.indexOf('/')) + "-(e)tik " + noiztikNora.substring(noiztikNora.indexOf('/')) + "-(e)ra irakasle gatazkatsuena izan da.", "Ados", "Intzidentzia sortua", JOptionPane.INFORMATION_MESSAGE);
 						} catch (RemoteException e1) {
 							new MezuLeiho("REMOTE");
 							e1.printStackTrace();
