@@ -37,20 +37,19 @@ public class EI_AlarmaGaitu extends JDialog {
 	private JLabel jLabel = null;
 
 	private JButton jButton = null;
-	
-	private boolean gaituta=false;
+
+	private boolean gaituta = false;
 
 	private UrrunekoInterfazea urrunekoKud; // @jve:decl-index=0:
-	
+
 	private InputStream in;
-	
+
 	private AudioStream as;
-	
+
 	private AudioData ad;
-	
-	
+
 	private ContinuousAudioDataStream cas;
-	
+
 	private EI_SegurtasunArduraduna jabea;
 
 	private JLabel jLabel1 = null;
@@ -61,7 +60,7 @@ public class EI_AlarmaGaitu extends JDialog {
 	public EI_AlarmaGaitu(EI_SegurtasunArduraduna owner) {
 		super(owner, true);
 		initialize();
-		this.jabea= owner;
+		this.jabea = owner;
 	}
 
 	/**
@@ -73,19 +72,20 @@ public class EI_AlarmaGaitu extends JDialog {
 		this.setSize(300, 230);
 		this.setTitle("Alarma Gaitu");
 		this.setContentPane(getJContentPane());
-			try {
-				in = new FileInputStream("alarm.wav");
+		try {
+			in = new FileInputStream("alarm.wav");
 			// Create an AudioStream object from the input stream.
-				as = new AudioStream(in);
-				ad= as.getData();
-				cas= new ContinuousAudioDataStream(ad);
-			} catch (FileNotFoundException e) {
-				new MezuLeiho("Alarmaren soinua duen Fitxategia ez da aurkitu","Ados","Alarma soinua ez dago",JOptionPane.ERROR_MESSAGE);
-				e.printStackTrace();
-			} catch (IOException e) {
-				new MezuLeiho("IO");
-				e.printStackTrace();
-			}  
+			as = new AudioStream(in);
+			ad = as.getData();
+			cas = new ContinuousAudioDataStream(ad);
+		} catch (FileNotFoundException e) {
+			new MezuLeiho("Alarmaren soinua duen Fitxategia ez da aurkitu",
+					"Ados", "Alarma soinua ez dago", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		} catch (IOException e) {
+			new MezuLeiho("IO");
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -128,25 +128,20 @@ public class EI_AlarmaGaitu extends JDialog {
 		if (jButton == null) {
 			jButton = new JButton();
 			jButton.setText("Alarma Gaitu");
-			jButton.setPreferredSize(new Dimension(160, 20)); 
+			jButton.setPreferredSize(new Dimension(160, 20));
 			jButton.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {					
-					if (!gaituta){
-						setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);	
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					if (!gaituta) {
+						setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 						try {
-								urrunekoKud.irekiAteak();
-							} catch (RemoteException e1) {
-								new MezuLeiho("REMOTE");
-								e1.printStackTrace();
-							} catch (IllegalStateException e1) {
-								new MezuLeiho("DB");
-								e1.printStackTrace();
+							urrunekoKud.irekiAteak();
+							try {
+								urrunekoKud.alarmaIntzidentziaSortu();
+								new MezuLeiho("Ate guztiak ireki dira eta alarmaren intzidentzia sortu da", "Ados", "Alarma Gaitua", JOptionPane.INFORMATION_MESSAGE);
 							} catch (SQLException e1) {
-								new MezuLeiho("SQL","Ezin izan dira ateak ireki");
+								new MezuLeiho("SQL","Ezin izan da alrmaren intzidentzia sortu");
 								e1.printStackTrace();
 							}
-						try {
-							urrunekoKud.alarmaIntzidentziaSortu();
 						} catch (RemoteException e1) {
 							new MezuLeiho("REMOTE");
 							e1.printStackTrace();
@@ -154,49 +149,55 @@ public class EI_AlarmaGaitu extends JDialog {
 							new MezuLeiho("DB");
 							e1.printStackTrace();
 						} catch (SQLException e1) {
-							new MezuLeiho("SQL","Ezin izan da alrmaren intzidentzia sortu");
+							new MezuLeiho("SQL",
+									"Ezin izan dira ateak ireki");
 							e1.printStackTrace();
 						}
-							Vector<String> zutIzenak = new Vector<String>();
-							zutIzenak.addElement("Erabiltzaile ID");
-							zutIzenak.addElement("Data");
-							zutIzenak.addElement("Larritasuna");
-							zutIzenak.addElement("Mota");
-							zutIzenak.addElement("Deskribapena");
-							zutIzenak.addElement("Txartel Zenbakia");
-							zutIzenak.addElement("Atea");
-							zutIzenak.addElement("Txartel Irakurgailua");
-							zutIzenak.addElement("Gaitua");
-							zutIzenak.addElement("Noiztik Nora");
-							try {
-								jabea.setTableModel(urrunekoKud.getIntzidentziak(),
-										zutIzenak);
-							} catch (IllegalStateException e1) {
-								new MezuLeiho("DB");
-								e1.printStackTrace();
-							} catch (RemoteException e1) {
-								new MezuLeiho("REMOTE");
-								e1.printStackTrace();
-							} catch (SQLException e1) {
-								new MezuLeiho("SQL","Ezin izan dira intzidentziak hartu, eta ondoren ezin da gertakari taula eguneratu");
-								e1.printStackTrace();
-							}
-						
-						//Use the static class member "player" from class AudioPlayer to play
+						Vector<String> zutIzenak = new Vector<String>();
+						zutIzenak.addElement("Erabiltzaile ID");
+						zutIzenak.addElement("Data");
+						zutIzenak.addElement("Larritasuna");
+						zutIzenak.addElement("Mota");
+						zutIzenak.addElement("Deskribapena");
+						zutIzenak.addElement("Txartel Zenbakia");
+						zutIzenak.addElement("Atea");
+						zutIzenak.addElement("Txartel Irakurgailua");
+						zutIzenak.addElement("Gaitua");
+						zutIzenak.addElement("Noiztik Nora");
+						try {
+							jabea.setTableModel(urrunekoKud.getIntzidentziak(),
+									zutIzenak);
+						} catch (IllegalStateException e1) {
+							new MezuLeiho("DB");
+							e1.printStackTrace();
+						} catch (RemoteException e1) {
+							new MezuLeiho("REMOTE");
+							e1.printStackTrace();
+						} catch (SQLException e1) {
+							new MezuLeiho(
+									"SQL",
+									"Ezin izan dira intzidentziak hartu, eta ondoren ezin da gertakari taula eguneratu");
+							e1.printStackTrace();
+						}
+
+						// Use the static class member "player" from class
+						// AudioPlayer to play
 						// clip.
 						AudioPlayer.player.start(cas);
 						jButton.setText("Alarma Desgaitu");
 						jLabel.setText("");
-						jLabel.setIcon(new ImageIcon(getClass().getResource("sirena.GIF")));
+						jLabel.setIcon(new ImageIcon(getClass().getResource(
+								"sirena.GIF")));
 						jLabel1.setText("Alarma Gaitu Da!");
 					}
-						
+
 					else {
 						try {
 							try {
 								urrunekoKud.ItxiAteak();
 							} catch (SQLException e1) {
-								new MezuLeiho("SQL","Ezin izan dira ateak itxi");
+								new MezuLeiho("SQL",
+										"Ezin izan dira ateak itxi");
 								e1.printStackTrace();
 							}
 							urrunekoKud.pertsonakAteraEraikinetik();
@@ -207,7 +208,8 @@ public class EI_AlarmaGaitu extends JDialog {
 							new MezuLeiho("DB");
 							e1.printStackTrace();
 						} catch (SQLException e1) {
-							new MezuLeiho("SQL","Ezin da jakin zenbat pertsona dauden eraikinean");
+							new MezuLeiho("SQL",
+									"Ezin da jakin zenbat pertsona dauden eraikinean");
 							e1.printStackTrace();
 						}
 						jButton.setText("Alarma Gaitu");
@@ -217,7 +219,9 @@ public class EI_AlarmaGaitu extends JDialog {
 						AudioPlayer.player.stop(cas);
 						setDefaultCloseOperation(HIDE_ON_CLOSE);
 						setVisible(false);
-						new MezuLeiho("Alarma desgaitua izan da", "Ados", "Alarma Desgaitua", JOptionPane.INFORMATION_MESSAGE);
+						new MezuLeiho("Alarma desgaitua izan da", "Ados",
+								"Alarma Desgaitua",
+								JOptionPane.INFORMATION_MESSAGE);
 					}
 					gaituta = !gaituta;
 				}
@@ -232,18 +236,19 @@ public class EI_AlarmaGaitu extends JDialog {
 
 	public void setEraikinekoPertsonKop() {
 		int kop = 0;
-			try {
-				kop = urrunekoKud.getEraikinekoPertsonKop();
-			} catch (RemoteException e) {
-				new MezuLeiho("REMOTE");
-				e.printStackTrace();
-			} catch (IllegalStateException e) {
-				new MezuLeiho("DB");
-				e.printStackTrace();
-			} catch (SQLException e) {
-				new MezuLeiho("SQL","Ezin da jakin zenbat pertsona dauden eraikinean");
-				e.printStackTrace();
-			}
-		jLabel.setText("Eraikinean dauden pertsonen kopurua: "+ kop);
+		try {
+			kop = urrunekoKud.getEraikinekoPertsonKop();
+		} catch (RemoteException e) {
+			new MezuLeiho("REMOTE");
+			e.printStackTrace();
+		} catch (IllegalStateException e) {
+			new MezuLeiho("DB");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			new MezuLeiho("SQL",
+					"Ezin da jakin zenbat pertsona dauden eraikinean");
+			e.printStackTrace();
+		}
+		jLabel.setText("Eraikinean dauden pertsonen kopurua: " + kop);
 	}
 }
