@@ -121,7 +121,7 @@ public class EI_TxartelaGaitu extends JDialog {
 							setVisible(false);
 						}
 						}catch (NumberFormatException e1){
-							new MezuLeiho ("Sartutako txartela ez da egokia edo ez duzu txartelik sartu.", "Ados", "Txartel Okerra", JOptionPane.ERROR_MESSAGE);
+							new MezuLeiho ("Sartutako NAN-a ez da egokia edo ez duzu NAN-ik sartu(bakarrik zenbakiak sartu ahal dira).", "Ados", "Txartel Okerra", JOptionPane.ERROR_MESSAGE);
 						}
 					} catch (RemoteException e1) {
 						new MezuLeiho("REMOTE");

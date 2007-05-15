@@ -314,7 +314,7 @@ public class EI_TxartelaEman extends JDialog {
 
 							}
 							else {
-								new MezuLeiho("Eremurenbat bete gabe utzi duzu","Ados","Eremuak bete gabe",JOptionPane.ERROR_MESSAGE);
+								new MezuLeiho("Eremuren bat bete gabe utzi duzu","Ados","Eremuak bete gabe",JOptionPane.ERROR_MESSAGE);
 							}
 							
 							if (jComboBox.getSelectedItem().toString().equals(
