@@ -107,6 +107,7 @@ public class EI_TxartelaGaitu extends JDialog {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					try {
 						String nan = jTextField.getText();
+						try {
 						int bal = Integer.parseInt(nan);
 						if (urrunekoKud.gaituTxartela(bal) == 0)
 							new MezuLeiho(
@@ -118,6 +119,9 @@ public class EI_TxartelaGaitu extends JDialog {
 									"Txartela gaitu",
 									JOptionPane.INFORMATION_MESSAGE);
 							setVisible(false);
+						}
+						}catch (NumberFormatException e1){
+							new MezuLeiho ("Sartutako txartela ez da egokia edo ez duzu txartelik sartu.", "Ados", "Txartel Okerra", JOptionPane.ERROR_MESSAGE);
 						}
 					} catch (RemoteException e1) {
 						new MezuLeiho("REMOTE");

@@ -64,7 +64,7 @@ public class EI_SegurtasunArduraduna extends JFrame {
 	//private String host = "localhost";  //  @jve:decl-index=0:
 
 	private EI_TxartelaEman txart_eman = new EI_TxartelaEman(this);  //  @jve:decl-index=0:visual-constraint="10,165"
-	private EI_TxartelaJaso txart_jaso =  new EI_TxartelaJaso(this);
+	private EI_TxartelaDesgaitu txart_desgaitu =  new EI_TxartelaDesgaitu(this);
 	private EI_TxartelaGaitu txart_gaitu =  new EI_TxartelaGaitu(this);//  @jve:decl-index=0:visual-constraint="10,165"
 	
 	private EI_IrakasleGatazkatsuena irakGatazk = new EI_IrakasleGatazkatsuena(this);  //  @jve:decl-index=0:visual-constraint="13,55"
@@ -223,7 +223,8 @@ public class EI_SegurtasunArduraduna extends JFrame {
 			jMenuItem1.setText("Txartela Jaso");
 			jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					txart_jaso.setVisible(true);
+					txart_desgaitu.setLocationRelativeTo(null);
+					txart_desgaitu.setVisible(true);
 				}
 			});
 		}
@@ -241,6 +242,7 @@ public class EI_SegurtasunArduraduna extends JFrame {
 			jMenuItem2.setText("Txartela Gaitu");
 			jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
+					txart_gaitu.setLocationRelativeTo(null);
 					txart_gaitu.setVisible(true);
 				}
 			});
@@ -259,7 +261,8 @@ public class EI_SegurtasunArduraduna extends JFrame {
 			jMenuItem3.setText("Txartela Desgaitu");
 			jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					txart_jaso.setVisible(true);
+					txart_desgaitu.setLocationRelativeTo(null);
+					txart_desgaitu.setVisible(true);
 				}
 			});
 		}
@@ -324,11 +327,9 @@ public class EI_SegurtasunArduraduna extends JFrame {
 			return null;
 		} catch (IllegalStateException e) {
 			new MezuLeiho("DB");
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			new MezuLeiho("SQL","Ezin izan dira intzidentziak Lorrtu, eta ondoren ezin da gertakari taula eguneratu");
-			// TODO Auto-generated catch block
+			new MezuLeiho("SQL","Ezin izan dira intzidentziak lortu eta ondorioz ezin da gertakari taula eguneratu");
 			e.printStackTrace();
 		}
 		return jTable;
@@ -381,7 +382,7 @@ public class EI_SegurtasunArduraduna extends JFrame {
 		sarbKonts.setUrrunekoNegozioLogika(urrunekoKud);
 		kokEgun.setUrrunekoNegozioLogika(urrunekoKud);
 		txart_eman.setUrrunekoNegozioLogika(urrunekoKud);
-		txart_jaso.setUrrunekoNegozioLogika(urrunekoKud);
+		txart_desgaitu.setUrrunekoNegozioLogika(urrunekoKud);
 		txart_gaitu.setUrrunekoNegozioLogika(urrunekoKud);
 		
 	}
