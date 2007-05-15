@@ -107,7 +107,7 @@ public class EI_TxartelaGaitu extends JDialog {
 					try {
 					String nan = jTextField.getText();
 					int bal= Integer.parseInt(nan);
-						urrunekoKud.gaitTxartela(bal);
+						urrunekoKud.gaituTxartela(bal);
 					} catch (RemoteException e1) {
 						new MezuLeiho("REMOTE");
 						e1.printStackTrace();

@@ -41,6 +41,8 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 
 	private GuneKud gunek;
 
+	private OrdutegiKud ord;
+	
 	private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 
 	private static final String DATABASE_URL = "jdbc:mysql://localhost/eraikikon";
@@ -81,6 +83,7 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 			ate = new AteKud(kon);
 			prof = new ProfKud(kon);
 			gunek = new GuneKud(kon);
+			ord = new OrdutegiKud(kon);
 			
 		} catch (Exception ex) {
 			System.out.println("Errorea: " + ex.toString());
@@ -122,18 +125,26 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 			erak.insertErabiltzailea(nan, izena, pasahitza, profId);
 	}
 
+	public void createTxartela(int nan) throws IllegalStateException, SQLException {
+		if (!connectedToDatabase)
+			throw new IllegalStateException(
+					"Datu-basearekin ez dago konexiorik.");
+			txk.createTxartela(nan);
+	}
+
+	public void createProfila(String mota, String deskribapena) {
+		try {
+			prof.createProfila(mota, deskribapena);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void gaituTxartela(int nan) throws IllegalStateException, SQLException {
 		if (!connectedToDatabase)
 			throw new IllegalStateException(
 					"Datu-basearekin ez dago konexiorik.");
 			txk.gaituTxartela(nan);
-	}
-
-	public void gaitTxartela(int nan) throws IllegalStateException, SQLException {
-		if (!connectedToDatabase)
-			throw new IllegalStateException(
-					"Datu-basearekin ez dago konexiorik.");
-			txk.gaitTxartela(nan);
 	}
 
 	public void desgaituTxartela(int nan) throws IllegalStateException, SQLException {
@@ -151,6 +162,15 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 			profZenb = prof.profilZenbakia(mota);
 			return profZenb;
 	}
+	
+	public int profilZenbakia(String mota,String deskribapena) throws IllegalStateException, SQLException {
+		if (!connectedToDatabase)
+			throw new IllegalStateException(
+					"Datu-basearekin ez dago konexiorik.");
+		int profZenb;
+		profZenb = prof.profilZenbakia(mota,deskribapena);
+		return profZenb;
+}
 
 	public void alarmaIntzidentziaSortu() throws IllegalStateException, SQLException {
 		if (!connectedToDatabase)
@@ -336,6 +356,15 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 			fakul.kokapenaSartu(erabId, guneId);
 	}
 
+	public void createBisitariBaimenak(int profId, Vector<Integer> gune) throws IllegalStateException, SQLException {
+		if (!connectedToDatabase)
+			throw new IllegalStateException(
+					"Datu-basearekin ez dago konexiorik.");
+		for(Integer i : gune){
+			ord.createOrdutegia(false,"08:00:00","19:30:00",profId, i.intValue());
+		}
+	}
+
 	/**
 	 * UrrunekoNegozioLogika-ren zerbitzaria hasieratzen du zerbitzuIzena
 	 * atributuan definitutako zerbitzu izenarekin.
@@ -373,5 +402,4 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 					.println("Errorea zerbitzaria jaurtitzean" + e.toString());
 		}
 	}
-
 }
