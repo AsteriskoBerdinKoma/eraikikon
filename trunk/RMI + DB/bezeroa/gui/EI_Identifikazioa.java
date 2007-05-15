@@ -61,7 +61,7 @@ public class EI_Identifikazioa extends JFrame {
 			jbInit();
 			this.jabea = owner;
 			setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-			addWindowListener(new WindowAdapter() {
+			this.addWindowListener(new WindowAdapter() {
 				public void windowClosed(WindowEvent event) {
 					jabea.setVisible(true);
 					setVisible(false);
