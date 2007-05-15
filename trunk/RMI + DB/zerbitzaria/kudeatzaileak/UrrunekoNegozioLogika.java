@@ -10,8 +10,6 @@ import java.sql.SQLException;
 import java.util.Collections;
 import java.util.Vector;
 
-import javax.swing.JOptionPane;
-
 import partekatuak.*;
 
 /**
@@ -108,67 +106,35 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 	 *      java.lang.String, java.lang.String)
 	 */
 	public void createIntzidentzia(String txartId, String tIrakId,
-			String noiztikNora) {
-		try {
+			String noiztikNora) throws SQLException {
 			intz.insertIntzGatazkatsuena(txartId, tIrakId, noiztikNora);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 
 	public void createErabiltzailea(int nan, String izena, String pasahitza,
-			int profId) {
-		try {
+			int profId) throws SQLException {
 			erak.insertErabiltzailea(nan, izena, pasahitza, profId);
-		} catch (SQLException e) {
-			new MezuLeiho("Erabiltzaile hori jadanik existitzen da", "Ados",
-					"Arazoa erabiltzailea sortzerakoan",
-					JOptionPane.ERROR_MESSAGE);
-			e.printStackTrace();
-		}
 	}
 
-	public void gaituTxartela(int nan) {
-		try {
+	public void gaituTxartela(int nan) throws SQLException {
 			txk.gaituTxartela(nan);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 
-	public void gaitTxartela(int nan) {
-		try {
+	public void gaitTxartela(int nan) throws SQLException {
 			txk.gaitTxartela(nan);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 
-	public void desgaituTxartela(int nan) {
-		try {
+	public void desgaituTxartela(int nan) throws SQLException {
 			txk.desgaituTxartela(nan);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 
-	public int profilZenbakia(String mota) {
-		try {
+	public int profilZenbakia(String mota) throws SQLException {
 			int profZenb;
 			profZenb = prof.profilZenbakia(mota);
 			return profZenb;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return -1;
-		}
 	}
 
-	public void alarmaIntzidentziaSortu() {
-		try {
+	public void alarmaIntzidentziaSortu() throws SQLException {
 			intz.insertAlarma();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 
 	/*
@@ -176,11 +142,10 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 	 * 
 	 * @see irakasleGatazkatsuenaRMI.UrrunekoInterfazea#getGatazkatsuenak(java.lang.String)
 	 */
-	public Vector<IrakasleGatazkatsuaDatuak> getGatazkatsuenak(String sarData) {
+	public Vector<IrakasleGatazkatsuaDatuak> getGatazkatsuenak(String sarData) throws SQLException {
 		if (!connectedToDatabase)
 			throw new IllegalStateException(
 					"Datu-basearekin ez dago konexiorik.");
-		try {
 			Vector<Integer> vErabiltzaileak;
 			Vector<Integer> vErabTxartelIrakUkatu;
 			Vector<IrakasleGatazkatsuaDatuak> vIrakGataz = new Vector<IrakasleGatazkatsuaDatuak>();
@@ -214,13 +179,7 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 					vIrakGataz.elementAt(i).setErabIzena(Izena);
 			}
 			return vIrakGataz;
-		} catch (IllegalStateException e) {
-			System.out.println("DB errorea:" + e.toString());
-			return null;
-		} catch (SQLException e) {
-			System.out.println("DB errorea:" + e.toString());
-			return null;
-		}
+
 	}
 
 	/*
@@ -228,34 +187,21 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 	 * 
 	 * @see irakasleGatazkatsuenaRMI.UrrunekoInterfazea#getIntzidentziak()
 	 */
-	public Vector<Vector<Object>> getIntzidentziak() {
-		try {
+	public Vector<Vector<Object>> getIntzidentziak() throws SQLException {
 			return intz.getIntzidentziak();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		}
 	}
 
 	public Vector<Vector<Object>> getGuneak(int txartelid, String hasData,
-			String bukData, String hasOrd, String bukOrd) {
-		try {
+			String bukData, String hasOrd, String bukOrd) throws SQLException {
 			return sek.getSarbideEskaerak(txartelid, hasData + " " + hasOrd,
 					bukData + " " + bukOrd);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		}
 	}
 
-	public Vector<String> getProfilak() throws IllegalStateException,
-			SQLException {
+	public Vector<String> getProfilak() throws SQLException {
 		return prof.getProfilak();
 	}
 
-	public Vector<DbDatuLerroa> getSarbideEskaerak(String data) {
-
-		try {
+	public Vector<DbDatuLerroa> getSarbideEskaerak(String data) throws SQLException {
 			Vector<DbDatuLerroa> vTratatzekoDatuak;
 			vTratatzekoDatuak = sek.getSarbideEskaerak(data);
 			if (vTratatzekoDatuak.size() != 0) {
@@ -268,13 +214,6 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 				return vTratatzekoDatuak;
 			}
 			return null;
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-			return null;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		}
 
 	}
 
@@ -283,119 +222,51 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 	 * 
 	 * @see irakasleGatazkatsuenaRMI.UrrunekoInterfazea#getEraikinekoPertsonKop()
 	 */
-	public int getEraikinekoPertsonKop() {
-		try {
+	public int getEraikinekoPertsonKop() throws SQLException {
 			return fakul.getEraikinekoPertsonKop();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return -1;
-		}
 	}
 
-	public String getErabIzena(int txId) {
-		try {
+	public String getErabIzena(int txId) throws SQLException {
 			return txk.getErabIzena(txId);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		}
 	}
 
-	public int loginEgin(String erab, String pasahitza) throws RemoteException {
-		try {
+	public int loginEgin(String erab, String pasahitza) throws RemoteException, SQLException {
 			if (erak.isLoginZuzena(erab, pasahitza))
 				return erak.getProfila(erab);
 			else
 				return -1;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return -1;
-		}
 	}
 
-	public void irekiAteak() {
-		try {
+	public void irekiAteak() throws SQLException {
 			ate.IrekiAteak();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 
-	public void ItxiAteak() {
-		try {
+	public void ItxiAteak() throws SQLException {
 			ate.ItxiAteak();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 
-	public void pertsonakAteraEraikinetik() {
-		try {
+	public void pertsonakAteraEraikinetik() throws SQLException {
 			fakul.pertsonakAteraEraikinetik();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 
-	public Vector<Vector<Object>> getGuneGuztiak() {
-		try {
+	public Vector<Vector<Object>> getGuneGuztiak() throws SQLException {
 			return gunek.getGuneGuztiak();
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-			return null;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		}
-
 	}
 
-	public Vector<Vector<Object>> getErabiltzaileKokapena(String txId) {
-
-		try {
+	public Vector<Vector<Object>> getErabiltzaileKokapena(String txId) throws SQLException {
 			return txk.getErabiltzaileKokapena(txId);
-		} catch (IllegalStateException e) {
-
-			e.printStackTrace();
-			return null;
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-			return null;
-		}
-
 	}
 
-	public boolean erabiltzaileaFakultatean(String erabId) {
-		try {
+	public boolean erabiltzaileaFakultatean(String erabId) throws SQLException {
 			return fakul.erabiltzaileaFakultatean(erabId);
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-			return false;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}
 	}
 
-	public void kokapenaEguneratu(String erabId, String guneId) {
-		try {
+	public void kokapenaEguneratu(String erabId, String guneId) throws SQLException {
 			fakul.kokapenaEguneratu(erabId, guneId);
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 
-	public void kokapenaSartu(String erabId, String guneId) {
-		try {
+	public void kokapenaSartu(String erabId, String guneId) throws SQLException {
 			fakul.kokapenaSartu(erabId, guneId);
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 
 	/**
