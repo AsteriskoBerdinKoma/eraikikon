@@ -300,18 +300,20 @@ public class EI_TxartelaEman extends JDialog {
 								.getSelectedItem().toString());
 						try {
 							if (!nan.equals("") && !izena.equals("") && !pasahitza.equals("")) {
+								try{
 								int bal = Integer.parseInt(nan);
-
 								urrunekoKud.createErabiltzailea(bal, izena,
 										pasahitza, aukProf);
 								urrunekoKud.createTxartela(bal);
 								new MezuLeiho(nan +"  NAN zenbakia duen erabiltzaileari txartela esleitu zaio","Ados","Erabiltzaile sortua",JOptionPane.INFORMATION_MESSAGE);
 								setVisible(false);
+								}catch (NumberFormatException e1){
+									new MezuLeiho("NAN eremuan zenbakiak sartu behar dira","Ados","NAN okerra",JOptionPane.ERROR_MESSAGE);
+								}
 
 							}
 							else {
-								new MezuLeiho("Eremurenbat bete gabe utzi duzu","Ados","Errorea datuak sartzean",JOptionPane.ERROR_MESSAGE);
-								setVisible(false);
+								new MezuLeiho("Eremurenbat bete gabe utzi duzu","Ados","Eremuak bete gabe",JOptionPane.ERROR_MESSAGE);
 							}
 							
 							if (jComboBox.getSelectedItem().toString().equals(
