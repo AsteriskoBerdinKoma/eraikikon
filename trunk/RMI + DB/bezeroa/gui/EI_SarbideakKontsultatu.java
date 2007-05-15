@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.Vector;
 
 import javax.swing.DefaultListModel;
@@ -268,7 +269,9 @@ public class EI_SarbideakKontsultatu extends JDialog {
 	}
 	
 	public void listaKargatu(String data) throws RemoteException {
-		datuak=urrunekoKud.getSarbideEskaerak(data);
+		try {
+			datuak=urrunekoKud.getSarbideEskaerak(data);
+		
 		if (datuak!=null) {
 			ateak.addElement(datuak.elementAt(0).getAteId());
 			for (DbDatuLerroa lerroa: datuak) {
@@ -280,6 +283,15 @@ public class EI_SarbideakKontsultatu extends JDialog {
 		} 
 		else {
 			new MezuLeiho("Ez dago sarbide eskaerarik data horretan","Ados","Sarbide eskaerarik ez",JOptionPane.ERROR_MESSAGE);
+		}
+		} catch (IllegalStateException e) {
+			new MezuLeiho("DB");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			new MezuLeiho("SQL","Ezin dira egun horretako Sarbide eskaeran lortu");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	

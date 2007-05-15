@@ -133,7 +133,7 @@ public class EI_AlarmaGaitu extends JDialog {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							} catch (SQLException e1) {
-								new MezuLeiho("Ezin izan dira ateak ireki","Ados","SQL Errorea",JOptionPane.ERROR_MESSAGE);
+								new MezuLeiho("SQL","Ezin izan dira ateak ireki");
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
@@ -147,7 +147,7 @@ public class EI_AlarmaGaitu extends JDialog {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						} catch (SQLException e1) {
-							new MezuLeiho("Ezin izan da alrmaren intzidentzia sortu","Ados","SQL Errorea",JOptionPane.ERROR_MESSAGE);
+							new MezuLeiho("SQL","Ezin izan da alrmaren intzidentzia sortu");
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
@@ -174,7 +174,7 @@ public class EI_AlarmaGaitu extends JDialog {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							} catch (SQLException e1) {
-								new MezuLeiho("Ezin izan dira intzidentziak hartu, eta ondoren ezin da gertakari taula eguneratu","Ados","SQL Errorea",JOptionPane.ERROR_MESSAGE);
+								new MezuLeiho("SQL","Ezin izan dira intzidentziak hartu, eta ondoren ezin da gertakari taula eguneratu");
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
