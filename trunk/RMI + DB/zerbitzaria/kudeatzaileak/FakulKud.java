@@ -82,7 +82,7 @@ public class FakulKud {
 	public void kokapenaSartu(String erabId, String guneId) throws
 	IllegalStateException, SQLException{
 		String query3= "INSERT INTO fakultatea (erId, guId, inId) VALUES( "
-		+ erabId + " , " + guneId + " ,1 )";
+		+ erabId + " , " + guneId + " ,null )";
 		this.agindua.executeUpdate(query3);
 		
 	}
