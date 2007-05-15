@@ -39,7 +39,11 @@ public class GuneKud {
 	 */
 	public Vector<Vector<Object>> getGuneGuztiak()throws SQLException {
 
-		String query = "SELECT * FROM guneak ";
+		String query = 
+			"SELECT g.id,g.izena,t.ateid,t.id " +
+			"FROM txartelirakurgailuak t INNER JOIN ateak a ON t.ateid=a.id " +
+				 "INNER JOIN guneak g ON g.id=t.guneid " +
+			"ORDER BY g.id";
 		ResultSet rs = this.agindua.executeQuery(query);
 		Vector<Vector<Object>> lerroak = new Vector<Vector<Object>>();
 		while (rs.next()) {
