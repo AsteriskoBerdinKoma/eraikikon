@@ -27,9 +27,10 @@ public interface UrrunekoInterfazea extends Remote {
 	 * @return Bektore bat itzultzen du, non irakasle gatazkatsuenak sartzen
 	 *         dituen
 	 * @throws RemoteException
+	 * @throws SQLException 
 	 */
 	public Vector<IrakasleGatazkatsuaDatuak> getGatazkatsuenak(String sarData)
-			throws RemoteException;
+			throws IllegalStateException, RemoteException, SQLException;
 
 	/**
 	 * Intzidentzia bat sortzen du (data, mota, idTxartela,
@@ -44,9 +45,10 @@ public interface UrrunekoInterfazea extends Remote {
 	 *            Zein denbora tartetan izen den irakasle gatazkatsuena. Bere
 	 *            formatua UUUU-HH/UUUU-HH
 	 * @throws RemoteException
+	 * @throws SQLException 
 	 */
 	public void createIntzidentzia(String TxartelId, String TxartelIrakId,
-			String NoiztikNora) throws RemoteException;
+			String NoiztikNora) throws IllegalStateException, RemoteException, SQLException;
 
 	/**
 	 * Datu basean dauden intzidentzia guztiak itzultzen ditu. Intzidentziaren
@@ -58,53 +60,55 @@ public interface UrrunekoInterfazea extends Remote {
 	 *         bat sortuz. Sortutako lerro bakoitzeko bektorea bigarren
 	 *         bektorean gordetzen da azken honek taula osoa osatuz.
 	 * @throws RemoteException
+	 * @throws SQLException 
 	 */
-	public Vector<Vector<Object>> getIntzidentziak() throws RemoteException;
+	public Vector<Vector<Object>> getIntzidentziak() throws IllegalStateException, RemoteException, SQLException;
 	
-	public Vector<Vector<Object>> getGuneak(int txartelid, String hasData, String bukData, String hasOrd, String bukOrd) throws RemoteException;
+	public Vector<Vector<Object>> getGuneak(int txartelid, String hasData, String bukData, String hasOrd, String bukOrd) throws IllegalStateException, RemoteException, SQLException;
 	
 	/**
 	 * Eraikinean dauden pertsonen kopurua itziltzen du. 
 	 * @return int batean eraikinean dauden pertsonen kopurua.
+	 * @throws SQLException 
 	 * @throws SQLException
 	 */
-	public int getEraikinekoPertsonKop() throws RemoteException;
+	public int getEraikinekoPertsonKop() throws IllegalStateException, RemoteException, SQLException;
 
-	public String getErabIzena(int txId) throws RemoteException;
+	public String getErabIzena(int txId) throws IllegalStateException, RemoteException, SQLException;
 	
-	public int loginEgin(String erab, String pasahitza) throws RemoteException;
+	public int loginEgin(String erab, String pasahitza) throws IllegalStateException, RemoteException, SQLException;
 	
-	public Vector<DbDatuLerroa> getSarbideEskaerak(String data) throws RemoteException;
+	public Vector<DbDatuLerroa> getSarbideEskaerak(String data) throws IllegalStateException, RemoteException, SQLException;
 	
-	public void irekiAteak() throws RemoteException;
+	public void irekiAteak() throws IllegalStateException, RemoteException, SQLException;
 	
-	public void ItxiAteak() throws RemoteException;
+	public void ItxiAteak() throws IllegalStateException, RemoteException, SQLException;
 	
-	public void alarmaIntzidentziaSortu() throws RemoteException;
+	public void alarmaIntzidentziaSortu() throws IllegalStateException, RemoteException, SQLException;
 
-	public void pertsonakAteraEraikinetik() throws RemoteException;
+	public void pertsonakAteraEraikinetik() throws IllegalStateException, RemoteException, SQLException;
 	
-	public Vector<String> getProfilak() throws RemoteException, IllegalStateException, SQLException;
+	public Vector<String> getProfilak() throws IllegalStateException, RemoteException, SQLException;
 	
-	public void createErabiltzailea(int nan, String izena, String pasahitza, int profId) throws RemoteException;
+	public void createErabiltzailea(int nan, String izena, String pasahitza, int profId) throws IllegalStateException, RemoteException, SQLException;
 	
-	public int profilZenbakia(String mota) throws RemoteException;
+	public int profilZenbakia(String mota) throws IllegalStateException, RemoteException, SQLException;
 	
-	public void gaituTxartela(int nan) throws RemoteException;
+	public void gaituTxartela(int nan) throws IllegalStateException, RemoteException, SQLException;
 	
-	public void gaitTxartela(int nan) throws RemoteException;
+	public void gaitTxartela(int nan) throws IllegalStateException, RemoteException, SQLException;
 	
-	public void desgaituTxartela(int nan) throws RemoteException;
+	public void desgaituTxartela(int nan) throws IllegalStateException, RemoteException, SQLException;
 
-	public Vector<Vector<Object>> getErabiltzaileKokapena (String txId) throws RemoteException;
+	public Vector<Vector<Object>> getErabiltzaileKokapena (String txId) throws IllegalStateException, RemoteException, SQLException;
 	
-	public Vector<Vector<Object>> getGuneGuztiak() throws RemoteException;
+	public Vector<Vector<Object>> getGuneGuztiak() throws IllegalStateException, RemoteException, SQLException;
 	
-	public boolean erabiltzaileaFakultatean(String erabId) throws RemoteException;
+	public boolean erabiltzaileaFakultatean(String erabId) throws IllegalStateException, RemoteException, SQLException;
 	
-	public void kokapenaEguneratu( String erabId, String guneId) throws RemoteException;
+	public void kokapenaEguneratu( String erabId, String guneId) throws IllegalStateException, RemoteException, SQLException;
 	
-	public void kokapenaSartu( String erabId, String guneId)throws RemoteException;
+	public void kokapenaSartu( String erabId, String guneId)throws IllegalStateException, RemoteException, SQLException;
 
 
 }

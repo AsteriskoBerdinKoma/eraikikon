@@ -28,6 +28,16 @@ public class MezuLeiho {
 		this.sortuMezua();
 	}
 	
+	public MezuLeiho(String exceptionMota, String mezu){
+		if(exceptionMota.equals("SQL")){
+			this.mezua = mezu;
+			this.botoia = "Ados";
+			this.titulua = "SQL Errorea";
+			this.mota =JOptionPane.ERROR_MESSAGE;
+		}
+		this.sortuMezua();
+	}
+	
 	public MezuLeiho(String exceptioMota){
 		if (exceptioMota.equals("REMOTE")){
 			this.mezua = "Ezin izan da zerbitzariarekin konexioa ezarri";
@@ -45,6 +55,12 @@ public class MezuLeiho {
 			this.mezua = " Errorea negozio logika esleitzean";
 			this.botoia = "Ados";
 			this.titulua = "Negozio logika errorea";
+			this.mota = JOptionPane.ERROR_MESSAGE;
+		}
+		if(exceptioMota.equals("DB")){
+			this.mezua = "Zerbitzaria ez da Datu basearekin Konketatu";
+			this.botoia = "Ados";
+			this.titulua = "Zerbitzari/Datu Base Errorea";
 			this.mota = JOptionPane.ERROR_MESSAGE;
 		}
 		this.sortuMezua();

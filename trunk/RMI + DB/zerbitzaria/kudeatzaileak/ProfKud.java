@@ -16,8 +16,7 @@ public class ProfKud {
 		this.agindua = (Statement) konexioa.createStatement();
 	}
 
-	public Vector<String> getProfilak() throws IllegalStateException,
-			SQLException {
+	public Vector<String> getProfilak() throws SQLException {
 		Vector<String> profMotaV = new Vector<String>();
 		String c1 = "SELECT mota  FROM profilak";
 		ResultSet q = agindua.executeQuery(c1);

@@ -44,8 +44,7 @@ public class ErabKud {
 	 * @throws IllegalStateException
 	 * @throws SQLException
 	 */
-	public Vector<Integer> getErabiltzaileak(String mota)
-			throws IllegalStateException, SQLException {
+	public Vector<Integer> getErabiltzaileak(String mota)throws SQLException {
 
 		Vector<Integer> id = new Vector<Integer>();
 		String c1 = "SELECT E.id "
@@ -69,8 +68,7 @@ public class ErabKud {
 	 * @throws IllegalStateException
 	 * @throws SQLException
 	 */
-	public String getErabDatuak(int erabId) throws IllegalStateException,
-			SQLException {
+	public String getErabDatuak(int erabId) throws SQLException {
 		String izena = null;
 		String c4 = "SELECT E.izena "
 				+ "FROM erabiltzaileak AS E INNER JOIN txartelak AS T ON T.erabId=E.id "

@@ -89,10 +89,11 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 
 	/**
 	 * Datu basearekin konexioa irekita badago itxi egiten du.
+	 * @throws SQLException 
 	 * 
 	 * @throws SQLException
 	 */
-	public void disconnect() throws SQLException {
+	public void disconnect() throws SQLException  {
 		if (connectedToDatabase) {
 			kon.close();
 			connectedToDatabase = false;
@@ -106,34 +107,55 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 	 *      java.lang.String, java.lang.String)
 	 */
 	public void createIntzidentzia(String txartId, String tIrakId,
-			String noiztikNora) throws SQLException {
+			String noiztikNora) throws IllegalStateException, SQLException  {
+		if (!connectedToDatabase)
+			throw new IllegalStateException(
+					"Datu-basearekin ez dago konexiorik.");
 			intz.insertIntzGatazkatsuena(txartId, tIrakId, noiztikNora);
 	}
 
 	public void createErabiltzailea(int nan, String izena, String pasahitza,
-			int profId) throws SQLException {
+			int profId) throws IllegalStateException, SQLException {
+		if (!connectedToDatabase)
+			throw new IllegalStateException(
+					"Datu-basearekin ez dago konexiorik.");
 			erak.insertErabiltzailea(nan, izena, pasahitza, profId);
 	}
 
-	public void gaituTxartela(int nan) throws SQLException {
+	public void gaituTxartela(int nan) throws IllegalStateException, SQLException {
+		if (!connectedToDatabase)
+			throw new IllegalStateException(
+					"Datu-basearekin ez dago konexiorik.");
 			txk.gaituTxartela(nan);
 	}
 
-	public void gaitTxartela(int nan) throws SQLException {
+	public void gaitTxartela(int nan) throws IllegalStateException, SQLException {
+		if (!connectedToDatabase)
+			throw new IllegalStateException(
+					"Datu-basearekin ez dago konexiorik.");
 			txk.gaitTxartela(nan);
 	}
 
-	public void desgaituTxartela(int nan) throws SQLException {
+	public void desgaituTxartela(int nan) throws IllegalStateException, SQLException {
+		if (!connectedToDatabase)
+			throw new IllegalStateException(
+					"Datu-basearekin ez dago konexiorik.");
 			txk.desgaituTxartela(nan);
 	}
 
-	public int profilZenbakia(String mota) throws SQLException {
+	public int profilZenbakia(String mota) throws IllegalStateException, SQLException {
+		if (!connectedToDatabase)
+			throw new IllegalStateException(
+					"Datu-basearekin ez dago konexiorik.");
 			int profZenb;
 			profZenb = prof.profilZenbakia(mota);
 			return profZenb;
 	}
 
-	public void alarmaIntzidentziaSortu() throws SQLException {
+	public void alarmaIntzidentziaSortu() throws IllegalStateException, SQLException {
+		if (!connectedToDatabase)
+			throw new IllegalStateException(
+					"Datu-basearekin ez dago konexiorik.");
 			intz.insertAlarma();
 	}
 
@@ -142,7 +164,7 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 	 * 
 	 * @see irakasleGatazkatsuenaRMI.UrrunekoInterfazea#getGatazkatsuenak(java.lang.String)
 	 */
-	public Vector<IrakasleGatazkatsuaDatuak> getGatazkatsuenak(String sarData) throws SQLException {
+	public Vector<IrakasleGatazkatsuaDatuak> getGatazkatsuenak(String sarData) throws IllegalStateException, SQLException {
 		if (!connectedToDatabase)
 			throw new IllegalStateException(
 					"Datu-basearekin ez dago konexiorik.");
@@ -187,21 +209,33 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 	 * 
 	 * @see irakasleGatazkatsuenaRMI.UrrunekoInterfazea#getIntzidentziak()
 	 */
-	public Vector<Vector<Object>> getIntzidentziak() throws SQLException {
+	public Vector<Vector<Object>> getIntzidentziak() throws IllegalStateException, SQLException  {
+		if (!connectedToDatabase)
+			throw new IllegalStateException(
+					"Datu-basearekin ez dago konexiorik.");
 			return intz.getIntzidentziak();
 	}
 
 	public Vector<Vector<Object>> getGuneak(int txartelid, String hasData,
-			String bukData, String hasOrd, String bukOrd) throws SQLException {
+			String bukData, String hasOrd, String bukOrd) throws IllegalStateException, SQLException  {
+		if (!connectedToDatabase)
+			throw new IllegalStateException(
+					"Datu-basearekin ez dago konexiorik.");
 			return sek.getSarbideEskaerak(txartelid, hasData + " " + hasOrd,
 					bukData + " " + bukOrd);
 	}
 
-	public Vector<String> getProfilak() throws SQLException {
+	public Vector<String> getProfilak() throws IllegalStateException, SQLException  {
+		if (!connectedToDatabase)
+			throw new IllegalStateException(
+					"Datu-basearekin ez dago konexiorik.");
 		return prof.getProfilak();
 	}
 
-	public Vector<DbDatuLerroa> getSarbideEskaerak(String data) throws SQLException {
+	public Vector<DbDatuLerroa> getSarbideEskaerak(String data) throws IllegalStateException, SQLException {
+		if (!connectedToDatabase)
+			throw new IllegalStateException(
+					"Datu-basearekin ez dago konexiorik.");
 			Vector<DbDatuLerroa> vTratatzekoDatuak;
 			vTratatzekoDatuak = sek.getSarbideEskaerak(data);
 			if (vTratatzekoDatuak.size() != 0) {
@@ -222,50 +256,83 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 	 * 
 	 * @see irakasleGatazkatsuenaRMI.UrrunekoInterfazea#getEraikinekoPertsonKop()
 	 */
-	public int getEraikinekoPertsonKop() throws SQLException {
+	public int getEraikinekoPertsonKop() throws IllegalStateException, SQLException {
+		if (!connectedToDatabase)
+			throw new IllegalStateException(
+					"Datu-basearekin ez dago konexiorik.");
 			return fakul.getEraikinekoPertsonKop();
 	}
 
-	public String getErabIzena(int txId) throws SQLException {
+	public String getErabIzena(int txId) throws IllegalStateException, SQLException {
+		if (!connectedToDatabase)
+			throw new IllegalStateException(
+					"Datu-basearekin ez dago konexiorik.");
 			return txk.getErabIzena(txId);
 	}
 
-	public int loginEgin(String erab, String pasahitza) throws RemoteException, SQLException {
+	public int loginEgin(String erab, String pasahitza) throws IllegalStateException, RemoteException, SQLException {
+		if (!connectedToDatabase)
+			throw new IllegalStateException(
+					"Datu-basearekin ez dago konexiorik.");
 			if (erak.isLoginZuzena(erab, pasahitza))
 				return erak.getProfila(erab);
 			else
 				return -1;
 	}
 
-	public void irekiAteak() throws SQLException {
+	public void irekiAteak() throws IllegalStateException, SQLException {
+		if (!connectedToDatabase)
+			throw new IllegalStateException(
+					"Datu-basearekin ez dago konexiorik.");
 			ate.IrekiAteak();
 	}
 
-	public void ItxiAteak() throws SQLException {
+	public void ItxiAteak() throws IllegalStateException, SQLException {
+		if (!connectedToDatabase)
+			throw new IllegalStateException(
+					"Datu-basearekin ez dago konexiorik.");
 			ate.ItxiAteak();
 	}
 
-	public void pertsonakAteraEraikinetik() throws SQLException {
+	public void pertsonakAteraEraikinetik() throws IllegalStateException, SQLException {
+		if (!connectedToDatabase)
+			throw new IllegalStateException(
+					"Datu-basearekin ez dago konexiorik.");
 			fakul.pertsonakAteraEraikinetik();
 	}
 
-	public Vector<Vector<Object>> getGuneGuztiak() throws SQLException {
+	public Vector<Vector<Object>> getGuneGuztiak() throws IllegalStateException, SQLException {
+		if (!connectedToDatabase)
+			throw new IllegalStateException(
+					"Datu-basearekin ez dago konexiorik.");
 			return gunek.getGuneGuztiak();
 	}
 
-	public Vector<Vector<Object>> getErabiltzaileKokapena(String txId) throws SQLException {
+	public Vector<Vector<Object>> getErabiltzaileKokapena(String txId) throws IllegalStateException, SQLException {
+		if (!connectedToDatabase)
+			throw new IllegalStateException(
+					"Datu-basearekin ez dago konexiorik.");
 			return txk.getErabiltzaileKokapena(txId);
 	}
 
-	public boolean erabiltzaileaFakultatean(String erabId) throws SQLException {
+	public boolean erabiltzaileaFakultatean(String erabId) throws IllegalStateException, SQLException {
+		if (!connectedToDatabase)
+			throw new IllegalStateException(
+					"Datu-basearekin ez dago konexiorik.");
 			return fakul.erabiltzaileaFakultatean(erabId);
 	}
 
-	public void kokapenaEguneratu(String erabId, String guneId) throws SQLException {
+	public void kokapenaEguneratu(String erabId, String guneId) throws IllegalStateException, SQLException {
+		if (!connectedToDatabase)
+			throw new IllegalStateException(
+					"Datu-basearekin ez dago konexiorik.");
 			fakul.kokapenaEguneratu(erabId, guneId);
 	}
 
-	public void kokapenaSartu(String erabId, String guneId) throws SQLException {
+	public void kokapenaSartu(String erabId, String guneId) throws IllegalStateException, SQLException {
+		if (!connectedToDatabase)
+			throw new IllegalStateException(
+					"Datu-basearekin ez dago konexiorik.");
 			fakul.kokapenaSartu(erabId, guneId);
 	}
 
