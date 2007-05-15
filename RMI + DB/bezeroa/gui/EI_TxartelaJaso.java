@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import partekatuak.MezuLeiho;
 import partekatuak.UrrunekoInterfazea;
 
 public class EI_TxartelaJaso extends JDialog {
@@ -114,12 +115,12 @@ public class EI_TxartelaJaso extends JDialog {
 					
 						urrunekoKud.desgaituTxartela(bal);
 					} catch (RemoteException e1) {
+						new MezuLeiho("REMOTE");
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
 			});		
-			
 		}
 		return jButton;
 	}
