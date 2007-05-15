@@ -133,13 +133,22 @@ public class EI_AlarmaGaitu extends JDialog {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					if (!gaituta) {
 						setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+//						 Use the static class member "player" from class
+						// AudioPlayer to play
+						// clip.
+						AudioPlayer.player.start(cas);
+						jButton.setText("Alarma Desgaitu");
+						jLabel.setText("");
+						jLabel.setIcon(new ImageIcon(getClass().getResource(
+								"sirena.GIF")));
+						jLabel1.setText("Alarma Gaitu Da!");
 						try {
 							urrunekoKud.irekiAteak();
 							try {
 								urrunekoKud.alarmaIntzidentziaSortu();
 								new MezuLeiho("Ate guztiak ireki dira eta alarmaren intzidentzia sortu da", "Ados", "Alarma Gaitua", JOptionPane.INFORMATION_MESSAGE);
 							} catch (SQLException e1) {
-								new MezuLeiho("SQL","Ezin izan da alrmaren intzidentzia sortu");
+								new MezuLeiho("SQL","Ezin izan da alarmaren intzidentzia sortu");
 								e1.printStackTrace();
 							}
 						} catch (RemoteException e1) {
@@ -179,16 +188,6 @@ public class EI_AlarmaGaitu extends JDialog {
 									"Ezin izan dira intzidentziak hartu, eta ondoren ezin da gertakari taula eguneratu");
 							e1.printStackTrace();
 						}
-
-						// Use the static class member "player" from class
-						// AudioPlayer to play
-						// clip.
-						AudioPlayer.player.start(cas);
-						jButton.setText("Alarma Desgaitu");
-						jLabel.setText("");
-						jLabel.setIcon(new ImageIcon(getClass().getResource(
-								"sirena.GIF")));
-						jLabel1.setText("Alarma Gaitu Da!");
 					}
 
 					else {
