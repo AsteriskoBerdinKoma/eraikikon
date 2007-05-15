@@ -11,6 +11,7 @@ import java.rmi.RMISecurityManager;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -48,6 +49,7 @@ public class EI_Jaurtitzailea extends JFrame {
 		try {
 			jbInit();
 		} catch (Exception e) {
+			new MezuLeiho("Errore bat egon da","Ados","Errorea", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}
 	}
