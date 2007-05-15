@@ -98,11 +98,11 @@ public interface UrrunekoInterfazea extends Remote {
 	
 	public void createTxartela(int nan) throws RemoteException, IllegalStateException, SQLException;
 	
-	public void gaituTxartela(int nan) throws IllegalStateException, RemoteException, SQLException;
+	public int gaituTxartela(int nan) throws IllegalStateException, RemoteException, SQLException;
 	
 	public void createProfila(String mota, String deskribapena) throws RemoteException;
 	
-	public void desgaituTxartela(int nan) throws IllegalStateException, RemoteException, SQLException;
+	public int desgaituTxartela(int nan) throws IllegalStateException, RemoteException, SQLException;
 
 	public Vector<Vector<Object>> getErabiltzaileKokapena (String txId) throws IllegalStateException, RemoteException, SQLException;
 	

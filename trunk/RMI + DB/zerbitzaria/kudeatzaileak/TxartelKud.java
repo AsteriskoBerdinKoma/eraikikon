@@ -99,15 +99,15 @@ public class TxartelKud {
 		this.agindua.executeUpdate(txart);
 	}
 
-	public void desgaituTxartela(int nan) throws SQLException {
+	public int desgaituTxartela(int nan) throws SQLException {
 		String txart = "UPDATE txartelak SET desgaituData=NOW()WHERE erabId='"
 				+ nan + "'";
-		this.agindua.executeUpdate(txart);
+		return this.agindua.executeUpdate(txart);
 	}
 
-	public void gaituTxartela(int nan) throws SQLException {
+	public int gaituTxartela(int nan) throws SQLException {
 		String txart = "UPDATE txartelak SET gaituData=NOW(), desgaituData=null WHERE erabId='"
 				+ nan + "'";
-		this.agindua.executeUpdate(txart);
+		return this.agindua.executeUpdate(txart);
 	}
 }
