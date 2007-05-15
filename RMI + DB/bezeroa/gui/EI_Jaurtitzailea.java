@@ -54,7 +54,8 @@ public class EI_Jaurtitzailea extends JFrame {
 		try {
 			jbInit();
 		} catch (Exception e) {
-			new MezuLeiho("Errore ezezagun bat suertatu da", "Ados", "Errore ezezaguna", JOptionPane.ERROR_MESSAGE);
+			new MezuLeiho("Errore ezezagun bat suertatu da", "Ados",
+					"Errore ezezaguna", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}
 	}
@@ -96,7 +97,7 @@ public class EI_Jaurtitzailea extends JFrame {
 		gridBagConstraints.ipadx = 0;
 		gridBagConstraints.ipady = 0;
 		gridBagConstraints.gridx = 0;
-		//this.setSize(new Dimension(309, 291));
+		// this.setSize(new Dimension(309, 291));
 		this.setContentPane(jPanel1);
 		jPanel1.setLayout(new GridBagLayout());
 		jLabel1.setText("Negozio logika duen hostIzena:portua :");
@@ -127,7 +128,7 @@ public class EI_Jaurtitzailea extends JFrame {
 	}
 
 	void jButton1_actionPerformed(ActionEvent e) {
-		//this.setVisible(false);
+		// this.setVisible(false);
 		a.setLocationRelativeTo(null);
 		a.setVisible(true);
 		this.setVisible(false);
@@ -148,22 +149,25 @@ public class EI_Jaurtitzailea extends JFrame {
 			a.setNegozioLogika(urrunekoObj);
 			jTextArea1.setText("Negozio logika esleitua\n");
 			jButton1.setEnabled(true);
-		}catch (ConnectException ex) {
+		} catch (ConnectException ex) {
 			jTextArea1.setText("Errorea negozio logika esleitzean\n");
 			jTextArea1.append(ex.toString());
 			jButton1.setEnabled(false);
-			new MezuLeiho("Ezin izan da zerbitzariarekin konexioa ezarri. Egiaztatu adierazitako \n helbidean zerbitzaria martxan dagoela.", "Ados", "Errorea konexioa ezartzean", JOptionPane.ERROR_MESSAGE);
-		}catch (UnknownHostException ex) {
+			new MezuLeiho(
+					"Ezin izan da zerbitzariarekin konexioa ezarri. Egiaztatu adierazitako \n helbidean zerbitzaria martxan dagoela.",
+					"Ados", "Errorea konexioa ezartzean",
+					JOptionPane.ERROR_MESSAGE);
+		} catch (UnknownHostException ex) {
 			jTextArea1.setText("Errorea negozio logika esleitzean\n");
 			jTextArea1.append(ex.toString());
 			jButton1.setEnabled(false);
 			new MezuLeiho("ZerbitzariEzezaguna");
-		} 
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			jTextArea1.setText("Errorea negozio logika esleitzean\n");
 			jTextArea1.append(ex.toString());
 			jButton1.setEnabled(false);
-			new MezuLeiho("Errore ezezagun bat suertatu da", "Ados", "Errore ezezaguna", JOptionPane.ERROR_MESSAGE);
+			new MezuLeiho("Errore ezezagun bat suertatu da", "Ados",
+					"Errore ezezaguna", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -205,26 +209,24 @@ public class EI_Jaurtitzailea extends JFrame {
 		u.setVisible(true);
 		u.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
-	
-	public void setSize(int width, int height)
-	{
+
+	public void setSize(int width, int height) {
 		super.setSize(width, height);
-		
-		//Get the screen size
+
+		// Get the screen size
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = toolkit.getScreenSize();
 
-		//Calculate the frame location
+		// Calculate the frame location
 		int x = (screenSize.width - getWidth()) / 2;
 		int y = (screenSize.height - getHeight()) / 2;
-		
-		//Set the new frame location
-		setLocation(x, y);				
+
+		// Set the new frame location
+		setLocation(x, y);
 	}
-	
-	public void setSize(Dimension size)
-	{
+
+	public void setSize(Dimension size) {
 		setSize(size.width, size.height);
-	}	
+	}
 } // @jve:decl-index=0:visual-constraint="10,10"
 

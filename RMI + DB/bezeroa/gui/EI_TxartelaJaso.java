@@ -24,7 +24,7 @@ public class EI_TxartelaJaso extends JDialog {
 
 	private JPanel jContentPane = null;
 
-	private UrrunekoInterfazea urrunekoKud;  //  @jve:decl-index=0:
+	private UrrunekoInterfazea urrunekoKud; // @jve:decl-index=0:
 
 	private JLabel jLabel = null;
 
@@ -88,9 +88,9 @@ public class EI_TxartelaJaso extends JDialog {
 	}
 
 	/**
-	 * This method initializes jTextField	
-	 * 	
-	 * @return javax.swing.JTextField	
+	 * This method initializes jTextField
+	 * 
+	 * @return javax.swing.JTextField
 	 */
 	private JTextField getJTextField() {
 		if (jTextField == null) {
@@ -100,9 +100,9 @@ public class EI_TxartelaJaso extends JDialog {
 	}
 
 	/**
-	 * This method initializes jButton	
-	 * 	
-	 * @return javax.swing.JButton	
+	 * This method initializes jButton
+	 * 
+	 * @return javax.swing.JButton
 	 */
 
 	private JButton getJButton() {
@@ -112,33 +112,37 @@ public class EI_TxartelaJaso extends JDialog {
 			jButton.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					try {
-					String nan = jTextField.getText();
-					int bal= Integer.parseInt(nan);
-					
-						urrunekoKud.desgaituTxartela(bal);
-						new MezuLeiho("Txartela desgaitua izan da","Ados","Txartela jasoa",JOptionPane.INFORMATION_MESSAGE);
-						setVisible(false);
+						String nan = jTextField.getText();
+						int bal = Integer.parseInt(nan);
+						if (urrunekoKud.desgaituTxartela(bal) == 0)
+							new MezuLeiho(
+									"Ezin izan da txartela desgaitu. Egiaztatu txartela existitzen dela.",
+									"Ados", "Ez da txartela desgaitu",
+									JOptionPane.WARNING_MESSAGE);
+						else {
+							new MezuLeiho("Txartela desgaitua izan da", "Ados",
+									"Txartela jasoa",
+									JOptionPane.INFORMATION_MESSAGE);
+							setVisible(false);
+						}
 					} catch (RemoteException e1) {
 						new MezuLeiho("REMOTE");
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					} catch (IllegalStateException e1) {
 						new MezuLeiho("DB");
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					} catch (SQLException e1) {
-						new MezuLeiho("SQL","Ezin da txartela desgaitu datu Basean");
-						// TODO Auto-generated catch block
+						new MezuLeiho("SQL",
+								"Ezin da txartela desgaitu datu Basean");
 						e1.printStackTrace();
 					}
 				}
-			});		
+			});
 		}
 		return jButton;
 	}
-	
-	public void setUrrunekoNegozioLogika(UrrunekoInterfazea ui)
-	{
+
+	public void setUrrunekoNegozioLogika(UrrunekoInterfazea ui) {
 		this.urrunekoKud = ui;
 	}
-}  //  @jve:decl-index=0:visual-constraint="9,8"
+} // @jve:decl-index=0:visual-constraint="9,8"

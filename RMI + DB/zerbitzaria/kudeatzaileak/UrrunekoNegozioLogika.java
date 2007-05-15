@@ -146,20 +146,20 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		}
 	}
 
-	public void gaituTxartela(int nan) throws IllegalStateException,
+	public int gaituTxartela(int nan) throws IllegalStateException,
 			SQLException {
 		if (!connectedToDatabase)
 			throw new IllegalStateException(
 					"Datu-basearekin ez dago konexiorik.");
-		txk.gaituTxartela(nan);
+		return txk.gaituTxartela(nan);
 	}
 
-	public void desgaituTxartela(int nan) throws IllegalStateException,
+	public int desgaituTxartela(int nan) throws IllegalStateException,
 			SQLException {
 		if (!connectedToDatabase)
 			throw new IllegalStateException(
 					"Datu-basearekin ez dago konexiorik.");
-		txk.desgaituTxartela(nan);
+		return txk.desgaituTxartela(nan);
 	}
 
 	public int profilZenbakia(String mota) throws IllegalStateException,

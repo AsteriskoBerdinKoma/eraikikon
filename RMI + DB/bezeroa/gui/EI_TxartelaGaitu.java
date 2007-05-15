@@ -29,8 +29,8 @@ public class EI_TxartelaGaitu extends JDialog {
 	private JTextField jTextField;
 
 	private JButton jButton;
-	
-	private UrrunekoInterfazea urrunekoKud;  //  @jve:decl-index=0:
+
+	private UrrunekoInterfazea urrunekoKud; // @jve:decl-index=0:
 
 	/**
 	 * @param owner
@@ -88,9 +88,9 @@ public class EI_TxartelaGaitu extends JDialog {
 	}
 
 	/**
-	 * This method initializes jTextField	
-	 * 	
-	 * @return javax.swing.JTextField	
+	 * This method initializes jTextField
+	 * 
+	 * @return javax.swing.JTextField
 	 */
 	private JTextField getJTextField() {
 		if (jTextField == null) {
@@ -106,21 +106,28 @@ public class EI_TxartelaGaitu extends JDialog {
 			jButton.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					try {
-					String nan = jTextField.getText();
-					int bal= Integer.parseInt(nan);
-						urrunekoKud.gaituTxartela(bal);
-						new MezuLeiho("Txartela gaitua izan da","Ados","Txartela gaitu",JOptionPane.INFORMATION_MESSAGE);
-						setVisible(false);
+						String nan = jTextField.getText();
+						int bal = Integer.parseInt(nan);
+						if (urrunekoKud.gaituTxartela(bal) == 0)
+							new MezuLeiho(
+									"Ezin izan da txartela gaitu. Egiaztatu txartela existitzen dela.",
+									"Ados", "Ez da txartela gaitu",
+									JOptionPane.WARNING_MESSAGE);
+						else {
+							new MezuLeiho("Txartela gaitua izan da", "Ados",
+									"Txartela gaitu",
+									JOptionPane.INFORMATION_MESSAGE);
+							setVisible(false);
+						}
 					} catch (RemoteException e1) {
 						new MezuLeiho("REMOTE");
 						e1.printStackTrace();
 					} catch (IllegalStateException e1) {
 						new MezuLeiho("DB");
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					} catch (SQLException e1) {
-						new MezuLeiho("SQL","Ezin da txartela gaitu Datu Basean");
-						// TODO Auto-generated catch block
+						new MezuLeiho("SQL",
+								"Ezin da txartela gaitu Datu Basean");
 						e1.printStackTrace();
 					}
 				}
@@ -128,8 +135,8 @@ public class EI_TxartelaGaitu extends JDialog {
 		}
 		return jButton;
 	}
-	public void setUrrunekoNegozioLogika(UrrunekoInterfazea ui)
-	{
+
+	public void setUrrunekoNegozioLogika(UrrunekoInterfazea ui) {
 		this.urrunekoKud = ui;
 	}
 }
