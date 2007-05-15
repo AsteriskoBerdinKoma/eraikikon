@@ -8,6 +8,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -48,13 +51,23 @@ public class EI_Identifikazioa extends JFrame {
 	UrrunekoInterfazea urrunekoKud;
 
 	JLabel jLabel3 = new JLabel();
-
+	
 	EI_SegurtasunArduraduna segArd;
 
-	public EI_Identifikazioa() {
+	EI_Jaurtitzailea jabea;
+	
+	public EI_Identifikazioa(EI_Jaurtitzailea owner) {
 		super();
 		try {
 			jbInit();
+			this.jabea = owner;
+			setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+			addWindowListener(new WindowAdapter() {
+				public void windowClosed(WindowEvent event) {
+					jabea.setVisible(true);
+					setVisible(false);
+				}
+			});
 		} catch (Exception e) {
 			new MezuLeiho("Errorea identifikazio egiterakoan","Ados","Identifikazio Errorea", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();

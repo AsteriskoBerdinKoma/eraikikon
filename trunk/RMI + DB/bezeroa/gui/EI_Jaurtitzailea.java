@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.rmi.Naming;
 import java.rmi.RMISecurityManager;
@@ -35,7 +36,7 @@ public class EI_Jaurtitzailea extends JFrame {
 
 	JButton jButton2 = new JButton();
 
-	EI_Identifikazioa a = new EI_Identifikazioa(); // @jve:decl-index=0:visual-constraint="343,10"
+	EI_Identifikazioa a = new EI_Identifikazioa(this); // @jve:decl-index=0:visual-constraint="343,10"
 
 	public static final String zerbitzuIzena = "EraikiKon";
 
@@ -45,6 +46,7 @@ public class EI_Jaurtitzailea extends JFrame {
 
 	public EI_Jaurtitzailea() {
 		super();
+		this.setSize(309, 291);
 		this.setLocationRelativeTo(null);
 		try {
 			jbInit();
@@ -91,13 +93,14 @@ public class EI_Jaurtitzailea extends JFrame {
 		gridBagConstraints.ipadx = 0;
 		gridBagConstraints.ipady = 0;
 		gridBagConstraints.gridx = 0;
-		this.setSize(new Dimension(309, 291));
+		//this.setSize(new Dimension(309, 291));
 		this.setContentPane(jPanel1);
 		jPanel1.setLayout(new GridBagLayout());
 		jLabel1.setText("Negozio logika duen hostIzena:portua :");
 		jTextField1.setText("localhost");
 		jTextField1.setPreferredSize(new Dimension(250, 19));
-		jButton1.setText("Aurkezpena egikaritu");
+		jButton1.setText("Sisteman Sartu");
+		jButton1.setEnabled(false);
 		jButton1.addActionListener(new java.awt.event.ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -121,9 +124,10 @@ public class EI_Jaurtitzailea extends JFrame {
 	}
 
 	void jButton1_actionPerformed(ActionEvent e) {
-		this.setVisible(false);
+		//this.setVisible(false);
 		a.setLocationRelativeTo(null);
 		a.setVisible(true);
+		this.setVisible(false);
 	}
 
 	void jButton2_actionPerformed(ActionEvent e) {
@@ -142,9 +146,11 @@ public class EI_Jaurtitzailea extends JFrame {
 			urrunekoObj = (UrrunekoInterfazea) Naming.lookup(zerbIzena);
 			a.setNegozioLogika(urrunekoObj);
 			jTextArea1.setText("Negozio logika esleitua\n");
+			jButton1.setEnabled(true);
 		} catch (Exception ex) {
 			jTextArea1.setText("Errorea negozio logika esleitzean\n");
 			jTextArea1.append(ex.toString());
+			jButton1.setEnabled(false);
 			new MezuLeiho("NegozioLogika");
 		}
 	}
@@ -187,5 +193,26 @@ public class EI_Jaurtitzailea extends JFrame {
 		u.setVisible(true);
 		u.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
+	
+	public void setSize(int width, int height)
+	{
+		super.setSize(width, height);
+		
+		//Get the screen size
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+		Dimension screenSize = toolkit.getScreenSize();
+
+		//Calculate the frame location
+		int x = (screenSize.width - getWidth()) / 2;
+		int y = (screenSize.height - getHeight()) / 2;
+		
+		//Set the new frame location
+		setLocation(x, y);				
+	}
+	
+	public void setSize(Dimension size)
+	{
+		setSize(size.width, size.height);
+	}	
 } // @jve:decl-index=0:visual-constraint="10,10"
 
