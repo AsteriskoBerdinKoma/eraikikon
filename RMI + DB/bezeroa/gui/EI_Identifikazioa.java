@@ -171,7 +171,7 @@ public class EI_Identifikazioa extends JFrame {
 				jLabel3.setText("EZ DUZU SARTZEKO BAIMENIK");
 			}
 		} catch (Exception ex) {
-			new MezuLeiho("Negozio Logikarekin Arazoak Daude","ados","Negozio Logika Erroreak",JOptionPane.ERROR_MESSAGE);
+			new MezuLeiho("Negozio Logikarekin Arazoak Daude","Ados","Negozio Logika Erroreak",JOptionPane.ERROR_MESSAGE);
 			ex.printStackTrace();
 			jLabel3.setForeground(Color.RED);
 			jLabel3.setText("NEGOZIO LOGIKAREKIN ARAZOAK DAUDE");
