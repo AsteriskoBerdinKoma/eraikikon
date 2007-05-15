@@ -113,6 +113,8 @@ public interface UrrunekoInterfazea extends Remote {
 	public void kokapenaEguneratu( String erabId, String guneId) throws IllegalStateException, RemoteException, SQLException;
 	
 	public void kokapenaSartu( String erabId, String guneId)throws IllegalStateException, RemoteException, SQLException;
+	
+	public void sarbideEskaeraEguneratu(int tx,int tirak) throws RemoteException;
 
 	public void createBisitariBaimenak(int profId, Vector<Integer> gune) throws IllegalStateException, RemoteException, SQLException;
 
