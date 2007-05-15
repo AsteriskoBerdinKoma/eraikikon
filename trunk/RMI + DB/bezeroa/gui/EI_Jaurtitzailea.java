@@ -124,11 +124,10 @@ public class EI_Jaurtitzailea extends JFrame {
 		jPanel1.add(jButton1, gridBagConstraints2);
 		jPanel1.add(jButton2, gridBagConstraints3);
 		jPanel1.add(getJScrollPane(), gridBagConstraints5);
-		// this.getContentPane().add(jPanel1, null);
 	}
 
 	void jButton1_actionPerformed(ActionEvent e) {
-		// this.setVisible(false);
+		a.getRootPane().setDefaultButton(a.getJButton1());
 		a.setLocationRelativeTo(null);
 		a.setVisible(true);
 		this.setVisible(false);
