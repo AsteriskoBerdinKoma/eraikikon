@@ -5,6 +5,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ItemEvent;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -297,8 +298,15 @@ public class EI_IrakasleGatazkatsuena extends JDialog {
 									.getTxartelId());
 							String txartIrakId = String.valueOf(gatazkatsuena
 									.getTxartelIrakUkatuena());
-							urrunekoKud.createIntzidentzia(txartId,
-									txartIrakId, noiztikNora);
+							try {
+								urrunekoKud.createIntzidentzia(txartId,
+										txartIrakId, noiztikNora);
+						
+							} catch (SQLException e1) {
+								new MezuLeiho("SQL","Ezin da intzidentzia sortu");
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 							Vector<String> zutIzenak = new Vector<String>();
 							zutIzenak.addElement("Erabiltzaile ID");
 							zutIzenak.addElement("Data");
@@ -313,6 +321,15 @@ public class EI_IrakasleGatazkatsuena extends JDialog {
 							jabea.setTableModel(urrunekoKud.getIntzidentziak(),
 									zutIzenak);
 						} catch (RemoteException e1) {
+							new MezuLeiho("REMOTE");
+							e1.printStackTrace();
+						} catch (IllegalStateException e1) {
+							new MezuLeiho("DB");
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (SQLException e1) {
+							new MezuLeiho("SQL","Ezin izan dira intzidentziak hartu, eta ondoren ezin da gertakari taula eguneratu");
+							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -372,7 +389,8 @@ public class EI_IrakasleGatazkatsuena extends JDialog {
 		zutIzen.addElement("Ukapen Kopurua");
 		Vector<IrakasleGatazkatsuaDatuak> vGatazkatsuenak;
 
-		vGatazkatsuenak = urrunekoKud.getGatazkatsuenak(sarData);
+		try {
+			vGatazkatsuenak = urrunekoKud.getGatazkatsuenak(sarData);
 		if (vGatazkatsuenak.size() != 0) {
 			gatazkatsuena = vGatazkatsuenak.firstElement();
 			jButton1.setEnabled(true);
@@ -388,6 +406,15 @@ public class EI_IrakasleGatazkatsuena extends JDialog {
 		} else {
 			gatazkatsuena = null;
 			jButton1.setEnabled(false);
+		}
+		} catch (IllegalStateException e) {
+			new MezuLeiho("DB");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			new MezuLeiho("SQL","Ezin dira irakasle gatazkatzuenak Datu Basetik hartu");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		tableModel.setDataVector(taula, zutIzen);
 		tableModel.fireTableStructureChanged();
