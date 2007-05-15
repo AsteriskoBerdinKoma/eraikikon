@@ -85,6 +85,7 @@ public interface UrrunekoInterfazea extends Remote {
 	public void pertsonakAteraEraikinetik() throws RemoteException;
 	
 	public Vector<String> getProfilak() throws RemoteException, IllegalStateException, SQLException;
+	
 	public void createErabiltzailea(int nan, String izena, String pasahitza, int profId) throws RemoteException;
 	
 	public int profilZenbakia(String mota) throws RemoteException;
