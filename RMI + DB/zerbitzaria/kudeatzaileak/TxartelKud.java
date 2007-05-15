@@ -61,15 +61,16 @@ public class TxartelKud {
 
 	public Vector<Vector<Object>> getErabiltzaileKokapena(String txId)throws SQLException {
 
-		String c3 = "SELECT e.izena, " + "e.id, t.id, g.id, g.izena, s.data "
-				+ "FROM (((guneak g "
-				+ "INNER JOIN txartelirakurgailuak ti ON g.id=ti.guneId) "
-				+ "INNER JOIN sarbideeskaerak s ON ti.id=s.txIrakurId) "
-				+ "INNER JOIN txartelak t ON s.txId=t.id) "
-				+ "INNER JOIN erabiltzaileak e ON t.erabId=e.id "
-				+ "WHERE s.txId= " + txId + " AND s.data <= ALL "
-				+ "(SELECT data FROM sarbideeskaerak " + "WHERE txId= " + txId
-				+ ")";
+		String c3 = 
+			"SELECT e.izena,e.id, t.id, g.id, g.izena, s.data " +
+			"FROM (((guneak g INNER JOIN txartelirakurgailuak ti ON g.id=ti.guneId) " +
+				  "INNER JOIN sarbideeskaerak s ON ti.id=s.txIrakurId) " +
+				  "INNER JOIN txartelak t ON s.txId=t.id) " +
+				  "INNER JOIN erabiltzaileak e ON t.erabId=e.id " +
+			"WHERE s.txId="+txId+
+			" AND s.data >= ALL (SELECT data " +
+				  				"FROM sarbideeskaerak " + 
+				  				"WHERE txId="+txId+")";
 
 		ResultSet q = this.agindua.executeQuery(c3);
 		Vector<Vector<Object>> erabKokapena = new Vector<Vector<Object>>();
