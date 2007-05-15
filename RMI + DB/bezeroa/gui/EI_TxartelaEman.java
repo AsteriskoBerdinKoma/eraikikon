@@ -296,36 +296,39 @@ public class EI_TxartelaEman extends JDialog {
 						String izena = jTextField1.getText();
 						String pasahitza = kodetu(String.valueOf(jPasswordField
 								.getPassword()));
-						if (jComboBox.getSelectedItem().toString().equals(
-								"Bisitari")) {
-							urrunekoKud.createProfila("Bisitari", nan);
-							int profId = urrunekoKud.profilZenbakia("Bisitari",
-									nan);
-							Vector<Botoia> botoiAuk = bisitari.getBotoiak();
-							Vector<Integer> vGune = new Vector<Integer>();
-							for (Botoia b : bisitari.getBotoiak()) {
-								if (b.isAktibatuta())
-									vGune
-											.addElement(new Integer(b
-													.getGuneId()));
-							}
-							urrunekoKud.createBisitariBaimenak(profId, vGune);
-						}
+
 						int aukProf = urrunekoKud.profilZenbakia(jComboBox
 								.getSelectedItem().toString());
-						if (nan.length() != 0) {
-							int bal = Integer.parseInt(nan);
-							try {
+						try {
+							if (nan.length() != 0) {
+								int bal = Integer.parseInt(nan);
+
 								urrunekoKud.createErabiltzailea(bal, izena,
 										pasahitza, aukProf);
 								urrunekoKud.createTxartela(bal);
-							} catch (SQLException e1) {
-								new MezuLeiho(
-										"Erabiltzailea jadanik existitzen da",
-										"Ados", "Ezin da erabiltzailea sortu",
-										JOptionPane.ERROR_MESSAGE);
-								e1.printStackTrace();
+
 							}
+							if (jComboBox.getSelectedItem().toString().equals(
+									"Bisitari")) {
+								urrunekoKud.createProfila("Bisitari", nan);
+								int profId = urrunekoKud.profilZenbakia(
+										"Bisitari", nan);
+								Vector<Integer> vGune = new Vector<Integer>();
+								for (Botoia b : bisitari.getBotoiak()) {
+									if (b.isAktibatuta())
+										vGune.addElement(new Integer(b
+												.getGuneId()));
+								}
+								urrunekoKud.createBisitariBaimenak(profId,
+										vGune);
+							}
+							new MezuLeiho(nan +"  NAN zenbakia duen erabiltzaileari txartela esleitu zaio","Ados","Erabiltzaile sortua",JOptionPane.INFORMATION_MESSAGE);
+						} catch (SQLException e1) {
+							new MezuLeiho(
+									"Erabiltzailea jadanik existitzen da",
+									"Ados", "Ezin da erabiltzailea sortu",
+									JOptionPane.ERROR_MESSAGE);
+							e1.printStackTrace();
 						}
 					} catch (RemoteException e1) {
 						new MezuLeiho("REMOTE");
