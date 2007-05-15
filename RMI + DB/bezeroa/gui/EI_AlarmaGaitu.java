@@ -117,7 +117,7 @@ public class EI_AlarmaGaitu extends JDialog {
 		if (jButton == null) {
 			jButton = new JButton();
 			jButton.setText("Alarma Gaitu");
-			jButton.setPreferredSize(new Dimension(115, 20)); 
+			jButton.setPreferredSize(new Dimension(160, 20)); 
 			jButton.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {					
 					if (!gaituta){
