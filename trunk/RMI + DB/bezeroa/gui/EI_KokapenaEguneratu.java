@@ -18,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
 
+import partekatuak.MezuLeiho;
 import partekatuak.UrrunekoInterfazea;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -253,13 +254,11 @@ public class EI_KokapenaEguneratu extends JDialog {
 			
 			if (taula.size()!=0){
 				jButton1.setEnabled(true);
-				tableModel.setDataVector(taula, zutIzen);
 				
+				tableModel.setDataVector(taula, zutIzen);	
 				tableModel.fireTableStructureChanged();
 			}
 			else
-			
-		
 			jButton1.setEnabled(false);
 		
 	}
@@ -298,7 +297,6 @@ public class EI_KokapenaEguneratu extends JDialog {
 			
 			tableModel1 = new DefaultTableModel();
 			jTable = new JTable(tableModel1);
-			
 		}
 		return jTable;
 	}
@@ -322,32 +320,21 @@ public class EI_KokapenaEguneratu extends JDialog {
 					int x =jTable.getSelectedRow();
 					
 					if (x== -1){
-					JOptionPane optPane = new JOptionPane("Ez duzu gunerik aukeratu",JOptionPane.ERROR_MESSAGE);
-			
-					JPanel buttonPanel = (JPanel) optPane.getComponent(1);
-					JButton buttonOk = (JButton) buttonPanel.getComponent(0);
-					buttonOk.setText("Ados");
-					JDialog d = optPane.createDialog(null, "Errorea");
-					d.setVisible(true);
+						new MezuLeiho("Ez duzu gunerik aukeratu","Ados","Gunea Aukeratu",JOptionPane.ERROR_MESSAGE);
 					}
 					else{
 						String guneId = jTable.getValueAt(x, 0).toString();
-						
 						try {
 							boolean b = urruIn.erabiltzaileaFakultatean(erabId);
-							if (b==true){
+							if (b==true)
 								urruIn.kokapenaEguneratu(erabId, guneId);
-							}else {
+							else 
 								urruIn.kokapenaSartu(erabId, guneId);
-							}
-							
 						} catch (RemoteException e1) {
-						
+							new MezuLeiho("REMOTE");
 							e1.printStackTrace();
 						}
-					}
-					
-				
+					}				
 				}
 			});
 		}
