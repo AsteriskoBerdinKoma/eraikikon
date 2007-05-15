@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -304,7 +305,6 @@ public class EI_IrakasleGatazkatsuena extends JDialog {
 						
 							} catch (SQLException e1) {
 								new MezuLeiho("SQL","Ezin da intzidentzia sortu");
-								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
 							Vector<String> zutIzenak = new Vector<String>();
@@ -318,18 +318,16 @@ public class EI_IrakasleGatazkatsuena extends JDialog {
 							zutIzenak.addElement("Txartel Irakurgailua");
 							zutIzenak.addElement("Gaitua");
 							zutIzenak.addElement("Noiztik Nora");
-							jabea.setTableModel(urrunekoKud.getIntzidentziak(),
-									zutIzenak);
+							jabea.setTableModel(urrunekoKud.getIntzidentziak(), zutIzenak);
+							new MezuLeiho (txartId + " txartela duen irakaslea, " + noiztikNora + " irakasle gatazkatsuena izan da.", "Ados", "Intzidentzia sortua", JOptionPane.INFORMATION_MESSAGE);
 						} catch (RemoteException e1) {
 							new MezuLeiho("REMOTE");
 							e1.printStackTrace();
 						} catch (IllegalStateException e1) {
 							new MezuLeiho("DB");
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						} catch (SQLException e1) {
 							new MezuLeiho("SQL","Ezin izan dira intzidentziak hartu, eta ondoren ezin da gertakari taula eguneratu");
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
@@ -409,11 +407,9 @@ public class EI_IrakasleGatazkatsuena extends JDialog {
 		}
 		} catch (IllegalStateException e) {
 			new MezuLeiho("DB");
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
 			new MezuLeiho("SQL","Ezin dira irakasle gatazkatzuenak Datu Basetik hartu");
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		tableModel.setDataVector(taula, zutIzen);
