@@ -320,8 +320,10 @@ public class EI_TxartelaEman extends JDialog {
 								}
 								urrunekoKud.createBisitariBaimenak(profId,
 										vGune);
+								
 							}
 							new MezuLeiho(nan +"  NAN zenbakia duen erabiltzaileari txartela esleitu zaio","Ados","Erabiltzaile sortua",JOptionPane.INFORMATION_MESSAGE);
+							setVisible(false);
 						} catch (SQLException e1) {
 							new MezuLeiho(
 									"Erabiltzailea jadanik existitzen da",
