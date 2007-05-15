@@ -160,11 +160,13 @@ public class EI_Identifikazioa extends JFrame {
 					segArd.setLocationRelativeTo(null);
 					segArd.setVisible(true);
 				} else {
+					new MezuLeiho("Ez duzu sartzeko baimenik","Ados","Baimenik Ez",JOptionPane.ERROR_MESSAGE);
 					jLabel3.setForeground(Color.RED);
 					jLabel3.setText("EZ DUZU SARTZEKO BAIMENIK");
 				}
 			}
 			else {
+				new MezuLeiho("Ez duzu sartzeko baimenik","Ados","Baimenik Ez",JOptionPane.ERROR_MESSAGE);
 				jLabel3.setForeground(Color.RED);
 				jLabel3.setText("EZ DUZU SARTZEKO BAIMENIK");
 			}
