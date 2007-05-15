@@ -299,14 +299,21 @@ public class EI_TxartelaEman extends JDialog {
 						int aukProf = urrunekoKud.profilZenbakia(jComboBox
 								.getSelectedItem().toString());
 						try {
-							if (nan.length() != 0) {
+							if (!nan.equals("") && !izena.equals("") && !pasahitza.equals("")) {
 								int bal = Integer.parseInt(nan);
 
 								urrunekoKud.createErabiltzailea(bal, izena,
 										pasahitza, aukProf);
 								urrunekoKud.createTxartela(bal);
+								new MezuLeiho(nan +"  NAN zenbakia duen erabiltzaileari txartela esleitu zaio","Ados","Erabiltzaile sortua",JOptionPane.INFORMATION_MESSAGE);
+								setVisible(false);
 
 							}
+							else {
+								new MezuLeiho("Eremurenbat bete gabe utzi duzu","Ados","Errorea datuak sartzean",JOptionPane.ERROR_MESSAGE);
+								setVisible(false);
+							}
+							
 							if (jComboBox.getSelectedItem().toString().equals(
 									"Bisitari")) {
 								urrunekoKud.createProfila("Bisitari", nan);
@@ -320,10 +327,11 @@ public class EI_TxartelaEman extends JDialog {
 								}
 								urrunekoKud.createBisitariBaimenak(profId,
 										vGune);
+								new MezuLeiho(nan +"  NAN zenbakia duen erabiltzaileari txartela esleitu zaio","Ados","Erabiltzaile sortua",JOptionPane.INFORMATION_MESSAGE);
+								setVisible(false);
 								
 							}
-							new MezuLeiho(nan +"  NAN zenbakia duen erabiltzaileari txartela esleitu zaio","Ados","Erabiltzaile sortua",JOptionPane.INFORMATION_MESSAGE);
-							setVisible(false);
+							
 						} catch (SQLException e1) {
 							new MezuLeiho(
 									"Erabiltzailea jadanik existitzen da",
