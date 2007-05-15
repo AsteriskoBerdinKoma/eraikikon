@@ -16,12 +16,14 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.Dimension;
 import javax.swing.SwingConstants;
 import javax.swing.JPasswordField;
 
+import partekatuak.MezuLeiho;
 import partekatuak.UrrunekoInterfazea;
 import sun.misc.BASE64Encoder;
 
@@ -294,14 +296,38 @@ public class EI_TxartelaEman extends JDialog {
 						String izena = jTextField1.getText();
 						String pasahitza = kodetu(String.valueOf(jPasswordField.getPassword()));
 						// bisita bada zelan ein???
-						int aukProf = urrunekoKud.profilZenbakia(jComboBox
-								.getSelectedItem().toString());
+						int aukProf = 0;
+						try {
+							aukProf = urrunekoKud.profilZenbakia(jComboBox
+									.getSelectedItem().toString());
+						}  catch (SQLException e1) {
+							new MezuLeiho("SQL","Ezin da jakin Profil horren Identifikadorea zein den");
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						int bal = Integer.parseInt(nan);
-						urrunekoKud.createErabiltzailea(bal, izena, pasahitza,
-								aukProf);
-						urrunekoKud.gaituTxartela(bal);
+						try {
+							urrunekoKud.createErabiltzailea(bal, izena, pasahitza,
+									aukProf);
+						} catch (SQLException e1) {
+							new MezuLeiho("SQL","Ezin da erabiltzailea sortu, seguruena jadanik Identifikadore(NAN) existitzen delako.");
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						try {
+							urrunekoKud.gaituTxartela(bal);
+						} catch (SQLException e1) {
+							new MezuLeiho("SQL","Ezin da txartela gaitu, posiblea da lehenik gaituta zegoela edo ezin dela gaituta izan");
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						
 					} catch (RemoteException e1) {
+						new MezuLeiho("REMOTE");
+						e1.printStackTrace();
+					}catch (IllegalStateException e1) {
+						new MezuLeiho("DB");
+						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
@@ -336,31 +362,28 @@ public class EI_TxartelaEman extends JDialog {
 					jComboBox.addItem(prof);
 			}
 		} catch (IllegalStateException e) {
+			new MezuLeiho("DB");
 			e.printStackTrace();
 		} catch (SQLException e) {
+			new MezuLeiho("SQL","Ezin dira Datu Basetik Profiiak hartu");
 			e.printStackTrace();
 		} catch (RemoteException e) {
+			new MezuLeiho("REMOTE");
 			e.printStackTrace();
 		}
 	}
 	
 	public String kodetu (String testusoila){
 	    MessageDigest md = null;
-	    try
-	    {
+	    try{
 	      md = MessageDigest.getInstance("SHA"); //2. pausua
-	    }
-	    catch(NoSuchAlgorithmException e)
-	    {
+	    }catch(NoSuchAlgorithmException e){
+	    	new MezuLeiho("Ez da zifraketa algoritmoa aurkitu","Ados","Zifraketa Arazoa",JOptionPane.ERROR_MESSAGE);
 	      e.printStackTrace();
-	    }
-	    
-	    try
-	    {
+	    }try{
 	      md.update(testusoila.getBytes("UTF-8")); //3. pausua
-	    }
-	    catch(UnsupportedEncodingException e)
-	    {
+	    }catch(UnsupportedEncodingException e){
+	    	new MezuLeiho("Errorea kodetzerakoan","Ados","Kodeketa Errorea",JOptionPane.ERROR_MESSAGE);
 	      e.printStackTrace();
 	    }
 	    byte raw[] = md.digest(); //4. pausua
