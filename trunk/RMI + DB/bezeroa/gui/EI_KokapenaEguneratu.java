@@ -2,7 +2,6 @@ package bezeroa.gui;
 
 import javax.swing.JPanel;
 
-
 import javax.swing.JDialog;
 
 import javax.swing.JLabel;
@@ -10,14 +9,12 @@ import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.Vector;
 
-
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
-
 
 import partekatuak.MezuLeiho;
 import partekatuak.UrrunekoInterfazea;
@@ -28,13 +25,17 @@ import java.awt.Dimension;
 import javax.swing.SwingConstants;
 
 public class EI_KokapenaEguneratu extends JDialog {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	private JPanel jContentPane = null;
-	private DefaultTableModel tableModel;
-	private DefaultTableModel tableModel1;
-	private UrrunekoInterfazea urruIn;  //  @jve:decl-index=0:
+
+	private DefaultTableModel tableModel = new DefaultTableModel();
+
+	private DefaultTableModel tableModel1 = new DefaultTableModel();;
+
+	private UrrunekoInterfazea urruIn; // @jve:decl-index=0:
+
 	private JTextField jTextField = null;
 
 	private JButton jButton = null;
@@ -43,25 +44,19 @@ public class EI_KokapenaEguneratu extends JDialog {
 
 	private JTable jTable1 = null;
 
-
-
 	private JScrollPane jScrollPane1 = null;
-
-
 
 	private JTable jTable = null;
 
-
-
 	private JButton jButton1 = null;
-
-
 
 	private JLabel jLabel = null;
 
-
-
 	private JLabel jLabel1 = null;
+
+	Vector<Integer> txartelIrak = new Vector<Integer>(); // @jve:decl-index=0:
+
+	Vector<Object> zutabeak = new Vector<Object>();
 
 	/**
 	 * @param owner
@@ -69,6 +64,10 @@ public class EI_KokapenaEguneratu extends JDialog {
 	public EI_KokapenaEguneratu(EI_SegurtasunArduraduna owner) {
 		super(owner, true);
 		initialize();
+		zutabeak.addElement("Oraingo Gunea");
+		zutabeak.addElement("Izena");
+		zutabeak.addElement("Atea");
+		zutabeak.addElement("Helburu Gunea");
 	}
 
 	/**
@@ -161,9 +160,9 @@ public class EI_KokapenaEguneratu extends JDialog {
 	}
 
 	/**
-	 * This method initializes jTextField	
-	 * 	
-	 * @return javax.swing.JTextField	
+	 * This method initializes jTextField
+	 * 
+	 * @return javax.swing.JTextField
 	 */
 	private JTextField getJTextField() {
 		if (jTextField == null) {
@@ -173,37 +172,9 @@ public class EI_KokapenaEguneratu extends JDialog {
 	}
 
 	/**
-	 * This method initializes jButton	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */
-	private JButton getJButton() {
-		if (jButton == null) {
-			jButton = new JButton();
-			jButton.setText("Kokapena Erakutsi");
-			jButton.setPreferredSize(new Dimension(140, 20));
-			jButton.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					
-					
-					try {
-						String kode = jTextField.getText().toString();
-						taulaKokapenaEguneratu(kode);
-						taulaGuneakEguneratu();
-					} catch (RemoteException e1) {
-						e1.printStackTrace();
-					}
-					
-				}
-			});
-		}
-		return jButton;
-	}
-
-	/**
-	 * This method initializes jScrollPane	
-	 * 	
-	 * @return javax.swing.JScrollPane	
+	 * This method initializes jScrollPane
+	 * 
+	 * @return javax.swing.JScrollPane
 	 */
 	private JScrollPane getJScrollPane() {
 		if (jScrollPane == null) {
@@ -214,85 +185,24 @@ public class EI_KokapenaEguneratu extends JDialog {
 	}
 
 	/**
-	 * This method initializes jTable1	
-	 * 	
-	 * @return javax.swing.JTable	
+	 * This method initializes jTable1
+	 * 
+	 * @return javax.swing.JTable
 	 */
 	private JTable getJTable1() {
 		if (jTable1 == null) {
-			
-			
-			tableModel = new DefaultTableModel();
 			jTable1 = new JTable(tableModel);
-			
-			
-			
 		}
 		return jTable1;
-		
-	}
-	public void setUrrunekoNegozioLogika(UrrunekoInterfazea ui) {
-		this.urruIn = ui;	
-	}
-	
-	
-	public void taulaKokapenaEguneratu(String kode) throws RemoteException{
-		
-		Vector<Vector<Object>> taula = new Vector<Vector<Object>>();
-		
-		Vector<Object> zutIzen = new Vector<Object>();
-		zutIzen.addElement("Erabiltzaile Izena");
-		zutIzen.addElement("Erabiltzaile Id");
-		zutIzen.addElement("Txartel Zenbakia");
-		zutIzen.addElement("Gune Zenbakia");
-		zutIzen.addElement("Gune Izena");
-		zutIzen.addElement("Data");
-			try {
-				taula = urruIn.getErabiltzaileKokapena(kode);
-			} catch (IllegalStateException e) {
-				new MezuLeiho("DB");
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SQLException e) {
-				new MezuLeiho("SQL","Ezin da erabiltzailearen kokapena lortu Datu Basetik");
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			if (taula.size()!=0){
-				jButton1.setEnabled(true);
-				
-				tableModel.setDataVector(taula, zutIzen);	
-				tableModel.fireTableStructureChanged();
-			}
-			else
-			jButton1.setEnabled(false);
 	}
 
-	public void taulaGuneakEguneratu() throws RemoteException{
-		Vector<Vector<Object>> taula2 = new Vector<Vector<Object>>();
-		Vector<Object> zutabeak = new Vector<Object>();
-		zutabeak.addElement("Id");
-		zutabeak.addElement("Izena");
-		try {
-			taula2 = urruIn.getGuneGuztiak();
-		} catch (IllegalStateException e) {
-			new MezuLeiho("DB");
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			new MezuLeiho("SQL","Ezin dira guneak lortu Datu Basetik");
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		tableModel1.setDataVector(taula2, zutabeak);
-		tableModel1.fireTableStructureChanged();
-		
-	}
+	
+
 
 	/**
-	 * This method initializes jScrollPane1	
-	 * 	
-	 * @return javax.swing.JScrollPane	
+	 * This method initializes jScrollPane1
+	 * 
+	 * @return javax.swing.JScrollPane
 	 */
 	private JScrollPane getJScrollPane1() {
 		if (jScrollPane1 == null) {
@@ -303,23 +213,88 @@ public class EI_KokapenaEguneratu extends JDialog {
 	}
 
 	/**
-	 * This method initializes jTable	
-	 * 	
-	 * @return javax.swing.JTable	
+	 * This method initializes jTable
+	 * 
+	 * @return javax.swing.JTable
 	 */
 	private JTable getJTable() {
 		if (jTable == null) {
-			
-			tableModel1 = new DefaultTableModel();
 			jTable = new JTable(tableModel1);
 		}
 		return jTable;
 	}
 
+	public void setUrrunekoNegozioLogika(UrrunekoInterfazea ui) {
+		this.urruIn = ui;
+
+	}
+
+	public void taulaKokapenaEguneratu(String kode) {
+
+		Vector<Vector<Object>> taula = new Vector<Vector<Object>>();
+		Vector<Object> zutIzen = new Vector<Object>();
+		zutIzen.addElement("Erabiltzaile Izena");
+		zutIzen.addElement("Erabiltzaile Id");
+		zutIzen.addElement("Txartel Zenbakia");
+		zutIzen.addElement("Gune Zenbakia");
+		zutIzen.addElement("Gune Izena");
+		zutIzen.addElement("Data");
+		try{
+			taula = urruIn.getErabiltzaileKokapena(kode);
+			if (taula.size() != 0) {
+				jButton1.setEnabled(true);
+				tableModel.setDataVector(taula, zutIzen);
+				tableModel.fireTableStructureChanged();
+				taulaGuneakEguneratu();
+			} else {
+				new MezuLeiho("Erabiltzailea ez da eraikinean izan", "Ados",
+					"Txartel Kodea Sartu", JOptionPane.INFORMATION_MESSAGE);
+				jButton1.setEnabled(false);
+				tableModel.setDataVector(new Vector<Object>(), zutIzen);
+				tableModel.fireTableStructureChanged();
+			}
+		} catch (RemoteException e1) {
+				new MezuLeiho("REMOTE");
+				e1.printStackTrace();
+		} catch (IllegalStateException e3) {
+				new MezuLeiho("DB");
+		} catch (SQLException e4) {
+			new MezuLeiho("SQL","Ezin da erabiltzailearen kokapena lortu Datu Basetik");	
+		}
+
+	}
+
+	public void taulaGuneakEguneratu() {
+		Vector<Vector<Object>> taula2;
+		
+		try{
+			taula2 = urruIn.getGuneGuztiak();
+			if (taula2 != null) {
+				for (Vector<Object> lerro : taula2) {
+					String tx = lerro.lastElement().toString();
+					Integer txi = Integer.parseInt(tx);
+					txartelIrak.addElement(txi);
+					lerro.removeElementAt(4);
+				}
+			} else
+				taula2 = new Vector<Vector<Object>>();
+			tableModel1.setDataVector(taula2, zutabeak);
+			tableModel1.fireTableStructureChanged();
+		} catch (RemoteException e1) {
+			new MezuLeiho("REMOTE");
+			e1.printStackTrace();
+		} catch (IllegalStateException e3) {
+			new MezuLeiho("DB");
+		} catch (SQLException e4) {
+		new MezuLeiho("SQL","Ezin da erabiltzailearen kokapena lortu Datu Basetik");	
+		}
+
+	}
+
 	/**
-	 * This method initializes jButton1	
-	 * 	
-	 * @return javax.swing.JButton	
+	 * This method initializes jButton1
+	 * 
+	 * @return javax.swing.JButton
 	 */
 	private JButton getJButton1() {
 		if (jButton1 == null) {
@@ -329,56 +304,70 @@ public class EI_KokapenaEguneratu extends JDialog {
 			jButton1.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					String erabId = jTable1.getValueAt(0, 1).toString();
-					//String txId= jTable1.getValueAt(0, 2).toString(); 
-					
-					
-					int x =jTable.getSelectedRow();
-					
-					if (x== -1){
-						new MezuLeiho("Ez duzu gunerik aukeratu","Ados","Gunea Aukeratu",JOptionPane.ERROR_MESSAGE);
-					}
-					else{
-						String guneId = jTable.getValueAt(x, 0).toString();
-						boolean b = false;
+					String txartelId = jTable1.getValueAt(0, 2).toString();
+
+					int x = jTable.getSelectedRow();
+
+					if (x == -1) {
+						new MezuLeiho("Ez duzu gunerik aukeratu", "Ados",
+								"Gunea Aukeratu", JOptionPane.ERROR_MESSAGE);
+					} else {
+						String guneId = jTable.getValueAt(x, 3).toString();
+						Integer txIra = (Integer) txartelIrak.elementAt(x);
+
 						try {
-							
-							try {
-								b = urruIn.erabiltzaileaFakultatean(erabId);
-							} catch (SQLException e2) {
-								new MezuLeiho("SQL","Ezin da datu Basetik lortu Erabiltzailea Fakultatean dagoen edo ez");
-								// TODO Auto-generated catch block
-								e2.printStackTrace();
-							}
-							if (b==true)
-								try {
-									urruIn.kokapenaEguneratu(erabId, guneId);
-								} catch (SQLException e2) {
-									new MezuLeiho("SQL","Ezin da erabiltzailea gunetik aldatu Datu Basean");
-									// TODO Auto-generated catch block
-									e2.printStackTrace();
-								}
+							System.out.println(txIra.intValue());
+							urruIn.sarbideEskaeraEguneratu(Integer.parseInt(txartelId), txIra.intValue());
+							boolean b = urruIn.erabiltzaileaFakultatean(erabId);
+							if (b == true)
+								urruIn.kokapenaEguneratu(erabId, guneId);
 							else
-								try {
-									urruIn.kokapenaSartu(erabId, guneId);
-								} catch (SQLException e1) {
-									new MezuLeiho("SQL","Ezin du Erabiltzalean Sartu Fakultatean(Datu Basean)");
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
-								}
+								urruIn.kokapenaSartu(erabId, guneId);
+							taulaKokapenaEguneratu(jTextField.getText().toString());
 						} catch (RemoteException e1) {
 							new MezuLeiho("REMOTE");
 							e1.printStackTrace();
-						}catch (IllegalStateException e1) {
+						} catch (IllegalStateException e3) {
 							new MezuLeiho("DB");
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
+						} catch (SQLException e4) {
+						new MezuLeiho("SQL","Ezin da erabiltzailearen kokapena lortu Datu Basetik");	
 						}
-					}				
+					}
 				}
 			});
 		}
 		return jButton1;
 	}
 
-}  //  @jve:decl-index=0:visual-constraint="56,17"
+	/**
+	 * This method initializes jButton
+	 * 
+	 * @return javax.swing.JButton
+	 */
+	private JButton getJButton() {
+		if (jButton == null) {
+			jButton = new JButton();
+			jButton.setText("Kokapena Erakutsi");
+			jButton.setPreferredSize(new Dimension(140, 20));
+			jButton.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					try {
+						int i = Integer.parseInt(jTextField.getText()
+								.toString());
+						String kode = String.valueOf(i);
+						taulaKokapenaEguneratu(kode);
+					} catch (NumberFormatException e2) {
+						new MezuLeiho(
+								"Ez duzu Txartel Koderik sartu edo sartutako txartel-kodea ez da zuzena",
+								"Ados", "Txartel Kodea Okerra",
+								JOptionPane.ERROR_MESSAGE);
+					}
+
+				}
+			});
+		}
+		return jButton;
+	}
+
+} // @jve:decl-index=0:visual-constraint="56,17"
 
