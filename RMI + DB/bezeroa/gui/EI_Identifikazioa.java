@@ -154,6 +154,10 @@ public class EI_Identifikazioa extends JFrame {
 		// this.getContentPane().add(jPanel1, BorderLayout.CENTER);
 	}
 
+	public JButton getJButton1(){
+		return jButton1;
+	}
+	
 	public void setNegozioLogika(UrrunekoInterfazea i) {
 		// Lehen EZ URRUNEKOA
 		this.urrunekoKud = i;
