@@ -27,10 +27,6 @@ import javax.swing.SwingConstants;
 
 public class EI_KokapenaEguneratu extends JDialog {
 	
-	private EI_SegurtasunArduraduna jabea;
-	
-	
-
 	private static final long serialVersionUID = 1L;
 
 	private JPanel jContentPane = null;
@@ -71,7 +67,6 @@ public class EI_KokapenaEguneratu extends JDialog {
 	public EI_KokapenaEguneratu(EI_SegurtasunArduraduna owner) {
 		super(owner, true);
 		initialize();
-		this.jabea=owner;
 	}
 
 	/**
