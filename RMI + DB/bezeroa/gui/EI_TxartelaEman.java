@@ -251,6 +251,7 @@ public class EI_TxartelaEman extends JDialog {
 				public void itemStateChanged(ItemEvent e) {
 					if (e.getStateChange() == ItemEvent.SELECTED
 							&& e.getItem().equals("Bisitari")) {
+						bisitari.setLocationRelativeTo(null);
 						bisitari.setVisible(true);
 						bisitari.pack();
 					}

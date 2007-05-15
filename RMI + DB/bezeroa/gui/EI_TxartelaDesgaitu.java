@@ -18,7 +18,7 @@ import javax.swing.SwingConstants;
 import partekatuak.MezuLeiho;
 import partekatuak.UrrunekoInterfazea;
 
-public class EI_TxartelaJaso extends JDialog {
+public class EI_TxartelaDesgaitu extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 
@@ -35,7 +35,7 @@ public class EI_TxartelaJaso extends JDialog {
 	/**
 	 * @param owner
 	 */
-	public EI_TxartelaJaso(Frame owner) {
+	public EI_TxartelaDesgaitu(Frame owner) {
 		super(owner);
 		initialize();
 	}
@@ -47,7 +47,7 @@ public class EI_TxartelaJaso extends JDialog {
 	 */
 	private void initialize() {
 		this.setSize(225, 130);
-		this.setTitle("Txartela Jaso");
+		this.setTitle("Txartela Desgaitu");
 		this.setContentPane(getJContentPane());
 	}
 
@@ -113,17 +113,24 @@ public class EI_TxartelaJaso extends JDialog {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					try {
 						String nan = jTextField.getText();
-						int bal = Integer.parseInt(nan);
-						if (urrunekoKud.desgaituTxartela(bal) == 0)
+						try {
+							int bal = Integer.parseInt(nan);
+							if (urrunekoKud.desgaituTxartela(bal) == 0)
+								new MezuLeiho(
+										"Ezin izan da txartela desgaitu. Egiaztatu txartela existitzen dela.",
+										"Ados", "Ez da txartela desgaitu",
+										JOptionPane.WARNING_MESSAGE);
+							else {
+								new MezuLeiho("Txartela desgaitua izan da",
+										"Ados", "Txartela jasoa",
+										JOptionPane.INFORMATION_MESSAGE);
+								setVisible(false);
+							}
+						} catch (NumberFormatException e1) {
 							new MezuLeiho(
-									"Ezin izan da txartela desgaitu. Egiaztatu txartela existitzen dela.",
-									"Ados", "Ez da txartela desgaitu",
-									JOptionPane.WARNING_MESSAGE);
-						else {
-							new MezuLeiho("Txartela desgaitua izan da", "Ados",
-									"Txartela jasoa",
-									JOptionPane.INFORMATION_MESSAGE);
-							setVisible(false);
+									"Sartutako txartela ez da egokia edo ez duzu txartelik sartu.",
+									"Ados", "Txartel Okerra",
+									JOptionPane.ERROR_MESSAGE);
 						}
 					} catch (RemoteException e1) {
 						new MezuLeiho("REMOTE");
