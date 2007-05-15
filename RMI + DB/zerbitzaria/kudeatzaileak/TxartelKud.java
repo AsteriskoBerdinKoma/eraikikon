@@ -93,9 +93,9 @@ public class TxartelKud {
 			return null;
 	}
 
-	public void gaituTxartela(int nan) throws SQLException {
+	public void createTxartela(int nan) throws SQLException {
 		String txart = "INSERT INTO txartelak (gaituData,desgaituData,erabId) "
-				+ "VALUES (NOW(),'null,'" + nan + "')";
+				+ "VALUES (NOW(),null," + nan + ")";
 		this.agindua.executeUpdate(txart);
 	}
 
@@ -105,7 +105,7 @@ public class TxartelKud {
 		this.agindua.executeUpdate(txart);
 	}
 
-	public void gaitTxartela(int nan) throws SQLException {
+	public void gaituTxartela(int nan) throws SQLException {
 		String txart = "UPDATE txartelak SET gaituData=NOW(), desgaituData=null WHERE erabId='"
 				+ nan + "'";
 		this.agindua.executeUpdate(txart);

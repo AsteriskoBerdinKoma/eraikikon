@@ -91,7 +91,8 @@ public class EI_BisitariaTxartela extends JDialog {
 	private JButton getJButton() {
 		if (jButton == null) {
 			jButton = new JButton();
-			new Botoia(jButton);
+			vBotoi.addElement(new Botoia(jButton, 1));
+			new Botoia(jButton, 1);
 			jButton.setIcon(new ImageIcon(getClass().getResource("g1.png")));
 			jButton.setBackground(Color.blue);
 			jButton.addActionListener(new JButton_actionPerformed());
@@ -107,7 +108,8 @@ public class EI_BisitariaTxartela extends JDialog {
 	private JButton getJButton1() {
 		if (jButton1 == null) {
 			jButton1 = new JButton();
-			new Botoia(jButton1);
+			vBotoi.addElement(new Botoia(jButton1, 2));
+			new Botoia(jButton1, 2);
 			jButton1.setIcon(new ImageIcon(getClass().getResource("g2.png")));
 			jButton1.setBackground(Color.blue);
 			jButton1.addActionListener(new JButton_actionPerformed());
@@ -123,7 +125,8 @@ public class EI_BisitariaTxartela extends JDialog {
 	private JButton getJButton2() {
 		if (jButton2 == null) {
 			jButton2 = new JButton();
-			new Botoia(jButton2);
+			vBotoi.addElement(new Botoia(jButton2, 3));
+			new Botoia(jButton2, 3);
 			jButton2.setIcon(new ImageIcon(getClass().getResource("g4.png")));
 			jButton2.setBackground(Color.blue);
 			jButton2.addActionListener(new JButton_actionPerformed());
@@ -139,7 +142,8 @@ public class EI_BisitariaTxartela extends JDialog {
 	private JButton getJButton3() {
 		if (jButton3 == null) {
 			jButton3 = new JButton();
-			new Botoia(jButton3);
+			vBotoi.addElement(new Botoia(jButton3, 4));
+			new Botoia(jButton3, 4);
 			jButton3.setIcon(new ImageIcon(getClass().getResource("g5.png")));
 			jButton3.setBackground(Color.blue);
 			jButton3.addActionListener(new JButton_actionPerformed());
@@ -155,7 +159,8 @@ public class EI_BisitariaTxartela extends JDialog {
 	private JButton getJButton4() {
 		if (jButton4 == null) {
 			jButton4 = new JButton();
-			new Botoia(jButton4);
+			vBotoi.addElement(new Botoia(jButton4, 5));
+			new Botoia(jButton4, 5);
 			jButton4.setIcon(new ImageIcon(getClass().getResource("g6.png")));
 			jButton4.setBackground(Color.blue);
 			jButton4.addActionListener(new JButton_actionPerformed());
@@ -171,7 +176,8 @@ public class EI_BisitariaTxartela extends JDialog {
 	private JButton getJButton5() {
 		if (jButton5 == null) {
 			jButton5 = new JButton();
-			new Botoia(jButton5);
+			vBotoi.addElement(new Botoia(jButton5, 6));
+			new Botoia(jButton5, 6);
 			jButton5.setMnemonic(KeyEvent.VK_UNDEFINED);
 			jButton5.setBackground(Color.blue);
 			jButton5.setIcon(new ImageIcon(getClass().getResource("g3.png")));
@@ -180,6 +186,10 @@ public class EI_BisitariaTxartela extends JDialog {
 		return jButton5;
 	}
 
+	public Vector<Botoia> getBotoiak(){
+		return vBotoi;
+	}
+	
 	/**
 	 * Elkarrizketa leihoko botoiak egikaritu beharreko kodea jaurtitzen du.
 	 * 
@@ -192,67 +202,15 @@ public class EI_BisitariaTxartela extends JDialog {
 			for (Botoia bo : vBotoi) {
 				if (bo.getBotoia().equals(e.getSource())) {
 					bo.egoeraAldatu();
-					if (bo.akt)
+					if (bo.isAktibatuta()){
 						bo.getBotoia().setBackground(Color.yellow);
-					else
+					}
+					else{
 						bo.getBotoia().setBackground(Color.blue);
+					}
 					break;
 				}
 			}
 		}
-	}
-
-	/**
-	 * Gunea adierazten duen irudi bakoitza gordetzen duen botoia adierazteko
-	 * klasea.
-	 * 
-	 * @author 5. TAlDEA
-	 * 
-	 */
-	public class Botoia {
-
-		private JButton bot;
-
-		private boolean akt;
-
-		/**
-		 * {@link JButton} bat gehitzen du botoiez osatutako bektore batera.
-		 * 
-		 * @param b
-		 *            Bektorera gehitu beharreko botoia.
-		 */
-		public Botoia(JButton b) {
-			this.bot = b;
-			this.akt = false;
-			vBotoi.addElement(this);
-		}
-
-		/**
-		 * Botoia lortzeko
-		 * 
-		 * @return Botoi bat itzultzen du.
-		 */
-		public JButton getBotoia() {
-			return bot;
-		}
-
-		/**
-		 * Botoi bat aktibatuta dagoen ala ez esaten du.
-		 * 
-		 * @return Boolean bat itzultzen du. Botoia aktibatuta baldin badago
-		 *         True itzultzen du, False bestela.
-		 */
-		public boolean isAktibatuta() {
-			return akt;
-		}
-
-		/**
-		 * Botoiaren egoera aldatzen du, aktibatu/desaktibatzeko balio du.
-		 * 
-		 */
-		public void egoeraAldatu() {
-			this.akt = !akt;
-		}
-
 	}
 } // @jve:decl-index=0:visual-constraint="10,10"

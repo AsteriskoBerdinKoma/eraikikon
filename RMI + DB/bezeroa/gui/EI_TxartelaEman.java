@@ -1,5 +1,6 @@
 package bezeroa.gui;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -18,10 +19,9 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import java.awt.Dimension;
-import javax.swing.SwingConstants;
 import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import partekatuak.MezuLeiho;
 import partekatuak.UrrunekoInterfazea;
@@ -56,7 +56,7 @@ public class EI_TxartelaEman extends JDialog {
 
 	private JButton jButton1 = null;
 
-	private JDialog bisitari;
+	private EI_BisitariaTxartela bisitari;
 
 	private JLabel jLabel3 = null;
 
@@ -249,13 +249,13 @@ public class EI_TxartelaEman extends JDialog {
 			jComboBox.addItem("Bisitari");
 			jComboBox.addItemListener(new java.awt.event.ItemListener() {
 				public void itemStateChanged(ItemEvent e) {
-				if (e.getStateChange() == ItemEvent.SELECTED &&
-				e.getItem().equals("Bisita") ){
-				bisitari.setVisible(true);
-				bisitari.pack();
+					if (e.getStateChange() == ItemEvent.SELECTED
+							&& e.getItem().equals("Bisitari")) {
+						bisitari.setVisible(true);
+						bisitari.pack();
+					}
 				}
-				}
-				});
+			});
 		}
 		return jComboBox;
 	}
@@ -294,40 +294,46 @@ public class EI_TxartelaEman extends JDialog {
 					try {
 						String nan = jTextField.getText();
 						String izena = jTextField1.getText();
-						String pasahitza = kodetu(String.valueOf(jPasswordField.getPassword()));
-						// bisita bada zelan ein???
-						int aukProf = 0;
-						try {
-							aukProf = urrunekoKud.profilZenbakia(jComboBox
-									.getSelectedItem().toString());
-						}  catch (SQLException e1) {
-							new MezuLeiho("SQL","Ezin da jakin Profil horren Identifikadorea zein den");
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
+						String pasahitza = kodetu(String.valueOf(jPasswordField
+								.getPassword()));
+						if (jComboBox.getSelectedItem().toString().equals(
+								"Bisitari")) {
+							urrunekoKud.createProfila("Bisitari", nan);
+							int profId = urrunekoKud.profilZenbakia("Bisitari",
+									nan);
+							Vector<Botoia> botoiAuk = bisitari.getBotoiak();
+							Vector<Integer> vGune = new Vector<Integer>();
+							for (Botoia b : bisitari.getBotoiak()) {
+								if (b.isAktibatuta())
+									vGune
+											.addElement(new Integer(b
+													.getGuneId()));
+							}
+							urrunekoKud.createBisitariBaimenak(profId, vGune);
 						}
-						int bal = Integer.parseInt(nan);
-						try {
-							urrunekoKud.createErabiltzailea(bal, izena, pasahitza,
-									aukProf);
-						} catch (SQLException e1) {
-							new MezuLeiho("SQL","Ezin da erabiltzailea sortu, seguruena jadanik Identifikadore(NAN) existitzen delako.");
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
+						int aukProf = urrunekoKud.profilZenbakia(jComboBox
+								.getSelectedItem().toString());
+						if (nan.length() != 0) {
+							int bal = Integer.parseInt(nan);
+							try {
+								urrunekoKud.createErabiltzailea(bal, izena,
+										pasahitza, aukProf);
+								urrunekoKud.createTxartela(bal);
+							} catch (SQLException e1) {
+								new MezuLeiho(
+										"Erabiltzailea jadanik existitzen da",
+										"Ados", "Ezin da erabiltzailea sortu",
+										JOptionPane.ERROR_MESSAGE);
+								e1.printStackTrace();
+							}
 						}
-						try {
-							urrunekoKud.gaituTxartela(bal);
-						} catch (SQLException e1) {
-							new MezuLeiho("SQL","Ezin da txartela gaitu, posiblea da lehenik gaituta zegoela edo ezin dela gaituta izan");
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-						
 					} catch (RemoteException e1) {
 						new MezuLeiho("REMOTE");
 						e1.printStackTrace();
-					}catch (IllegalStateException e1) {
+					} catch (IllegalStateException e1) {
 						new MezuLeiho("DB");
-						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
 				}
@@ -365,29 +371,32 @@ public class EI_TxartelaEman extends JDialog {
 			new MezuLeiho("DB");
 			e.printStackTrace();
 		} catch (SQLException e) {
-			new MezuLeiho("SQL","Ezin dira Datu Basetik Profiiak hartu");
+			new MezuLeiho("SQL", "Ezin dira Datu Basetik Profiiak hartu");
 			e.printStackTrace();
 		} catch (RemoteException e) {
 			new MezuLeiho("REMOTE");
 			e.printStackTrace();
 		}
 	}
-	
-	public String kodetu (String testusoila){
-	    MessageDigest md = null;
-	    try{
-	      md = MessageDigest.getInstance("SHA"); //2. pausua
-	    }catch(NoSuchAlgorithmException e){
-	    	new MezuLeiho("Ez da zifraketa algoritmoa aurkitu","Ados","Zifraketa Arazoa",JOptionPane.ERROR_MESSAGE);
-	      e.printStackTrace();
-	    }try{
-	      md.update(testusoila.getBytes("UTF-8")); //3. pausua
-	    }catch(UnsupportedEncodingException e){
-	    	new MezuLeiho("Errorea kodetzerakoan","Ados","Kodeketa Errorea",JOptionPane.ERROR_MESSAGE);
-	      e.printStackTrace();
-	    }
-	    byte raw[] = md.digest(); //4. pausua
-	    String hash = (new BASE64Encoder()).encode(raw); //5. pausua
-	    return hash; //6. pausua
-	  }
+
+	public String kodetu(String testusoila) {
+		MessageDigest md = null;
+		try {
+			md = MessageDigest.getInstance("SHA"); // 2. pausua
+		} catch (NoSuchAlgorithmException e) {
+			new MezuLeiho("Ez da zifraketa algoritmoa aurkitu", "Ados",
+					"Zifraketa Arazoa", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+		try {
+			md.update(testusoila.getBytes("UTF-8")); // 3. pausua
+		} catch (UnsupportedEncodingException e) {
+			new MezuLeiho("Errorea kodetzerakoan", "Ados", "Kodeketa Errorea",
+					JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+		byte raw[] = md.digest(); // 4. pausua
+		String hash = (new BASE64Encoder()).encode(raw); // 5. pausua
+		return hash; // 6. pausua
+	}
 } // @jve:decl-index=0:visual-constraint="10,10"
