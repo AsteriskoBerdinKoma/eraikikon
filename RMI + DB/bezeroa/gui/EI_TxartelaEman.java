@@ -296,7 +296,6 @@ public class EI_TxartelaEman extends JDialog {
 						String izena = jTextField1.getText();
 						String pasahitza = kodetu(String.valueOf(jPasswordField
 								.getPassword()));
-
 						int aukProf = urrunekoKud.profilZenbakia(jComboBox
 								.getSelectedItem().toString());
 						try {
