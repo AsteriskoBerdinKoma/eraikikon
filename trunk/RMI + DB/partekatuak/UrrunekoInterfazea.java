@@ -94,7 +94,7 @@ public interface UrrunekoInterfazea extends Remote {
 	
 	public int profilZenbakia(String mota) throws IllegalStateException, RemoteException, SQLException;
 	
-	public int profilZenbakia(String mota,String deskribapena) throws IllegalStateException, SQLException;
+	public int profilZenbakia(String mota,String deskribapena) throws IllegalStateException, RemoteException, SQLException;
 	
 	public void createTxartela(int nan) throws RemoteException, IllegalStateException, SQLException;
 	
@@ -114,7 +114,7 @@ public interface UrrunekoInterfazea extends Remote {
 	
 	public void kokapenaSartu( String erabId, String guneId)throws IllegalStateException, RemoteException, SQLException;
 
-	public void createBisitariBaimenak(int profId, Vector<Integer> gune) throws IllegalStateException, SQLException;
+	public void createBisitariBaimenak(int profId, Vector<Integer> gune) throws IllegalStateException, RemoteException, SQLException;
 
 
 }
