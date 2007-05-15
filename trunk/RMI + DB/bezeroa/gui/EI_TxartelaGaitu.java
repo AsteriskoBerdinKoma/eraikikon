@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import partekatuak.MezuLeiho;
 import partekatuak.UrrunekoInterfazea;
 
 public class EI_TxartelaGaitu extends JDialog {
@@ -107,6 +108,7 @@ public class EI_TxartelaGaitu extends JDialog {
 					int bal= Integer.parseInt(nan);
 						urrunekoKud.gaitTxartela(bal);
 					} catch (RemoteException e1) {
+						new MezuLeiho("REMOTE");
 						e1.printStackTrace();
 					}
 				}
