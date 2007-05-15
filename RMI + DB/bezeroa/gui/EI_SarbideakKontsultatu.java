@@ -12,12 +12,14 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import partekatuak.DbDatuLerroa;
+import partekatuak.MezuLeiho;
 import partekatuak.UrrunekoInterfazea;
 import java.awt.Dimension;
 import java.awt.Rectangle;
@@ -162,26 +164,6 @@ public class EI_SarbideakKontsultatu extends JDialog {
 		if (jDateComboBox == null) {
 			jDateComboBox = new DateComboBox();
 			jDateComboBox.setPreferredSize(new Dimension(100, 20));
-//			jDateComboBox.addItemListener(new java.awt.event.ItemListener() {
-//				public void itemStateChanged(java.awt.event.ItemEvent e) {
-//					Calendar gaur = new GregorianCalendar();
-//					Calendar auk = new GregorianCalendar();
-//					DateFormat combo = null;
-//					gaur.setTime(new Date());
-//					auk.setTime(new Date());
-//					try {
-//						if(e.getStateChange() == ItemEvent.SELECTED){ 
-//							Date dat= combo.parse(jDateComboBox.getSelectedItem().toString());
-//							auk.setTime(dat);
-//							if(gaur.getTime().after(auk.getTime())){
-//								System.out.println("data ez da oraindik existitzen");
-//								jButton.setEnabled(false);
-//							}
-//						}
-//					} catch (ParseException e1) {
-//						e1.printStackTrace();
-//					}
-//			}});
 		}
 		return jDateComboBox;
 	}
@@ -210,6 +192,7 @@ public class EI_SarbideakKontsultatu extends JDialog {
 					//honek data horretako sarbide eskaera guztiak lortuko ditu eta atelista beteko du.
 					//egkoia ez bada, joptionpane, data egokia sartzeko adieraziz.
 					} catch (RemoteException e1) {
+						new MezuLeiho("REMOTE");
 						System.out.println("Remote exception");
 					}
 				}
@@ -296,9 +279,8 @@ public class EI_SarbideakKontsultatu extends JDialog {
 			jList.setModel(ateak);
 		} 
 		else {
-			//JOptionPane ez dago sarbide eskaerarik data horretan
+			new MezuLeiho("Ez dago sarbide eskaerarik data horretan","Ados","Sarbide eskaerarik ez",JOptionPane.ERROR_MESSAGE);
 		}
-
 	}
 	
 	public void taulaEguneratu (int ateid){
