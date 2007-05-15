@@ -113,11 +113,11 @@ CREATE TABLE  `eraikikon`.`fakultatea` (
 DROP TABLE IF EXISTS `eraikikon`.`ordutegia`;
 CREATE TABLE `eraikikon`.`ordutegia` (
   `jaiEguna` TINYINT(1) NOT NULL DEFAULT '0',
-  `haiseraOrdua` TIME NOT NULL,
+  `hasieraOrdua` TIME NOT NULL,
   `bukaeraOrdua` TIME NOT NULL,
   `proId` INTEGER UNSIGNED NOT NULL,
   `gunId` INTEGER UNSIGNED NOT NULL,
-  PRIMARY KEY USING BTREE (`haiseraOrdua`, `proId`, `gunId`),
+  PRIMARY KEY USING BTREE (`hasieraOrdua`, `proId`, `gunId`),
   KEY `proId` (`proId`),
   KEY `gunId` (`gunId`),
   CONSTRAINT `proId` FOREIGN KEY `proId` (`proId`)
