@@ -174,6 +174,14 @@ public class EI_Jaurtitzailea extends JFrame {
 		return jTextArea1;
 	}
 
+	/**
+	 * Main metodoa. Interfaze grafikoa egikaritzeko erabiltzen da. Interfazea
+	 * ixterakoan egin beharreko ekintzak definitzen ditu.
+	 * 
+	 * @param args
+	 *            Aplikazioa komando lerrotik jaurtitzean, beharrezkoak diren
+	 *            parametroak (behar balitu) jasotzeko Array bat da.
+	 */
 	public static void main(String[] args) {
 		EI_Jaurtitzailea u = new EI_Jaurtitzailea();
 		u.setVisible(true);
