@@ -51,6 +51,8 @@ public class EI_SarbideakKontsultatu extends JDialog {
 	
 	private Vector<DbDatuLerroa> datuak=new Vector<DbDatuLerroa>();  //  @jve:decl-index=0:
 	private DefaultListModel ateak=new DefaultListModel();
+	private Vector<String> zutIzen=new Vector<String>();  //  @jve:decl-index=0:
+	
 	
 	/**
 	 * @param owner
@@ -58,6 +60,12 @@ public class EI_SarbideakKontsultatu extends JDialog {
 	public EI_SarbideakKontsultatu(EI_SegurtasunArduraduna owner) {
 		super(owner, true);
 		initialize();
+		zutIzen.addElement("Ordua");
+		zutIzen.addElement("Txartel Zenbakia");
+		zutIzen.addElement("Hasiera Gunea");
+		zutIzen.addElement("Helburu Gunea");
+		zutIzen.addElement("Baimenduta?");
+		zutIzen.addElement("Ukapenaren Arrazoia");
 	}
 
 	/**
@@ -192,16 +200,8 @@ public class EI_SarbideakKontsultatu extends JDialog {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					try {
 						String data = jDateComboBox.getSelectedItem().toString().replace('/', '-');
-						System.out.println(data);
 						ateak.removeAllElements();
 						jList.setModel(new DefaultListModel());
-						Vector<String> zutIzen=new Vector<String>();
-						zutIzen.addElement("Ordua");
-						zutIzen.addElement("Txartel Zenbakia");
-						zutIzen.addElement("Hasiera Gunea");
-						zutIzen.addElement("Helburu Gunea");
-						zutIzen.addElement("Baimenduta?");
-						zutIzen.addElement("Ukapenaren Arrazoia");
 						tableModel.setDataVector(new Vector<Object>(), zutIzen);
 						tableModel.fireTableStructureChanged();
 						listaKargatu(data);
@@ -274,13 +274,6 @@ public class EI_SarbideakKontsultatu extends JDialog {
 	private JTable getJTable1() {
 		if (jTable1 == null) {
 			tableModel = new DefaultTableModel();
-			Vector<String> zutIzen=new Vector<String>();
-			zutIzen.addElement("Ordua");
-			zutIzen.addElement("Txartel Zenbakia");
-			zutIzen.addElement("Hasiera Gunea");
-			zutIzen.addElement("Helburu Gunea");
-			zutIzen.addElement("Baimenduta?");
-			zutIzen.addElement("Ukapenaren Arrazoia");
 			tableModel.setDataVector(new Vector<Object>(), zutIzen);
 			jTable1 = new JTable(tableModel);
 		}
@@ -309,15 +302,8 @@ public class EI_SarbideakKontsultatu extends JDialog {
 	}
 	
 	public void taulaEguneratu (int ateid){
-		Vector<Object> zutIzen = new Vector<Object>();
 		Vector<Object> lerroa = new Vector<Object>();
 		Vector<Vector<Object>> vEskaerak = new Vector<Vector<Object>>();
-		zutIzen.addElement("Ordua");
-		zutIzen.addElement("Txartel Zenbakia");
-		zutIzen.addElement("Hasiera Gunea");
-		zutIzen.addElement("Helburu Gunea");
-		zutIzen.addElement("Baimenduta?");
-		zutIzen.addElement("Ukapenaren Arrazoia");
 		for(DbDatuLerroa ddl: datuak){
 			if(ddl.getAteId()==ateid){
 				lerroa = new Vector<Object>();
