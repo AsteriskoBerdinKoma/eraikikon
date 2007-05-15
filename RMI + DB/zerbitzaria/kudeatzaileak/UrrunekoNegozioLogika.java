@@ -340,12 +340,22 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		fakul.pertsonakAteraEraikinetik();
 	}
 
-	public Vector<Vector<Object>> getGuneGuztiak()
-			throws IllegalStateException, SQLException {
-		if (!connectedToDatabase)
-			throw new IllegalStateException(
-					"Datu-basearekin ez dago konexiorik.");
-		return gunek.getGuneGuztiak();
+
+	public Vector<Vector<Object>> getGuneGuztiak() 
+			throws IllegalStateException, SQLException{
+		Vector<Vector<Object>> vGuneInfo;
+		
+			vGuneInfo= gunek.getGuneGuztiak();
+			if (vGuneInfo!=null){
+				for (Vector<Object> lerro: vGuneInfo){
+					String ateid= lerro.elementAt(2).toString();
+					String guneid=lerro.elementAt(0).toString();
+					lerro.insertElementAt(tik.getHelburuGunea(Integer.parseInt(ateid), Integer.parseInt(guneid)), 3);
+				}
+				return vGuneInfo;
+			}
+			else
+				return null;
 	}
 
 	public Vector<Vector<Object>> getErabiltzaileKokapena(String txId)
@@ -388,6 +398,14 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		for (Integer i : gune) {
 			ord.createOrdutegia(false, "08:00:00", "19:30:00", profId, i
 					.intValue());
+		}
+	}
+	
+	public void sarbideEskaeraEguneratu(int txartelid,int txartelirakid){
+		try {
+			sek.sarbideEskaeraEguneratu(txartelid,txartelirakid);
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
