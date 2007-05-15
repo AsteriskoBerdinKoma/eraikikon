@@ -128,7 +128,7 @@ public class EI_Identifikazioa extends JFrame {
 		gridBagConstraints.gridx = 0;
 		this.setSize(new Dimension(339, 206));
 		this.setContentPane(jPanel1);
-		jLabel1.setText("Idatzi erabiltzailearen NAN zenbakia:");
+		jLabel1.setText("NAN Zenbakia:");
 		jLabel1.setHorizontalAlignment(SwingConstants.RIGHT);
 		jLabel1.setHorizontalTextPosition(SwingConstants.RIGHT);
 		jButton1.setText("Sisteman sartu");
@@ -138,7 +138,7 @@ public class EI_Identifikazioa extends JFrame {
 				jButton1_actionPerformed(e);
 			}
 		});
-		jLabel2.setText("Idatzi passworda:");
+		jLabel2.setText("Pasahitza:");
 		jLabel2.setPreferredSize(new Dimension(130, 15));
 		jLabel2.setHorizontalAlignment(SwingConstants.RIGHT);
 		jLabel2.setHorizontalTextPosition(SwingConstants.RIGHT);
