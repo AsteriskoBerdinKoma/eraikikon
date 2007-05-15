@@ -326,22 +326,17 @@ public class EI_PresentziaKontrolatu extends JDialog {
 							txId = -1;
 						}
 						String erabIzen = urrunekoKud.getErabIzena(txId);
-						if (erabIzen != null)
-							jLabel5.setText(erabIzen + " erabiltzaileak zeharkatu dituen guneak.");
-						else
-							jLabel5.setText("Ez dago txartel hori dagokion erabiltzailerik.");
-						taulaEguneratu(txId, hasData, bukData, hasOrdu, bukOrdu);
+						taulaEguneratu(txId, hasData, bukData, hasOrdu,
+								bukOrdu, erabIzen);
 					} catch (RemoteException ex) {
 						new MezuLeiho("REMOTE");
 						ex.printStackTrace();
-						System.exit(1); // terminate application
 					} catch (IllegalStateException e1) {
 						new MezuLeiho("DB");
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					} catch (SQLException e1) {
-						new MezuLeiho("SQL","Ezin da Txartelaren Erabiltzaileran Izena lortu Datu Basetik");
-						// TODO Auto-generated catch block
+						new MezuLeiho("SQL",
+								"Ezin da Txartelaren Erabiltzaileran Izena lortu Datu Basetik");
 						e1.printStackTrace();
 					}
 				}
@@ -415,26 +410,31 @@ public class EI_PresentziaKontrolatu extends JDialog {
 	}
 
 	public void taulaEguneratu(int txartelId, String hasData, String bukData,
-			String hasOrdu, String bukOrdu) throws RemoteException {
+			String hasOrdu, String bukOrdu, String erabIzen)
+			throws RemoteException {
 		try {
-		Vector<Object> zutIzen = new Vector<Object>();
-		zutIzen.addElement("Gunearen IDa");
-		zutIzen.addElement("Gunearen Izena");
-		zutIzen.addElement("Data eta Ordua");
-		Vector<Vector<Object>> taula;
-		
-			taula = urrunekoKud.getGuneak(txartelId,
-					hasData, bukData, hasOrdu, bukOrdu);
-		
-		tableModel.setDataVector(taula, zutIzen);
-		tableModel.fireTableStructureChanged();
+			Vector<Object> zutIzen = new Vector<Object>();
+			zutIzen.addElement("Gunearen IDa");
+			zutIzen.addElement("Gunearen Izena");
+			zutIzen.addElement("Data eta Ordua");
+			Vector<Vector<Object>> taula;
+			taula = urrunekoKud.getGuneak(txartelId, hasData, bukData, hasOrdu, bukOrdu);
+			if (erabIzen != null){
+				if (taula.size() != 0)
+					jLabel5.setText(erabIzen+ " erabiltzaileak aukeratutako denbora tartean zeharkatu dituen guneak.");
+				else
+					jLabel5.setText(erabIzen+ " erabiltzaileak aukeratutako denbora tartean ez du gunerik zeharkatu.");
+			}
+			else
+				jLabel5.setText("Ez dago txartel hori dagokion erabiltzailerik.");	
+			tableModel.setDataVector(taula, zutIzen);
+			tableModel.fireTableStructureChanged();
 		} catch (IllegalStateException e) {
 			new MezuLeiho("DB");
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			new MezuLeiho("SQL","Ezin da Erabiltzaile horrek zein gunetan egon den jakin");
-			// TODO Auto-generated catch block
+			new MezuLeiho("SQL",
+					"Ezin da Erabiltzaile horrek zein gunetan egon den jakin");
 			e.printStackTrace();
 		}
 	}
