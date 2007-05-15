@@ -46,15 +46,15 @@ public class MezuLeiho {
 			this.mota = JOptionPane.ERROR_MESSAGE;
 		}
 		if(exceptioMota.equals("IO")){
-			this.mezua = " baliabide baten atzipena egiterakoan arazoa egon da";
+			this.mezua = "Baliabide baten atzipena egiterakoan arazoa egon da";
 			this.botoia = "Ados";
 			this.titulua = "Sarrera/Irteera arazoa";
 			this.mota = JOptionPane.ERROR_MESSAGE;
 		}
-		if(exceptioMota.equals("NegozioLogika")){
-			this.mezua = " Errorea negozio logika esleitzean";
+		if(exceptioMota.equals("ZerbitzariEzezaguna")){
+			this.mezua = "Ezin izan da zerbitzaria aurkitu";
 			this.botoia = "Ados";
-			this.titulua = "Negozio logika errorea";
+			this.titulua = "Zerbitzari Ezezaguna";
 			this.mota = JOptionPane.ERROR_MESSAGE;
 		}
 		if(exceptioMota.equals("DB")){

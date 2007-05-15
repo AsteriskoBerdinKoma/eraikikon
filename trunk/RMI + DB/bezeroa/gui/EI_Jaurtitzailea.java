@@ -6,8 +6,10 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.rmi.ConnectException;
 import java.rmi.Naming;
 import java.rmi.RMISecurityManager;
+import java.rmi.UnknownHostException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -46,12 +48,13 @@ public class EI_Jaurtitzailea extends JFrame {
 
 	public EI_Jaurtitzailea() {
 		super();
+		System.setProperty("java.security.policy", "client.policy");
 		this.setSize(309, 291);
 		this.setLocationRelativeTo(null);
 		try {
 			jbInit();
 		} catch (Exception e) {
-			new MezuLeiho("Errore bat egon da","Ados","Errorea", JOptionPane.ERROR_MESSAGE);
+			new MezuLeiho("Errore ezezagun bat suertatu da", "Ados", "Errore ezezaguna", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}
 	}
@@ -132,8 +135,6 @@ public class EI_Jaurtitzailea extends JFrame {
 
 	void jButton2_actionPerformed(ActionEvent e) {
 		try {
-			System.setProperty("java.security.policy", "client.policy");
-
 			// Assingn security manager
 			if (System.getSecurityManager() == null)
 				System.setSecurityManager(new RMISecurityManager());
@@ -147,11 +148,22 @@ public class EI_Jaurtitzailea extends JFrame {
 			a.setNegozioLogika(urrunekoObj);
 			jTextArea1.setText("Negozio logika esleitua\n");
 			jButton1.setEnabled(true);
-		} catch (Exception ex) {
+		}catch (ConnectException ex) {
 			jTextArea1.setText("Errorea negozio logika esleitzean\n");
 			jTextArea1.append(ex.toString());
 			jButton1.setEnabled(false);
-			new MezuLeiho("NegozioLogika");
+			new MezuLeiho("Ezin izan da zerbitzariarekin konexioa ezarri. Egiaztatu adierazitako \n helbidean zerbitzaria martxan dagoela.", "Ados", "Errorea konexioa ezartzean", JOptionPane.ERROR_MESSAGE);
+		}catch (UnknownHostException ex) {
+			jTextArea1.setText("Errorea negozio logika esleitzean\n");
+			jTextArea1.append(ex.toString());
+			jButton1.setEnabled(false);
+			new MezuLeiho("ZerbitzariEzezaguna");
+		} 
+		catch (Exception ex) {
+			jTextArea1.setText("Errorea negozio logika esleitzean\n");
+			jTextArea1.append(ex.toString());
+			jButton1.setEnabled(false);
+			new MezuLeiho("Errore ezezagun bat suertatu da", "Ados", "Errore ezezaguna", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
