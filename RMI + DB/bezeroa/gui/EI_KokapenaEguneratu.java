@@ -7,6 +7,7 @@ import javax.swing.JDialog;
 
 import javax.swing.JLabel;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.Vector;
 
 
@@ -231,8 +232,7 @@ public class EI_KokapenaEguneratu extends JDialog {
 		
 	}
 	public void setUrrunekoNegozioLogika(UrrunekoInterfazea ui) {
-		this.urruIn = ui;
-		
+		this.urruIn = ui;	
 	}
 	
 	
@@ -247,11 +247,17 @@ public class EI_KokapenaEguneratu extends JDialog {
 		zutIzen.addElement("Gune Zenbakia");
 		zutIzen.addElement("Gune Izena");
 		zutIzen.addElement("Data");
-		
-		
-			taula = urruIn.getErabiltzaileKokapena(kode);
-			
-			
+			try {
+				taula = urruIn.getErabiltzaileKokapena(kode);
+			} catch (IllegalStateException e) {
+				new MezuLeiho("DB");
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				new MezuLeiho("SQL","Ezin da erabiltzailearen kokapena lortu Datu Basetik");
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			if (taula.size()!=0){
 				jButton1.setEnabled(true);
 				
@@ -260,15 +266,24 @@ public class EI_KokapenaEguneratu extends JDialog {
 			}
 			else
 			jButton1.setEnabled(false);
-		
 	}
-	
+
 	public void taulaGuneakEguneratu() throws RemoteException{
 		Vector<Vector<Object>> taula2 = new Vector<Vector<Object>>();
 		Vector<Object> zutabeak = new Vector<Object>();
 		zutabeak.addElement("Id");
 		zutabeak.addElement("Izena");
-		taula2 = urruIn.getGuneGuztiak();
+		try {
+			taula2 = urruIn.getGuneGuztiak();
+		} catch (IllegalStateException e) {
+			new MezuLeiho("DB");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			new MezuLeiho("SQL","Ezin dira guneak lortu Datu Basetik");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		tableModel1.setDataVector(taula2, zutabeak);
 		tableModel1.fireTableStructureChanged();
 		
@@ -324,14 +339,38 @@ public class EI_KokapenaEguneratu extends JDialog {
 					}
 					else{
 						String guneId = jTable.getValueAt(x, 0).toString();
+						boolean b = false;
 						try {
-							boolean b = urruIn.erabiltzaileaFakultatean(erabId);
+							
+							try {
+								b = urruIn.erabiltzaileaFakultatean(erabId);
+							} catch (SQLException e2) {
+								new MezuLeiho("SQL","Ezin da datu Basetik lortu Erabiltzailea Fakultatean dagoen edo ez");
+								// TODO Auto-generated catch block
+								e2.printStackTrace();
+							}
 							if (b==true)
-								urruIn.kokapenaEguneratu(erabId, guneId);
-							else 
-								urruIn.kokapenaSartu(erabId, guneId);
+								try {
+									urruIn.kokapenaEguneratu(erabId, guneId);
+								} catch (SQLException e2) {
+									new MezuLeiho("SQL","Ezin da erabiltzailea gunetik aldatu Datu Basean");
+									// TODO Auto-generated catch block
+									e2.printStackTrace();
+								}
+							else
+								try {
+									urruIn.kokapenaSartu(erabId, guneId);
+								} catch (SQLException e1) {
+									new MezuLeiho("SQL","Ezin du Erabiltzalean Sartu Fakultatean(Datu Basean)");
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
 						} catch (RemoteException e1) {
 							new MezuLeiho("REMOTE");
+							e1.printStackTrace();
+						}catch (IllegalStateException e1) {
+							new MezuLeiho("DB");
+							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}				
