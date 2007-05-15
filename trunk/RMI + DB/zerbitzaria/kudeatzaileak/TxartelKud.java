@@ -28,14 +28,11 @@ public class TxartelKud {
 	 *            Datu-basearen aurkako konexioaren parametroak gordetzen dituen
 	 *            klasea da. Negozio logika egikaritzean sortuko da eta honek
 	 *            egikarituriko klase guztiek erabiliko dute.
+	 * @throws SQLException 
 	 */
-	public TxartelKud(Connection kon) {
-		try {
+	public TxartelKud(Connection kon) throws SQLException {
 			konexioa = kon;
 			agindua = (Statement) konexioa.createStatement();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 
 	/**
