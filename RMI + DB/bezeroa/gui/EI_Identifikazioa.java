@@ -165,10 +165,10 @@ public class EI_Identifikazioa extends JFrame {
 
 	void jButton1_actionPerformed(ActionEvent e) {
 		try {
-			String erab = jTextField1.getText();
+			int nan = Integer.parseInt(jTextField1.getText());
 			String pasahitza = kodetu(String.valueOf(jPasswordField1.getPassword()));
-			if (!erab.equals("") && !pasahitza.equals("")) {
-				if (urrunekoKud.loginEgin(erab, pasahitza) == 3) {
+			if (!pasahitza.equals("")) {
+				if (urrunekoKud.loginEgin(nan, pasahitza) == 3) {
 					jLabel3.setForeground(Color.GREEN);
 					jLabel3.setText("AURRERA");
 					segArd = new EI_SegurtasunArduraduna(urrunekoKud);
@@ -186,6 +186,10 @@ public class EI_Identifikazioa extends JFrame {
 				jLabel3.setForeground(Color.RED);
 				jLabel3.setText("EZ DUZU SARTZEKO BAIMENIK");
 			}
+		} catch (NumberFormatException ex) {
+			new MezuLeiho("Ez duzu sartzeko baimenik","Ados","Baimenik Ez",JOptionPane.ERROR_MESSAGE);
+			jLabel3.setForeground(Color.RED);
+			jLabel3.setText("EZ DUZU SARTZEKO BAIMENIK");
 		} catch (Exception ex) {
 			new MezuLeiho("Negozio Logikarekin Arazoak Daude","Ados","Negozio Logika Erroreak",JOptionPane.ERROR_MESSAGE);
 			ex.printStackTrace();
