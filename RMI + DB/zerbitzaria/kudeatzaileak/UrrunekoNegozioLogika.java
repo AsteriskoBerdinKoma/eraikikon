@@ -307,13 +307,13 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		return txk.getErabIzena(txId);
 	}
 
-	public int loginEgin(String erab, String pasahitza)
+	public int loginEgin(int nan, String pasahitza)
 			throws IllegalStateException, RemoteException, SQLException {
 		if (!connectedToDatabase)
 			throw new IllegalStateException(
 					"Datu-basearekin ez dago konexiorik.");
-		if (erak.isLoginZuzena(erab, pasahitza))
-			return erak.getProfila(erab);
+		if (erak.isLoginZuzena(nan, pasahitza))
+			return erak.getProfila(nan);
 		else
 			return -1;
 	}

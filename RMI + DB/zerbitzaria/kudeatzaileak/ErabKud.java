@@ -87,17 +87,17 @@ public class ErabKud {
 		this.agindua.executeUpdate(erab);
 	}
 
-	public boolean isLoginZuzena(String erab, String pasahitza)
+	public boolean isLoginZuzena(int nan, String pasahitza)
 			throws SQLException {
-		String query = "SELECT * FROM erabiltzaileak WHERE id = " + erab
+		String query = "SELECT * FROM erabiltzaileak WHERE id = " + String.valueOf(nan)
 				+ " AND pasahitza = '" + pasahitza + "'";
 		ResultSet r = agindua.executeQuery(query);
 		return r.next();
 	}
 
-	public int getProfila(String erab) throws SQLException {
+	public int getProfila(int nan) throws SQLException {
 		String query = "SELECT P.id FROM erabiltzaileak AS E INNER JOIN profilak AS P ON E.profId = P.id WHERE E.id = "
-				+ erab;
+				+ String.valueOf(nan);
 		ResultSet r = agindua.executeQuery(query);
 		if (r.next())
 			return r.getInt("id");
