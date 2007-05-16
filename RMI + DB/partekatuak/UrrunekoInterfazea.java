@@ -76,7 +76,7 @@ public interface UrrunekoInterfazea extends Remote {
 
 	public String getErabIzena(int txId) throws IllegalStateException, RemoteException, SQLException;
 	
-	public int loginEgin(String erab, String pasahitza) throws IllegalStateException, RemoteException, SQLException;
+	public int loginEgin(int nan, String pasahitza) throws IllegalStateException, RemoteException, SQLException;
 	
 	public Vector<DbDatuLerroa> getSarbideEskaerak(String data) throws IllegalStateException, RemoteException, SQLException;
 	
