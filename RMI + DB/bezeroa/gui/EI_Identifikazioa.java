@@ -115,7 +115,7 @@ public class EI_Identifikazioa extends JFrame {
 		gridBagConstraints5.ipadx = 0;
 		gridBagConstraints5.ipady = 0;
 		gridBagConstraints5.anchor = GridBagConstraints.WEST;
-		gridBagConstraints5.fill = GridBagConstraints.HORIZONTAL;
+		gridBagConstraints5.fill = GridBagConstraints.NONE;
 		gridBagConstraints5.gridwidth = 3;
 		GridBagConstraints gridBagConstraints4 = new GridBagConstraints();
 		gridBagConstraints4.insets = new Insets(5, 10, 10, 10);
@@ -157,10 +157,10 @@ public class EI_Identifikazioa extends JFrame {
 		gridBagConstraints.fill = GridBagConstraints.NONE;
 		gridBagConstraints.gridwidth = 2;
 		gridBagConstraints.gridx = 0;
-		this.setSize(new Dimension(330, 201));
+		this.setSize(new Dimension(299, 201));
 		this.setContentPane(jPanel1);
+		jLabel1.setPreferredSize(null);
 		jLabel1.setText("NAN Zenbakia:");
-		jLabel1.setPreferredSize(new Dimension(100, 16));
 		jLabel1.setHorizontalAlignment(SwingConstants.RIGHT);
 		jLabel1.setHorizontalTextPosition(SwingConstants.RIGHT);
 		jButton1.setText("Sisteman Sartu");
@@ -170,11 +170,12 @@ public class EI_Identifikazioa extends JFrame {
 				jButton1_actionPerformed(e);
 			}
 		});
+		jLabel2.setPreferredSize(null);
 		jLabel2.setText("Pasahitza:");
-		jLabel2.setPreferredSize(new Dimension(70, 15));
 		jLabel2.setHorizontalAlignment(SwingConstants.RIGHT);
 		jLabel2.setHorizontalTextPosition(SwingConstants.RIGHT);
 		jLabel2.setDisplayedMnemonic(KeyEvent.VK_UNDEFINED);
+		jLabel3.setPreferredSize(null);
 		jPanel1.setLayout(new GridBagLayout());
 		this.setTitle("Identifikazioa");
 		jPanel1.add(jLabel2, gridBagConstraints);
@@ -271,6 +272,7 @@ public class EI_Identifikazioa extends JFrame {
 			jLabel3.setForeground(Color.RED);
 			jLabel3.setText("NEGOZIO LOGIKAREKIN ARAZOAK DAUDE");
 		}
+		this.pack();
 	}
 	
 	public String kodetu (String testusoila){
@@ -309,8 +311,8 @@ public class EI_Identifikazioa extends JFrame {
 	private JButton getJButton() {
 		if (jButton == null) {
 			jButton = new JButton();
+			jButton.setPreferredSize(null);
 			jButton.setText("Aldatu");
-			jButton.setPreferredSize(new Dimension(75, 15));
 			jButton.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					zerbEsl.setHostFieldText(host);
