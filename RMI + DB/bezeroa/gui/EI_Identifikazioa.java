@@ -60,7 +60,7 @@ public class EI_Identifikazioa extends JFrame {
 	
 	private EI_SegurtasunArduraduna segArd;
 	
-	private EI_ZerbitzariaEsleitu zerbEsl = new EI_ZerbitzariaEsleitu(this); 
+	private EI_ZerbitzariaEsleitu zerbEsk = new EI_ZerbitzariaEsleitu(this); 
 
 	private JLabel jLabel = null;
 
@@ -267,10 +267,10 @@ public class EI_Identifikazioa extends JFrame {
 			jLabel3.setForeground(Color.RED);
 			jLabel3.setText("EZ DUZU SARTZEKO BAIMENIK");
 		} catch (Exception ex) {
-			new MezuLeiho("Negozio Logikarekin Arazoak Daude","Ados","Negozio Logika Erroreak",JOptionPane.ERROR_MESSAGE);
+			new MezuLeiho("Errore ezezagun bat suertatu da","Ados","Errore Ezezaguna",JOptionPane.ERROR_MESSAGE);
 			ex.printStackTrace();
 			jLabel3.setForeground(Color.RED);
-			jLabel3.setText("NEGOZIO LOGIKAREKIN ARAZOAK DAUDE");
+			jLabel3.setText("ERRORE EZEZAGUNA");
 		}
 		this.pack();
 	}
@@ -315,8 +315,8 @@ public class EI_Identifikazioa extends JFrame {
 			jButton.setText("Aldatu");
 			jButton.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					zerbEsl.setHostFieldText(host);
-					zerbEsl.setVisible(true);
+					zerbEsk.setHostFieldText(host);
+					zerbEsk.setVisible(true);
 				}
 			});
 		}
