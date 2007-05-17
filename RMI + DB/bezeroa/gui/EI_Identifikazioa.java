@@ -160,7 +160,7 @@ public class EI_Identifikazioa extends JFrame {
 		this.setSize(new Dimension(330, 201));
 		this.setContentPane(jPanel1);
 		jLabel1.setText("NAN Zenbakia:");
-		jLabel1.setPreferredSize(new Dimension(85, 16));
+		jLabel1.setPreferredSize(new Dimension(100, 16));
 		jLabel1.setHorizontalAlignment(SwingConstants.RIGHT);
 		jLabel1.setHorizontalTextPosition(SwingConstants.RIGHT);
 		jButton1.setText("Sisteman Sartu");
@@ -171,7 +171,7 @@ public class EI_Identifikazioa extends JFrame {
 			}
 		});
 		jLabel2.setText("Pasahitza:");
-		jLabel2.setPreferredSize(new Dimension(60, 15));
+		jLabel2.setPreferredSize(new Dimension(70, 15));
 		jLabel2.setHorizontalAlignment(SwingConstants.RIGHT);
 		jLabel2.setHorizontalTextPosition(SwingConstants.RIGHT);
 		jLabel2.setDisplayedMnemonic(KeyEvent.VK_UNDEFINED);
@@ -310,7 +310,7 @@ public class EI_Identifikazioa extends JFrame {
 		if (jButton == null) {
 			jButton = new JButton();
 			jButton.setText("Aldatu");
-			jButton.setPreferredSize(new Dimension(70, 15));
+			jButton.setPreferredSize(new Dimension(75, 15));
 			jButton.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					zerbEsl.setHostFieldText(host);
