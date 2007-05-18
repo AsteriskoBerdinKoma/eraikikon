@@ -20,6 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
 
 import partekatuak.MezuLeiho;
@@ -87,14 +88,10 @@ public class EI_PresentziaKontrolatu extends JDialog {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(460, 302);
+		cal.setTime(new Date());
+		this.setSize(579, 315);
 		this.setTitle("Presentzia Kontrolatu");
 		this.setContentPane(getJContentPane());
-		cal.setTime(new Date());
-		hasOrd.setValue(cal.get(Calendar.HOUR_OF_DAY));
-		bukOrd.setValue(cal.get(Calendar.HOUR_OF_DAY));
-		hasMin.setValue(cal.get(Calendar.MINUTE));
-		bukMin.setValue(cal.get(Calendar.MINUTE));
 		Vector<Object> zutIzen = new Vector<Object>();
 		zutIzen.addElement("Gunearen IDa");
 		zutIzen.addElement("Gunearen Izena");
@@ -125,7 +122,7 @@ public class EI_PresentziaKontrolatu extends JDialog {
 			gridBagConstraints14.gridy = 4;
 			gridBagConstraints14.weightx = 1.0;
 			gridBagConstraints14.weighty = 1.0;
-			gridBagConstraints14.gridwidth = 3;
+			gridBagConstraints14.gridwidth = 6;
 			gridBagConstraints14.insets = new Insets(5, 10, 5, 0);
 			gridBagConstraints14.gridheight = 2;
 			gridBagConstraints14.gridx = 0;
@@ -196,7 +193,7 @@ public class EI_PresentziaKontrolatu extends JDialog {
 			jLabel3 = new JLabel();
 			jLabel3.setText("Bukaera Eguna:");
 			GridBagConstraints gridBagConstraints10 = new GridBagConstraints();
-			gridBagConstraints10.gridx = 3;
+			gridBagConstraints10.gridx = 6;
 			gridBagConstraints10.gridwidth = 3;
 			gridBagConstraints10.insets = new Insets(5, 5, 5, 5);
 			gridBagConstraints10.fill = GridBagConstraints.HORIZONTAL;
@@ -269,7 +266,7 @@ public class EI_PresentziaKontrolatu extends JDialog {
 
 	private JSpinner gethasOrd() {
 		if (hasOrd == null) {
-			hasOrd = new JSpinner();
+			hasOrd = new JSpinner(new SpinnerNumberModel(cal.get(Calendar.HOUR_OF_DAY),0,23,1));
 			hasOrd.setPreferredSize(new Dimension(40, 20));
 		}
 		return hasOrd;
@@ -277,7 +274,7 @@ public class EI_PresentziaKontrolatu extends JDialog {
 
 	private JSpinner getbukOrd() {
 		if (bukOrd == null) {
-			bukOrd = new JSpinner();
+			bukOrd = new JSpinner(new SpinnerNumberModel(cal.get(Calendar.HOUR_OF_DAY),0,23,1));
 			bukOrd.setPreferredSize(new Dimension(40, 20));
 		}
 		return bukOrd;
@@ -285,7 +282,7 @@ public class EI_PresentziaKontrolatu extends JDialog {
 
 	private JSpinner gethasMin() {
 		if (hasMin == null) {
-			hasMin = new JSpinner();
+			hasMin = new JSpinner(new SpinnerNumberModel(cal.get(Calendar.MINUTE),0,59,1));
 			hasMin.setPreferredSize(new Dimension(40, 20));
 		}
 		return hasMin;
@@ -293,7 +290,7 @@ public class EI_PresentziaKontrolatu extends JDialog {
 
 	private JSpinner getbukMin() {
 		if (bukMin == null) {
-			bukMin = new JSpinner();
+			bukMin = new JSpinner(new SpinnerNumberModel(cal.get(Calendar.MINUTE),0,59,1));
 			bukMin.setPreferredSize(new Dimension(40, 20));
 		}
 		return bukMin;
