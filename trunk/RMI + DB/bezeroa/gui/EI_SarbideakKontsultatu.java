@@ -25,6 +25,12 @@ import partekatuak.UrrunekoInterfazea;
 import java.awt.Dimension;
 import java.awt.Rectangle;
 
+/**
+ * Egun konkretu batean eraikinean izandako sarbide-eskaerak erakusten ditu, ateen arabera antolatuta.
+ * 
+ * @author 5. Taldea
+ *
+ */
 public class EI_SarbideakKontsultatu extends JDialog {
 
 	private static final long serialVersionUID = 1L;
@@ -58,7 +64,10 @@ public class EI_SarbideakKontsultatu extends JDialog {
 	
 	
 	/**
+	 * Elkarrizketa leihoa hasieratzen du era modalean.
+	 * 
 	 * @param owner
+	 *            Elkarrizketa leihoaren jabea den Frame objektua adierazten du.
 	 */
 	public EI_SarbideakKontsultatu(EI_SegurtasunArduraduna owner) {
 		super(owner, true);
@@ -264,10 +273,24 @@ public class EI_SarbideakKontsultatu extends JDialog {
 		return jTable1;
 	}
 	
+	/**
+	 * Interfaze grafikoari pasatako negozio logika esleitzen dio.
+	 * 
+	 * @param ui
+	 *            interfaze grafikoak erabiliko duen UrrunekoInterfazea motako
+	 *            objektu bat urruneko zerbitzariarekin konexioa ezarri ahal
+	 *            izateko.
+	 */
 	public void setUrrunekoNegozioLogika(UrrunekoInterfazea ui) {
 			this.urrunekoKud = ui;
 	}
 	
+	/**
+	 * Emandako egunean izan diren sarbide-eskaerak lortzen ditu eta Jlist-ari ateak esleitzen dizkio.
+	 * 
+	 * @param data Sarbide-eskaerak egon diren kontsultatu nahi dugun data.
+	 * @throws RemoteException Zerbitzariarekin konexio errorea suertatu denean jaurtitzen da.
+	 */
 	public void listaKargatu(String data) throws RemoteException {
 		try {
 			datuak=urrunekoKud.getSarbideEskaerak(data);
@@ -295,6 +318,11 @@ public class EI_SarbideakKontsultatu extends JDialog {
 		}
 	}
 	
+	/**
+	 * Aukearatutako atearen arabera sarbide-eskaeren informazioa duen taula eguneratzen du.
+	 * 
+	 * @param ateid Emandako atearen identifikatzailea.
+	 */
 	public void taulaEguneratu (int ateid){
 		Vector<Object> lerroa = new Vector<Object>();
 		Vector<Vector<Object>> vEskaerak = new Vector<Vector<Object>>();

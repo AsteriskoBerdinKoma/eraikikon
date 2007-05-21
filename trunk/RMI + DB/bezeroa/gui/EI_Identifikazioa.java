@@ -34,6 +34,12 @@ import partekatuak.MezuLeiho;
 import partekatuak.UrrunekoInterfazea;
 import sun.misc.BASE64Encoder;
 
+/**
+ * Erabiltzailea sisteman kautotzeko klasea.
+ * 
+ * @author 5. Taldea
+ *
+ */
 public class EI_Identifikazioa extends JFrame {
 	/**
 	 * 
@@ -76,6 +82,11 @@ public class EI_Identifikazioa extends JFrame {
 
 	private String host = "localhost";  //  @jve:decl-index=0:
 
+	/**
+	 * Metodo eraikitzailea. Framea egikaritzen du. 
+	 * Frameari RMI baimenak esleitzen dizkio.
+	 * 
+	 */
 	public EI_Identifikazioa() {
 		super();
 		System.setProperty("java.security.policy", "client.policy");
@@ -188,10 +199,19 @@ public class EI_Identifikazioa extends JFrame {
 		jPanel1.add(getJToggleButton(), gridBagConstraints61);
 	}
 
+	/**
+	 * Botoia itzultzen
+	 * 
+	 * @return jButton1 botoia itzultzen du
+	 */
 	public JButton getJButton1(){
 		return jButton1;
 	}
 	
+	/**
+	 * Aplikazioak erabiliko duen negozio-logika duen zerbitzariarekin konexioa ezartzen du.
+	 * 
+	 */
 	public void setNegozioLogika() {
 		try {
 			// Assingn security manager
@@ -275,6 +295,12 @@ public class EI_Identifikazioa extends JFrame {
 		this.pack();
 	}
 	
+	/**
+	 * Emandako testua SHA-1 algoritmoa erabiliz kodetzen du
+	 * 
+	 * @param testusoila kodetu behar den String-a
+	 * @return Pasatako String-a kodetuta
+	 */
 	public String kodetu (String testusoila){
 	    MessageDigest md = null;
 	    try
@@ -293,11 +319,21 @@ public class EI_Identifikazioa extends JFrame {
 	    return hash; //6. pausua
 	  }
 
+	/**
+	 * Negozio-logika duen zerbitzariaren helbidea edo izena itzultzen du 
+	 * 
+	 * @return Helbidea edo izena duen String bat
+	 */
 	public String getHost()
 	{
 		return this.host;
 	}
 	
+	/**
+	 * Negozio-logika duen zerbitzariaren helbidea esleitzen du
+	 * 
+	 * @param helbidea Negozio-logikaren helbide berria
+	 */
 	public void setHost(String helbidea)
 	{
 		this.host = helbidea;

@@ -18,6 +18,12 @@ import javax.swing.SwingConstants;
 import partekatuak.MezuLeiho;
 import partekatuak.UrrunekoInterfazea;
 
+/**
+ * Emandako txartel zenbakia datu-basean desgaitu bezala markatzen du.
+ * 
+ * @author 5. Taula
+ *
+ */
 public class EI_TxartelaDesgaitu extends JDialog {
 
 	private static final long serialVersionUID = 1L;
@@ -33,7 +39,10 @@ public class EI_TxartelaDesgaitu extends JDialog {
 	private JButton jButton = null;
 
 	/**
+	 * Elkarrizketa leihoa hasieratzen du era modalean.
+	 * 
 	 * @param owner
+	 *            Elkarrizketa leihoaren jabea den Frame objektua adierazten du.
 	 */
 	public EI_TxartelaDesgaitu(Frame owner) {
 		super(owner);
@@ -149,6 +158,14 @@ public class EI_TxartelaDesgaitu extends JDialog {
 		return jButton;
 	}
 
+	/**
+	 * Interfaze grafikoari pasatako negozio logika esleitzen dio.
+	 * 
+	 * @param ui
+	 *            interfaze grafikoak erabiliko duen UrrunekoInterfazea motako
+	 *            objektu bat urruneko zerbitzariarekin konexioa ezarri ahal
+	 *            izateko.
+	 */
 	public void setUrrunekoNegozioLogika(UrrunekoInterfazea ui) {
 		this.urrunekoKud = ui;
 	}

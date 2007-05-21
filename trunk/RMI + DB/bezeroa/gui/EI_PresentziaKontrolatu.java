@@ -26,6 +26,12 @@ import javax.swing.table.DefaultTableModel;
 import partekatuak.MezuLeiho;
 import partekatuak.UrrunekoInterfazea;
 
+/**
+ * Erabiltzaile batek denbora tarte batean iragan dituen guneei buruzko informazioa ematen du.
+ * 
+ * @author 5. Taldea
+ *
+ */
 public class EI_PresentziaKontrolatu extends JDialog {
 
 	private static final long serialVersionUID = 1L;
@@ -75,10 +81,13 @@ public class EI_PresentziaKontrolatu extends JDialog {
 	private JLabel jLabel5 = null;
 
 	/**
-	 * @param arduraduna
+	 * Elkarrizketa leihoa hasieratzen du era modalean.
+	 * 
+	 * @param owner
+	 *            Elkarrizketa leihoaren jabea den Frame objektua adierazten du.
 	 */
-	public EI_PresentziaKontrolatu(EI_SegurtasunArduraduna arduraduna) {
-		super(arduraduna, true);
+	public EI_PresentziaKontrolatu(EI_SegurtasunArduraduna owner) {
+		super(owner, true);
 		initialize();
 	}
 
@@ -406,6 +415,17 @@ public class EI_PresentziaKontrolatu extends JDialog {
 		this.urrunekoKud = ui;
 	}
 
+	/**
+	 * Guneen taula eguneratzeko erabiltzen da
+	 * 
+	 * @param txartelId Erabiltzailearen txartel zenbakia. Zenbaki bat.
+	 * @param hasData Bilatu nahi dugun denbora-tartearen hasierako data.
+	 * @param bukData Bilatu nahi dugun denbora-tartearen bukaerako data.
+	 * @param hasOrdu Bilatu nahi dugun hasierako denbora.
+	 * @param bukOrdu Bilatu nahi dugun bukaerako denbora.
+	 * @param erabIzen Erabiltzailearen izena. String bat.
+	 * @throws RemoteException zerbitzariarekin konexio errorea suertatu denean jaurtitzen da.
+	 */
 	public void taulaEguneratu(int txartelId, String hasData, String bukData,
 			String hasOrdu, String bukOrdu, String erabIzen)
 			throws RemoteException {

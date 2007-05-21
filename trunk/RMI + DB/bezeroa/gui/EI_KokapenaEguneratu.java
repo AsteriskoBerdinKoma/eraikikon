@@ -24,6 +24,12 @@ import java.awt.Insets;
 import java.awt.Dimension;
 import javax.swing.SwingConstants;
 
+/**
+ * Emandako erabiltzailearen kokapena eguneratzen du eraikinaren barnean.
+ * 
+ * @author 5. Taldea
+ *
+ */
 public class EI_KokapenaEguneratu extends JDialog {
 
 	private static final long serialVersionUID = 1L;
@@ -59,7 +65,10 @@ public class EI_KokapenaEguneratu extends JDialog {
 	Vector<Object> zutabeak = new Vector<Object>();
 
 	/**
+	 * Elkarrizketa leihoa hasieratzen du era modalean.
+	 * 
 	 * @param owner
+	 *            Elkarrizketa leihoaren jabea den Frame objektua adierazten du.
 	 */
 	public EI_KokapenaEguneratu(EI_SegurtasunArduraduna owner) {
 		super(owner, true);
@@ -224,11 +233,22 @@ public class EI_KokapenaEguneratu extends JDialog {
 		return jTable;
 	}
 
+	/**
+	 * Urruneko negozio logikaren erreferentzia esleitzen du.
+	 * 
+	 * @param ui Emandako urruneko negozio logikaren erreferentzia
+	 */
 	public void setUrrunekoNegozioLogika(UrrunekoInterfazea ui) {
 		this.urruIn = ui;
 
 	}
 
+	/**
+	 * Emandako txartel kodeari dagokion erabiltzailearen eguneko kokapenaren informazioa
+	 * taula batean itzultzen du.
+	 * 
+	 * @param kode Erabiltzaile txartel-kodea, zenbaki bat.
+	 */
 	public void taulaKokapenaEguneratu(String kode) {
 
 		Vector<Vector<Object>> taula = new Vector<Vector<Object>>();
@@ -264,6 +284,10 @@ public class EI_KokapenaEguneratu extends JDialog {
 
 	}
 
+	/**
+	 * Eraikinean dauden gune guztiei buruzko informazioa taula batean itzultzen du.
+	 * 
+	 */
 	public void taulaGuneakEguneratu() {
 		Vector<Vector<Object>> taula2;
 		
