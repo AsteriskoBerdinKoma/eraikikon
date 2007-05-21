@@ -10,6 +10,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * @author 5. Taldea
+ *
+ */
 public class EI_ZerbitzariaEsleitu extends JDialog {
 
 	private static final long serialVersionUID = 1L;
@@ -25,7 +29,9 @@ public class EI_ZerbitzariaEsleitu extends JDialog {
 	private EI_Identifikazioa jabea = null;
 	
 	/**
-	 * @param owner
+	 * Metodo eraikitzailea. Elkarrizketa leihoa modu modalean hasieratuko da.
+	 * 
+	 * @param owner Elkarrizketa leihoaren jabea.
 	 */
 	public EI_ZerbitzariaEsleitu(EI_Identifikazioa owner) {
 		super(owner, true);
@@ -89,6 +95,11 @@ public class EI_ZerbitzariaEsleitu extends JDialog {
 		return jTextField;
 	}
 
+	/**
+	 * Pasatutako helbidea testu eremuari esleitzen dio.
+	 *  
+	 * @param helbidea ip edo host izena adierazten duen String bat.
+	 */
 	public void setHostFieldText(String helbidea)
 	{
 		this.jTextField.setText(helbidea);
