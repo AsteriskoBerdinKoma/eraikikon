@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
+ * Zerbitzari berria esleitzeko elkarrizketa leihoa.
+ * 
  * @author 5. Taldea
  *
  */
