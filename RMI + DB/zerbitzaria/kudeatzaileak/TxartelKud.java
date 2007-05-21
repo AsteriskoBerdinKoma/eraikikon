@@ -28,11 +28,11 @@ public class TxartelKud {
 	 *            Datu-basearen aurkako konexioaren parametroak gordetzen dituen
 	 *            klasea da. Negozio logika egikaritzean sortuko da eta honek
 	 *            egikarituriko klase guztiek erabiliko dute.
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public TxartelKud(Connection kon) throws SQLException {
-			konexioa = kon;
-			agindua = (Statement) konexioa.createStatement();
+		konexioa = kon;
+		agindua = (Statement) konexioa.createStatement();
 	}
 
 	/**
@@ -59,18 +59,26 @@ public class TxartelKud {
 		return biUrte.intValue();
 	}
 
-	public Vector<Vector<Object>> getErabiltzaileKokapena(String txId)throws SQLException {
+	/**
+	 * Erabiltzaile baten uneko kokapena itzultzen du
+	 * 
+	 * @param txId
+	 *            Txartel identifikadore bat, zenbakizkoa.
+	 * @return Erabiltzailea dagoen kokapenari buruzko informazioa itzultzen du,
+	 *         Objektuz osatutako bektorezko bektore batean, non Azpibektore
+	 *         bakoitzak datu-lerro bat adierazten duen.
+	 * @throws SQLException
+	 */
+	public Vector<Vector<Object>> getErabiltzaileKokapena(String txId)
+			throws SQLException {
 
-		String c3 = 
-			"SELECT e.izena,e.id, t.id, g.id, g.izena, s.data " +
-			"FROM (((guneak g INNER JOIN txartelirakurgailuak ti ON g.id=ti.guneId) " +
-				  "INNER JOIN sarbideeskaerak s ON ti.id=s.txIrakurId) " +
-				  "INNER JOIN txartelak t ON s.txId=t.id) " +
-				  "INNER JOIN erabiltzaileak e ON t.erabId=e.id " +
-			"WHERE s.txId="+txId+
-			" AND s.data >= ALL (SELECT data " +
-				  				"FROM sarbideeskaerak " + 
-				  				"WHERE txId="+txId+")";
+		String c3 = "SELECT e.izena,e.id, t.id, g.id, g.izena, s.data "
+				+ "FROM (((guneak g INNER JOIN txartelirakurgailuak ti ON g.id=ti.guneId) "
+				+ "INNER JOIN sarbideeskaerak s ON ti.id=s.txIrakurId) "
+				+ "INNER JOIN txartelak t ON s.txId=t.id) "
+				+ "INNER JOIN erabiltzaileak e ON t.erabId=e.id "
+				+ "WHERE s.txId=" + txId + " AND s.data >= ALL (SELECT data "
+				+ "FROM sarbideeskaerak " + "WHERE txId=" + txId + ")";
 
 		ResultSet q = this.agindua.executeQuery(c3);
 		Vector<Vector<Object>> erabKokapena = new Vector<Vector<Object>>();
@@ -83,6 +91,15 @@ public class TxartelKud {
 		return erabKokapena;
 	}
 
+	/**
+	 * Txartel identifikadore bati dagokion erabiltzailearen izena lortzeko
+	 * 
+	 * @param txId
+	 *            Txartel identifikadore bat, zenbakizkoa.
+	 * @return Erabiltzailearen izena adierazten duen String bat itzultzen du,
+	 *         txartel identifikadorea aurkitu bada, bestela null itzuliko du.
+	 * @throws SQLException
+	 */
 	public String getErabIzena(int txId) throws SQLException {
 		String query = "SELECT E.izena "
 				+ "FROM erabiltzaileak AS E INNER JOIN txartelak AS T ON E.id = T.erabId "
