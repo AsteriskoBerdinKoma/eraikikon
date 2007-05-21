@@ -79,6 +79,16 @@ public class ErabKud {
 		return izena;
 	}
 
+	/**
+	 * Emandako erabiltzailearen id-a, erabilzailearen izena, pasahitza eta profil id-a duen
+	 * erabiltzailea sortzen du.
+	 * 
+	 * @param nan Erabiltzailearen identifikatzailea edo nan zenbakia
+	 * @param izena Erabiltzailearen izena
+	 * @param pasahitza Erabiltzaileak bere burua identifikatzeko sartu beharko duen pasahitza
+	 * @param profId Erabiltzaile horri dagokion profilaren id-a
+	 * @throws SQLException
+	 */
 	public void insertErabiltzailea(int nan, String izena, String pasahitza,
 			int profId) throws SQLException {
 		String erab = "INSERT INTO erabiltzaileak (id,izena,pasahitza,profId) "
@@ -87,6 +97,14 @@ public class ErabKud {
 		this.agindua.executeUpdate(erab);
 	}
 
+	/**
+	 * Emandako erabiltzailearen identifikazioari pasatako pasahitza dagokion edo ez esaten du
+	 * 
+	 * @param nan Erabiltzailearen identifikazioa
+	 * @param pasahitza Erabitzailearen pasahitza
+	 * @return Emandako erabiltzailea existitzen bada eta bere pasahitza emandakoa bada true itzultzen du, bestela false
+	 * @throws SQLException
+	 */
 	public boolean isLoginZuzena(int nan, String pasahitza)
 			throws SQLException {
 		String query = "SELECT * FROM erabiltzaileak WHERE id = " + String.valueOf(nan)
@@ -95,6 +113,13 @@ public class ErabKud {
 		return r.next();
 	}
 
+	/**
+	 * Erabiltzaile baten idetifikazioa emanda, erabiltzaile horri dagokion profilaren identifikazioa itzultzen du
+	 * 
+	 * @param nan Erabiltzailearen identifikatzailea
+	 * @return Emandako erabiltzaileari dagokion profilaren id-a
+	 * @throws SQLException
+	 */
 	public int getProfila(int nan) throws SQLException {
 		String query = "SELECT P.id FROM erabiltzaileak AS E INNER JOIN profilak AS P ON E.profId = P.id WHERE E.id = "
 				+ String.valueOf(nan);

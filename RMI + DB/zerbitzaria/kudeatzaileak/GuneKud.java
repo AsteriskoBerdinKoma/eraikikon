@@ -6,6 +6,13 @@ import java.sql.SQLException;
 import java.util.Vector;
 import com.mysql.jdbc.Statement;
 
+/**
+ * Guneekin erlazionaturik dauden datu-basearen aurkako eskaerak
+ * gauzatzeko klasea.
+ * 
+ * @author 5. TALDEA
+ * 
+ */
 public class GuneKud {
 
 	private Connection konexioa;

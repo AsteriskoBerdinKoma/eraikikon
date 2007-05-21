@@ -85,6 +85,11 @@ public class IntziKud {
 		this.agindua.executeUpdate(intz);
 	}
 
+	/**
+	 * Alarmaren intzidentzia bat sortzen du
+	 * 
+	 * @throws SQLException
+	 */
 	public void insertAlarma() throws SQLException {
 		String intz = "INSERT INTO intzidentziak (data, mota, gaituta) "
 				+ "VALUES (NOW(), 'alarma', true)";
