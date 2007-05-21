@@ -4,6 +4,6 @@
 	<classpathentry kind="src" path="Datu Basearekin"/>
 	<classpathentry kind="src" path="RMI + DB"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/eclipse/mysql-connector-java-5.0.5/mysql-connector-java-5.0.5-bin.jar"/>
+	<classpathentry kind="lib" path="/home/blizarazu/EHU/Software Ingieneritza/mysql-connector-java-5.0.5/mysql-connector-java-5.0.5-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
