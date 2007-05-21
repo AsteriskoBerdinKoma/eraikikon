@@ -61,7 +61,8 @@ public class SarbideEskKud {
 	 * @throws IllegalStateException
 	 * @throws SQLException
 	 */
-	public Vector<Integer> getSarbideEskaeraUkatuak(int txartelId, String data)throws SQLException {
+	public Vector<Integer> getSarbideEskaeraUkatuak(int txartelId, String data)
+			throws SQLException {
 		Vector<Integer> vTxIrakurId = new Vector<Integer>();
 		String c3 = "SELECT S.txIrakurId AS TxartelIrak, COUNT(*) AS Kop "
 				+ "FROM sarbideeskaerak AS S INNER JOIN txartelirakurgailuak AS T ON S.txIrakurId=T.id "
@@ -78,7 +79,18 @@ public class SarbideEskKud {
 		return vTxIrakurId;
 	}
 
-	public Vector<DbDatuLerroa> getSarbideEskaerak(String data)throws SQLException {
+	/**
+	 * Data batean izan diren sarbide-eskaera guztiak lortzen ditu Data-basetik
+	 * 
+	 * @param data
+	 *            Data bat adierazten duen UUUU-hh-ee formatuko String bat.
+	 * @return Objektuz osatutako bektorezko bektore bat itzultzen du,
+	 *         Azpibektore bakoitzean sarbide-eskaera baten informazioa
+	 *         gordetzen da.
+	 * @throws SQLException
+	 */
+	public Vector<DbDatuLerroa> getSarbideEskaerak(String data)
+			throws SQLException {
 		Vector<DbDatuLerroa> vDatuak = new Vector<DbDatuLerroa>();
 		String c4 = "SELECT A.id, S.data, S.txId, G.id, S.baimenduta, S.ukapenarenArrazoia, T.id "
 				+ "FROM ((sarbideeskaerak AS S INNER JOIN txartelirakurgailuak AS T ON S.txIrakurId=T.id) "
@@ -103,6 +115,22 @@ public class SarbideEskKud {
 		return vDatuak;
 	}
 
+	/**
+	 * Erabiltzaile batek data-tarte batean izandako sarbide-eskaeren
+	 * informazioa itzultzen du
+	 * 
+	 * @param txartelId
+	 *            Txartel identifikadore bat, zenbakizkoa.
+	 * @param hasDataOrd
+	 *            Hasierako data bat, UUUU:hh:ee formatuko String bat.
+	 * @param bukDataOrd
+	 *            Bukaerako data bat, UUUU:hh:ee formatuko String bat.
+	 * @return Objektuz osatutako bektorezko bektore bat itzultzen du,
+	 *         azpibektore bakoitzean erabiltzaile horrek izandako
+	 *         sarbide-eskaeraren gune identifikatzailea, gune izena eta
+	 *         sarbide-eskaeraren data gordeko da.
+	 * @throws SQLException
+	 */
 	public Vector<Vector<Object>> getSarbideEskaerak(int txartelId,
 			String hasDataOrd, String bukDataOrd) throws SQLException {
 		Vector<Vector<Object>> taula = new Vector<Vector<Object>>();
@@ -122,13 +150,23 @@ public class SarbideEskKud {
 		}
 		return taula;
 	}
-	
-	public void sarbideEskaeraEguneratu(int txartelid,int txartelirakid) 
-				throws SQLException{
-		String c18=
-			"INSERT INTO sarbideeskaerak " +
-			"(data,baimenduta,ukapenarenArrazoia,txId,txIrakurId) " +
-			"VALUES (now(),1,null,"+txartelid+","+txartelirakid+")";
+
+	/**
+	 * Sarbide-eskaera berri bat sortzen du emandako Txartel identifikadore eta
+	 * Txartel-irakurgailu identifikadorearekin
+	 * 
+	 * @param txartelid
+	 *            Txartel identifikadorea bat, zenbakizkoa.
+	 * @param txartelirakid
+	 *            Txartel-irakurgailu identifikadore bat, zenbakizkoa.
+	 * @throws SQLException
+	 */
+	public void sarbideEskaeraEguneratu(int txartelid, int txartelirakid)
+			throws SQLException {
+		String c18 = "INSERT INTO sarbideeskaerak "
+				+ "(data,baimenduta,ukapenarenArrazoia,txId,txIrakurId) "
+				+ "VALUES (now(),1,null," + txartelid + "," + txartelirakid
+				+ ")";
 		agindua.executeUpdate(c18);
 	}
 }
