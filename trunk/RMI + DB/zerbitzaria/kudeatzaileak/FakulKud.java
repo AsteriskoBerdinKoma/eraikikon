@@ -6,8 +6,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * @author Propietario
- *
+ * Fakultatearekin erlazionaturik dauden datu-basearen aurkako eskaerak
+ * gauzatzeko klasea.
+ * 
+ * @author 5. TALDEA
+ * 
  */
 public class FakulKud {
 
@@ -46,12 +49,24 @@ public class FakulKud {
 				return kop;	
 	}
 	
+	/**
+	 * Fakultatea taula ustu egiten du
+	 * 
+	 * @throws SQLException
+	 */
 	public void pertsonakAteraEraikinetik() throws SQLException{
 		String query = "DELETE FROM fakultatea";
 			this.agindua.executeUpdate(query);
 	}
 	
 	
+	/**
+	 * Emandako erabiltzailea fakultatea taulan dagoen edo ez esaten du
+	 * 
+	 * @param erabId Fakultatean dagoen jakin nahi dugun erabiltzalearen identifikazioa
+	 * @return Erabiltzailea fakultatean badago true itzuliko du, bestela false
+	 * @throws SQLException
+	 */
 	public boolean erabiltzaileaFakultatean(String erabId)throws SQLException{
 		
 		String query1 = "SELECT * FROM fakultatea WHERE erId= "+ erabId;
@@ -61,29 +76,35 @@ public class FakulKud {
 			return true;
 		}
 		return false;
-	}
+	}	
 	
-	
-	
-	
-	
-	
+	/**
+	 * Emandako erabiltzailearen gunea emandakoagatik aldatzen du.
+	 * 
+	 * @param erabId Gunez aldatu nahi dugun erabiltzailearen id-a
+	 * @param guneId Erabiltzilea aldatu nahi dugun gunearen id-a
+	 * @throws IllegalStateException
+	 * @throws SQLException
+	 */
 	public void kokapenaEguneratu(String erabId,String guneId) throws 
-	IllegalStateException, SQLException{
-		
-			
+	IllegalStateException, SQLException{	
 			String query2= "UPDATE fakultatea SET guId= " + guneId + " WHERE erId= " + erabId;
 			this.agindua.executeUpdate(query2);
-			
-		
 	}
 	
+	/**
+	 * Emandako erabiltzailea emandako fakultateko gunean sartzen du
+	 * 
+	 * @param erabId Fakultatean sartu nahi dugun erabiltzailearen id-a
+	 * @param guneId Erabiltzailea sartu nahi dugun gunearen id-a
+	 * @throws IllegalStateException
+	 * @throws SQLException
+	 */
 	public void kokapenaSartu(String erabId, String guneId) throws
 	IllegalStateException, SQLException{
 		String query3= "INSERT INTO fakultatea (erId, guId, inId) VALUES( "
 		+ erabId + " , " + guneId + " ,null )";
 		this.agindua.executeUpdate(query3);
-		
 	}
 
 	

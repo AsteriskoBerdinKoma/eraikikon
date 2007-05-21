@@ -111,18 +111,38 @@ public class TxartelKud {
 			return null;
 	}
 
+	/**
+	 * Emandako erabiltzaileari txartel bat sortzen dio
+	 * 
+	 * @param nan Txartela sortu nahi diogun erabiltzailearen identifikazioa
+	 * @throws SQLException
+	 */
 	public void createTxartela(int nan) throws SQLException {
 		String txart = "INSERT INTO txartelak (gaituData,desgaituData,erabId) "
 				+ "VALUES (NOW(),null," + nan + ")";
 		this.agindua.executeUpdate(txart);
 	}
 
+	/**
+	 * Emandako erabiltzailearen txartela desgaitzen du
+	 * 
+	 * @param nan Txartela desgaitu nahi diogun erabiltzailearen identifikazioa
+	 * @return Desgaitu dituen txartel kopurua
+	 * @throws SQLException
+	 */
 	public int desgaituTxartela(int nan) throws SQLException {
 		String txart = "UPDATE txartelak SET desgaituData=NOW()WHERE erabId='"
 				+ nan + "'";
 		return this.agindua.executeUpdate(txart);
 	}
 
+	/**
+	 * Emandako erabiltzailearen txartela gaitzen du
+	 * 
+	 * @param nan Txartela gaitu nahi diogun erabiltzailearen identifikazioa
+	 * @return Gaitu dituen txartel kopurua
+	 * @throws SQLException
+	 */
 	public int gaituTxartela(int nan) throws SQLException {
 		String txart = "UPDATE txartelak SET gaituData=NOW(), desgaituData=null WHERE erabId='"
 				+ nan + "'";
