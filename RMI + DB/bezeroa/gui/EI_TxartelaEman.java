@@ -370,10 +370,22 @@ public class EI_TxartelaEman extends JDialog {
 		return jPasswordField;
 	}
 
+	/**
+	 * Interfaze grafikoari pasatako negozio logika esleitzen dio.
+	 * 
+	 * @param ui
+	 *            interfaze grafikoak erabiliko duen UrrunekoInterfazea motako
+	 *            objektu bat urruneko zerbitzariarekin konexioa ezarri ahal
+	 *            izateko.
+	 */
 	public void setUrrunekoNegozioLogika(UrrunekoInterfazea ui) {
 		this.urrunekoKud = ui;
 	}
 
+	/**
+	 * Datu-basean dauden profil desberdinak ComboBox-ean kargatzen ditu
+	 * 
+	 */
 	public void profilakKargatu() {
 		try {
 			Vector<String> vProfilak = null;
@@ -394,6 +406,12 @@ public class EI_TxartelaEman extends JDialog {
 		}
 	}
 
+	/**
+	 * Emandako testua SHA-1 algoritmoa erabiliz kodetzen du
+	 * 
+	 * @param testusoila kodetu behar den String-a
+	 * @return Pasatako String-a kodetuta
+	 */
 	public String kodetu(String testusoila) {
 		MessageDigest md = null;
 		try {

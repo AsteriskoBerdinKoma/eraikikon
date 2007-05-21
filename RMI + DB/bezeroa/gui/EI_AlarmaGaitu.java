@@ -28,6 +28,13 @@ import sun.audio.ContinuousAudioDataStream;
 import java.awt.Dimension;
 import java.awt.Color;
 
+/**
+ * Eraikineko alarma gaitu eta barnean dauden pertsona kopurua adierazteko klasea.
+ * Alarma gaitzerakoan ate guztiak ireki eta alarma horren intzidentzia sortzen du.
+ * 
+ * @author 5. Taldea
+ *
+ */
 public class EI_AlarmaGaitu extends JDialog {
 
 	private static final long serialVersionUID = 1L;
@@ -55,7 +62,9 @@ public class EI_AlarmaGaitu extends JDialog {
 	private JLabel jLabel1 = null;
 
 	/**
-	 * @param owner
+	 * Metodo eraikitzailea. Elkarrizketa leihoa modu modalean hasieratuko da.
+	 * 
+	 * @param owner  Elkarrizketa leihoaren jabea.
 	 */
 	public EI_AlarmaGaitu(EI_SegurtasunArduraduna owner) {
 		super(owner, true);
@@ -229,10 +238,19 @@ public class EI_AlarmaGaitu extends JDialog {
 		return jButton;
 	}
 
+	/**
+	 * Urruneko negozio logikaren erreferentzia esleitzen du.
+	 * 
+	 * @param ui Emandako urruneko negozio logikaren erreferentzia
+	 */
 	public void setUrrunekoNegozioLogika(UrrunekoInterfazea ui) {
 		this.urrunekoKud = ui;
 	}
 
+	/**
+	 * Eraikin barnean dagoen pertsona kopurua esleitzen du.
+	 * 
+	 */
 	public void setEraikinekoPertsonKop() {
 		int kop = 0;
 		try {

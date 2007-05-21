@@ -18,6 +18,12 @@ import javax.swing.SwingConstants;
 import partekatuak.MezuLeiho;
 import partekatuak.UrrunekoInterfazea;
 
+/**
+ * Erabiltzaile baten txartela gaitzeko balio du.
+ * 
+ * @author 5. Taldea
+ *
+ */
 public class EI_TxartelaGaitu extends JDialog {
 
 	private static final long serialVersionUID = 1L;
@@ -33,7 +39,10 @@ public class EI_TxartelaGaitu extends JDialog {
 	private UrrunekoInterfazea urrunekoKud; // @jve:decl-index=0:
 
 	/**
+	 * Elkarrizketa leihoa hasieratzen du era modalean.
+	 * 
 	 * @param owner
+	 *            Elkarrizketa leihoaren jabea den Frame objektua adierazten du.
 	 */
 	public EI_TxartelaGaitu(Frame owner) {
 		super(owner);
@@ -140,6 +149,14 @@ public class EI_TxartelaGaitu extends JDialog {
 		return jButton;
 	}
 
+	/**
+	 * Interfaze grafikoari pasatako negozio logika esleitzen dio.
+	 * 
+	 * @param ui
+	 *            interfaze grafikoak erabiliko duen UrrunekoInterfazea motako
+	 *            objektu bat urruneko zerbitzariarekin konexioa ezarri ahal
+	 *            izateko.
+	 */
 	public void setUrrunekoNegozioLogika(UrrunekoInterfazea ui) {
 		this.urrunekoKud = ui;
 	}

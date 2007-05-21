@@ -40,7 +40,7 @@ public class EI_BisitariaTxartela extends JDialog {
 	private Vector<Botoia> vBotoi = new Vector<Botoia>(); // @jve:decl-index=0:
 
 	/**
-	 * Elkarrizketa leihoa hasieratzen du.
+	 * Elkarrizketa leihoa hasieratzen du era modalean.
 	 * 
 	 * @param owner
 	 *            Elkarrizketa leihoaren jabea den Frame objektua adierazten du.
@@ -180,6 +180,11 @@ public class EI_BisitariaTxartela extends JDialog {
 		return jButton5;
 	}
 
+	/**
+	 * Botoien bektorea lortzeko beraien egoerekin batera
+	 *  
+	 * @return Botoiez osatutako bektore bat
+	 */
 	public Vector<Botoia> getBotoiak(){
 		return vBotoi;
 	}

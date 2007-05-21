@@ -211,12 +211,6 @@ public class EI_SegurtasunArduraduna extends JFrame {
 	}
 
 	/**
-	 * This method initializes jMenuItem1
-	 * 
-	 * @return javax.swing.JMenuItem
-	 */
-
-	/**
 	 * This method initializes jMenuItem2
 	 * 
 	 * @return javax.swing.JMenuItem
@@ -357,6 +351,15 @@ public class EI_SegurtasunArduraduna extends JFrame {
 		this.tableModel.fireTableStructureChanged();
 	}
 
+	/**
+	 * Interfaze grafikoari pasatako negozio logika esleitzen dio. Honek sortzen dituen elkarrizketa-leiho guztiei
+	 * negozio-logika bera esleitzen die.
+	 * 
+	 * @param ui
+	 *            interfaze grafikoak erabiliko duen UrrunekoInterfazea motako
+	 *            objektu bat urruneko zerbitzariarekin konexioa ezarri ahal
+	 *            izateko.
+	 */
 	public void setUrrunekoNegozioLogika(UrrunekoInterfazea ui)
 	{
 		this.urrunekoKud = ui;
