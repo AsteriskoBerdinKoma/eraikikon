@@ -5,6 +5,12 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+/**
+ * Errore-mezuak bistaratzeko leiho-mezu sistema. Aplikazioak jaurtitzen dituen mezu-leiho guztiak kudeatuko ditu.
+ * 
+ * @author 5. Taldea
+ *
+ */
 public class MezuLeiho {
 
 	private String mezua;
@@ -14,10 +20,12 @@ public class MezuLeiho {
 	
 	
 	/**
-	 * @param mezu
-	 * @param botoi
-	 * @param titulu
-	 * @param mezu_mota JOptionPane-en motak
+	 * Metodo eraikitzailea. Mezuaren izaera definitzeko erabiltzen da.
+	 * 
+	 * @param mezu Mezu-leihoan agertuko den mezua, String bat.
+	 * @param botoi Mezu-leihoan agertzen den botoiaren testua, String bat.
+	 * @param titulu Mezu-leihoaren tituluko testua, String bat.
+	 * @param mezu_mota JOptionPane-en mota adierazten duen zenbaki bat.
 	 */
 	public MezuLeiho(String mezu, String botoi, String titulu, int mezu_mota){
 		this.mezua = mezu;
@@ -28,6 +36,12 @@ public class MezuLeiho {
 		this.sortuMezua();
 	}
 	
+	/**
+	 * Metodo eraikitzailea. Mezuaren izaera definitzeko erabiltzen da.
+	 * 
+	 * @param exceptionMota Mezua jaurti duen salbuespen-mota, String bat.
+	 * @param mezu Mezu-leihoan agertuko den mezua, String bat.
+	 */
 	public MezuLeiho(String exceptionMota, String mezu){
 		if(exceptionMota.equals("SQL")){
 			this.mezua = mezu;
@@ -38,6 +52,11 @@ public class MezuLeiho {
 		this.sortuMezua();
 	}
 	
+	/**
+	 * Metodo eraikitzailea. Mezuaren izaera definitzeko erabiltzen da.
+	 * 
+	 * @param exceptioMota Mezua jaurti duen salbuespen-mota, String bat.
+	 */
 	public MezuLeiho(String exceptioMota){
 		if (exceptioMota.equals("REMOTE")){
 			this.mezua = "Ezin izan da zerbitzariarekin konexioa ezarri";
