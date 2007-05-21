@@ -20,6 +20,13 @@ import com.sun.java.swing.plaf.windows.WindowsComboBoxUI;
 import javax.swing.JLabel;
 import java.awt.Color;
 
+/**
+ * Datak aukeratzeko egutegi bat panel batean sortzen duen klasea. Aukeratutako data ComboBox 
+ * batean gordetzen da.
+ * 
+ * @author www.java.happycodings.com (5. Taldeak atondua)
+ *
+ */
 public class DateComboBox extends JComboBox {
 
 	/**
@@ -29,10 +36,18 @@ public class DateComboBox extends JComboBox {
 
 	protected SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, yyyy");
 
+	/**
+	 * ComboBox-aren Data formatua esleitzeko balio du.
+	 * 
+	 * @param dateFormat ComboBox-ak erabiliko duen data formatua
+	 */
 	public void setDateFormat(SimpleDateFormat dateFormat) {
 		this.dateFormat = dateFormat;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComboBox#setSelectedItem(java.lang.Object)
+	 */
 	public void setSelectedItem(Object item) {
 		// Could put extra logic here or in renderer when item is instanceof
 		// Date, Calendar, or String
@@ -42,6 +57,9 @@ public class DateComboBox extends JComboBox {
 		super.setSelectedItem(item);
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComboBox#updateUI()
+	 */
 	public void updateUI() {
 		ComboBoxUI cui = (ComboBoxUI) UIManager.getUI(this);
 		if (cui instanceof MetalComboBoxUI) {
@@ -59,18 +77,35 @@ public class DateComboBox extends JComboBox {
 	// UI Inner classes -- one for each supported Look and Feel
 	// ////////////////////////////////////////////////////////////
 
+	/**
+	 * Egutegia egikaritzen duen panela sortzeko.
+	 * 
+	 * @author www.java.happycodings.com (5. Taldeak atondua)
+	 *
+	 */
 	class MetalDateComboBoxUI extends MetalComboBoxUI {
 		protected ComboPopup createPopup() {
 			return new DatePopup(comboBox);
 		}
 	}
 
+	/**
+	 * Egutegia egikaritzen duen panela sortzeko.
+	 * 
+	 * @author www.java.happycodings.com (5. Taldeak atondua)
+	 *
+	 */
 	class WindowsDateComboBoxUI extends WindowsComboBoxUI {
 		protected ComboPopup createPopup() {
 			return new DatePopup(comboBox);
 		}
 	}
 
+	/**
+	 * Egutegia egikaritzen duen panela sortzeko.
+	 * 
+	 * @author www.java.happycodings.com (5. Taldeak atondua)
+	 */
 	class MotifDateComboBoxUI extends MotifComboBoxUI {
 		/**
 		 * 
@@ -86,6 +121,12 @@ public class DateComboBox extends JComboBox {
 	// DatePopup inner class
 	// ////////////////////////////////////////////////////////////
 
+	/**
+	 * Egutegiari informazioa esleitzeko klasea
+	 * 
+	 * @author www.java.happycodings.com (5. Taldeak atondua)
+	 *
+	 */
 	class DatePopup implements ComboPopup, MouseMotionListener, MouseListener,
 			KeyListener, PopupMenuListener {
 
@@ -113,6 +154,11 @@ public class DateComboBox extends JComboBox {
 
 		protected Color foreground;
 
+		/**
+		 * Emandako ComboBox-ari egutegia hasieratu.
+		 * 
+		 * @param comboBox Egutegia edukitzea nahi dugun ComboBox-a
+		 */
 		public DatePopup(JComboBox comboBox) {
 			this.comboBox = comboBox;
 			calendar = Calendar.getInstance();
@@ -133,6 +179,9 @@ public class DateComboBox extends JComboBox {
 		// ========================================
 		// begin ComboPopup method implementations
 		//
+		/* (non-Javadoc)
+		 * @see javax.swing.plaf.basic.ComboPopup#show()
+		 */
 		public void show() {
 			try {
 				// if setSelectedItem() was called with a valid date, adjust the
@@ -144,43 +193,73 @@ public class DateComboBox extends JComboBox {
 			popup.show(comboBox, 0, comboBox.getHeight());
 		}
 
+		/* (non-Javadoc)
+		 * @see javax.swing.plaf.basic.ComboPopup#hide()
+		 */
 		public void hide() {
 			popup.setVisible(false);
 		}
 
 		protected JList list = new JList();
 
+		/* (non-Javadoc)
+		 * @see javax.swing.plaf.basic.ComboPopup#getList()
+		 */
 		public JList getList() {
 			return list;
 		}
 
+		/* (non-Javadoc)
+		 * @see javax.swing.plaf.basic.ComboPopup#getMouseListener()
+		 */
 		public MouseListener getMouseListener() {
 			return this;
 		}
 
+		/* (non-Javadoc)
+		 * @see javax.swing.plaf.basic.ComboPopup#getMouseMotionListener()
+		 */
 		public MouseMotionListener getMouseMotionListener() {
 			return this;
 		}
 
+		/* (non-Javadoc)
+		 * @see javax.swing.plaf.basic.ComboPopup#getKeyListener()
+		 */
 		public KeyListener getKeyListener() {
 			return this;
 		}
 
+		/* (non-Javadoc)
+		 * @see javax.swing.plaf.basic.ComboPopup#isVisible()
+		 */
 		public boolean isVisible() {
 			return popup.isVisible();
 		}
 
+		/* (non-Javadoc)
+		 * @see javax.swing.plaf.basic.ComboPopup#uninstallingUI()
+		 */
 		public void uninstallingUI() {
 			popup.removePopupMenuListener(this);
 		}
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
+		 */
 		public void mousePressed(MouseEvent e) {
 		}
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
+		 */
 		public void mouseReleased(MouseEvent e) {
 		}
 
 		// something else registered for MousePressed
+		/* (non-Javadoc)
+		 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
+		 */
 		public void mouseClicked(MouseEvent e) {
 			if (!SwingUtilities.isLeftMouseButton(e))
 				return;
@@ -196,28 +275,49 @@ public class DateComboBox extends JComboBox {
 
 		protected boolean mouseInside = false;
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
+		 */
 		public void mouseEntered(MouseEvent e) {
 			mouseInside = true;
 		}
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
+		 */
 		public void mouseExited(MouseEvent e) {
 			mouseInside = false;
 		}
 
 		// MouseMotionListener
+		/* (non-Javadoc)
+		 * @see java.awt.event.MouseMotionListener#mouseDragged(java.awt.event.MouseEvent)
+		 */
 		public void mouseDragged(MouseEvent e) {
 		}
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.MouseMotionListener#mouseMoved(java.awt.event.MouseEvent)
+		 */
 		public void mouseMoved(MouseEvent e) {
 		}
 
 		// KeyListener
+		/* (non-Javadoc)
+		 * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
+		 */
 		public void keyPressed(KeyEvent e) {
 		}
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.KeyListener#keyTyped(java.awt.event.KeyEvent)
+		 */
 		public void keyTyped(KeyEvent e) {
 		}
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
+		 */
 		public void keyReleased(KeyEvent e) {
 			if (e.getKeyCode() == KeyEvent.VK_SPACE
 					|| e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -229,15 +329,24 @@ public class DateComboBox extends JComboBox {
 		 * Variables hideNext and mouseInside are used to hide the popupMenu by
 		 * clicking the mouse in the JComboBox
 		 */
+		/* (non-Javadoc)
+		 * @see javax.swing.event.PopupMenuListener#popupMenuCanceled(javax.swing.event.PopupMenuEvent)
+		 */
 		public void popupMenuCanceled(PopupMenuEvent e) {
 		}
 
 		protected boolean hideNext = false;
 
+		/* (non-Javadoc)
+		 * @see javax.swing.event.PopupMenuListener#popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent)
+		 */
 		public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
 			hideNext = mouseInside;
 		}
 
+		/* (non-Javadoc)
+		 * @see javax.swing.event.PopupMenuListener#popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent)
+		 */
 		public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
 		}
 
@@ -259,15 +368,24 @@ public class DateComboBox extends JComboBox {
 			label.setBorder(unselectedBorder);
 			label.setForeground(foreground);
 			label.addMouseListener(new MouseAdapter() {
+				/* (non-Javadoc)
+				 * @see java.awt.event.MouseAdapter#mouseReleased(java.awt.event.MouseEvent)
+				 */
 				public void mouseReleased(MouseEvent e) {
 					calendar.add(field, amount);
 					updatePopup();
 				}
 
+				/* (non-Javadoc)
+				 * @see java.awt.event.MouseAdapter#mouseEntered(java.awt.event.MouseEvent)
+				 */
 				public void mouseEntered(MouseEvent e) {
 					label.setBorder(selectedBorder);
 				}
 
+				/* (non-Javadoc)
+				 * @see java.awt.event.MouseAdapter#mouseExited(java.awt.event.MouseEvent)
+				 */
 				public void mouseExited(MouseEvent e) {
 					label.setBorder(unselectedBorder);
 				}
@@ -366,12 +484,21 @@ public class DateComboBox extends JComboBox {
 				label.setHorizontalAlignment(JLabel.CENTER);
 				label.setForeground(foreground);
 				label.addMouseListener(new MouseListener() {
+					/* (non-Javadoc)
+					 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
+					 */
 					public void mousePressed(MouseEvent e) {
 					}
 
+					/* (non-Javadoc)
+					 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
+					 */
 					public void mouseClicked(MouseEvent e) {
 					}
 
+					/* (non-Javadoc)
+					 * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
+					 */
 					public void mouseReleased(MouseEvent e) {
 						label.setOpaque(false);
 						label.setBackground(background);
@@ -385,12 +512,18 @@ public class DateComboBox extends JComboBox {
 						comboBox.requestFocus();
 					}
 
+					/* (non-Javadoc)
+					 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
+					 */
 					public void mouseEntered(MouseEvent e) {
 						label.setOpaque(true);
 						label.setBackground(selectedBackground);
 						label.setForeground(selectedForeground);
 					}
 
+					/* (non-Javadoc)
+					 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
+					 */
 					public void mouseExited(MouseEvent e) {
 						label.setOpaque(false);
 						label.setBackground(background);
