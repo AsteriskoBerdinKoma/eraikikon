@@ -122,6 +122,9 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		intz.insertIntzGatazkatsuena(txartId, tIrakId, noiztikNora);
 	}
 
+	/* (non-Javadoc)
+	 * @see partekatuak.UrrunekoInterfazea#createErabiltzailea(int, java.lang.String, java.lang.String, int)
+	 */
 	public void createErabiltzailea(int nan, String izena, String pasahitza,
 			int profId) throws IllegalStateException, SQLException {
 		if (!connectedToDatabase)
@@ -130,6 +133,9 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		erak.insertErabiltzailea(nan, izena, pasahitza, profId);
 	}
 
+	/* (non-Javadoc)
+	 * @see partekatuak.UrrunekoInterfazea#createTxartela(int)
+	 */
 	public void createTxartela(int nan) throws IllegalStateException,
 			SQLException {
 		if (!connectedToDatabase)
@@ -138,6 +144,9 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		txk.createTxartela(nan);
 	}
 
+	/* (non-Javadoc)
+	 * @see partekatuak.UrrunekoInterfazea#createProfila(java.lang.String, java.lang.String)
+	 */
 	public void createProfila(String mota, String deskribapena) {
 		try {
 			prof.createProfila(mota, deskribapena);
@@ -146,6 +155,9 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see partekatuak.UrrunekoInterfazea#gaituTxartela(int)
+	 */
 	public int gaituTxartela(int nan) throws IllegalStateException,
 			SQLException {
 		if (!connectedToDatabase)
@@ -154,6 +166,9 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		return txk.gaituTxartela(nan);
 	}
 
+	/* (non-Javadoc)
+	 * @see partekatuak.UrrunekoInterfazea#desgaituTxartela(int)
+	 */
 	public int desgaituTxartela(int nan) throws IllegalStateException,
 			SQLException {
 		if (!connectedToDatabase)
@@ -162,6 +177,9 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		return txk.desgaituTxartela(nan);
 	}
 
+	/* (non-Javadoc)
+	 * @see partekatuak.UrrunekoInterfazea#profilZenbakia(java.lang.String)
+	 */
 	public int profilZenbakia(String mota) throws IllegalStateException,
 			SQLException {
 		if (!connectedToDatabase)
@@ -172,6 +190,9 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		return profZenb;
 	}
 
+	/* (non-Javadoc)
+	 * @see partekatuak.UrrunekoInterfazea#profilZenbakia(java.lang.String, java.lang.String)
+	 */
 	public int profilZenbakia(String mota, String deskribapena)
 			throws IllegalStateException, SQLException {
 		if (!connectedToDatabase)
@@ -182,6 +203,9 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		return profZenb;
 	}
 
+	/* (non-Javadoc)
+	 * @see partekatuak.UrrunekoInterfazea#alarmaIntzidentziaSortu()
+	 */
 	public void alarmaIntzidentziaSortu() throws IllegalStateException,
 			SQLException {
 		if (!connectedToDatabase)
@@ -248,6 +272,9 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		return intz.getIntzidentziak();
 	}
 
+	/* (non-Javadoc)
+	 * @see partekatuak.UrrunekoInterfazea#getGuneak(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+	 */
 	public Vector<Vector<Object>> getGuneak(int txartelid, String hasData,
 			String bukData, String hasOrd, String bukOrd)
 			throws IllegalStateException, SQLException {
@@ -258,6 +285,9 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 				bukData + " " + bukOrd);
 	}
 
+	/* (non-Javadoc)
+	 * @see partekatuak.UrrunekoInterfazea#getProfilak()
+	 */
 	public Vector<String> getProfilak() throws IllegalStateException,
 			SQLException {
 		if (!connectedToDatabase)
@@ -266,6 +296,9 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		return prof.getProfilak();
 	}
 
+	/* (non-Javadoc)
+	 * @see partekatuak.UrrunekoInterfazea#getSarbideEskaerak(java.lang.String)
+	 */
 	public Vector<DbDatuLerroa> getSarbideEskaerak(String data)
 			throws IllegalStateException, SQLException {
 		if (!connectedToDatabase)
@@ -299,6 +332,9 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		return fakul.getEraikinekoPertsonKop();
 	}
 
+	/* (non-Javadoc)
+	 * @see partekatuak.UrrunekoInterfazea#getErabIzena(int)
+	 */
 	public String getErabIzena(int txId) throws IllegalStateException,
 			SQLException {
 		if (!connectedToDatabase)
@@ -307,6 +343,9 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		return txk.getErabIzena(txId);
 	}
 
+	/* (non-Javadoc)
+	 * @see partekatuak.UrrunekoInterfazea#loginEgin(int, java.lang.String)
+	 */
 	public int loginEgin(int nan, String pasahitza)
 			throws IllegalStateException, RemoteException, SQLException {
 		if (!connectedToDatabase)
@@ -318,6 +357,9 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 			return -1;
 	}
 
+	/* (non-Javadoc)
+	 * @see partekatuak.UrrunekoInterfazea#irekiAteak()
+	 */
 	public void irekiAteak() throws IllegalStateException, SQLException {
 		if (!connectedToDatabase)
 			throw new IllegalStateException(
@@ -325,6 +367,9 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		ate.IrekiAteak();
 	}
 
+	/* (non-Javadoc)
+	 * @see partekatuak.UrrunekoInterfazea#ItxiAteak()
+	 */
 	public void ItxiAteak() throws IllegalStateException, SQLException {
 		if (!connectedToDatabase)
 			throw new IllegalStateException(
@@ -332,6 +377,9 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		ate.ItxiAteak();
 	}
 
+	/* (non-Javadoc)
+	 * @see partekatuak.UrrunekoInterfazea#pertsonakAteraEraikinetik()
+	 */
 	public void pertsonakAteraEraikinetik() throws IllegalStateException,
 			SQLException {
 		if (!connectedToDatabase)
@@ -341,6 +389,9 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 	}
 
 
+	/* (non-Javadoc)
+	 * @see partekatuak.UrrunekoInterfazea#getGuneGuztiak()
+	 */
 	public Vector<Vector<Object>> getGuneGuztiak() 
 			throws IllegalStateException, SQLException{
 		Vector<Vector<Object>> vGuneInfo;
@@ -358,6 +409,9 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 				return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see partekatuak.UrrunekoInterfazea#getErabiltzaileKokapena(java.lang.String)
+	 */
 	public Vector<Vector<Object>> getErabiltzaileKokapena(String txId)
 			throws IllegalStateException, SQLException {
 		if (!connectedToDatabase)
@@ -366,6 +420,9 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		return txk.getErabiltzaileKokapena(txId);
 	}
 
+	/* (non-Javadoc)
+	 * @see partekatuak.UrrunekoInterfazea#erabiltzaileaFakultatean(java.lang.String)
+	 */
 	public boolean erabiltzaileaFakultatean(String erabId)
 			throws IllegalStateException, SQLException {
 		if (!connectedToDatabase)
@@ -374,6 +431,9 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		return fakul.erabiltzaileaFakultatean(erabId);
 	}
 
+	/* (non-Javadoc)
+	 * @see partekatuak.UrrunekoInterfazea#kokapenaEguneratu(java.lang.String, java.lang.String)
+	 */
 	public void kokapenaEguneratu(String erabId, String guneId)
 			throws IllegalStateException, SQLException {
 		if (!connectedToDatabase)
@@ -382,6 +442,9 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		fakul.kokapenaEguneratu(erabId, guneId);
 	}
 
+	/* (non-Javadoc)
+	 * @see partekatuak.UrrunekoInterfazea#kokapenaSartu(java.lang.String, java.lang.String)
+	 */
 	public void kokapenaSartu(String erabId, String guneId)
 			throws IllegalStateException, SQLException {
 		if (!connectedToDatabase)
@@ -390,6 +453,9 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		fakul.kokapenaSartu(erabId, guneId);
 	}
 
+	/* (non-Javadoc)
+	 * @see partekatuak.UrrunekoInterfazea#createBisitariBaimenak(int, java.util.Vector)
+	 */
 	public void createBisitariBaimenak(int profId, Vector<Integer> gune)
 			throws IllegalStateException, SQLException {
 		if (!connectedToDatabase)
@@ -401,6 +467,9 @@ public class UrrunekoNegozioLogika extends UnicastRemoteObject implements
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see partekatuak.UrrunekoInterfazea#sarbideEskaeraEguneratu(int, int)
+	 */
 	public void sarbideEskaeraEguneratu(int txartelid,int txartelirakid){
 		try {
 			sek.sarbideEskaeraEguneratu(txartelid,txartelirakid);
