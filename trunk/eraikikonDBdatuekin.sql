@@ -148,8 +148,8 @@ INSERT INTO `eraikikon`.`erabiltzaileak` (id, izena,pasahitza,profId) VALUES (11
 INSERT INTO `eraikikon`.`erabiltzaileak` (id, izena,pasahitza,profId) VALUES (12, "Alex","UNATyBGnstWo3Ii5fTnmuWAKcRE=", 1); #sareak
 INSERT INTO `eraikikon`.`erabiltzaileak` (id, izena,pasahitza,profId) VALUES (13, "Josune","1nFG8SRLVYr1h0WXx0mePW2YaBQ=", 1); #analisi
 INSERT INTO `eraikikon`.`erabiltzaileak` (id, izena,pasahitza,profId) VALUES (14, "Aitziber","kHfTKuD2AkDQ+PqdWbRc23XzN1c=", 2); #iza
-INSERT INTO `eraikikon`.`erabiltzaileak` (id, izena,pasahitza,profId) VALUES (15, "Benat","frqlrMDia9KfX2Ii1vVdSEr5JvA=", 2); #lizarazu
-INSERT INTO `eraikikon`.`erabiltzaileak` (id, izena,pasahitza,profId) VALUES (16, "Inko","9rnolrsrZLpqtx5Aaay1SZs47m8=", 2); #perurena
+INSERT INTO `eraikikon`.`erabiltzaileak` (id, izena,pasahitza,profId) VALUES (15, "Eusebio","frqlrMDia9KfX2Ii1vVdSEr5JvA=", 2); #lizarazu
+INSERT INTO `eraikikon`.`erabiltzaileak` (id, izena,pasahitza,profId) VALUES (16, "Mikel","9rnolrsrZLpqtx5Aaay1SZs47m8=", 2); #perurena
 INSERT INTO `eraikikon`.`erabiltzaileak` (id, izena,pasahitza,profId) VALUES (17, "Idoia","FXKZvLo7viuK1WXgcSTjxcrswPA=", 2); #lertxundi
 INSERT INTO `eraikikon`.`erabiltzaileak` (id, izena,pasahitza,profId) VALUES (18, "Dani","CIA8kowIHsXh/3LEOHkq38Otuio=", 2); #campos
 INSERT INTO `eraikikon`.`erabiltzaileak` (id, izena,pasahitza,profId) VALUES (19, "Amagoia","jiFTQ0Ij660Dzv7rHzRHpaSWrs4=", 2); #agirre
